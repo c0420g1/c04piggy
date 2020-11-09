@@ -1,0 +1,10 @@
+.mat-cell{
+  text-align: center;
+  border-bottom-style: none;
+  padding-top: 13px;
+}
+.mat-header-cell{
+  padding-bottom: 12px;
+  text-align: center;
+}
+
