@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NotificationService } from '../service/notification.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-notification',
@@ -6,10 +11,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-
-  constructor() { }
+  columnHeader = { 'title': 'Title', 'content': 'Content' , 'action': 'Action'};
+  constructor(public notificationService: NotificationService) { }
 
   ngOnInit(): void {
   }
 
+  onEditClick(element, modal) {
+    const modalRef = modal.open(NotificationModal);
+    modalRef.componentInstance.data = element;
+  }
+}
+
+
+@Component({
+  templateUrl: './notification-modal.html'
+})
+export class NotificationModal implements OnInit {
+  @Input() data;
+  @Input() title;
+  notificationForm: FormGroup;
+
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit(): void {
+    this.notificationForm= this.fb.group({
+      id: this.data.id,
+      title: [this.data.title],
+      content: [this.data.content]
+    });
+  }
+
+  onSubmit(){}
 }
