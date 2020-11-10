@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoadCssService} from '../load-css.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 declare var $: any;
 @Component({
   selector: 'app-layout',
