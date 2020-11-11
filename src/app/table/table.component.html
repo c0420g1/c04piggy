@@ -12,8 +12,8 @@
             </div>
             <div *ngIf="columnHeader[tableData] == 'Action'">
               <td mat-cell  *matCellDef="let element">
-                <a href="#table" data-toggle="modal" style="margin-left: 10px;">
-                  <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+            <button (click)="onEdit(element)">edit</button>
+          <button mat-button (click)="onDelete(element)">delete</button>
                </td>
             </div>
             </tbody>

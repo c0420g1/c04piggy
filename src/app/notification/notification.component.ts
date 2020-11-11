@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from '../service/notification.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-notification',
