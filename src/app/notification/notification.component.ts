@@ -3,22 +3,23 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationService } from '../service/notification.service';
-
+import { Notification } from '../model/Notification';
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  columnHeader = { 'title': 'Title', 'content': 'Content' , 'action': 'Action'};
+  columnHeader = {'title': 'Title', 'content': 'Content' , 'action': 'Action'};
   constructor(public notificationService: NotificationService) { }
 
   ngOnInit(): void {
   }
 
-  onEditClick(element, modal) {
+  onAddEdit(element, modal) {
     const modalRef = modal.open(NotificationModal);
-    modalRef.componentInstance.data = element;
+    modalRef.componentInstance.data = element ?? new Notification();
+    modalRef.componentInstance.title = element ?  'Edit' : 'Add';
   }
 }
 

@@ -16,13 +16,13 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
   @Input() columnHeader;
   @Input() tableService;
-  @Input() editButton;
+  @Input() addEditButton;
   objectKeys = Object.keys;
   dataSource;
 
   @ViewChild(MatSort) sort: MatSort;
   onEdit(element) {
-    this.editButton(element, this.modalService);
+    this.addEditButton(element, this.modalService);
   }
 
   onDelete(element){
@@ -45,12 +45,11 @@ export class TableComponent implements OnInit {
 export class DeleteModal{
   @Input() service;
   @Input() id;
-  ids: number[];
+  ids: number[]=[];
   constructor(public activeModal: NgbActiveModal, private router: Router) {}
 
   delete(){
       this.ids.push(this.id);
       this.service.delete(this.ids).subscribe();
-      alert("deleted");
   }
 }
