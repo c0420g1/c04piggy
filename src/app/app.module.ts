@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -39,6 +39,7 @@ import { FeedComponent } from './feed/feed.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MatCheckboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]
