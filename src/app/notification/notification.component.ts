@@ -10,7 +10,7 @@ import { Notification } from '../model/Notification';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  columnHeader = {'title': 'Title', 'content': 'Content' , 'action': 'Action'};
+  columnHeader = {'select':'Select', 'title': 'Title', 'content': 'Content' , 'action': 'Action'};
   constructor(public notificationService: NotificationService) { }
 
   ngOnInit(): void {

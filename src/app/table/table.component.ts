@@ -6,6 +6,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import {LoadCssService} from '../load-css.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -19,7 +20,6 @@ export class TableComponent implements OnInit {
   @Input() addEditButton;
   objectKeys = Object.keys;
   dataSource;
-
   @ViewChild(MatSort) sort: MatSort;
   onEdit(element) {
     this.addEditButton(element, this.modalService);
