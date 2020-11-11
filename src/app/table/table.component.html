@@ -1,5 +1,5 @@
 <button (click)='onEdit(null)'>Add new</button>
-<button>Delete</button>
+<button (click)='fdelete()'>Delete</button>
       <div class="x_content">
         <div class="table-responsive">
           <table class="table table-striped jambo_table bulk_action " *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
@@ -8,7 +8,7 @@
               <div *ngIf="columnHeader[tableData] == 'Select'">
                 <th mat-header-cell *matHeaderCellDef>
                   <span class="custom-checkbox">
-                    <input type="checkbox" id="selectAll">
+                    <input type="checkbox" id="selectAll" (click)='isSelectAll()'>
                     <label for="selectAll"></label>
                   </span>
                 </th>
@@ -19,9 +19,9 @@
             </thead>
             <tbody>
               <div *ngIf="columnHeader[tableData] == 'Select'">
-                <td mat-cell *matCellDef="let row">
+                <td mat-cell *matCellDef="let element">
                   <span class="custom-checkbox">
-                    <input type="checkbox" id="cb">
+                    <input type="checkbox" id="cb" [value]="element['id']" (click)='checkit()'>
                     <label for="cb"></label>
                   </span>
                 </td>
