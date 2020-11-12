@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {HistoryExportService} from '../service/history-export.service';
 import {HistoryExport} from '../model/HistoryExport';
+import {HistoryExportService} from '../service/history-export.service';
 
 @Component({
   selector: 'app-history-export',
@@ -12,18 +12,35 @@ import {HistoryExport} from '../model/HistoryExport';
 })
 export class HistoryExportComponent implements OnInit {
    coteExport: HistoryExport[];
+   idDel = [];
+   pageNum = 1;
+   search =  "";
+
+
   constructor(public historyExportService: HistoryExportService) { }
 
   ngOnInit(): void {
-    this.historyExportService.getAll().subscribe(
+    this.historyExportService.getAll(this.pageNum, this.search).subscribe(
         data => {
-          this.coteExport = data,
-          console.log(this.coteExport);
+          this.coteExport = data;
         },error => console.log(error)
     )
   }
 
 
+  getIdDelete(id: number) {
+    this.idDel.push(id)
+  }
+
+  delete() {
+    this.historyExportService.delete(this.idDel);
+    this.ngOnInit();
+  }
+
+  searching() {
+    console.log(this.search);
+    this.ngOnInit();
+  }
 }
 
 

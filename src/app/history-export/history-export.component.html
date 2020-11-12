@@ -3,15 +3,15 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3 style="color: orange; font-weight: bold">Cote Management</h3>
+                <h3 style="color: orange; font-weight: bold"> Export Management</h3>
             </div>
 
             <div class="title_right">
                 <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search for...">
                         <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Search</button>
+                      <button class="btn btn-outline-warning"  (click)="searching()" type="button">Search</button>
                     </span>
                     </div>
                 </div>
@@ -73,14 +73,16 @@
                                 <td class=" last">
                                     <a href="#table" data-toggle="modal" style="margin-right: 10px;">
                                         <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
-                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;margin-top: -2px">
+                                    <a href="#delete" data-toggle="modal" (click)="getIdDelete(cote.id)" style="font-size: 17px;margin-top: -2px">
                                         <i style=" color: red;font-size: 18px;" class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
-
                             </tbody>
+
                         </table>
+
                     </div>
+
 
                     <div class="x_content">
 
@@ -163,7 +165,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
+                    <input type="submit" class="btn btn-danger" value="Delete" data-dismiss="modal" (click)="delete()">
                 </div>
             </form>
         </div>

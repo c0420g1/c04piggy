@@ -19,6 +19,7 @@ import { AccountComponent } from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import { CoteComponent } from './cote/cote.component';
 import { StockComponent } from './stock/stock.component';
+import {HistoryExportComponent, HistoryExportModal} from './history-export/history-export.component';
 
 
 @NgModule({
@@ -33,7 +34,9 @@ import { StockComponent } from './stock/stock.component';
     TreatmentComponent,
     TreatmentModal,
     CoteComponent,
-    StockComponent
+    StockComponent,
+    HistoryExportModal,
+    HistoryExportComponent
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { StockComponent } from './stock/stock.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
