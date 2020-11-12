@@ -44,7 +44,7 @@ export class TableComponent implements OnInit {
       this.currentItems= data.length;
       this.dataSource = new MatTableDataSource(data);
       let a: number = this.totalItems/this.currentItems;
-      alert(Math.ceil(a)); });
+      // alert(Math.ceil(a)); });
   }
   searchInput(val){
     this.searchValue= val;
