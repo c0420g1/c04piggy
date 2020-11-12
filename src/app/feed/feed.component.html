@@ -1,1 +1,14 @@
+
+
+    <ul class="nav navbar-right panel_toolbox">
+        <div style="margin-left: 15px">
+            <button class="btn btn-success" style="height: 32px" (click)="onAddClick()"><a style="color: white">Add</a></button>
+            <button id="send"  class="btn btn-sm btn-danger" type="button">
+                <a ><i style="color: white" class="fa fa-trash-o"></i></a></button>
+        </div>
+
+    </ul>
+    <div class="clearfix"></div>
+
 <app-table [columnHeader]="columnHeader" [tableService]="feedService" ></app-table>
+
