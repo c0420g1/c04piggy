@@ -1,18 +1,40 @@
-
+<button (click)='onAddEdit(null)'>Add new</button>
+<button (click)='fdelete()'>Delete</button>
+<input type="text" (keyup)='searchInput($event.target.value)'>
+<button (click)='search()'> Search</button>
       <div class="x_content">
         <div class="table-responsive">
           <table class="table table-striped jambo_table bulk_action " *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
             <ng-container [matColumnDef]="tableData" *ngFor="let tableData of objectKeys(columnHeader)">
             <thead>
+              <div *ngIf="columnHeader[tableData] == 'Select'">
+                <th mat-header-cell *matHeaderCellDef>
+                  <span class="custom-checkbox">
+                    <input type="checkbox" id="selectAll" (click)='isSelectAll()'>
+                    <label for="selectAll"></label>
+                  </span>
+                </th>
+              </div>
+              <div *ngIf="columnHeader[tableData] != 'Select'">
               <th class="column-title"  mat-header-cell *matHeaderCellDef mat-sort-header> {{columnHeader[tableData]}}</th>
+            </div>
             </thead>
             <tbody>
+              <div *ngIf="columnHeader[tableData] == 'Select'">
+                <td mat-cell *matCellDef="let element">
+                  <span class="custom-checkbox">
+                    <input type="checkbox" id="cb" [value]="element['id']" (click)='checkit()'>
+                    <label for="cb"></label>
+                  </span>
+                </td>
+              </div>
             <div *ngIf="columnHeader[tableData] != 'Action'">
               <td mat-cell  *matCellDef="let element"> {{element[tableData] }}</td>
             </div>
+            
             <div *ngIf="columnHeader[tableData] == 'Action'">
               <td mat-cell  *matCellDef="let element">
-            <button (click)="onEdit(element)">edit</button>
+            <button (click)="onAddEdit(element)">edit</button>
           <button mat-button (click)="onDelete(element)">delete</button>
                </td>
             </div>
@@ -22,5 +44,17 @@
             <tr class="even pointer" mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"></tr>
           </table>
         </div>
-      </div>
+      
 
+
+        <div>
+          Showing {{currentItems}} of {{totalItems}}
+        </div>
+        <div>
+          <button (click)='previous()'>Previous</button>
+          <button (click)='next()'>Next</button>
+        </div>
+      
+      </div>
+      
+      
