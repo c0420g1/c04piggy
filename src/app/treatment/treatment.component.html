@@ -24,8 +24,8 @@
                 <h2>Custom</h2>
                 <ul class="nav navbar-right panel_toolbox">
                     <div style="margin-left: 15px">
-                        <a href="#table" data-toggle="modal"><button id="a" title="add" class="btn btn-sm btn-success" type="button">Add new
-                            <i style="color: white" class="fa fa-plus"></i></button></a>
+                        <button id="a" title="add" class="btn btn-sm btn-success" type="button" (click)="addTreatment()">Add new
+                            <i style="color: white" class="fa fa-plus"></i></button>
                     </div>
                     <div style="margin-left: 15px">
                         <a href="#delete" data-toggle="modal"><button id=""  class="btn btn-sm btn-danger" type="button">Delete
@@ -59,7 +59,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="even pointer" *ngFor="let list of treatmentList; let i = index">
+                        <tr class="even pointer" *ngFor="let list of treatmentListDTO; let i = index">
                             <td class="a-center ">
                                 <input type="checkbox" class="flat" name="table_records">
                             </td>

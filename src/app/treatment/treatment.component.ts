@@ -4,6 +4,8 @@ import {TreatmentDTO} from '../model/TreatmentDTO';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {TreatmentVacxins} from '../model/TreatmentVacxins';
+import {NotificationModal} from '../notification/notification.component';
 
 @Component({
   selector: 'app-treatment',
@@ -13,13 +15,14 @@ import {Router} from '@angular/router';
 export class TreatmentComponent implements OnInit {
   search = '';
   pageNum = 1;
-  treatmentList: TreatmentDTO[] = [];
+  treatmentListDTO: TreatmentDTO[] = [];
+  treatment: TreatmentVacxins;
   constructor(private treatmentService: TreatmentService) { }
 
   ngOnInit(): void {
     this.treatmentService.getAll(this.pageNum, this.search,'treatment').subscribe(data =>{
-      this.treatmentList = data;
-      console.log(this.treatmentList);
+      this.treatmentListDTO = data;
+      console.log(this.treatmentListDTO);
     })
   }
 
@@ -29,6 +32,10 @@ export class TreatmentComponent implements OnInit {
 
   editTreatment(id) {
     // this.treatmentService
+  }
+
+  addTreatment(element,modal) {
+    const modalRef = modal.open(NotificationModal);
   }
 }
 

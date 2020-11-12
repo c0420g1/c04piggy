@@ -1,3 +1,4 @@
+import {Herd} from './Herd';
 
 export class Cote {
     id: number;
@@ -9,5 +10,5 @@ export class Cote {
     quantity: number;
     type: string;
     employeeId: number;
-    herdId: number;
+    herd: Herd;
 }
