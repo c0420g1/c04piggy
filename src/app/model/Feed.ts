@@ -1,3 +1,6 @@
+import {FeedType} from './FeedType';
+import {Herd} from './Herd';
+
 export class Feed {
     id: number;
     description: string;
@@ -5,7 +8,6 @@ export class Feed {
     amount: number;
     code: string;
     unit: string;
-    feedTypeId: number;
-    heardId: number;
-    herdId: number;
+    feedType: FeedType;
+    heard: Herd;
 }
