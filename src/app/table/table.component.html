@@ -56,7 +56,7 @@
                 <td mat-cell *matCellDef="let element">
                   <span class="customcheckbox">
                     <input type="checkbox" id="cb" [value]="element['id']" (click)='checkit()'>
-                    <label for="cb"></label>
+                    <label></label>
                   </span>
                 </td>
               </div>
@@ -80,15 +80,28 @@
         </div>
       </div>
       
-
-      <div>
-        <div>
-          Showing {{currentItems}} of {{totalItems}}
-          <div style="float: right">
-            <button class="btn btn-sm btn-outline-info" (click)='previous()'>Previous</button>
-            <button  class="btn btn-sm btn-outline-dark"  (click)='next()'>Next</button>
-          </div>
+      <div class="clearfix">
+        <div>Showing
+            <b> {{currentItems}}</b> out of <b>{{totalItems}}</b> entries
         </div>
 
+        <ul class="pagination" >
+            <li>
+                <a class="page-link" (click)='previous()'>Previous</a>
+            </li>
+
+
+            <li *ngFor="let i of listPage" class="page-item">
+                <a class="page-link" (click)="changePage(i)">{{i}}</a>
+            </li>
+
+
+            <li>
+                <a class="page-link" (click)='next()'>Next</a>
+            </li>
+            
+
+        </ul>
+      </div>
       </div>
 
