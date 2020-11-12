@@ -15,12 +15,9 @@ import { RouterModule } from '@angular/router';
 import { TableComponent } from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-<<<<<<< Updated upstream
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
-=======
-import { FeedComponent } from './feed/feed.component';
 import { CoteComponent } from './cote/cote.component';
->>>>>>> Stashed changes
+
 
 @NgModule({
   declarations: [
@@ -30,13 +27,9 @@ import { CoteComponent } from './cote/cote.component';
     DashboardComponent,
     NotificationComponent,
     NotificationModal,
-<<<<<<< Updated upstream
     TreatmentComponent,
-    TreatmentModal
-=======
-    FeedComponent,
+    TreatmentModal,
     CoteComponent
->>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,

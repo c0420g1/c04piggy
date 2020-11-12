@@ -1,26 +1,180 @@
 
-<div class="x_content">
-    <div class="table-responsive">
-        <table class="table table-striped jambo_table bulk_action "  mat-table matSort>
-            <ng-container>
-                <thead>
-                <th class="column-title"  mat-header-cell *matHeaderCellDef mat-sort-header> {{columnHeader[tableData]}}</th>
-                </thead>
-                <tbody>
-                <div *ngIf="columnHeader[tableData] != 'Action'">
-                    <td mat-cell  *matCellDef="let element"> {{element[tableData] }}</td>
-                </div>
-                <div *ngIf="columnHeader[tableData] == 'Action'">
-                    <td mat-cell  *matCellDef="let element">
-                        <button (click)="onEdit(element)">edit</button>
-                        <button mat-button (click)="onDelete(element)">delete</button>
-                    </td>
-                </div>
-                </tbody>
-            </ng-container>
-            <tr class="headings" style="height: 45px" mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></tr>
-            <tr class="even pointer" mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"></tr>
-        </table>
-    </div>
-</div>
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3 style="color: orange; font-weight: bold">Cote Management</h3>
+            </div>
 
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search for...">
+                        <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Search</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+                <div class="x_title">
+
+                    <ul class="nav navbar-right panel_toolbox">
+
+                        <div style="margin-left: 15px">
+                            <button href="#add" data-toggle="modal" class="btn btn-sm btn-success" type="button">Add New Cote
+                                <a href="#add" data-toggle="modal"><i style="color: white" class="fa fa-plus"></i></a></button>
+                        </div>
+                        <li><a class="collapse-link">Collapse<i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                            <tr class="headings" style="font-size: 15px">
+                                <th class="column-title"># </th>
+                                <th class="column-title">Cote Code </th>
+                                <th class="column-title">Staff Code </th>
+                                <th class="column-title">Herd Code </th>
+                                <th class="column-title">Day Start </th>
+                                <th class="column-title">Day End </th>
+                                <th class="column-title">Quantity </th>
+                                <th class="column-title">To Current Day | Status </th>
+                                <th class="column-title no-link last"><span class="nobr">Action</span>
+                                </th>
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr class="even pointer">
+
+                                <td class=" ">1</td>
+                                <td class=" ">C01 </td>
+                                <td class=" ">NV1234</td>
+                                <td class=" ">C01-200320 </td>
+                                <td class=" ">20-03-2020 </td>
+                                <td class=" ">20-06-2020 </td>
+                                <td class=" ">5 </td>
+                                <td class=" ">50 days | Growing Pig  </td>
+                                <td class=" last">
+                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
+                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="odd pointer">
+
+                                <td class=" ">2</td>
+                                <td class=" ">C02 </td>
+                                <td class=" ">NV1234</td>
+                                <td class=" ">C02-150320 </td>
+                                <td class=" ">15-03-2020 </td>
+                                <td class=" ">15-06-2020 </td>
+                                <td class=" ">5 </td>
+                                <td class=" ">55 days | Growing Pig  </td>
+                                <td class=" last">
+                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
+                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="even pointer">
+
+                                <td class=" ">3</td>
+                                <td class=" ">C03 </td>
+                                <td class=" ">NV1235</td>
+                                <td class=" ">C03-260720 </td>
+                                <td class=" ">26-07-2020 </td>
+                                <td class=" ">26-09-2020 </td>
+                                <td class=" ">5 </td>
+                                <td class=" ">35 days | Wean Pig  </td>
+                                <td class=" last">
+                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
+                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="odd pointer">
+
+                                <td class=" ">4</td>
+                                <td class=" ">C04 </td>
+                                <td class=" ">NV1236</td>
+                                <td class=" ">C03-191020 </td>
+                                <td class=" ">19-10-2020 </td>
+                                <td class=" ">19-01-2021 </td>
+                                <td class=" ">5 </td>
+                                <td class=" ">112 days | Finishing Pig  </td>
+                                <td class=" last">
+                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
+                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            <tr class="even pointer">
+
+                                <td class=" ">5</td>
+                                <td class=" ">C05 </td>
+                                <td class=" ">NV1236</td>
+                                <td class=" ">C05-310120 </td>
+                                <td class=" ">30-01-2020 </td>
+                                <td class=" ">31-03-2020 </td>
+                                <td class=" ">5 </td>
+                                <td class=" ">90 days | Developing Pig  </td>
+                                <td class=" last">
+                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
+                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="x_content">
+
+                        <nav>
+                            <ul class="pagination pg-dark" style="float: right">
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link">1</a></li>
+                                <li class="page-item"><a class="page-link">2</a></li>
+                                <li class="page-item active"><a class="page-link">3</a></li>
+                                <li class="page-item"><a class="page-link">4</a></li>
+                                <li class="page-item"><a class="page-link">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
