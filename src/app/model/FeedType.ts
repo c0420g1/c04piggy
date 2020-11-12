@@ -1,5 +1,4 @@
-
-export  class FeedType {
+export class FeedType {
     id: number;
     description: string;
     isDeleted: number;

@@ -9,7 +9,7 @@ import {CoteDTO} from '../model/CoteDTO';
 })
 export class CoteService {
   private readonly API_URL_COTE = 'http://localhost:8080/cote';
-
+  
   constructor(private http: HttpClient) { }
 
   getAllCote(pageNum: number,search: string): Observable<CoteDTO[]>{
@@ -24,5 +24,5 @@ export class CoteService {
     return this.http.post<void>(this.API_URL_COTE, cote);
   }
 
-  // getListPig(herdCode: string): Observable<any>
+
 }
