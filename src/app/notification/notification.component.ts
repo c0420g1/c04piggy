@@ -34,7 +34,7 @@ export class NotificationModal implements OnInit {
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    this.notificationForm= this.fb.group({
+    this.notificationForm = this.fb.group({
       id: this.data.id,
       title: [this.data.title],
       content: [this.data.content]

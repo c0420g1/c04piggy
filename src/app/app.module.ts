@@ -16,6 +16,9 @@ import { TableComponent } from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AccountComponent } from './account/account.component';
+import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
+import { CoteComponent } from './cote/cote.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { AccountComponent } from './account/account.component';
     DashboardComponent,
     NotificationComponent,
     NotificationModal,
-    AccountComponent
+    AccountComponent,
+    TreatmentComponent,
+    TreatmentModal,
+    CoteComponent
   ],
   imports: [
     BrowserModule,

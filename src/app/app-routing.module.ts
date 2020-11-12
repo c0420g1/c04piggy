@@ -4,6 +4,8 @@ import {LayoutComponent} from './layout/layout.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import { NotificationComponent } from './notification/notification.component';
 import { AccountComponent } from './account/account.component';
+import {TreatmentComponent} from './treatment/treatment.component';
+import {CoteComponent} from './cote/cote.component';
 
 
 const routes: Routes = [{
@@ -20,7 +22,12 @@ const routes: Routes = [{
     {
       path: 'account',
       component: AccountComponent
-    }
+    },
+  {
+    path: 'treatment',
+    component: TreatmentComponent
+  },
+    {path: 'cote', component: CoteComponent}
 ]
 }];
 
