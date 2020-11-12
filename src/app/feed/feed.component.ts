@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FeedService} from '../service/feed.service';
 
 @Component({
   selector: 'app-feed',
@@ -6,8 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
-
-  constructor() { }
+  columnHeader = { 'id': 'ID', 'amount': 'Amount' , 'code': 'Code','unit' : 'Unit','feedType.name': 'FeedType','herd.name':'Herd'};
+  constructor(public feedService: FeedService) { }
 
   ngOnInit(): void {
   }
