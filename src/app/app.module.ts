@@ -20,6 +20,7 @@ import {TreatmentComponent, TreatmentModal} from './treatment/treatment.componen
 import {CoteComponent } from './cote/cote.component';
 import {FeedComponent} from './feed/feed.component';
 import { StockComponent } from './stock/stock.component';
+import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 
 
 
@@ -37,7 +38,9 @@ import { StockComponent } from './stock/stock.component';
     TreatmentModal,
     CoteComponent,
     FeedComponent,
-    StockComponent
+    StockComponent,
+    HistoryExportModal,
+    HistoryExportComponent
 
   ],
   imports: [
