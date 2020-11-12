@@ -21,6 +21,7 @@ export class TableComponent implements OnInit {
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string='';
+  listPage: number[]=[];
   objectKeys = Object.keys;
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
@@ -41,7 +42,9 @@ export class TableComponent implements OnInit {
   getDataSource(){
     this.tableService.search(1,this.searchValue).subscribe(data => {
       this.currentItems= data.length;
-      this.dataSource = new MatTableDataSource(data); });
+      this.dataSource = new MatTableDataSource(data);
+      let a: number = this.totalItems/this.currentItems;
+      // alert(Math.ceil(a)); });
   }
   searchInput(val){
     this.searchValue= val;
@@ -77,6 +80,7 @@ export class TableComponent implements OnInit {
     this.tableService.getAll().subscribe(data => {
       this.totalItems= data.length;
       this.dataSource = new MatTableDataSource(data); });
+
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
