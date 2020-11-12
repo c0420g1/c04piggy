@@ -6,6 +6,6 @@ export class Herd {
     description: string;
     isDeleted: boolean;
     name: string;
-    feed: Feed[]= [];
-    cote: Cote[]= [];
+    feed: Feed;
+    cote: Cote;
 }
