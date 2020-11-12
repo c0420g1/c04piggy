@@ -6,6 +6,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { AccountComponent } from './account/account.component';
 import {TreatmentComponent} from './treatment/treatment.component';
 import {CoteComponent} from './cote/cote.component';
+import {StockComponent} from './stock/stock.component';
 
 
 const routes: Routes = [{
@@ -19,6 +20,10 @@ const routes: Routes = [{
     path: 'notification',
     component: NotificationComponent
   },
+    {
+      path: 'stock',
+      component: StockComponent
+    },
     {
       path: 'account',
       component: AccountComponent
