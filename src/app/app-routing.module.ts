@@ -4,6 +4,7 @@ import {LayoutComponent} from './layout/layout.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {NotificationComponent} from './notification/notification.component';
 import {FeedComponent} from './feed/feed.component';
+import {HistoryExportComponent} from './history-export/history-export.component';
 
 
 const routes: Routes = [{
@@ -20,6 +21,10 @@ const routes: Routes = [{
         }, {
             path: 'feed',
             component: FeedComponent
+        },
+        {
+            path: 'export-management',
+            component: HistoryExportComponent
         }
     ]
 }];

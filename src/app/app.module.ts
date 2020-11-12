@@ -16,6 +16,7 @@ import { TableComponent } from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FeedComponent } from './feed/feed.component';
+import {HistoryExportComponent, HistoryExportModal} from './history-export/history-export.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { FeedComponent } from './feed/feed.component';
     DashboardComponent,
     NotificationComponent,
     NotificationModal,
-    FeedComponent
+    FeedComponent,
+    HistoryExportComponent,
+      HistoryExportModal
   ],
   imports: [
     BrowserModule,
