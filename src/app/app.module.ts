@@ -16,6 +16,7 @@ import { TableComponent } from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { StockComponent } from './stock/stock.component';
+import { AccountComponent } from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import { CoteComponent } from './cote/cote.component';
 
@@ -29,6 +30,7 @@ import { CoteComponent } from './cote/cote.component';
     NotificationComponent,
     NotificationModal,
     StockComponent,
+    AccountComponent,
     TreatmentComponent,
     TreatmentModal,
     CoteComponent
