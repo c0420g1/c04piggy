@@ -8,7 +8,7 @@
   text-align: center;
 }
 
-custom-checkbox {
+.custom-checkbox {
   position: relative;
 }
 .custom-checkbox input[type="checkbox"] {
