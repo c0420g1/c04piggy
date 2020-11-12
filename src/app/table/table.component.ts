@@ -18,6 +18,9 @@ export class TableComponent implements OnInit {
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
+  currentItems: number=0;
+  totalItems: number=0;
+  searchValue: string='';
   objectKeys = Object.keys;
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
@@ -25,10 +28,27 @@ export class TableComponent implements OnInit {
     this.addEditButton(element, this.modalService);
   }
 
+  next(){
+
+  }
+  previous(){
+    
+  }
+  search(){
+    this.getDataSource();
+  }
+
+  getDataSource(){
+    this.tableService.search(1,this.searchValue).subscribe(data => {
+      this.currentItems= data.length;
+      this.dataSource = new MatTableDataSource(data); });
+  }
+  searchInput(val){
+    this.searchValue= val;
+  }
   onDelete(element){
     let ids: number[]=[];
     ids.push(element.id);
-    alert(ids);
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.ids = ids;
     modalRef.componentInstance.service = this.tableService;
@@ -55,7 +75,9 @@ export class TableComponent implements OnInit {
   }
   ngOnInit(): void {
     this.tableService.getAll().subscribe(data => {
+      this.totalItems= data.length;
       this.dataSource = new MatTableDataSource(data); });
+    this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
   }

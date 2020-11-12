@@ -1,5 +1,7 @@
 <button (click)='onAddEdit(null)'>Add new</button>
 <button (click)='fdelete()'>Delete</button>
+<input type="text" (keyup)='searchInput($event.target.value)'>
+<button (click)='search()'> Search</button>
       <div class="x_content">
         <div class="table-responsive">
           <table class="table table-striped jambo_table bulk_action " *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
@@ -42,4 +44,17 @@
             <tr class="even pointer" mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"></tr>
           </table>
         </div>
+      
+
+
+        <div>
+          Showing {{currentItems}} of {{totalItems}}
+        </div>
+        <div>
+          <button (click)='previous()'>Previous</button>
+          <button (click)='next()'>Next</button>
+        </div>
+      
       </div>
+      
+      
