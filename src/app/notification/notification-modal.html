@@ -1,18 +1,22 @@
-<div class="modal-header">
-    <h4 class="modal-title">{{title}}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form [formGroup]="notificationForm">
-      <div class="form-group">
-        <label>Title</label>
-        <input type="text" class="form-control" value="{{data.title}}" formControlName="title">
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')" value="Cancel">
-                    <input [disabled]="notificationForm.invalid"  class="btn btn-info" value="Save" (click)="onSubmit()">
-  </div>
+
+<div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">{{title}}</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="notificationForm">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" class="form-control" value="{{data.title}}" formControlName="title">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
+                    <button [disabled]="notificationForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                </div>
+            </form>
+        </div>
+

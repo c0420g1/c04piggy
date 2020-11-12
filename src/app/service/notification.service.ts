@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GlobalUtil } from '../shared/GlobalUtil';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
-  private readonly APIgetAllNotification = GlobalUtil.host + 'getAllNotification';
-  private readonly APIaddEditNotification = GlobalUtil.host + 'addEditNotification';
-  private readonly APIdeleteNotification = GlobalUtil.host + 'deleteNotification';
+  private readonly APIgetAllNotification = 'http://localhost:8080/getAllNotification';
+  private readonly APIaddEditNotification = 'http://localhost:8080/addEditNotification';
+  private readonly APIdeleteNotification = 'http://localhost:8080/deleteNotification';
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Notification[]>{
