@@ -18,6 +18,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AccountComponent } from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import { CoteComponent } from './cote/cote.component';
+import { StockComponent } from './stock/stock.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { CoteComponent } from './cote/cote.component';
     AccountComponent,
     TreatmentComponent,
     TreatmentModal,
-    CoteComponent
+    CoteComponent,
+    StockComponent
   ],
   imports: [
     BrowserModule,
