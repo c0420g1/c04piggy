@@ -1,4 +1,17 @@
 
+<div class="page-title">
+<div class="title_right" style="float: right">
+  <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..." (keyup)='searchInput($event.target.value)' >
+      <span class="input-group-btn">
+                      <button class="btn btn-secondary" style="color: white" type="button" (click)='search()'>Go!</button>
+                    </span>
+    </div>
+  </div>
+</div>
+</div>
+<div class="clearfix"></div>
 <div class="col-md-12 col-sm-12  ">
   <div class="x_panel">
     <div class="x_title">
@@ -19,8 +32,8 @@
 
 
 
-<input type="text" (keyup)='searchInput($event.target.value)'>
-<button (click)='search()'> Search</button>
+<!--<input type="text" (keyup)='searchInput($event.target.value)'>-->
+<!--<button (click)='search()'> Search</button>-->
       <div class="x_content">
         <div class="table-responsive">
           <table class="table table-striped jambo_table bulk_action " *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
@@ -68,15 +81,14 @@
       </div>
       
 
-
+      <div>
         <div>
           Showing {{currentItems}} of {{totalItems}}
+          <div style="float: right">
+            <button class="btn btn-sm btn-outline-info" (click)='previous()'>Previous</button>
+            <button  class="btn btn-sm btn-outline-dark"  (click)='next()'>Next</button>
+          </div>
         </div>
-        <div>
-          <button (click)='previous()'>Previous</button>
-          <button (click)='next()'>Next</button>
-        </div>
-      
+
       </div>
-      
 
