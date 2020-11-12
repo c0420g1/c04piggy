@@ -1,0 +1,84 @@
+<div class="">
+    <div class="page-title">
+        <div class="title_left" style="color: orange">
+            <h3>Examination & Treatment Information</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." [(ngModel)]="search" (ngModelChange)="changeSearch()" >
+                    <span class="input-group-btn">
+                      <button class="btn btn-secondary" style="color: white" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Custom</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <div style="margin-left: 15px">
+                        <a href="#table" data-toggle="modal"><button id="a" title="add" class="btn btn-sm btn-success" type="button">Add new
+                            <i style="color: white" class="fa fa-plus"></i></button></a>
+                    </div>
+                    <div style="margin-left: 15px">
+                        <a href="#delete" data-toggle="modal"><button id=""  class="btn btn-sm btn-danger" type="button">Delete
+                            <i style="color: white" class="fa fa-trash-o"></i></button></a>
+                    </div>
+                    <li><a class="collapse-link">Collapse <i class="fa fa-chevron-up"></i></a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                        <tr class="headings">
+                            <th>
+                                <input type="checkbox" id="check-all" class="flat">
+                            </th>
+                            <th class="column-title">No. </th>
+                            <th class="column-title">Date </th>
+                            <th class="column-title">Cote Code </th>
+                            <th class="column-title">Pig Code </th>
+                            <th class="column-title">Veterinarians </th>
+                            <th class="column-title">Diseases </th>
+                            <th class="column-title">Medicine </th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            <th class="bulk-actions" colspan="9">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr class="even pointer" *ngFor="let list of treatmentList; let i = index">
+                            <td class="a-center ">
+                                <input type="checkbox" class="flat" name="table_records">
+                            </td>
+                            <td class=" ">{{i + 1}}</td>
+                            <td class=" " style="width: 10%;">{{list.treatDate}}</td>
+                            <td class=" ">{{list.coteCode}}</td>
+                            <td class=" ">{{list.pigCode}}</td>
+                            <td class=" ">{{list.veterinarian}}</td>
+                            <td class="a-right a-right ">{{list.diseases}}</td>
+                            <td class="a-right a-right ">{{list.vacxin}}</td>
+                            <td class=" last">
+                                <a  data-toggle="modal" style="margin-left: 10px;" (click)="editTreatment(list.id)">
+                                    <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
