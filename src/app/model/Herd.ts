@@ -1,6 +1,11 @@
+import {Feed} from './Feed';
+import {Cote} from './Cote';
+
 export class Herd {
-    id: string;
+    id: number;
     description: string;
-    isDeleted: number;
+    isDeleted: boolean;
     name: string;
+    feed: Feed;
+    cote: Cote;
 }

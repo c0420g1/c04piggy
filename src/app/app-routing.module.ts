@@ -1,37 +1,38 @@
-import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 import {LayoutComponent} from './layout/layout.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
-import {NotificationComponent} from './notification/notification.component';
-import {FeedComponent} from './feed/feed.component';
-import {HistoryExportComponent} from './history-export/history-export.component';
+import { NotificationComponent } from './notification/notification.component';
+import { AccountComponent } from './account/account.component';
+import {TreatmentComponent} from './treatment/treatment.component';
+import {CoteComponent} from './cote/cote.component';
 
 
 const routes: Routes = [{
-    path: '',
-    component: LayoutComponent,
-    children: [
-        {
-            path: 'dashboard',
-            component: DashboardComponent
-        },
-        {
-            path: 'notification',
-            component: NotificationComponent
-        }, {
-            path: 'feed',
-            component: FeedComponent
-        },
-        {
-            path: 'export-management',
-            component: HistoryExportComponent
-        }
-    ]
+  path: '',
+  component: LayoutComponent,
+  children: [{
+    path: 'dashboard',
+    component: DashboardComponent
+  },
+  {
+    path: 'notification',
+    component: NotificationComponent
+  },
+    {
+      path: 'account',
+      component: AccountComponent
+    },
+  {
+    path: 'treatment',
+    component: TreatmentComponent
+  },
+    {path: 'cote', component: CoteComponent}
+]
 }];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

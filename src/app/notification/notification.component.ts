@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Notification } from '../model/Notification';
 import { NotificationService } from '../service/notification.service';
 
 @Component({
@@ -10,15 +11,16 @@ import { NotificationService } from '../service/notification.service';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-  columnHeader = { 'title': 'Title', 'content': 'Content' , 'action': 'Action'};
+  columnHeader = {'select': 'Select', 'title': 'Title', 'content': 'Content' , 'action': 'Action'};
   constructor(public notificationService: NotificationService) { }
 
   ngOnInit(): void {
   }
 
-  onEditClick(element, modal) {
+  onAddEdit(element, modal) {
     const modalRef = modal.open(NotificationModal);
-    modalRef.componentInstance.data = element;
+    modalRef.componentInstance.data = element ?? new Notification();
+    modalRef.componentInstance.title = element ? 'edit' : 'add';
   }
 }
 
@@ -34,7 +36,7 @@ export class NotificationModal implements OnInit {
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
-    this.notificationForm= this.fb.group({
+    this.notificationForm = this.fb.group({
       id: this.data.id,
       title: [this.data.title],
       content: [this.data.content]

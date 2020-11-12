@@ -15,8 +15,10 @@ import { RouterModule } from '@angular/router';
 import { TableComponent } from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
-import { FeedComponent } from './feed/feed.component';
-import {HistoryExportComponent, HistoryExportModal} from './history-export/history-export.component';
+import { AccountComponent } from './account/account.component';
+import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
+import { CoteComponent } from './cote/cote.component';
+
 
 @NgModule({
   declarations: [
@@ -26,9 +28,10 @@ import {HistoryExportComponent, HistoryExportModal} from './history-export/histo
     DashboardComponent,
     NotificationComponent,
     NotificationModal,
-    FeedComponent,
-    HistoryExportComponent,
-      HistoryExportModal
+    AccountComponent,
+    TreatmentComponent,
+    TreatmentModal,
+    CoteComponent
   ],
   imports: [
     BrowserModule,
