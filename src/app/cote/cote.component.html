@@ -1,0 +1,26 @@
+
+<div class="x_content">
+    <div class="table-responsive">
+        <table class="table table-striped jambo_table bulk_action "  mat-table matSort>
+            <ng-container>
+                <thead>
+                <th class="column-title"  mat-header-cell *matHeaderCellDef mat-sort-header> {{columnHeader[tableData]}}</th>
+                </thead>
+                <tbody>
+                <div *ngIf="columnHeader[tableData] != 'Action'">
+                    <td mat-cell  *matCellDef="let element"> {{element[tableData] }}</td>
+                </div>
+                <div *ngIf="columnHeader[tableData] == 'Action'">
+                    <td mat-cell  *matCellDef="let element">
+                        <button (click)="onEdit(element)">edit</button>
+                        <button mat-button (click)="onDelete(element)">delete</button>
+                    </td>
+                </div>
+                </tbody>
+            </ng-container>
+            <tr class="headings" style="height: 45px" mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></tr>
+            <tr class="even pointer" mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"></tr>
+        </table>
+    </div>
+</div>
+
