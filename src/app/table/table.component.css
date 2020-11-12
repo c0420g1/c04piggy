@@ -21,10 +21,11 @@ custom-checkbox {
 .custom-checkbox {
   position: relative;
 }
-.custom-checkbox input[type="checkbox"] {
-  opacity: 0;
+.customcheckbox input[type="checkbox"] {
+  width: 21px;
+  height: 19px;
   position: absolute;
-  margin: 5px 0 0 3px;
+  margin: 0px 0 0 -16px;
   z-index: 9;
 }
 .custom-checkbox label:before{
@@ -68,3 +69,7 @@ custom-checkbox {
   box-shadow: none;
   background: #ddd;
 }
+table th:nth-child(1){
+  width: 5%;
+}
+
