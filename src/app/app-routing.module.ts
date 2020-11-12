@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LayoutComponent} from './layout/layout.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import { NotificationComponent } from './notification/notification.component';
+import { AccountComponent } from './account/account.component';
 import {TreatmentComponent} from './treatment/treatment.component';
 import {CoteComponent} from './cote/cote.component';
 
@@ -18,6 +19,10 @@ const routes: Routes = [{
     path: 'notification',
     component: NotificationComponent
   },
+    {
+      path: 'account',
+      component: AccountComponent
+    },
   {
     path: 'treatment',
     component: TreatmentComponent
