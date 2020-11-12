@@ -3,6 +3,8 @@ import {FeedService} from '../service/feed.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
+import {Account} from '../model/Account';
+import {AccountModal} from '../account/account.component';
 
 @Component({
   selector: 'app-feed',
@@ -16,9 +18,10 @@ export class FeedComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddClick() {
+  onAddClick(element, modal) {
     const modalRef = modal.open(FeedModal);
-    modalRef.componentInstance.title = 'Feed Manager';
+    modalRef.componentInstance.data = element ?? new Account();
+    modalRef.componentInstance.title = element ? 'Edit Account' : 'Add Account';
   }
 
 }
