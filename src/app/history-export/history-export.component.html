@@ -1,0 +1,173 @@
+<!-- page content -->
+
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3 style="color: orange; font-weight: bold"> Export Management</h3>
+            </div>
+
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" [(ngModel)]="search" placeholder="Search for...">
+                        <span class="input-group-btn">
+                      <button class="btn btn-outline-warning"  (click)="searching()" type="button">Search</button>
+                    </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-12 col-sm-12  ">
+            <div class="x_panel">
+                <div class="x_title">
+
+                    <ul class="nav navbar-right panel_toolbox">
+
+                        <div style="margin-left: 15px">
+                            <button href="#add" data-toggle="modal" class="btn btn-sm btn-success" type="button">Add New Cote
+                                <a href="#add" data-toggle="modal"><i style="color: white" class="fa fa-plus"></i></a></button>
+                        </div>
+                        <li><a class="collapse-link">Collapse<i class="fa fa-chevron-up"></i></a>
+                        </li>
+
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+                    <div class="table-responsive">
+                        <table class="table table-striped jambo_table bulk_action">
+                            <thead>
+                            <tr class="headings" style="font-size: 15px">
+                                <th class="column-title"># </th>
+                                <th class="column-title">Cote Code </th>
+                                <th class="column-title">Staff Code </th>
+                                <th class="column-title">Company </th>
+                                <th class="column-title">Day Export </th>
+                                <th class="column-title">Quantity </th>
+                                <th class="column-title">Weight Total</th>
+                                <th class="column-title">Total</th>
+                                <th class="column-title no-link last"><span class="nobr">Action</span>
+                                </th>
+                                <th class="bulk-actions" colspan="7">
+                                    <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                                </th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr class="even pointer" *ngFor="let cote of coteExport">
+
+                                <td class=" ">{{cote.id}}</td>
+                                <td class=" ">{{cote.coteCode}} </td>
+                                <td class=" ">{{cote.employeeCode}}</td>
+                                <td class=" ">{{cote.company}} </td>
+                                <td class=" ">{{cote.exportDate}} </td>
+                                <td class=" ">{{cote.quantity}} </td>
+                                <td class=" ">{{cote.weightTotal}} </td>
+                                <td class=" ">{{cote.total}} </td>
+                                <td class=" last">
+                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                                    <a href="#delete" data-toggle="modal" (click)="getIdDelete(cote.id)" style="font-size: 17px;margin-top: -2px">
+                                        <i style=" color: red;font-size: 18px;" class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                    <div class="x_content">
+
+                        <nav>
+                            <ul class="pagination pg-dark" style="float: right">
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link">1</a></li>
+                                <li class="page-item"><a class="page-link">2</a></li>
+                                <li class="page-item active"><a class="page-link">3</a></li>
+                                <li class="page-item"><a class="page-link">4</a></li>
+                                <li class="page-item"><a class="page-link">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- /page content -->
+<!--add/edit-->
+<div id="table" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Employee</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea class="form-control" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <button type="submit" class="btn btn-success" value="Add">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!--    delete-->
+<div id="delete" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Employee</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete these Records?</p>
+                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-danger" value="Delete" data-dismiss="modal" (click)="delete()">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

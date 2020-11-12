@@ -19,12 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="614651ce-c83e-44dc-a5aa-46a38a72f417" name="Default Changelist" comment="">
+    <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/Cote.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Cote.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,16 +49,19 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/OneDrive/Desktop/socket/socket" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/model" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="D:\CodeGym\C0420G1-Project\Product 2\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\CodeGym\C0420G1-Project\Product 2\c04piggy\src\app\service" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\project2\c04piggy\src\app\model" />
     </key>
@@ -73,46 +72,30 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="614651ce-c83e-44dc-a5aa-46a38a72f417" name="Default Changelist" comment="" />
+      <changelist id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="" />
       <created>1605081357020</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605081357020</updated>
       <workItem from="1605081359374" duration="734000" />
       <workItem from="1605082121229" duration="5001000" />
-      <workItem from="1605149632428" duration="10801000" />
-      <workItem from="1605176612264" duration="600000" />
+      <workItem from="1605170729155" duration="2638000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1605170917315">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="499" y="160" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1605170917315" />
-    <state x="549" y="168" key="FileChooserDialogImpl" timestamp="1605173584357">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="549" y="168" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605173584357" />
-    <state x="425" y="187" key="run.anything.popup" timestamp="1605160534673">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605160534673" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
