@@ -14,29 +14,24 @@ import {LoadCssService} from '../load-css.service';
   styleUrls: ['./treatment.component.css']
 })
 export class TreatmentComponent implements OnInit {
-  search = '';
-  pageNum = 1;
-  treatmentListDTO: TreatmentDTO[] = [];
-  treatment: TreatmentVacxins;
+  // search = '';
+  // pageNum = 1;
+  // treatmentListDTO: TreatmentDTO[] = [];
+  // treatment: TreatmentVacxins;
+  columnHeader = {'select': 'Select', 'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
+                  'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
   constructor(private treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {
-    this.treatmentService.getAll(this.pageNum, this.search,'treatment').subscribe(data =>{
-      this.treatmentListDTO = data;
-      console.log(this.treatmentListDTO);
-    })
+    // this.treatmentService.getAll(this.pageNum, this.search,'treatment').subscribe(data =>{
+    //   this.treatmentListDTO = data;
+    //   console.log(this.treatmentListDTO);
+    // })
   }
-
-  changeSearch() {
-    this.ngOnInit();
-  }
-
-  editTreatment(id) {
-    // this.treatmentService
-  }
-
-  addTreatment(element,modal) {
+  onAddEdit(element, modal) {
     const modalRef = modal.open(NotificationModal);
+    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
+    modalRef.componentInstance.title = element ? 'Edit Information' : 'Add Information';
   }
 }
 
@@ -46,13 +41,26 @@ export class TreatmentComponent implements OnInit {
 })
 export class TreatmentModal implements OnInit{
   @Input() data;
+  @Input() title;
   treatmentForm: FormGroup;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router){}
 
   ngOnInit(): void {
     this.treatmentForm = this.fb.group({
-      id: [this.data.id]
+      id: [this.data.id],
+      description: [this.data.description],
+      isDeleted: [0],
+      treatDate: [this.data.treatDate],
+      type: ['treatment'],
+      veterinary: [this.data.veterinary],
+      cote: [this.data.cote],
+      pig: [this.data.pig],
+      diseases: [this.data.diseases],
+      vacxin: [this.data.vacxin]
     })
   }
 
+  onSubmit() {
+
+  }
 }

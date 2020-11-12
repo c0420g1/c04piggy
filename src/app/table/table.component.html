@@ -83,25 +83,27 @@
       <div class="clearfix">
         <div>Showing
             <b> {{currentItems}}</b> out of <b>{{totalItems}}</b> entries
+            <div style="float: right">
+                <ul class="pagination" >
+                    <li>
+                        <a class="page-link" (click)='changePage(1)' >First</a>
+                    </li>
+                    <li>
+                        <a class="page-link" (click)='previous()'>Previous</a>
+                    </li>
+                    <li *ngFor="let i of listPage" class="page-item" [ngClass]="{active:currentPage == i}">
+                        <a class="page-link" (click)="changePage(i)">{{i}}</a>
+                    </li>
+                    <li>
+                        <a class="page-link" (click)='next()'>Next</a>
+                    </li>
+                    <li>
+                        <a class="page-link" (click)='changePage(totalPage)'>Last</a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <ul class="pagination" >
-            <li>
-                <a class="page-link" (click)='previous()'>Previous</a>
-            </li>
-
-
-            <li *ngFor="let i of listPage" class="page-item">
-                <a class="page-link" (click)="changePage(i)">{{i}}</a>
-            </li>
-
-
-            <li>
-                <a class="page-link" (click)='next()'>Next</a>
-            </li>
-            
-
-        </ul>
       </div>
       </div>
 
