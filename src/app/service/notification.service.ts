@@ -11,10 +11,15 @@ export class NotificationService {
   private readonly APIgetAllNotification = Global.host + 'getAllNotification';
   private readonly APIaddEditNotification = Global.host + 'addEditNotification';
   private readonly APIdeleteNotification = Global.host + 'deleteNotification';
+  private readonly APIsearchNotification = Global.host + 'searchNotification/';
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Notification[]>{
     return this.http.get<Notification[]>(this.APIgetAllNotification);
+  }
+
+  search(pageNum: number, search: string): Observable<Notification[]>{
+    return this.http.get<Notification[]>(this.APIsearchNotification + pageNum + '?search=' + search);
   }
 
   addEdit(nf: Notification): Observable<void>{
