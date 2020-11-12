@@ -68,7 +68,8 @@
                                 <td class=" ">{{cote.employeeName}}</td>
                                 <td class=" ">{{cote.herdName}} </td>
                                 <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
-                                <td class=" ">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
+                                <td class=" " *ngIf="cote.exportDate != ''">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
+                                <td class=" " *ngIf="cote.exportDate == ''">  </td>
                                 <td class=" ">{{cote.quantity}} </td>
                                 <td class=" ">50 days | Growing Pig  </td>
                                 <td class=" last">
@@ -85,21 +86,28 @@
 
                     <div class="x_content">
 
-                        <div class="col-lg-9">
-                            <div style="float: right; margin-right: 50px">
-                                <ul class="list-inline">
-                                    <li>
-                                        <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
-                                    </li>
-                                    <li>
-                                        <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
-                                               [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
-                                    </li>
-                                    <li>
-                                        <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
-                                        <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
-                                    </li>
-                                </ul>
+                        <div class="row" style="margin-top: 10px" *ngIf="!message">
+                            <div class="col-lg-3">
+                                <div style="font-size: 15px">
+                                    Show {{entityNumber}} entities of {{totalEntities}} entities
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div style="float: right; margin-right: 50px">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                        </li>
+                                        <li>
+                                            <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                                                   [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                                        </li>
+                                        <li>
+                                            <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                                            <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -160,35 +168,43 @@
     <div id="add" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form [formGroup]="addNewCote" (ngSubmit)="AddNewCote(addNewCote.value)">
                     <div class="modal-header">
                         <h4 class="modal-title">Add New Cote</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Cote Code</label>
-                            <input type="text" class="form-control"  required>
+                            <label>Description: </label>
+                            <input type="text" class="form-control" formControlName="description"  required>
                         </div>
                         <div class="form-group">
-                            <label>Staff Code</label>
-                            <input type="text" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Herd Code</label>
-                            <input type="text" class="form-control" required>
+                            <label>Code</label>
+                            <input type="text" class="form-control" formControlName="code" required>
                         </div>
                         <div class="form-group">
                             <label>Day Start</label>
-                            <input type="date" class="form-control" required>
+                            <input type="date" class="form-control" formControlName="importDate" required>
                         </div>
                         <div class="form-group">
                             <label>Day End</label>
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" formControlName="exportDate">
                         </div>
                         <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="number" class="form-control" required>
+                            <label>Type</label>
+                            <input type="text" class="form-control" formControlName="type" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Employee</label>
+                            <select class="form-control" formControlName="employee" required *ngFor="let employee of employeeList">
+                                <option value="{{employee}}">{{employee.name}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Herd</label>
+                            <select class="form-control" formControlName="herd" required *ngFor="let herd of herdList">
+                                <option value="{{herd}}">{{herd}}</option>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
