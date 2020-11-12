@@ -8,11 +8,14 @@
             <div class="title_right">
                 <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Search</button>
-                    </span>
+                        <input type="search"  [(ngModel)]="variableFind"  class="form-control mr-sm-2" placeholder="Search"  >
+                        <button type="button" class="btn btn-success" (click)="search()">Search <i class="fa fa-search"></i></button>
                     </div>
+                </div>
+                <div>
+                    <span *ngIf="message" style="color: red; font-size: 12px; font-weight: bold">
+                    {{message}}
+                    </span>
                 </div>
             </div>
 
@@ -44,7 +47,7 @@
                             <tr class="headings" style="font-size: 15px">
                                 <th class="column-title"># </th>
                                 <th class="column-title">Cote Code </th>
-                                <th class="column-title">Staff Code </th>
+                                <th class="column-title">Staff Name </th>
                                 <th class="column-title">Herd Code </th>
                                 <th class="column-title">Day Start </th>
                                 <th class="column-title">Day End </th>
@@ -59,15 +62,14 @@
                             </thead>
 
                             <tbody>
-                            <tr class="even pointer">
-
-                                <td class=" ">1</td>
-                                <td class=" ">C01 </td>
-                                <td class=" ">NV1234</td>
-                                <td class=" ">C01-200320 </td>
-                                <td class=" ">20-03-2020 </td>
-                                <td class=" ">20-06-2020 </td>
-                                <td class=" ">5 </td>
+                            <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
+                                <td class=" ">{{i+1}}</td>
+                                <td class=" ">{{cote.cote}}</td>
+                                <td class=" ">{{cote.employeeName}}</td>
+                                <td class=" ">{{cote.herdName}} </td>
+                                <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
+                                <td class=" ">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
+                                <td class=" ">{{cote.quantity}} </td>
                                 <td class=" ">50 days | Growing Pig  </td>
                                 <td class=" last">
                                     <a href="#table" data-toggle="modal" style="margin-right: 10px;">
@@ -76,105 +78,146 @@
                                         <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
-                            <tr class="odd pointer">
 
-                                <td class=" ">2</td>
-                                <td class=" ">C02 </td>
-                                <td class=" ">NV1234</td>
-                                <td class=" ">C02-150320 </td>
-                                <td class=" ">15-03-2020 </td>
-                                <td class=" ">15-06-2020 </td>
-                                <td class=" ">5 </td>
-                                <td class=" ">55 days | Growing Pig  </td>
-                                <td class=" last">
-                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
-                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
-                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
-                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="even pointer">
-
-                                <td class=" ">3</td>
-                                <td class=" ">C03 </td>
-                                <td class=" ">NV1235</td>
-                                <td class=" ">C03-260720 </td>
-                                <td class=" ">26-07-2020 </td>
-                                <td class=" ">26-09-2020 </td>
-                                <td class=" ">5 </td>
-                                <td class=" ">35 days | Wean Pig  </td>
-                                <td class=" last">
-                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
-                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
-                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
-                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="odd pointer">
-
-                                <td class=" ">4</td>
-                                <td class=" ">C04 </td>
-                                <td class=" ">NV1236</td>
-                                <td class=" ">C03-191020 </td>
-                                <td class=" ">19-10-2020 </td>
-                                <td class=" ">19-01-2021 </td>
-                                <td class=" ">5 </td>
-                                <td class=" ">112 days | Finishing Pig  </td>
-                                <td class=" last">
-                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
-                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
-                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
-                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
-                            <tr class="even pointer">
-
-                                <td class=" ">5</td>
-                                <td class=" ">C05 </td>
-                                <td class=" ">NV1236</td>
-                                <td class=" ">C05-310120 </td>
-                                <td class=" ">30-01-2020 </td>
-                                <td class=" ">31-03-2020 </td>
-                                <td class=" ">5 </td>
-                                <td class=" ">90 days | Developing Pig  </td>
-                                <td class=" last">
-                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
-                                        <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
-                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
-                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
                     </div>
 
                     <div class="x_content">
 
-                        <nav>
-                            <ul class="pagination pg-dark" style="float: right">
-                                <li class="page-item">
-                                    <a class="page-link" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link">1</a></li>
-                                <li class="page-item"><a class="page-link">2</a></li>
-                                <li class="page-item active"><a class="page-link">3</a></li>
-                                <li class="page-item"><a class="page-link">4</a></li>
-                                <li class="page-item"><a class="page-link">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <div class="col-lg-9">
+                            <div style="float: right; margin-right: 50px">
+                                <ul class="list-inline">
+                                    <li>
+                                        <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                    </li>
+                                    <li>
+                                        <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                                               [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                                    </li>
+                                    <li>
+                                        <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                                        <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                         <div class="clearfix"></div>
                     </div>
 
                 </div>
+            </div>
+        </div>
+    </div>
+
+<!--    edit-->
+
+    <div id="table" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Cote</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Cote Code</label>
+                            <input type="text" class="form-control" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Staff Code</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Herd Code</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Day Start</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Day End</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <button type="submit" class="btn btn-success" value="Add">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--    add-->
+
+    <div id="add" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add New Cote</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Cote Code</label>
+                            <input type="text" class="form-control"  required>
+                        </div>
+                        <div class="form-group">
+                            <label>Staff Code</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Herd Code</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Day Start</label>
+                            <input type="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Day End</label>
+                            <input type="date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--    delete-->
+    <div id="delete" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Employee</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete these Records?</p>
+                        <p class="text-warning"><small>This action cannot be undone.</small></p>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                        <input type="submit" class="btn btn-danger" value="Delete">
+                    </div>
+                </form>
             </div>
         </div>
     </div>

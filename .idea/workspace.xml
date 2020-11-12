@@ -20,12 +20,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="24f8d142-10d7-429f-96df-370340ed9253" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/debug.log" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/model/CoteDTO.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/Cote.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Cote.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/Herd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Herd.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/Pig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Pig.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/PigStatus.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/PigStatus.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/TreatmentVacxins.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/TreatmentVacxins.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/notification/notification.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/notification/notification.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/notification/notification.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/notification/notification.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/notification/notification.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/notification/notification.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/cote.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/cote.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/notification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/notification.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/shared/GlobalUtil.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/shared/GlobalUtil.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" afterDir="false" />
     </list>

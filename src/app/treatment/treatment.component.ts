@@ -6,6 +6,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {TreatmentVacxins} from '../model/TreatmentVacxins';
 import {NotificationModal} from '../notification/notification.component';
+import {LoadCssService} from '../load-css.service';
 
 @Component({
   selector: 'app-treatment',
@@ -17,7 +18,7 @@ export class TreatmentComponent implements OnInit {
   pageNum = 1;
   treatmentListDTO: TreatmentDTO[] = [];
   treatment: TreatmentVacxins;
-  constructor(private treatmentService: TreatmentService) { }
+  constructor(private treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {
     this.treatmentService.getAll(this.pageNum, this.search,'treatment').subscribe(data =>{
