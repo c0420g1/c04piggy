@@ -7,14 +7,14 @@ import {LoadCssService} from '../load-css.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
+import { Global } from '../model/Global';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-
-  constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
+  //#region Field
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
@@ -22,34 +22,58 @@ export class TableComponent implements OnInit {
   totalItems: number=0;
   searchValue: string='';
   listPage: number[]=[];
+  currentPage: number=1;
   objectKeys = Object.keys;
   dataSource;
   @ViewChild(MatSort) sort: MatSort;
-  onAddEdit(element) {
-    this.addEditButton(element, this.modalService);
+  //#endregion
+  
+  //#region life cycle
+  constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
+
+  ngOnInit(): void {
+    this.tableService.getAll().subscribe(data => {
+      this.totalItems= data.length; });
+
+    this.getDataSource();
+    this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
+    this.loadCssService.loadCss('assets/build/css/custom.min.css');
+  }
+  //#endregion
+  
+  getDataSource(){
+    this.tableService.search(this.currentPage,this.searchValue).subscribe(data => {
+      this.dataSource = new MatTableDataSource(data);
+      this.currentItems= data.length;
+      let a: number = this.totalItems/Global.pageSize;
+      this.listPage = Array.from({length: a}, (_, index) => index + 1);
+  });
   }
 
+  //#region table
   next(){
-
+    if(this.currentPage<this.listPage.length){
+      this.currentPage++;
+      this.getDataSource();
+    }
+      
   }
   previous(){
-    
+    if(this.currentPage>1)  {
+      this.currentPage--;
+      this.getDataSource();
+    }
+  
   }
+
+  searchInput(val){
+    this.searchValue= val;
+  }
+
   search(){
     this.getDataSource();
   }
 
-  getDataSource(){
-    this.tableService.search(1,this.searchValue).subscribe(data => {
-      this.currentItems= data.length;
-      this.dataSource = new MatTableDataSource(data);
-      let a: number = this.totalItems/this.currentItems;
-      // alert(Math.ceil(a)); });
-  });
-  }
-  searchInput(val){
-    this.searchValue= val;
-  }
   onDelete(element){
     let ids: number[]=[];
     ids.push(element.id);
@@ -72,20 +96,21 @@ export class TableComponent implements OnInit {
         ids.push(t);
       }
   });
-
   const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.ids = ids;
     modalRef.componentInstance.service = this.tableService;
   }
-  ngOnInit(): void {
-    this.tableService.getAll().subscribe(data => {
-      this.totalItems= data.length;
-      this.dataSource = new MatTableDataSource(data); });
-
+  
+  changePage(currentPage){
+    this.currentPage= currentPage;
+    alert(this.currentPage);
     this.getDataSource();
-    this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
-    this.loadCssService.loadCss('assets/build/css/custom.min.css');
   }
+
+  onAddEdit(element) {
+    this.addEditButton(element, this.modalService);
+  }
+  //#endregion
 }
 
 @Component({
