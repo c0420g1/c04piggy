@@ -17,8 +17,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
-import { CoteComponent } from './cote/cote.component';
+import {CoteComponent } from './cote/cote.component';
+import {FeedComponent} from './feed/feed.component';
 import { StockComponent } from './stock/stock.component';
+
 
 
 @NgModule({
@@ -30,11 +32,13 @@ import { StockComponent } from './stock/stock.component';
     NotificationComponent,
     NotificationModal,
     AccountComponent,
-      AccountModal,
+    AccountModal,
     TreatmentComponent,
     TreatmentModal,
     CoteComponent,
+    FeedComponent,
     StockComponent
+
   ],
   imports: [
     BrowserModule,
