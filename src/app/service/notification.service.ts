@@ -6,9 +6,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class NotificationService {
-  private readonly APIgetAllNotification = 'http://localhost/getAllNotification';
-  private readonly APIaddEditNotification = 'http://localhost/addEditNotification';
-  private readonly APIdeleteNotification = 'http://localhost/deleteNotification';
+  private readonly APIgetAllNotification = 'http://localhost:8080/getAllNotification';
+  private readonly APIaddEditNotification = 'http://localhost:8080/addEditNotification';
+  private readonly APIdeleteNotification = 'http://localhost:8080/deleteNotification';
   constructor(private http: HttpClient) { }
 
   getAll(): Observable<Notification[]>{

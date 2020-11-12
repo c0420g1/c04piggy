@@ -15,6 +15,7 @@ import { RouterModule } from '@angular/router';
 import { TableComponent } from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
+import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     TableComponent,
     DashboardComponent,
     NotificationComponent,
-    NotificationModal
+    NotificationModal,
+    TreatmentComponent,
+    TreatmentModal
   ],
   imports: [
     BrowserModule,

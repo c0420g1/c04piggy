@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {LayoutComponent} from './layout/layout.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import { NotificationComponent } from './notification/notification.component';
+import {TreatmentComponent} from './treatment/treatment.component';
 
 
 const routes: Routes = [{
@@ -16,6 +17,10 @@ const routes: Routes = [{
     path: 'notification',
     component: NotificationComponent
   },
+  {
+    path: 'treatment',
+    component: TreatmentComponent
+  }
 ]
 }];
 
