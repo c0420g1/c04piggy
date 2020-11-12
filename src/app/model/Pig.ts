@@ -18,6 +18,6 @@ export class Pig {
     exportDate: string;
     pigFeed: Feed;
     pigHerd: Herd;
-    PigAssociateStatus: PigAssociateStatus[] = [];
-    TreatmentVacxins: TreatmentVacxins[] = [];
+    PigAssociateStatus: PigAssociateStatus;
+    TreatmentVacxins: TreatmentVacxins;
 }
