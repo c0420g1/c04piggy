@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import {Cote} from '../model/Cote';
 import {CoteService} from '../service/cote.service';
 import {CoteDTO} from '../model/CoteDTO';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Form, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Account} from '../model/Account';
 import {Herd} from '../model/Herd';
 import {EmployeeService} from '../service/employee.service';
 import {Employee} from '../model/Employee';
+import {PigService} from '../service/pig.service';
 
 @Component({
   selector: 'app-cote',
@@ -17,7 +18,7 @@ export class CoteComponent implements OnInit {
   variableFind = '';
   coteList: CoteDTO[] = [];
   employeeList: Employee[] = [];
-  herdList:  ['A','B','C'];
+  herdList:  Herd[] = [];
   message: string;
 
   // Pagination
@@ -27,17 +28,18 @@ export class CoteComponent implements OnInit {
   totalPage: number;
   jumpPage: number;
   // Pagination
-  addNewCote: FormGroup;
+  addNewCoteForm: FormGroup;
 
   constructor(private coteService: CoteService,
               private fb: FormBuilder,
-              private employeeService: EmployeeService) { }
+              private employeeService: EmployeeService,
+              private pigService: PigService) { }
 
   ngOnInit(): void {
 
     this.coteService.getListCote(this.variableFind).subscribe((data) => {
       this.totalEntities = data.length;
-      this.totalPage = this.totalEntities / 10;
+      this.totalPage = this.totalEntities / 3;
     });
 
     this.coteService.getAllCote(this.currentPage, this.variableFind).subscribe((data) => {
@@ -50,17 +52,24 @@ export class CoteComponent implements OnInit {
       this.coteList = data;
     });
 
-    this.addNewCote = new FormGroup({
-      id: new FormControl(''),
-      description: new FormControl(''),
-      isDeleted: new FormControl(''),
-      code: new FormControl(''),
-      importDate: new FormControl(''),
-      exportDate: new FormControl(''),
-      quantity: new FormControl(''),
-      type: new FormControl(''),
-      employee: new FormControl(''),
-      herd: new FormControl(''),
+    this.employeeService.getAllEmployee().subscribe((employees) =>{
+      this.employeeList = employees;
+    });
+    this.pigService.getListHerd().subscribe((herds) =>{
+      this.herdList = herds;
+    })
+
+    this.addNewCoteForm = this.fb.group({
+      id: [''],
+      description: [''],
+      isDeleted: [''],
+      code: [''],
+      importDate: [''],
+      exportDate: [''],
+      quantity: [''],
+      type: [''],
+      employee: Employee,
+      herd: Herd,
     });
 
   }
@@ -78,7 +87,7 @@ export class CoteComponent implements OnInit {
   }
 
   nexPage(): void {
-    if (this.currentPage < this.totalEntities / 10) {
+    if (this.currentPage < this.totalEntities / 3) {
       this.currentPage++;
       this.jumpPage = this.currentPage;
     }
@@ -91,8 +100,8 @@ export class CoteComponent implements OnInit {
     this.ngOnInit();
   }
 
-  AddNewCote(cote: Cote) {
-    this.coteService.addNewCote(cote);
-    this.ngOnInit();
+  AddNewCote(form: FormGroup) {
+    this.coteService.addNewCote(form.value).subscribe(()=> this.ngOnInit());
+    document.getElementById("add").click();
   }
 }

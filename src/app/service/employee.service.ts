@@ -10,7 +10,7 @@ export class EmployeeService {
   private readonly API_URL_EMPLOYEE = 'http://localhost:8080/employee';
   constructor(private  http: HttpClient) { }
 
-  public getAllEmployeeDTO(): Observable<Employee[]>{
+  public getAllEmployee(): Observable<Employee[]>{
     return this.http.get<Employee[]>(this.API_URL_EMPLOYEE);
   }
 }
