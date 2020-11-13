@@ -18,10 +18,17 @@ export class TableComponent implements OnInit {
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
+  @Input() actionButton;
+  @Input() actionName="Action";
+  @Input() viewButton;
+  @Input() isAdd: boolean = true;
+  @Input() isDelete: boolean = true;
+
+  data:any;
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string='';
-  listPage: number[]= null;
+  listPage: number[];
   currentPage: number=1;
   objectKeys = Object.keys;
   dataSource;
@@ -43,11 +50,11 @@ export class TableComponent implements OnInit {
   getDataSource(){
     this.tableService.getData(-1,this.searchValue).subscribe(data => {
       this.totalItems= data.length;
-    
       this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
         this.dataSource = new MatTableDataSource(data);
         this.currentItems= data.length;
         this.setPage(this.currentPage);
+        this.data= data;
     });
   });
   }
@@ -73,7 +80,6 @@ export class TableComponent implements OnInit {
   }
 
   search(){
-    console.log(this.searchValue)
     this.getDataSource();
   }
 
@@ -143,6 +149,14 @@ export class TableComponent implements OnInit {
 
   onAddEdit(element) {
     this.addEditButton(element, this.modalService);
+  }
+
+  onView(element){
+    this.viewButton(element, this.modalService);
+  }
+
+  onAction(element){
+    this.actionButton(element, this.modalService);
   }
   //#endregion
 }
