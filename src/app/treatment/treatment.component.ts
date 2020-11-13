@@ -29,7 +29,7 @@ export class TreatmentComponent implements OnInit {
     // })
   }
   onAddEdit(element, modal) {
-    const modalRef = modal.open(NotificationModal);
+    const modalRef = modal.open(TreatmentModal);
     modalRef.componentInstance.data = element ?? new TreatmentVacxins();
     modalRef.componentInstance.title = element ? 'Edit Information' : 'Add Information';
   }
