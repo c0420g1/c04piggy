@@ -4,6 +4,6 @@ export class PigDTO {
     id: number;
     coteName: string;
     importDate: string;
-    PigAssociateStatus: PigAssociateStatus;
+    pigAssociateStatus: PigAssociateStatus;
     weight: number;
 }

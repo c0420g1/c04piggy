@@ -7,7 +7,7 @@ import {StockDTO} from '../model/StockDTO';
   providedIn: 'root'
 })
 export class StockService {
-  private readonly GET_ALL_STOCK_DTO_API = 'http://localhost/stockDTO/1';
+  private readonly GET_ALL_STOCK_DTO_API = 'http://localhost:8080/stockDTO/1';
 
   constructor(private http: HttpClient) { }
 
