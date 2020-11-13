@@ -21,11 +21,12 @@ export class TableComponent implements OnInit {
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string='';
-  listPage: number[]=[];
+  listPage: number[]= null;
   currentPage: number=1;
   objectKeys = Object.keys;
   dataSource;
   totalPage: any;
+
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -33,11 +34,6 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.tableService.getAll().subscribe(data => {
-    this.totalItems= data.length;
-    this.totalPage = Math.ceil(this.totalItems/Global.pageSize);
-      console.log(this.totalItems)
-    });
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
@@ -45,15 +41,14 @@ export class TableComponent implements OnInit {
   //#endregion
   
   getDataSource(){
-    console.log(this.currentPage)
-    console.log(this.searchValue)
-    this.tableService.search(this.currentPage,this.searchValue).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.currentItems= data.length;
-      this.setPage(this.currentPage)
-      // let a: number = Math.ceil(this.totalItems/Global.pageSize);
-      // this.listPage = Array.from({length: a}, (_, index) => index + 1);
-      console.log(this.listPage)
+    this.tableService.getData(-1,this.searchValue).subscribe(data => {
+      this.totalItems= data.length;
+    
+      this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.currentItems= data.length;
+        this.setPage(this.currentPage);
+    });
   });
   }
 
