@@ -64,7 +64,7 @@
                             <tbody>
                             <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
                                 <td class=" ">{{i+1}}</td>
-                                <td class=" ">{{cote.cote}}</td>
+                                <td class=" ">{{cote.coteCode}}</td>
                                 <td class=" ">{{cote.employeeName}}</td>
                                 <td class=" ">{{cote.herdName}} </td>
                                 <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
@@ -168,7 +168,7 @@
     <div id="add" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form [formGroup]="addNewCote" (ngSubmit)="AddNewCote(addNewCote.value)">
+                <form [formGroup]="addNewCoteForm" (ngSubmit)="AddNewCote(addNewCoteForm)">
                     <div class="modal-header">
                         <h4 class="modal-title">Add New Cote</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -196,14 +196,14 @@
                         </div>
                         <div class="form-group">
                             <label>Employee</label>
-                            <select class="form-control" formControlName="employee" required *ngFor="let employee of employeeList">
-                                <option value="{{employee}}">{{employee.name}}</option>
+                            <select class="form-control" formControlName="employee" required >
+                                <option *ngFor="let employee of employeeList"  [ngValue]="employee" >{{employee.name}}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Herd</label>
-                            <select class="form-control" formControlName="herd" required *ngFor="let herd of herdList">
-                                <option value="{{herd}}">{{herd}}</option>
+                            <select class="form-control" formControlName="herd" required >
+                                <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                             </select>
                         </div>
                     </div>
