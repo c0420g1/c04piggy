@@ -21,7 +21,7 @@ export class TableComponent implements OnInit {
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string='';
-  listPage: number[]=[];
+  listPage: number[];
   currentPage: number=1;
   objectKeys = Object.keys;
   dataSource;
@@ -32,8 +32,7 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.tableService.getAll().subscribe(data => {
-      this.totalItems= data.length; });
+    
 
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
@@ -42,7 +41,10 @@ export class TableComponent implements OnInit {
   //#endregion
   
   getDataSource(){
-    this.tableService.search(this.currentPage,this.searchValue).subscribe(data => {
+    this.tableService.getData(-1,this.searchValue).subscribe(data => {
+      this.totalItems= data.length; });
+
+    this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
       this.dataSource = new MatTableDataSource(data);
       this.currentItems= data.length;
       let a: number = this.totalItems/Global.pageSize;
@@ -103,7 +105,6 @@ export class TableComponent implements OnInit {
   
   changePage(currentPage){
     this.currentPage= currentPage;
-    alert(this.currentPage);
     this.getDataSource();
   }
 

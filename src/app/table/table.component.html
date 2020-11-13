@@ -67,7 +67,7 @@
         </div>
       </div>
       
-      <div class="clearfix">
+      <div *ngIf="listPage" class="clearfix">
         <div>Showing
             <b> {{currentItems}}</b> out of <b>{{totalItems}}</b> entries
         </div>
