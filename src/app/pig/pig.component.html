@@ -1,1 +1,239 @@
-<p>pig works!</p>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3 style="color: orange; font-weight: bold">Pig Management</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="search"  [(ngModel)]="search"  class="form-control mr-sm-2" placeholder="Search"  >
+                    <button type="button" class="btn btn-success" (click)="searchPig()">Search <i class="fa fa-search"></i></button>
+                </div>
+            </div>
+            <div>
+                    <span *ngIf="message" style="color: red; font-size: 12px; font-weight: bold">
+                    {{message}}
+                    </span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="col-md-12 col-sm-12  ">
+        <div class="x_panel">
+            <div class="x_title">
+
+                <ul class="nav navbar-right panel_toolbox">
+
+                    <div style="margin-left: 15px">
+                        <button href="#add" data-toggle="modal" class="btn btn-sm btn-success" type="button">Add New Cote
+                            <a href="#add" data-toggle="modal"><i style="color: white" class="fa fa-plus"></i></a></button>
+                    </div>
+                    <li><a class="collapse-link">Collapse<i class="fa fa-chevron-up"></i></a>
+                    </li>
+
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                        <tr class="headings" style="font-size: 15px">
+                            <th class="column-title"># </th>
+                            <th class="column-title">Cote Code </th>
+                            <th class="column-title">Staff Name </th>
+                            <th class="column-title">Herd Code </th>
+                            <th class="column-title">Day Start </th>
+                            <th class="column-title">Day End </th>
+                            <th class="column-title">Quantity </th>
+                            <th class="column-title">To Current Day | Status </th>
+                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            </th>
+                            <th class="bulk-actions" colspan="7">
+                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
+                            </th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
+                            <td class=" ">{{i+1}}</td>
+                            <td class=" ">{{cote.cote}}</td>
+                            <td class=" ">{{cote.employeeName}}</td>
+                            <td class=" ">{{cote.herdName}} </td>
+                            <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
+                            <td class=" " *ngIf="cote.exportDate != ''">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
+                            <td class=" " *ngIf="cote.exportDate == ''">  </td>
+                            <td class=" ">{{cote.quantity}} </td>
+                            <td class=" ">50 days | Growing Pig  </td>
+                            <td class=" last">
+                                <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                    <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
+                                <a href="#delete" data-toggle="modal" style="font-size: 17px;">
+                                    <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="x_content">
+
+                    <div class="row" style="margin-top: 10px" *ngIf="!message">
+                        <div class="col-lg-3">
+                            <div style="font-size: 15px">
+                                Show {{entityNumber}} entities of {{totalEntities}} entities
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div style="float: right; margin-right: 50px">
+                                <ul class="list-inline">
+                                    <li>
+                                        <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                    </li>
+                                    <li>
+                                        <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                                               [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                                    </li>
+                                    <li>
+                                        <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                                        <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--    edit-->
+
+<div id="table" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Cote</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Cote Code</label>
+                        <input type="text" class="form-control" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label>Staff Code</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Herd Code</label>
+                        <input type="text" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Day Start</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Day End</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number" class="form-control" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <button type="submit" class="btn btn-success" value="Add">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--    add-->
+
+<div id="add" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addNewCote" (ngSubmit)="AddNewCote(addNewCote.value)">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New Cote</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Description: </label>
+                        <input type="text" class="form-control" formControlName="description"  required>
+                    </div>
+                    <div class="form-group">
+                        <label>Code</label>
+                        <input type="text" class="form-control" formControlName="code" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Day Start</label>
+                        <input type="date" class="form-control" formControlName="importDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Day End</label>
+                        <input type="date" class="form-control" formControlName="exportDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Type</label>
+                        <input type="text" class="form-control" formControlName="type" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Employee</label>
+                        <select class="form-control" formControlName="employee" required *ngFor="let employee of employeeList">
+                            <option value="{{employee}}">{{employee.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Herd</label>
+                        <select class="form-control" formControlName="herd" required *ngFor="let herd of herdList">
+                            <option value="{{herd}}">{{herd}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!--    delete-->
+<div id="delete" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Employee</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete these Records?</p>
+                    <p class="text-warning"><small>This action cannot be undone.</small></p>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

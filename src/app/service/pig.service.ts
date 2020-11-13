@@ -10,6 +10,7 @@ import {Herd} from '../model/Herd';
 })
 export class PigService {
   private readonly API_URL_PIG_LIST_SHOW = 'http://localhost:8080/pigList';
+  private readonly API_URL_PIG_LIST = 'http://localhost:8080/pigListFull';
   private readonly API_URL_ADD_PIG = 'http://localhost:8080/addPig';
   private readonly API_URL_EDIT_PIG = 'http://localhost:8080/editPig';
   private readonly API_URL_DELETE_PIG = 'http://localhost:8080/deletePig';
@@ -21,6 +22,10 @@ export class PigService {
   //pig
   getListPigForShow(pageNum: number, search: string): Observable<PigDTO[]> {
     return this.http.get<PigDTO[]>(this.API_URL_PIG_LIST_SHOW + '/' + pageNum + '?search=' + search);
+  };
+
+  getListPig(): Observable<Pig[]> {
+    return this.http.get<Pig[]>(this.API_URL_PIG_LIST);
   };
 
   addPig(pig: Partial<Pig>): Observable<Pig> {

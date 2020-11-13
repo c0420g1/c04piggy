@@ -4,6 +4,7 @@ import { TreatmentVacxins } from '../model/TreatmentVacxins';
 import {Pig} from '../model/Pig';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {PigService} from '../service/pig.service';
+import {PigDTO} from '../model/PigDTO';
 
 @Component({
   selector: 'app-pig',
@@ -14,7 +15,7 @@ export class PigComponent implements OnInit {
   search = '';
   message: string;
   pigAssociateStatusList: PigAssociateStatus[] = [];
-  pigList: Pig[] = [];
+  pigList: PigDTO[] = [];
 
   // Pagination
   currentPage = 1;
@@ -31,6 +32,19 @@ export class PigComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
+    this.pigService.getListPigForShow(this.currentPage, this.search).subscribe((data) => {
+      if (data.length === 0) {
+        this.message = 'Không tìm thấy đặt dữ liệu nào!';
+      } else {
+        this.message = '';
+      }
+      this.entityNumber = data.length;
+      this.pigList = data;
+    });
+  }
+
+  searchPig() {
+    this.ngOnInit();
   }
 
 }
