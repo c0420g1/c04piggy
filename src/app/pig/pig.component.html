@@ -30,7 +30,7 @@
                 <ul class="nav navbar-right panel_toolbox">
 
                     <div style="margin-left: 15px">
-                        <button href="#add" data-toggle="modal" class="btn btn-sm btn-success" type="button">Add New Cote
+                        <button href="#add" data-toggle="modal" class="btn btn-sm btn-success" type="button">Add New Pig
                             <a href="#add" data-toggle="modal"><i style="color: white" class="fa fa-plus"></i></a></button>
                     </div>
                     <li><a class="collapse-link">Collapse<i class="fa fa-chevron-up"></i></a>
@@ -47,12 +47,9 @@
                         <tr class="headings" style="font-size: 15px">
                             <th class="column-title"># </th>
                             <th class="column-title">Cote Code </th>
-                            <th class="column-title">Staff Name </th>
-                            <th class="column-title">Herd Code </th>
-                            <th class="column-title">Day Start </th>
-                            <th class="column-title">Day End </th>
-                            <th class="column-title">Quantity </th>
-                            <th class="column-title">To Current Day | Status </th>
+                            <th class="column-title">Import Date </th>
+                            <th class="column-title">Pig Status </th>
+                            <th class="column-title">Weight </th>
                             <th class="column-title no-link last"><span class="nobr">Action</span>
                             </th>
                             <th class="bulk-actions" colspan="7">
@@ -62,16 +59,12 @@
                         </thead>
 
                         <tbody>
-                        <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
+                        <tr class="even pointer" *ngFor="let pig of pigList; let i = index">
                             <td class=" ">{{i+1}}</td>
-                            <td class=" ">{{cote.cote}}</td>
-                            <td class=" ">{{cote.employeeName}}</td>
-                            <td class=" ">{{cote.herdName}} </td>
-                            <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
-                            <td class=" " *ngIf="cote.exportDate != ''">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
-                            <td class=" " *ngIf="cote.exportDate == ''">  </td>
-                            <td class=" ">{{cote.quantity}} </td>
-                            <td class=" ">50 days | Growing Pig  </td>
+                            <td class=" ">{{pig.coteName}}</td>
+                            <td class=" ">{{pig.importDate}}</td>
+                            <td class=" ">{{pig.pigAssociateStatus}} </td>
+                            <td class=" ">{{pig.weight | date: 'dd-MM-yyyy'}} </td>
                             <td class=" last">
                                 <a href="#table" data-toggle="modal" style="margin-right: 10px;">
                                     <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
@@ -120,101 +113,101 @@
 
 <!--    edit-->
 
-<div id="table" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Edit Cote</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Cote Code</label>
-                        <input type="text" class="form-control" readonly required>
-                    </div>
-                    <div class="form-group">
-                        <label>Staff Code</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Herd Code</label>
-                        <input type="text" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Day Start</label>
-                        <input type="date" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Day End</label>
-                        <input type="date" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label>Quantity</label>
-                        <input type="number" class="form-control" required>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" class="btn btn-success" value="Add">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!--<div id="table" class="modal fade">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <form>-->
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Edit Cote</h4>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Cote Code</label>-->
+<!--                        <input type="text" class="form-control" readonly required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Staff Code</label>-->
+<!--                        <input type="text" class="form-control" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Herd Code</label>-->
+<!--                        <input type="text" class="form-control" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Day Start</label>-->
+<!--                        <input type="date" class="form-control" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Day End</label>-->
+<!--                        <input type="date" class="form-control">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Quantity</label>-->
+<!--                        <input type="number" class="form-control" required>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">-->
+<!--                    <button type="submit" class="btn btn-success" value="Add">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!--    add-->
 
-<div id="add" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form [formGroup]="addNewCote" (ngSubmit)="AddNewCote(addNewCote.value)">
-                <div class="modal-header">
-                    <h4 class="modal-title">Add New Cote</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>Description: </label>
-                        <input type="text" class="form-control" formControlName="description"  required>
-                    </div>
-                    <div class="form-group">
-                        <label>Code</label>
-                        <input type="text" class="form-control" formControlName="code" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Day Start</label>
-                        <input type="date" class="form-control" formControlName="importDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Day End</label>
-                        <input type="date" class="form-control" formControlName="exportDate">
-                    </div>
-                    <div class="form-group">
-                        <label>Type</label>
-                        <input type="text" class="form-control" formControlName="type" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Employee</label>
-                        <select class="form-control" formControlName="employee" required *ngFor="let employee of employeeList">
-                            <option value="{{employee}}">{{employee.name}}</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Herd</label>
-                        <select class="form-control" formControlName="herd" required *ngFor="let herd of herdList">
-                            <option value="{{herd}}">{{herd}}</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!--<div id="add" class="modal fade">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <form [formGroup]="addNewCote" (ngSubmit)="AddNewCote(addNewCote.value)">-->
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Add New Cote</h4>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Description: </label>-->
+<!--                        <input type="text" class="form-control" formControlName="description"  required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Code</label>-->
+<!--                        <input type="text" class="form-control" formControlName="code" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Day Start</label>-->
+<!--                        <input type="date" class="form-control" formControlName="importDate" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Day End</label>-->
+<!--                        <input type="date" class="form-control" formControlName="exportDate">-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Type</label>-->
+<!--                        <input type="text" class="form-control" formControlName="type" required>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Employee</label>-->
+<!--                        <select class="form-control" formControlName="employee" required *ngFor="let employee of employeeList">-->
+<!--                            <option value="{{employee}}">{{employee.name}}</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label>Herd</label>-->
+<!--                        <select class="form-control" formControlName="herd" required *ngFor="let herd of herdList">-->
+<!--                            <option value="{{herd}}">{{herd}}</option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">-->
+<!--                    <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <!--    delete-->
 <div id="delete" class="modal fade">
