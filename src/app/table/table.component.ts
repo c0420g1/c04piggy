@@ -21,11 +21,12 @@ export class TableComponent implements OnInit {
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string='';
-  listPage: number[];
+  listPage: number[]= null;
   currentPage: number=1;
   objectKeys = Object.keys;
   dataSource;
   totalPage: any;
+
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -41,13 +42,13 @@ export class TableComponent implements OnInit {
   
   getDataSource(){
     this.tableService.getData(-1,this.searchValue).subscribe(data => {
-      this.totalItems= data.length; });
-
-    this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.currentItems= data.length;
-      let a: number = Math.ceil(this.totalItems/Global.pageSize);
-      this.listPage = Array.from({length: a}, (_, index) => index + 1);
+      this.totalItems= data.length;
+    
+      this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.currentItems= data.length;
+        this.setPage(this.currentPage);
+    });
   });
   }
 
