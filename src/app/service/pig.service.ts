@@ -21,12 +21,12 @@ export class PigService {
   }
 
   //pig
-  getListPigForShow(pageNum: number, search: string): Observable<PigDTO[]> {
+  search(pageNum: number, search: string): Observable<PigDTO[]> {
     return this.http.get<PigDTO[]>(this.API_URL_PIG_LIST_SHOW + '/' + pageNum + '?search=' + search);
   };
 
-  getListPig(): Observable<Pig[]> {
-    return this.http.get<Pig[]>(this.API_URL_PIG_LIST);
+  getAll(): Observable<Pig[]> {
+    return this.http.get<Pig[]>(this.API_URL_PIG_LIST); 
   };
 
   addPig(pig: Partial<Pig>): Observable<Pig> {
