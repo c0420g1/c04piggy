@@ -47,4 +47,27 @@ export class PigComponent implements OnInit {
     this.ngOnInit();
   }
 
+  prePage(): void {
+    if (this.currentPage >= 2 ){
+      this.currentPage--;
+      this.jumpPage = this.currentPage;
+    }
+    this.ngOnInit();
+  }
+
+  nexPage(): void {
+    if (this.currentPage < this.totalEntities / 3) {
+      this.currentPage++;
+      this.jumpPage = this.currentPage;
+    }
+    console.log(this.currentPage)
+    this.ngOnInit();
+  }
+
+  goToPage() {
+    this.currentPage = this.jumpPage;
+    this.ngOnInit();
+  }
+
+
 }
