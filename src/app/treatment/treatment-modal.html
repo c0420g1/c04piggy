@@ -19,7 +19,7 @@
         </div>
         <div class="modal-footer">
             <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
-            <button [disabled]="notificationForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+            <button [disabled]="treatmentForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
         </div>
     </form>
 </div>

@@ -20,8 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment-modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +60,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\ProjectCodeGym\C0420G1_TranQuangTrung_Module6\project2new\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\CodeGym\C0420G1-Project\Product 2\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -81,8 +82,7 @@
       <workItem from="1605081359374" duration="734000" />
       <workItem from="1605082121229" duration="5001000" />
       <workItem from="1605170729155" duration="4084000" />
-      <workItem from="1605201518713" duration="2607000" />
-      <workItem from="1605230873429" duration="536000" />
+      <workItem from="1605201518713" duration="268000" />
     </task>
     <servers />
   </component>
@@ -94,12 +94,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="531" y="256" key="FileChooserDialogImpl" timestamp="1605192218318">

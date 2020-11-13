@@ -20,7 +20,7 @@ export class TreatmentComponent implements OnInit {
   // treatment: TreatmentVacxins;
   columnHeader = {'select': 'Select', 'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
-  constructor(private treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
+  constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {
     // this.treatmentService.getAll(this.pageNum, this.search,'treatment').subscribe(data =>{
