@@ -21,6 +21,7 @@ import {CoteComponent } from './cote/cote.component';
 import {FeedComponent} from './feed/feed.component';
 import { StockComponent } from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
+import { PigComponent } from './pig/pig.component';
 
 
 
@@ -40,7 +41,8 @@ import { HistoryExportComponent, HistoryExportModal } from './history-export/his
     FeedComponent,
     StockComponent,
     HistoryExportModal,
-    HistoryExportComponent
+    HistoryExportComponent,
+    PigComponent
 
   ],
   imports: [
