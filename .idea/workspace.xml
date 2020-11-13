@@ -21,6 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/model/Global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Global.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/treatment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/treatment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment-modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +58,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/model" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/[prototype]quan_ly_kham_chua_tri" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -79,7 +86,8 @@
       <updated>1605081357020</updated>
       <workItem from="1605081359374" duration="734000" />
       <workItem from="1605082121229" duration="5001000" />
-      <workItem from="1605170729155" duration="2638000" />
+      <workItem from="1605170729155" duration="4084000" />
+      <workItem from="1605201518713" duration="268000" />
     </task>
     <servers />
   </component>
@@ -98,5 +106,11 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="531" y="256" key="FileChooserDialogImpl" timestamp="1605192218318">
+      <screen x="0" y="0" width="1500" height="1000" />
+    </state>
+    <state x="531" y="256" key="FileChooserDialogImpl/0.0.1500.1000@0.0.1500.1000" timestamp="1605192218318" />
   </component>
 </project>
