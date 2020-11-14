@@ -21,14 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/service/treatment.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/treatment.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/layout.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/notification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/notification.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/stock.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/stock.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock/stock.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock/stock.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock/stock.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/table/table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment-modal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/treatment/treatment.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/build/css/custom.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/build/css/custom.min.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +58,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/model" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Sprint 1/c04cinema-frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -112,5 +111,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="580" y="185" key="FileChooserDialogImpl" timestamp="1605339223911">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
+    <state x="456" y="195" key="run.anything.popup" timestamp="1605338642405">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="456" y="195" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1605338642405" />
   </component>
 </project>
