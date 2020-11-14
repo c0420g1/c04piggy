@@ -18,13 +18,22 @@ export class TableComponent implements OnInit {
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
+  @Input() actionButton;
+  @Input() actionName="Action";
+  @Input() viewButton;
+  @Input() isAdd: boolean = true;
+  @Input() isDelete: boolean = true;
+
+  data:any;
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string='';
-  listPage: number[]=[];
+  listPage: number[];
   currentPage: number=1;
   objectKeys = Object.keys;
   dataSource;
+  totalPage: any;
+
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -32,9 +41,6 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.tableService.getAll().subscribe(data => {
-      this.totalItems= data.length; });
-
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
@@ -42,11 +48,14 @@ export class TableComponent implements OnInit {
   //#endregion
   
   getDataSource(){
-    this.tableService.search(this.currentPage,this.searchValue).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.currentItems= data.length;
-      let a: number = this.totalItems/Global.pageSize;
-      this.listPage = Array.from({length: a}, (_, index) => index + 1);
+    this.tableService.getData(-1,this.searchValue).subscribe(data => {
+      this.totalItems= data.length;
+      this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
+        this.dataSource = new MatTableDataSource(data);
+        this.currentItems= data.length;
+        this.setPage(this.currentPage);
+        this.data= data;
+    });
   });
   }
 
@@ -103,12 +112,51 @@ export class TableComponent implements OnInit {
   
   changePage(currentPage){
     this.currentPage= currentPage;
-    alert(this.currentPage);
     this.getDataSource();
+  }
+  setPage(currentPage){
+    let totalPage = Math.ceil(this.totalItems/Global.pageSize)
+    let maxPage = 5;
+    if(currentPage < 1){
+      this.currentPage = 1;
+    }else if(currentPage > totalPage){
+      this.currentPage = totalPage;
+    }
+    let startPage: number, endPage: number;
+    if (totalPage <= maxPage){
+      startPage = 1;
+      endPage = totalPage;
+    }else {
+      let maxPagesBeforeCurrentPage = Math.floor(maxPage / 2);
+      let maxPagesAfterCurrentPage = Math.ceil(maxPage / 2) - 1;
+      if (currentPage <= maxPagesBeforeCurrentPage) {
+        // current page near the start
+        startPage = 1;
+        endPage = maxPage;
+      }else if (currentPage + maxPagesAfterCurrentPage >= totalPage) {
+        // current page near the end
+        startPage = totalPage - maxPage + 1;
+        endPage = totalPage;
+      }else {
+        // current page somewhere in the middle
+        startPage = currentPage - maxPagesBeforeCurrentPage;
+        endPage = currentPage + maxPagesAfterCurrentPage;
+      }
+    }
+    this.listPage = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
+    this.currentPage = currentPage;
   }
 
   onAddEdit(element) {
     this.addEditButton(element, this.modalService);
+  }
+
+  onView(element){
+    this.viewButton(element, this.modalService);
+  }
+
+  onAction(element){
+    this.actionButton(element, this.modalService);
   }
   //#endregion
 }

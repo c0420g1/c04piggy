@@ -10,17 +10,23 @@ import {Herd} from '../model/Herd';
 })
 export class PigService {
   private readonly API_URL_PIG_LIST_SHOW = 'http://localhost:8080/pigList';
+  private readonly API_URL_PIG_LIST = 'http://localhost:8080/pigListFull';
   private readonly API_URL_ADD_PIG = 'http://localhost:8080/addPig';
   private readonly API_URL_EDIT_PIG = 'http://localhost:8080/editPig';
   private readonly API_URL_DELETE_PIG = 'http://localhost:8080/deletePig';
+  private readonly API_URL_SOLD_PIG = 'http://localhost:8080/soldPig';
   private readonly API_URL_HERD_LIST = 'http://localhost:8080/herdList';
 
   constructor(private http: HttpClient) {
   }
 
   //pig
-  getListPigForShow(pageNum: number, search: string): Observable<PigDTO[]> {
+  search(pageNum: number, search: string): Observable<PigDTO[]> {
     return this.http.get<PigDTO[]>(this.API_URL_PIG_LIST_SHOW + '/' + pageNum + '?search=' + search);
+  };
+
+  getAll(): Observable<Pig[]> {
+    return this.http.get<Pig[]>(this.API_URL_PIG_LIST); 
   };
 
   addPig(pig: Partial<Pig>): Observable<Pig> {
@@ -38,6 +44,11 @@ export class PigService {
   //herd
   getListHerd(): Observable<Herd[]> {
     return this.http.get<Herd[]>(this.API_URL_HERD_LIST);
+  };
+
+  //sold pig
+  soldPig(pig: Pig) {
+    return this.http.patch<Pig>(this.API_URL_SOLD_PIG, pig);
   };
 }
 
