@@ -14,24 +14,26 @@ import {LoadCssService} from '../load-css.service';
   styleUrls: ['./treatment.component.css']
 })
 export class TreatmentComponent implements OnInit {
-  // search = '';
-  // pageNum = 1;
-  // treatmentListDTO: TreatmentDTO[] = [];
-  // treatment: TreatmentVacxins;
   columnHeader = {'select': 'Select', 'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
+  actionName = 'import';
   constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {
-    // this.treatmentService.getAll(this.pageNum, this.search,'treatment').subscribe(data =>{
-    //   this.treatmentListDTO = data;
-    //   console.log(this.treatmentListDTO);
-    // })
   }
   onAddEdit(element, modal) {
-    const modalRef = modal.open(NotificationModal);
+    const modalRef = modal.open(TreatmentModal);
     modalRef.componentInstance.data = element ?? new TreatmentVacxins();
     modalRef.componentInstance.title = element ? 'Edit Information' : 'Add Information';
+  }
+  onView(element, modal){
+    const modalRef = modal.open(TreatmentModal);
+    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
+  }
+  onAction(element, modal){
+    console.log(element)
+    const modalRef = modal.open(TreatmentModal);
+    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
   }
 }
 
