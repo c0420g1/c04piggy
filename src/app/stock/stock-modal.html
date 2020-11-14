@@ -1,0 +1,64 @@
+
+    <div class="modal-content">
+        <form>
+            <div class="modal-header">
+                <h4 class="modal-title">{{title}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="stockForm">
+                    <div class="form-group">
+                        <label>Shipment Code<span style="color: red">(*)</span></label>
+                        <input type="text" class="form-control" value="{{data.shipmentCode}}" formControlName="shipmentCode">
+                    </div>
+                    <div class="form-group">
+                        <label>Feed Type<span style="color: red">(*)</span></label>
+                        <select formControlName="feedType"  class="form-control">
+                            <option  *ngFor="let feedType of feedTypes" [ngValue]="feedType">{{feedType.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Expiry Date<span style="color: red">(*)</span></label>
+                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate" >
+                    </div>
+                    <div class="form-group">
+                        <label>Manufacturing Date<span style="color: red">(*)</span></label>
+                        <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Import Date<span style="color: red">(*)</span></label>
+                        <input type="date" class="form-control" value="{{data.importDate}}" formControlName="importDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity<span style="color: red">(*)</span></label>
+                        <input type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity">
+                    </div>
+                    <div class="form-group">
+                        <label>Unit<span style="color: red">(*)</span></label>
+
+                        <select formControlName="unit" class="form-control">
+                            <option value="kilogam">Kilogram</option>
+                            <option value="lit">Liter</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" >
+                        <label>Vendor<span style="color: red">(*)</span></label>
+                        <select formControlName="vendor"  class="form-control">
+                            <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input type="text" class="form-control" value="{{data.description}}" formControlName="description">
+                    </div>
+                    
+                </form>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
+                <button [disabled]="stockForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+            </div>
+        </form>
+    </div>
+
