@@ -19,7 +19,6 @@ export class TableComponent implements OnInit {
   @Input() edit;
   @Input() delete;
   @Input() view;
-  @Input() deleteAll;
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
@@ -41,7 +40,7 @@ export class TableComponent implements OnInit {
   totalPage: any;
   startPage: any;
   endPage:any;
-
+  isDeleteAll:boolean=false;
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -49,6 +48,8 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    let arr: string[] = Object.keys(this.columnHeader)
+    this.isDeleteAll= arr[0] == 'select';
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');

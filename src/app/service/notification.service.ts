@@ -22,6 +22,6 @@ export class NotificationService {
   }
 
   delete(ids: number[]): Observable<number>{
-    return this.http.post<number>(this.APIdeleteNotification, ids);
+    return this.http.put<number>(this.APIdeleteNotification, ids);
   }
 }

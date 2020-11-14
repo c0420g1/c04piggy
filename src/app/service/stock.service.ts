@@ -5,24 +5,26 @@ import {StockDTO} from '../model/StockDTO';
 import {Stock} from '../model/Stock';
 import {FeedType} from '../model/FeedType';
 import { Vendor } from '../model/Vendor';
+import { Global } from '../model/Global';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StockService {
-  private readonly GET_ALL_STOCK_API = 'http://localhost:8080/listStock';
-  private readonly GET_ALL_STOCK_DTO_API = 'http://localhost:8080/stockDTO';
-  private readonly GET_ALL_FEED_TYPE_API = 'http://localhost:8080/feedType';
-  private readonly GET_ALL_VENDOR_API = 'http://localhost:8080/vendor';
-  private readonly ADD_EDIT_DELETE_STOCK_API = 'http://localhost:8080/stock';
+  private readonly APIgetStock = Global.host + 'getStock/';
+  private readonly APIdeleteStock = Global.host + 'deleteStock';
+  private readonly GET_ALL_FEED_TYPE_API =Global.host +'feedType';
+  private readonly GET_ALL_VENDOR_API =Global.host + 'vendor';
+  private readonly ADD_EDIT_DELETE_STOCK_API = Global.host +'';
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Stock[]>{
-    return this.http.get<Stock[]>(this.GET_ALL_STOCK_API);
+  getData(pageNum: number, search: string): Observable<StockDTO[]>{
+    return this.http.get<StockDTO[]>(this.APIgetStock + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
   }
-  search(pageNum, search): Observable<StockDTO[]>{
-    return this.http.get<StockDTO[]>(this.GET_ALL_STOCK_DTO_API + "/" + pageNum + "?search=" + search);
+
+  delete(ids: number[]): Observable<number>{
+    return this.http.put<number>(this.APIdeleteStock, ids);
   }
 
   getAllFeedType(): Observable<FeedType[]> {
@@ -39,11 +41,6 @@ export class StockService {
 
   editStock(stock: Stock): Observable<void>{
     return this.http.put<void>(this.ADD_EDIT_DELETE_STOCK_API, stock);
-  }
-
-
-  deleteStock(ids: number[]): Observable<number>{
-    return this.http.post<number>(this.ADD_EDIT_DELETE_STOCK_API, ids);
   }
 
 }

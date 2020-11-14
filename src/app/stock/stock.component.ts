@@ -15,9 +15,9 @@ import {Vendor} from '../model/Vendor';
   styleUrls: ['./stock.component.css']
 })
 export class StockComponent implements OnInit {
+  actionName="Import";
 
-
-  columnHeader = { 'id': 'ID', 'shipmentCode': 'Shipment Code' , 'feedTypeName':'Feed Type','vendorName':'Vendor',
+  columnHeader = { 'shipmentCode': 'Shipment Code' , 'feedTypeName':'Feed Type','vendorName':'Vendor',
     'expDate': 'Expiry Date', 'quantity': 'Quantity', 'unit': 'Unit','action': 'Action'};
 
   constructor(public stockService: StockService) { }
@@ -26,12 +26,20 @@ export class StockComponent implements OnInit {
 
   }
 
-  onAddEdit(element, modal) {
+  onAction(element, modal){
     const modalRef = modal.open(StockModal);
-    modalRef.componentInstance.data = element ?? new Stock();
-    modalRef.componentInstance.title = element ? 'Edit Stock' : 'Add to Stock';
+    modalRef.componentInstance.data = new Stock();
   }
 
+  onExport(element, modal){
+    const modalRef = modal.open(StockModal);
+    modalRef.componentInstance.data =element;
+  }
+
+  onAddEdit(element, modal){
+    const modalRef = modal.open(StockModal);
+    modalRef.componentInstance.data =element;
+  }
 }
 
 @Component({
