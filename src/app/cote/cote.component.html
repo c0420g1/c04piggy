@@ -64,7 +64,7 @@
                             <tbody>
                             <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
                                 <td class=" ">{{i+1}}</td>
-                                <td class=" ">{{cote.coteCode}}</td>
+                                <td class=" "><a href="#inforHerd" data-toggle="modal" (click)="getInfo(cote)">{{cote.coteCode}}</a></td>
                                 <td class=" ">{{cote.employeeName}}</td>
                                 <td class=" ">{{cote.herdName}} </td>
                                 <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
@@ -237,3 +237,67 @@
             </div>
         </div>
     </div>
+
+
+<!--    Xuat chuong-->
+
+<div id="inforHerd" class="modal fade">
+    <div class="modal-dialog" style="max-width: 660px;">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Herd's Information</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-container">
+                        <table class="table table-filter">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Code</th>
+                                <th>Weight</th>
+                                <th>Color</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let pig of pigList">
+                                <td>
+                                    <div>
+                                       <img src="../../assets/production/images/cute-pig-lying-down-looking-back_42750-237.png" style="width: auto; height: 75px">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px">
+                                        <p>{{pig.code}} </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px">
+                                        {{pig.weight}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px">
+                                        {{pig.color}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 20px">
+                                        <input type="button"  class="btn btn-warning" (click)="soldPig(pig)" value="Sold" >
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <button type="submit" class="btn btn-success" value="Add">Sold All</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
