@@ -22,6 +22,7 @@ import {FeedComponent} from './feed/feed.component';
 import { StockComponent } from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -45,19 +46,20 @@ import { PigComponent } from './pig/pig.component';
     PigComponent
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    NgbModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        NgbModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        MatAutocompleteModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

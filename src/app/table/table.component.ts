@@ -85,10 +85,6 @@ export class TableComponent implements OnInit {
   
   }
 
-  searchInput(val){
-    this.searchValue= val;
-  }
-
   search(){
     this.currentPage =1;
     console.log(this.searchValue)
@@ -108,6 +104,7 @@ export class TableComponent implements OnInit {
   checkit(){
     $('#selectAll').prop('checked', false);
   }
+
   fdelete(){
     let ids: number[]=[];
     var checkbox = $('table tbody input[type="checkbox"]');

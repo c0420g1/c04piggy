@@ -3,10 +3,7 @@
 <div class="title_right" style="float: right">
   <div class="col-md-5 col-sm-5   form-group pull-right top_search">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for..." (keyup)='searchInput($event.target.value)' >
-      <span class="input-group-btn">
-                      <button class="btn btn-secondary" style="color: white" type="button" (click)='search()'>Go!</button>
-                    </span>
+      <input type="text" class="form-control" placeholder="Search for..." [(ngModel)]="searchValue" (ngModelChange)="search()">
     </div>
   </div>
 </div>
@@ -18,14 +15,14 @@
       <h2>Custom</h2>
       <ul class="nav navbar-right panel_toolbox">
           <div *ngIf="actionButton" style="margin-left: 15px">
-              <button  title="action" class="btn btn-sm btn-success" type="button" (click)='onAction(data)'>{{actionName}}</button>
+              <button  title="action" class="btn btn-sm btn-primary" type="button" (click)='onAction(data)'>{{actionName}}</button>
           </div>
         <div style="margin-left: 15px">
           <button *ngIf="isAdd"  title="add" class="btn btn-sm btn-success" type="button" (click)='onAddEdit(null)'>Add new
             <i style="color: white" class="fa fa-plus"></i></button>
         </div>
         <div style="margin-left: 15px">
-          <button *ngIf="isDelete"   class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete
+          <button *ngIf="isDelete"  class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete
             <i style="color: white" class="fa fa-trash-o"></i></button>
         </div>
         <li><a class="collapse-link">Collapse <i class="fa fa-chevron-up"></i></a></li>

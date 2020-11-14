@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {TreatmentVacxins} from '../model/TreatmentVacxins';
 import {NotificationModal} from '../notification/notification.component';
 import {LoadCssService} from '../load-css.service';
+import {Cote} from '../model/Cote';
 
 @Component({
   selector: 'app-treatment',
@@ -26,15 +27,6 @@ export class TreatmentComponent implements OnInit {
     modalRef.componentInstance.data = element ?? new TreatmentVacxins();
     modalRef.componentInstance.title = element ? 'Edit Information' : 'Add Information';
   }
-  onView(element, modal){
-    const modalRef = modal.open(TreatmentModal);
-    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
-  }
-  onAction(element, modal){
-    console.log(element)
-    const modalRef = modal.open(TreatmentModal);
-    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
-  }
 }
 
 
@@ -44,10 +36,16 @@ export class TreatmentComponent implements OnInit {
 export class TreatmentModal implements OnInit{
   @Input() data;
   @Input() title;
+  coteList: Cote[] = [];
   treatmentForm: FormGroup;
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router){}
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
+              private treatmentService: TreatmentService){}
 
   ngOnInit(): void {
+    this.treatmentService.getCote().subscribe(data => {
+      this.coteList = data;
+      console.log(data);
+    })
     this.treatmentForm = this.fb.group({
       id: [this.data.id],
       description: [this.data.description],
