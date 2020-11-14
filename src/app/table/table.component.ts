@@ -23,7 +23,6 @@ export class TableComponent implements OnInit {
   @Input() tableService;
   @Input() addEditButton;
   @Input() deleteButton;
-  @Input() editButton;
   @Input() viewButton;
   @Input() exportButton;
   @Input() isAdd: boolean = true;
@@ -166,10 +165,15 @@ export class TableComponent implements OnInit {
   onAddEdit(element) {
     this.addEditButton(element, this.modalService);
   }
-  //#endregion
   onView(element: any) {
-    this.addEditButton(element, this.modalService);
+    this.viewButton(element, this.modalService);
   }
+  onExport(element: any) {
+    this.exportButton(element, this.modalService);
+  }
+  //#endregion
+
+
 }
 
 @Component({

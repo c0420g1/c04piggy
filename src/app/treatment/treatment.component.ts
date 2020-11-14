@@ -16,9 +16,6 @@ import {LoadCssService} from '../load-css.service';
 export class TreatmentComponent implements OnInit {
   columnHeader = {'select': 'Select', 'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
-  edit = 1;
-  deleteAll = 1;
-  view = 1;
   constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {
@@ -27,6 +24,10 @@ export class TreatmentComponent implements OnInit {
     const modalRef = modal.open(TreatmentModal);
     modalRef.componentInstance.data = element ?? new TreatmentVacxins();
     modalRef.componentInstance.title = element ? 'Edit Information' : 'Add Information';
+  }
+  onView(element, modal){
+    const modalRef = modal.open(TreatmentModal);
+    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
   }
 }
 
