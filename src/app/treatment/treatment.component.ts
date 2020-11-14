@@ -18,6 +18,7 @@ export class TreatmentComponent implements OnInit {
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
   edit = 1;
   deleteAll = 1;
+  view = 1;
   constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {

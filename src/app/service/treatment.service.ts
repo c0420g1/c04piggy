@@ -9,14 +9,16 @@ import {TreatmentVacxins} from '../model/TreatmentVacxins';
   providedIn: 'root'
 })
 export class TreatmentService {
-  private TREATMENTDTO_URL = Global.host + 'treatmentVacxinDTO';
-  private TREATMENT_URL = Global.host +'treatmentVacxin';
+  private readonly TREATMENTDTO_URL = Global.host + 'treatmentVacxinDTO';
+  // private TREATMENT_URL = Global.host +'treatmentVacxin';
   constructor(private http: HttpClient) {}
-  getAll():Observable<TreatmentVacxins[]>{
-    return this.http.get<TreatmentVacxins[]>(this.TREATMENT_URL)
-  }
+  // getAll():Observable<TreatmentVacxins[]>{
+  //   return this.http.get<TreatmentVacxins[]>(this.TREATMENT_URL)
+  // }
   getData(pageNum: number, search: string):Observable<TreatmentDTO[]>{
-    return  this.http.get<TreatmentDTO[]>(this.TREATMENTDTO_URL + '/' + pageNum + '?seacrh=' + search + '&type=treatment')
+    // let url: string= this.TREATMENTDTO_URL + '/' + pageNum + '?seacrh=' + search + '&type=treatment';
+    // alert(url);
+    return  this.http.get<TreatmentDTO[]>(this.TREATMENTDTO_URL + '/' + pageNum + '?search=' + search + '&type=treatment')
   }
   // getById(id): Observable<any>{}
 }

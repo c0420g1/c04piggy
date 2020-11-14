@@ -25,7 +25,7 @@ export class TableComponent implements OnInit {
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string ='';
-  listPage: number[] = null;
+  listPage: number[];
   currentPage: number =1;
   objectKeys = Object.keys;
   dataSource;
@@ -47,12 +47,12 @@ export class TableComponent implements OnInit {
   //#endregion
   
   getDataSource(){
-    console.log(this.searchValue)
-    this.tableService.getData(1,this.searchValue).subscribe(data => {
+
+    this.tableService.getData(-1,this.searchValue).subscribe(data => {
       this.totalItems= data.length;
       console.log(this.totalItems)
       this.totalPage = Math.ceil(this.totalItems/Global.pageSize);
-      console.log('total'+ this.totalPage)
+      console.log('total'+ this.totalPage);
       this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
         console.log('a'+ this.searchValue)
         this.dataSource = new MatTableDataSource(data);
@@ -83,6 +83,7 @@ export class TableComponent implements OnInit {
   }
 
   search(){
+    this.currentPage =1;
     console.log(this.searchValue)
     this.getDataSource();
   }
