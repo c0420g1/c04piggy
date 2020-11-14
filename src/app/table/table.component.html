@@ -17,12 +17,15 @@
     <div class="x_title">
       <h2>Custom</h2>
       <ul class="nav navbar-right panel_toolbox">
+          <div *ngIf="actionButton" style="margin-left: 15px">
+              <button  title="action" class="btn btn-sm btn-success" type="button" (click)='onAction(data)'>{{actionName}}</button>
+          </div>
         <div style="margin-left: 15px">
-          <button *ngIf="isAdd" id="a" title="add" class="btn btn-sm btn-success" type="button" (click)='onAddEdit(null)'>Add new
+          <button *ngIf="isAdd"  title="add" class="btn btn-sm btn-success" type="button" (click)='onAddEdit(null)'>Add new
             <i style="color: white" class="fa fa-plus"></i></button>
         </div>
         <div style="margin-left: 15px">
-          <button *ngIf="isDelete" id=""  class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete
+          <button *ngIf="isDelete"   class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete
             <i style="color: white" class="fa fa-trash-o"></i></button>
         </div>
         <li><a class="collapse-link">Collapse <i class="fa fa-chevron-up"></i></a></li>

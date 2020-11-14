@@ -15,6 +15,7 @@ import { Global } from '../model/Global';
 })
 export class TableComponent implements OnInit {
   //#region Field
+  @Input() actionName
   @Input() edit;
   @Input() delete;
   @Input() view;
@@ -25,6 +26,7 @@ export class TableComponent implements OnInit {
   @Input() deleteButton;
   @Input() viewButton;
   @Input() exportButton;
+  @Input() actionButton;
   @Input() isAdd: boolean = true;
   @Input() isDelete: boolean = true;
 
@@ -54,14 +56,12 @@ export class TableComponent implements OnInit {
   //#endregion
   
   getDataSource(){
-
     this.tableService.getData(-1,this.searchValue).subscribe(data => {
       this.totalItems= data.length;
-      console.log(this.totalItems)
       this.totalPage = Math.ceil(this.totalItems/Global.pageSize);
       console.log('total'+ this.totalPage);
       this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
-        console.log('a'+ this.searchValue)
+        this.data= data;
         this.dataSource = new MatTableDataSource(data);
         this.currentItems= data.length;
         this.setPage(this.currentPage);
@@ -170,6 +170,9 @@ export class TableComponent implements OnInit {
   }
   onExport(element: any) {
     this.exportButton(element, this.modalService);
+  }
+  onAction(element: any) {
+    this.actionButton(element, this.modalService)
   }
   //#endregion
 
