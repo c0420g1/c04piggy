@@ -8,6 +8,7 @@ import {Herd} from '../model/Herd';
 import {EmployeeService} from '../service/employee.service';
 import {Employee} from '../model/Employee';
 import {PigService} from '../service/pig.service';
+import {Pig} from '../model/Pig';
 
 @Component({
   selector: 'app-cote',
@@ -20,6 +21,7 @@ export class CoteComponent implements OnInit {
   employeeList: Employee[] = [];
   herdList:  Herd[] = [];
   message: string;
+  pigList: Pig[] = [];
 
   // Pagination
   currentPage = 1;
@@ -103,5 +105,14 @@ export class CoteComponent implements OnInit {
   AddNewCote(form: FormGroup) {
     this.coteService.addNewCote(form.value).subscribe(()=> this.ngOnInit());
     document.getElementById("add").click();
+  }
+
+  getInfo(cote: CoteDTO) {
+    this.coteService.getListPig(cote.herdName).subscribe((data) => this.pigList = data);
+    console.log(this.pigList)
+  }
+
+  soldPig(pig: Pig) {
+
   }
 }
