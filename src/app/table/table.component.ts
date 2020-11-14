@@ -15,17 +15,33 @@ import { Global } from '../model/Global';
 })
 export class TableComponent implements OnInit {
   //#region Field
+  @Input() actionName
+  @Input() edit;
+  @Input() delete;
+  @Input() view;
+  @Input() deleteAll;
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
+  @Input() deleteButton;
+  @Input() viewButton;
+  @Input() exportButton;
+  @Input() actionButton;
+  @Input() isAdd: boolean = true;
+  @Input() isDelete: boolean = true;
+
+  data:any;
   currentItems: number=0;
   totalItems: number=0;
-  searchValue: string='';
-  listPage: number[]=[];
-  currentPage: number=1;
+  searchValue: string ='';
+  listPage: number[];
+  currentPage: number =1;
   objectKeys = Object.keys;
   dataSource;
   totalPage: any;
+  startPage: any;
+  endPage:any;
+
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -33,11 +49,6 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    this.tableService.getAll().subscribe(data => {
-    this.totalItems= data.length;
-    this.totalPage = Math.ceil(this.totalItems/Global.pageSize);
-      console.log(this.totalItems)
-    });
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
@@ -45,15 +56,16 @@ export class TableComponent implements OnInit {
   //#endregion
   
   getDataSource(){
-    console.log(this.currentPage)
-    console.log(this.searchValue)
-    this.tableService.search(this.currentPage,this.searchValue).subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
-      this.currentItems= data.length;
-      this.setPage(this.currentPage)
-      // let a: number = Math.ceil(this.totalItems/Global.pageSize);
-      // this.listPage = Array.from({length: a}, (_, index) => index + 1);
-      console.log(this.listPage)
+    this.tableService.getData(-1,this.searchValue).subscribe(data => {
+      this.totalItems= data.length;
+      this.totalPage = Math.ceil(this.totalItems/Global.pageSize);
+      console.log('total'+ this.totalPage);
+      this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
+        this.data= data;
+        this.dataSource = new MatTableDataSource(data);
+        this.currentItems= data.length;
+        this.setPage(this.currentPage);
+    });
   });
   }
 
@@ -78,6 +90,7 @@ export class TableComponent implements OnInit {
   }
 
   search(){
+    this.currentPage =1;
     console.log(this.searchValue)
     this.getDataSource();
   }
@@ -144,12 +157,26 @@ export class TableComponent implements OnInit {
     }
     this.listPage = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
     this.currentPage = currentPage;
+    this.startPage = this.listPage[0];
+    this.endPage = this.listPage[this.listPage.length-1];
+    console.log(this.endPage);
   }
 
   onAddEdit(element) {
     this.addEditButton(element, this.modalService);
   }
+  onView(element: any) {
+    this.viewButton(element, this.modalService);
+  }
+  onExport(element: any) {
+    this.exportButton(element, this.modalService);
+  }
+  onAction(element: any) {
+    this.actionButton(element, this.modalService)
+  }
   //#endregion
+
+
 }
 
 @Component({

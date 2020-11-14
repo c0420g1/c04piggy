@@ -8,6 +8,7 @@ import {TreatmentComponent} from './treatment/treatment.component';
 import {CoteComponent} from './cote/cote.component';
 import {StockComponent} from './stock/stock.component';
 import {HistoryExportComponent} from './history-export/history-export.component';
+import {PigComponent} from './pig/pig.component';
 
 
 const routes: Routes = [{
@@ -36,6 +37,10 @@ const routes: Routes = [{
         {
             path: 'cote',
             component: CoteComponent
+        },
+        {
+            path: 'pig',
+            component: PigComponent
         },
       {
         path: 'export-management',

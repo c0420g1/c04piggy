@@ -72,4 +72,6 @@
 table th:nth-child(1){
   width: 5%;
 }
-
+.action {
+  cursor: pointer;
+}
