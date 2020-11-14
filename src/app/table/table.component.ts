@@ -22,6 +22,14 @@ export class TableComponent implements OnInit {
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
+  @Input() deleteButton;
+  @Input() editButton;
+  @Input() viewButton;
+  @Input() exportButton;
+  @Input() isAdd: boolean = true;
+  @Input() isDelete: boolean = true;
+
+  data:any;
   currentItems: number=0;
   totalItems: number=0;
   searchValue: string ='';

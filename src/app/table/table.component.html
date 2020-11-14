@@ -66,12 +66,14 @@
             
             <div *ngIf="columnHeader[tableData] == 'Action'">
               <td mat-cell  *matCellDef="let element">
-                  <a class="action" title="edit" *ngIf="edit == 1" style="margin-left: 10px;  " (click)="onAddEdit(element)">
+                  <a  class="action" title="edit" *ngIf="editButton" style="margin-left: 10px;  " (click)="onAddEdit(element)">
                   <i style=" color: #077cf9;font-size: 17px" class="fa fa-edit"></i></a>
-                  <a class="action" title="delete" *ngIf="delete == 1" style="margin-left: 10px;" (click)="onDelete(element)">
+                  <a class="action" title="delete" *ngIf="deleteButton" style="margin-left: 10px;" (click)="onDelete(element)">
                   <i style=" color: #dc3545;font-size: 17px" class="fa fa-trash"></i></a>
-                  <a class="action" title="view" *ngIf="view == 1" style="margin-left: 10px;" (click)="onView(element)">
+                  <a class="action" title="view" *ngIf="viewButton" style="margin-left: 10px;" (click)="onView(element)">
                       <i style=" color: #26b99a;font-size: 17px" class="fa fa-eye"></i></a>
+                  <a class="action" title="view" *ngIf="exportButton" style="margin-left: 10px;" (click)="onView(element)">
+                      <i style=" color: #26b99a;font-size: 17px" class="fa fa-share"></i></a>
                </td>
             </div>
             </tbody>
