@@ -19,7 +19,7 @@ import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import {CoteComponent } from './cote/cote.component';
 import {FeedComponent} from './feed/feed.component';
-import { StockComponent } from './stock/stock.component';
+import {StockComponent, StockModal} from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 
 
@@ -40,7 +40,8 @@ import { HistoryExportComponent, HistoryExportModal } from './history-export/his
     FeedComponent,
     StockComponent,
     HistoryExportModal,
-    HistoryExportComponent
+    HistoryExportComponent,
+    StockModal
 
   ],
   imports: [
@@ -55,6 +56,7 @@ import { HistoryExportComponent, HistoryExportModal } from './history-export/his
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
