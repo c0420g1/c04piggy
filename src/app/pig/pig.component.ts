@@ -32,7 +32,7 @@ export class PigComponent implements OnInit {
               ) { }
 
   ngOnInit(): void {
-    this.pigService.getListPigForShow(this.currentPage, this.search).subscribe((data) => {
+    this.pigService.search(this.currentPage, this.search).subscribe((data) => {
       if (data.length === 0) {
         this.message = 'Không tìm thấy đặt dữ liệu nào!';
       } else {

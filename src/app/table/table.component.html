@@ -22,7 +22,7 @@
             <i style="color: white" class="fa fa-plus"></i></button>
         </div>
         <div style="margin-left: 15px">
-          <button id=""  class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete
+          <button *ngIf="deleteAll == 1" id=""  class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete
             <i style="color: white" class="fa fa-trash-o"></i></button>
         </div>
         <li><a class="collapse-link">Collapse <i class="fa fa-chevron-up"></i></a></li>
@@ -66,10 +66,12 @@
             
             <div *ngIf="columnHeader[tableData] == 'Action'">
               <td mat-cell  *matCellDef="let element">
-                  <a   style="margin-left: 10px;  " (click)="onAddEdit(element)">
+                  <a class="action" title="edit" *ngIf="edit == 1" style="margin-left: 10px;  " (click)="onAddEdit(element)">
                   <i style=" color: #077cf9;font-size: 17px" class="fa fa-edit"></i></a>
-                  <a   style="margin-left: 10px;" (click)="onDelete(element)">
+                  <a class="action" title="delete" *ngIf="delete == 1" style="margin-left: 10px;" (click)="onDelete(element)">
                   <i style=" color: #dc3545;font-size: 17px" class="fa fa-trash"></i></a>
+                  <a class="action" title="view" *ngIf="view == 1" style="margin-left: 10px;" (click)="onView(element)">
+                      <i style=" color: #26b99a;font-size: 17px" class="fa fa-eye"></i></a>
                </td>
             </div>
             </tbody>
@@ -91,8 +93,24 @@
                     <li>
                         <a class="page-link" (click)='previous()'>Previous</a>
                     </li>
+                    <li>
+                        <div ngbDropdown class="d-inline-block" *ngIf="startPage != 1">
+                        <button style="margin: 0" class="page-link" ngbDropdownToggle (click)='previous()'>...</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                                <input type="email" class="form-control"  placeholder="page:" [(ngModel)]="currentPage" (ngModelChange)="changePage(currentPage)" >
+                            </div>
+                        </div>
+                    </li>
                     <li *ngFor="let i of listPage" class="page-item" [ngClass]="{active:currentPage == i}">
                         <a class="page-link" (click)="changePage(i)">{{i}}</a>
+                    </li>
+                    <li>
+                        <div ngbDropdown class="d-inline-block" *ngIf="endPage != totalPage">
+                            <button style="margin: 0" class="page-link" ngbDropdownToggle (click)='previous()'>...</button>
+                            <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                                <input type="email" class="form-control"  placeholder="page:" [(ngModel)]="currentPage" (ngModelChange)="changePage(currentPage)" >
+                            </div>
+                        </div>
                     </li>
                     <li>
                         <a class="page-link" (click)='next()'>Next</a>

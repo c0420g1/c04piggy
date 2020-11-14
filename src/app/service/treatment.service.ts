@@ -15,7 +15,7 @@ export class TreatmentService {
   getAll():Observable<TreatmentVacxins[]>{
     return this.http.get<TreatmentVacxins[]>(this.TREATMENT_URL)
   }
-  search(pageNum: number, search: string):Observable<TreatmentDTO[]>{
+  getData(pageNum: number, search: string):Observable<TreatmentDTO[]>{
     return  this.http.get<TreatmentDTO[]>(this.TREATMENTDTO_URL + '/' + pageNum + '?seacrh=' + search + '&type=treatment')
   }
   // getById(id): Observable<any>{}

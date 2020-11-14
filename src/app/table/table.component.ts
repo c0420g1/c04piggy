@@ -15,17 +15,23 @@ import { Global } from '../model/Global';
 })
 export class TableComponent implements OnInit {
   //#region Field
+  @Input() edit;
+  @Input() delete;
+  @Input() view;
+  @Input() deleteAll;
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
   currentItems: number=0;
   totalItems: number=0;
-  searchValue: string='';
-  listPage: number[]= null;
-  currentPage: number=1;
+  searchValue: string ='';
+  listPage: number[] = null;
+  currentPage: number =1;
   objectKeys = Object.keys;
   dataSource;
   totalPage: any;
+  startPage: any;
+  endPage:any;
 
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
@@ -41,10 +47,14 @@ export class TableComponent implements OnInit {
   //#endregion
   
   getDataSource(){
-    this.tableService.getData(-1,this.searchValue).subscribe(data => {
+    console.log(this.searchValue)
+    this.tableService.getData(1,this.searchValue).subscribe(data => {
       this.totalItems= data.length;
-    
+      console.log(this.totalItems)
+      this.totalPage = Math.ceil(this.totalItems/Global.pageSize);
+      console.log('total'+ this.totalPage)
       this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
+        console.log('a'+ this.searchValue)
         this.dataSource = new MatTableDataSource(data);
         this.currentItems= data.length;
         this.setPage(this.currentPage);
@@ -139,12 +149,18 @@ export class TableComponent implements OnInit {
     }
     this.listPage = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
     this.currentPage = currentPage;
+    this.startPage = this.listPage[0];
+    this.endPage = this.listPage[this.listPage.length-1];
+    console.log(this.endPage);
   }
 
   onAddEdit(element) {
     this.addEditButton(element, this.modalService);
   }
   //#endregion
+  onView(element: any) {
+    this.addEditButton(element, this.modalService);
+  }
 }
 
 @Component({
