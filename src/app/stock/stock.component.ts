@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {StockService} from '../service/stock.service';
-import {Notification} from '../model/Notification';
-import {NotificationModal} from '../notification/notification.component';
 import {Stock} from '../model/Stock';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
@@ -18,7 +16,7 @@ export class StockComponent implements OnInit {
   actionName="Import";
 
   columnHeader = { 'shipmentCode': 'Shipment Code' , 'feedTypeName':'Feed Type','vendorName':'Vendor',
-    'expDate': 'Expiry Date', 'quantity': 'Quantity', 'unit': 'Unit','action': 'Action'};
+    'expDate': 'Expiry Date', 'quantity': 'Quantity', 'unit': 'Unit','action': 'Actions'};
 
   constructor(public stockService: StockService) { }
 
@@ -71,6 +69,10 @@ export class StockModal implements OnInit {
     });
     this.stockService.getAllVendor().subscribe((data) => {this.vendors = data; console.log("vendor: " + this.vendors)});
     this.stockService.getAllFeedType().subscribe((data) => {this.feedTypes = data; console.log("feedType: " + this.feedTypes) });
+  }
+
+  addNewStock(){
+
   }
 
   onSubmit(){}
