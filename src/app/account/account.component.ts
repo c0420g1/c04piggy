@@ -31,24 +31,29 @@ export class AccountModal implements OnInit {
   @Input() data;
   @Input() title;
   accountForm: FormGroup;
-
+  employeeForm: FormGroup;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router) {}
 
   ngOnInit(): void {
 
     this.accountForm = this.fb.group({
-      id: this.data.id,
-      code: [this.data.code],
       username:  [this.data.username],
       password:  [this.data.password],
+
+    });
+    this.employeeForm = this.fb.group({
+      code: [this.data.code],
       name:  [this.data.name],
       birthday: [this.data.birthday],
       email:  [this.data.email],
       gender:  [this.data.gender],
       cardId:  [this.data.cardId],
       nameRole:  [this.data.nameRole],
+      account: []
     });
   }
 
-  onSubmit(){}
+  onSubmit(){
+
+  }
 }
