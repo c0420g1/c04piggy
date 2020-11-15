@@ -15,20 +15,16 @@ import { Global } from '../model/Global';
 })
 export class TableComponent implements OnInit {
   //#region Field
-  @Input() actionName
-  @Input() edit;
-  @Input() delete;
-  @Input() view;
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
   @Input() deleteButton;
   @Input() viewButton;
   @Input() exportButton;
-  @Input() actionButton;
+  @Input() isDeleteAll:boolean=true;
   @Input() isAdd: boolean = true;
-  @Input() isDelete: boolean = true;
-
+  @Input() actionName
+  @Input() actionButton;
   data:any;
   currentItems: number=0;
   totalItems: number=0;
@@ -40,7 +36,7 @@ export class TableComponent implements OnInit {
   totalPage: any;
   startPage: any;
   endPage:any;
-  isDeleteAll:boolean=false;
+  
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -48,14 +44,16 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    let arr: string[] = Object.keys(this.columnHeader)
-    this.isDeleteAll= arr[0] == 'select';
+    if(this.isDeleteAll)
+        this.sortColumn();
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
   }
   //#endregion
   
+  //#region private method
+
   getDataSource(){
     this.tableService.getData(-1,this.searchValue).subscribe(data => {
       this.totalItems= data.length;
@@ -69,6 +67,25 @@ export class TableComponent implements OnInit {
     });
   });
   }
+
+  private sortColumn(){
+    var obj = this.columnHeader;
+    var result = Object.keys(obj).map(function (key) { 
+      return [key, obj[key]]; 
+  }); 
+
+  result.unshift(['select', 'Select']);
+
+ let tmp = Object.values(result);
+ let res={};
+ for(let i=0; i< tmp.length;i++){
+    res[tmp[i][0]]= tmp[i][1];
+ }
+
+this.columnHeader= res;  
+  }
+  //#endregion
+  
 
   //#region table
   next(){

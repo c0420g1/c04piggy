@@ -12,7 +12,7 @@ import { NotificationService } from '../service/notification.service';
 })
 export class NotificationComponent implements OnInit {
   actionName: string= "Export";
-  columnHeader = {'select': 'Select', 'title': 'Title', 'content': 'Content' , 'action': 'Action'};
+  columnHeader = {'title': 'Title', 'content': 'Content' , 'action': 'Action'};
   constructor(public notificationService: NotificationService) { }
 
   ngOnInit(): void {
