@@ -18,7 +18,7 @@ export class FeedService {
   private readonly API_URL6 = 'http://localhost:8080/feeds';
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Feed[]>{
+  getData(): Observable<Feed[]>{
     return this.http.get<Feed[]>(this.API_URL);
   }
   search(pageNum: number, search: string): Observable<Notification[]>{

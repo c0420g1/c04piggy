@@ -75,7 +75,6 @@ export class FeedModal implements OnInit {
           if(this.data.id == e.id){
             this.data = e;
             this.herd = e.herd;
-            console.log(this.herd);
             this.feedType = e.feedType;
           }
         })) , error => (this.feeds = []));
