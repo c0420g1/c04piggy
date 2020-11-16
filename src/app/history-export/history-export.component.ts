@@ -11,36 +11,54 @@ import {HistoryExportService} from '../service/history-export.service';
   styleUrls: ['./history-export.component.css']
 })
 export class HistoryExportComponent implements OnInit {
-   coteExport: HistoryExport[];
-   idDel = [];
-   pageNum = 1;
-   search =  "";
+  columnHeader = {'No.':'No.','coteCode': 'Cote Code', 'employeeCode': 'Staff Name', 'company': 'Company', 'exportDate': 'Export Date',
+  'quantity': 'Quantity', 'weightTotal': 'Weight Total', 'total': 'Total', 'action': 'Action'};
+   // coteExport: HistoryExport[];
+   // idDel: number[] = [];
+   // pageNum = 1;
+   // search =  "";
 
 
   constructor(public historyExportService: HistoryExportService) { }
 
   ngOnInit(): void {
-    this.historyExportService.getAll(this.pageNum, this.search).subscribe(
-        data => {
-          this.coteExport = data;
-        },error => console.log(error)
-    )
+    // this.historyExportService.getData(this.pageNum, this.search).subscribe(
+    //     data => {
+    //       this.coteExport = data;
+    //     },error => console.log(error)
+    // )
   }
 
 
-  getIdDelete(id: number) {
-    this.idDel.push(id)
-  }
-
-  delete() {
-    this.historyExportService.delete(this.idDel);
-    this.ngOnInit();
-  }
-
-  searching() {
-    console.log(this.search);
-    this.ngOnInit();
-  }
+  // getIdDelete(id: number) {
+  //   this.idDel.push(id)
+  // }
+  //
+  // delete() {
+  //   this.historyExportService.delete(this.idDel).subscribe(
+  //       () => {
+  //         this.ngOnInit();
+  //       },error => console.log(error)
+  //   );
+  // }
+  //
+  // searching() {
+  //   this.ngOnInit();
+  // }
+  // prePage(){
+  //   this.pageNum--;
+  //   if (this.pageNum <=1){
+  //     this.pageNum =1
+  //   }
+  //   this.ngOnInit();
+  // }
+  // nextPage(){
+  //   this.pageNum++;
+  //   if (this.pageNum>=5){
+  //     this.pageNum = 5;
+  //   }
+  //   this.ngOnInit();
+  // }
 }
 
 

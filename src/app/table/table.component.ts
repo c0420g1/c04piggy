@@ -1,3 +1,4 @@
+
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
 import { MatSort } from "@angular/material/sort";
@@ -12,6 +13,7 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
 import { Global } from "../model/Global";
+
 @Component({
   selector: "app-table",
   templateUrl: "./table.component.html",
@@ -40,7 +42,10 @@ export class TableComponent implements OnInit {
   dataSource;
   totalPage: any;
   startPage: any;
-  endPage: any;
+
+  endPage:any;
+  isDeleteAll:boolean=false;
+  pageSize = Global.pageSize;
 
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
@@ -57,10 +62,12 @@ export class TableComponent implements OnInit {
     if (this.isDeleteAll) this.addColumn('Select');
 
     this.getDataSource();
+
     this.loadCssService.loadCss(
       "assets/vendors/bootstrap/dist/css/bootstrap.min.css"
     );
     this.loadCssService.loadCss("assets/build/css/custom.min.css");
+
   }
   //#endregion
 
@@ -218,7 +225,9 @@ export class DeleteModal {
   @Input() ids: number[];
   constructor(public activeModal: NgbActiveModal, private router: Router) {}
 
-  delete() {
-    this.service.delete(this.ids).subscribe();
+  delete(){
+      this.service.delete(this.ids).subscribe();
+      // this.activeModal.close();
+      window.location.reload();
   }
 }

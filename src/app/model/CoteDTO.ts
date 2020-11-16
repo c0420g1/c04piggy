@@ -6,4 +6,6 @@ export class CoteDTO {
     employeeName: string;
     importDate: string;
     exportDate: string;
+    day: number;
+    status: string;
 }
