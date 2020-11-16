@@ -44,7 +44,6 @@ export class TableComponent implements OnInit {
   startPage: any;
 
   endPage:any;
-  isDeleteAll:boolean=false;
   pageSize = Global.pageSize;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -60,7 +59,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     if (this.ordinalColumn) this.addColumn('No.');
     if (this.isDeleteAll) this.addColumn('Select');
-
+    console.log(this.columnHeader);
     this.getDataSource();
 
     this.loadCssService.loadCss(
