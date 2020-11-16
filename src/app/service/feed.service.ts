@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {Feed} from '../model/Feed';
 import {FeedType} from '../model/FeedType';
 import {Herd} from '../model/Herd';
+import { Global } from '../model/Global';
 
 @Injectable({
   providedIn: 'root'
@@ -14,15 +15,15 @@ export class FeedService {
   private readonly API_URL1 = 'http://localhost:8080/deleteFeed';
   private readonly API_URL2 = 'http://localhost:8080/herdList';
   private readonly API_URL3 = 'http://localhost:8080/createFeed';
-  private readonly API_URL4 = 'http://localhost:8080/searchFeed';
+  private readonly API_URL4 =  Global.host + 'feeds/';
   private readonly API_URL6 = 'http://localhost:8080/feeds';
   constructor(private http: HttpClient) { }
 
-  getData(): Observable<Feed[]>{
+  getAll(): Observable<Feed[]>{
     return this.http.get<Feed[]>(this.API_URL);
   }
-  search(pageNum: number, search: string): Observable<Notification[]>{
-    return this.http.get<Notification[]>(this.API_URL4 + pageNum + '?search=' + search);
+  getData(pageNum: number, search: string): Observable<Feed[]>{
+    return this.http.get<Feed[]>(this.API_URL4 + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
   }
 
   addEdit(feed: Feed): Observable<void>{
