@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -15,25 +15,33 @@ import { Global } from '../model/Global';
 })
 export class TableComponent implements OnInit {
   //#region Field
+  @Input() actionName
+  @Input() edit;
+  @Input() delete;
+  @Input() view;
   @Input() columnHeader;
   @Input() tableService;
   @Input() addEditButton;
-  @Input() actionButton;
-  @Input() actionName="Action";
+  @Input() deleteButton;
   @Input() viewButton;
+  @Input() exportButton;
+  @Input() actionButton;
   @Input() isAdd: boolean = true;
   @Input() isDelete: boolean = true;
 
   data:any;
   currentItems: number=0;
   totalItems: number=0;
-  searchValue: string='';
+  searchValue: string ='';
   listPage: number[];
-  currentPage: number=1;
+  currentPage: number =1;
   objectKeys = Object.keys;
   dataSource;
   totalPage: any;
-
+  startPage: any;
+  endPage:any;
+  isDeleteAll:boolean=false;
+  pageSize = Global.pageSize;
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -41,20 +49,25 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
+    let arr: string[] = Object.keys(this.columnHeader)
+    this.isDeleteAll= arr[0] == 'select';
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
+
   }
   //#endregion
   
   getDataSource(){
     this.tableService.getData(-1,this.searchValue).subscribe(data => {
       this.totalItems= data.length;
+      this.totalPage = Math.ceil(this.totalItems/Global.pageSize);
+      console.log('total'+ this.totalPage);
       this.tableService.getData(this.currentPage,this.searchValue).subscribe(data => {
+        this.data= data;
         this.dataSource = new MatTableDataSource(data);
         this.currentItems= data.length;
         this.setPage(this.currentPage);
-        this.data= data;
     });
   });
   }
@@ -80,6 +93,8 @@ export class TableComponent implements OnInit {
   }
 
   search(){
+    this.currentPage =1;
+    console.log(this.searchValue)
     this.getDataSource();
   }
 
@@ -145,20 +160,26 @@ export class TableComponent implements OnInit {
     }
     this.listPage = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
     this.currentPage = currentPage;
+    this.startPage = this.listPage[0];
+    this.endPage = this.listPage[this.listPage.length-1];
+    console.log(this.endPage);
   }
 
   onAddEdit(element) {
     this.addEditButton(element, this.modalService);
   }
-
-  onView(element){
+  onView(element: any) {
     this.viewButton(element, this.modalService);
   }
-
-  onAction(element){
-    this.actionButton(element, this.modalService);
+  onExport(element: any) {
+    this.exportButton(element, this.modalService);
+  }
+  onAction(element: any) {
+    this.actionButton(element, this.modalService)
   }
   //#endregion
+
+
 }
 
 @Component({
@@ -171,5 +192,7 @@ export class DeleteModal{
 
   delete(){
       this.service.delete(this.ids).subscribe();
+      // this.activeModal.close();
+      window.location.reload();
   }
 }

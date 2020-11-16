@@ -19,9 +19,10 @@ import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import {CoteComponent } from './cote/cote.component';
 import {FeedComponent} from './feed/feed.component';
-import { StockComponent } from './stock/stock.component';
+import {StockComponent, StockModal} from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -42,7 +43,9 @@ import { PigComponent } from './pig/pig.component';
     StockComponent,
     HistoryExportModal,
     HistoryExportComponent,
-    PigComponent
+    StockModal,
+    PigComponent,
+
 
   ],
   imports: [
@@ -57,6 +60,8 @@ import { PigComponent } from './pig/pig.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    MatAutocompleteModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
