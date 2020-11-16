@@ -12,7 +12,7 @@ import {HistoryExportService} from '../service/history-export.service';
 })
 export class HistoryExportComponent implements OnInit {
    coteExport: HistoryExport[];
-   idDel = [];
+   idDel: number[] = [];
    pageNum = 1;
    search =  "";
 
@@ -33,12 +33,28 @@ export class HistoryExportComponent implements OnInit {
   }
 
   delete() {
-    this.historyExportService.delete(this.idDel);
-    this.ngOnInit();
+    this.historyExportService.delete(this.idDel).subscribe(
+        () => {
+          this.ngOnInit();
+        },error => console.log(error)
+    );
   }
 
   searching() {
-    console.log(this.search);
+    this.ngOnInit();
+  }
+  prePage(){
+    this.pageNum--;
+    if (this.pageNum <=1){
+      this.pageNum =1
+    }
+    this.ngOnInit();
+  }
+  nextPage(){
+    this.pageNum++;
+    if (this.pageNum>=5){
+      this.pageNum = 5;
+    }
     this.ngOnInit();
   }
 }
