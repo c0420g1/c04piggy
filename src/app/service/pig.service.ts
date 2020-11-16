@@ -47,8 +47,8 @@ export class PigService {
   };
 
   //sold pig
-  soldPig(pig: Pig) {
-    return this.http.patch<Pig>(this.API_URL_SOLD_PIG, pig);
+  soldPig(pigId: number) {
+    return this.http.patch<Pig>(this.API_URL_SOLD_PIG, pigId);
   };
 }
 

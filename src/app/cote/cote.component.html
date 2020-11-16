@@ -64,7 +64,7 @@
                             <tbody>
                             <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
                                 <td class=" ">{{i+1}}</td>
-                                <td class=" "><a href="#inforHerd" data-toggle="modal" (click)="getInfo(cote)">{{cote.coteCode}}</a></td>
+                                <td class=" "><a href="#informHerd" data-toggle="modal" (click)="getInfo(cote)">{{cote.coteCode}}</a></td>
                                 <td class=" ">{{cote.employeeName}}</td>
                                 <td class=" ">{{cote.herdName}} </td>
                                 <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
@@ -199,12 +199,9 @@
                             <label>Day End</label>
                             <input type="date" class="form-control" formControlName="exportDate" required>
                         </div>
-                            <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('dateGroup').hasError('exportDate',['dateGroup']) &&
-                                                                              addNewCoteForm.get('dateGroup').get('exportDay').touched">
+                            <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.hasError('exportDay',['dateGroup'])">
                                 Export Day must be greater than today 4 month or can be blank!!!
                             </div>
-
-<!--                            how to get errors-->
                         </fieldset>
 
                         <div class="form-group">
@@ -266,7 +263,7 @@
 
 <!--    Xuat chuong-->
 
-<div id="inforHerd" class="modal fade">
+<div id="informHerd" class="modal fade">
     <div class="modal-dialog" style="max-width: 660px;">
         <div class="modal-content">
             <form>
@@ -283,11 +280,12 @@
                                 <th>Code</th>
                                 <th>Weight</th>
                                 <th>Color</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let pig of pigList">
+                            <tr *ngFor="let pig of pigListDTO">
                                 <td>
                                     <div>
                                        <img src="../../assets/production/images/cute-pig-lying-down-looking-back_42750-237.png" style="width: auto; height: 75px">
@@ -295,7 +293,7 @@
                                 </td>
                                 <td>
                                     <div style="padding-top: 30px">
-                                        <p>{{pig.code}} </p>
+                                        <p>{{pig.cote}} </p>
                                     </div>
                                 </td>
                                 <td>
@@ -305,12 +303,17 @@
                                 </td>
                                 <td>
                                     <div style="padding-top: 30px">
-                                        {{pig.color}}
+                                        {{pig.importDate}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px" *ngFor="let status of pig.status">
+                                        {{status}}
                                     </div>
                                 </td>
                                 <td>
                                     <div style="padding-top: 20px">
-                                        <input type="button"  class="btn btn-warning" (click)="soldPig(pig)" value="Sold" >
+                                        <input type="button"  class="btn btn-warning" (click)="soldPig(pig.pigId)" *ngIf="pig.weight > 113" value="Sold" >
                                     </div>
                                 </td>
                             </tr>
@@ -320,7 +323,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" class="btn btn-success" value="Add">Sold All</button>
+                    <button type="submit" class="btn btn-success" (click)="soldAllPig(pigListDTO)" value="Add">Sold All</button>
                 </div>
             </form>
         </div>
