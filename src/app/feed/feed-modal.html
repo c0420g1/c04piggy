@@ -1,20 +1,63 @@
-<!--<div class="modal-content">-->
-<!--    <form>-->
-<!--        <div class="modal-header">-->
-<!--            <h4 class="modal-title">{{title}}</h4>-->
-<!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--            <form [formGroup]="feedForm">-->
-<!--                <div class="form-group">-->
-<!--                    <label>Title</label>-->
-<!--                    <input type="text" class="form-control" value="{{data.title}}" formControlName="title">-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--            <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">-->
-<!--            <button [disabled]="feedForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>-->
-<!--        </div>-->
-<!--    </form>-->
-<!--</div>-->
+<div class="modal-content">
+    <form [formGroup]="feedForm">
+        <div class="modal-header">
+            <h4 class="modal-title">{{title}}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Amount</label>
+                <input type="text" class="form-control" value="{{data.amount}}" formControlName="amount">
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Code</label>
+                <input type="text" class="form-control" value="{{data.code}}" formControlName="code">
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Unit</label>
+                <input type="text" class="form-control" value="{{data.unit}}" formControlName="unit">
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Feed Type</label>
+                <select class="form-control" formControlName="feedType" [ngModel]="this.feedType">
+                    <option *ngFor="let feedType of FeedType" [ngValue]="feedType" [selected]="feedType.id === this.feedType.id" >{{feedType.name}}</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Herd</label>
+                <select class="form-control" formControlName="herd"  [ngModel]="this.herd">
+                    <option *ngFor="let herd of Herd" [ngValue]="herd" [selected]="herd.id === this.herd.id" >{{herd.name}}</option>
+                </select>
+            </div>
+
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Description</label>
+                <textarea type="text" class="form-control"  value="{{data.description}}" formControlName="description"></textarea>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
+            <button [disabled]="feedForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+        </div>
+    </form>
+</div>
