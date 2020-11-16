@@ -51,7 +51,7 @@ export class PigComponent implements OnInit {
       this.herdList = herds;
     })
 
-    this.feedService.getAll().subscribe((feeds) =>{
+    this.feedService.getData().subscribe((feeds) =>{
       this.feedList = feeds;
     })
 
