@@ -7,6 +7,8 @@ import {TreatmentVacxins} from '../model/TreatmentVacxins';
 import {LoadCssService} from '../load-css.service';
 import {Cote} from '../model/Cote';
 import {Pig} from '../model/Pig';
+import {Diseases} from '../model/Diseases';
+import {Vaccine} from '../model/Vaccine';
 
 
 @Component({
@@ -46,15 +48,29 @@ export class TreatmentModal implements OnInit{
   @Input() title;
   coteList: Cote[] = [];
   pigList: Pig[] = [];
+  diseasesList: Diseases[] = [];
+  medicineList: Vaccine[] = [];
   treatmentForm: FormGroup;
-  checkCoteCode: Cote;
-  coteId = 1;
+  checkCoteCode: Cote = null;
+
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
               private treatmentService: TreatmentService,){}
 
   ngOnInit(): void {
+    console.log(this.data)
+    this.treatmentService.getTreatmentById(this.data.id).subscribe(data => {
+      this.data = data;
+      console.log(this.data.veterinary);
+      this.treatmentForm.patchValue(data);
+    })
     this.treatmentService.getAllCote().subscribe(data => {
       this.coteList = data;
+    })
+    this.treatmentService.getAllDiseases().subscribe(data => {
+      this.diseasesList = data;
+    })
+    this.treatmentService.getAllMedicne().subscribe(data => {
+      this.medicineList = data;
     })
     if (this.checkCoteCode != null){
       this.treatmentService.getPigByCoteId(this.checkCoteCode.id).subscribe(data => {
@@ -65,26 +81,34 @@ export class TreatmentModal implements OnInit{
 
     // this.coteId = this.checkCoteCode.id
     this.treatmentForm = this.fb.group({
-      id: [this.data.id],
-      description: [this.data.description],
+      id: [''],
+      description: [''],
       isDeleted: [0],
-      treatDate: [this.data.treatDate],
+      treatDate: [''],
       type: ['treatment'],
-      veterinary: [this.data.veterinary],
+      veterinary: [''],
       cote: [this.data.cote],
-      pig: [this.data.pig],
-      diseases: [this.data.diseases],
-      vacxin: [this.data.vacxin]
+      pig: [''],
+      diseases: [''],
+      vacxin: ['']
     })
 
   }
 
   onSubmit() {
-    console.log(this.checkCoteCode);
+    console.log(this.treatmentForm.value);
+   this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
+     console.log(data);
+   })
   }
 
   check(coteId) {
     this.checkCoteCode.id = coteId;
-    this.ngOnInit();
+    if (this.checkCoteCode != null) {
+      this.treatmentService.getPigByCoteId(this.checkCoteCode.id).subscribe(data => {
+        this.pigList = data;
+        console.log(this.pigList);
+      });
+    }
   }
 }

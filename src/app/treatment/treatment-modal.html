@@ -9,19 +9,10 @@
             <form [formGroup]="treatmentForm">
                 <div class="form-group">
                     <label>Date</label>
-                    <input type="text" class="form-control" formControlName="treatDate">
+                    <input type="date" class="form-control" formControlName="treatDate">
                 </div>
                 <div class="form-group">
                     <label>Cote Code</label>
-<!--                    <input type="text" class="form-control" >-->
-<!--                    <mat-form-field class="example-full-width">-->
-<!--                        <input type="text" matInput class="form-control" [matAutocomplete]="auto">-->
-<!--                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">-->
-<!--                            <option *ngFor="let cote of coteList" [value]="cote">-->
-<!--                                {{cote.code}}-->
-<!--                            </option>-->
-<!--                        </mat-autocomplete>-->
-<!--                    </mat-form-field>-->
                     <select formControlName="cote"  class="form-control"  [(ngModel)]="checkCoteCode" (ngModelChange)="check(checkCoteCode.id)">
                         <option *ngFor="let cote of coteList" [ngValue]="cote"  >{{cote.code}}</option>
                     </select>
@@ -31,6 +22,26 @@
                     <select formControlName="pig"  class="form-control">
                         <option *ngFor="let pig of pigList" [ngValue]="pig">{{pig.code}}</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label>Veterinarians</label>
+                    <input type="text" class="form-control" formControlName="veterinary">
+                </div>
+                <div class="form-group">
+                    <label>Diseases </label>
+                    <select formControlName="diseases"  class="form-control">
+                        <option *ngFor="let diseases of diseasesList" [ngValue]="diseases">{{diseases.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Medicine  </label>
+                    <select formControlName="vacxin"  class="form-control">
+                        <option *ngFor="let medicine  of medicineList" [ngValue]="medicine">{{medicine.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Note</label>
+                    <textarea type="text" class="form-control" formControlName="description"></textarea>
                 </div>
             </form>
         </div>

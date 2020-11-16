@@ -32,6 +32,7 @@ export class TableComponent implements OnInit {
   @Input() ordinalColumn = true;
   @Input() actionName;
   @Input() actionButton;
+  @Input() historyButton = false;
   data: any;
   currentItems: number = 0;
   totalItems: number = 0;
