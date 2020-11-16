@@ -14,6 +14,7 @@ export class CoteService {
   private readonly API_URL_COTE = 'http://localhost:8080/cote';
   private readonly API_URL_PIG = 'http://localhost:8080/listPig';
   private readonly API_URL_STATUS_PIG = 'http://localhost:8080/listPigStatus';
+  private readonly API_URL_DETAIL_COTE = 'http://localhost:8080/idCote';
 
   constructor(private http: HttpClient) { }
 
@@ -35,5 +36,9 @@ export class CoteService {
 
   getStatusPig(herdCode: string): Observable<PigDTONew[]>{
     return this.http.get<PigDTONew[]>(this.API_URL_STATUS_PIG + '?herdCode=' +herdCode);
+  }
+
+  getCoteInform(id: number): Observable<Cote>{
+    return this.http.get<Cote>(this.API_URL_DETAIL_COTE + '/' +id);
   }
 }

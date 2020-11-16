@@ -25,6 +25,8 @@ export class CoteComponent implements OnInit {
   message: string;
   pigList: Pig[] = [];
   pigListDTO: PigDTONew[] = [];
+  coteEdit = new Cote();
+
 
 
   // Pagination
@@ -35,14 +37,17 @@ export class CoteComponent implements OnInit {
   jumpPage: number;
   // Pagination
   addNewCoteForm: FormGroup;
+  editCoteForm: FormGroup;
 
   constructor(private coteService: CoteService,
               private fb: FormBuilder,
               private employeeService: EmployeeService,
-              private pigService: PigService) { }
+              private pigService: PigService) {
+    this.coteEdit.employee = new Employee();
+    this.coteEdit.herd = new Herd();
+  }
 
   ngOnInit(): void {
-
     this.coteService.getListCote(this.variableFind).subscribe((data) => {
       this.totalEntities = data.length;
       this.totalPage = this.totalEntities / 10;
@@ -63,7 +68,7 @@ export class CoteComponent implements OnInit {
     });
     this.pigService.getListHerd().subscribe((herds) =>{
       this.herdList = herds;
-    })
+    });
 
     this.addNewCoteForm = this.fb.group({
       id: [''],
@@ -80,6 +85,21 @@ export class CoteComponent implements OnInit {
       employee: Employee,
       herd: Herd,
     });
+    this.editCoteForm = this.fb.group({
+      id: [''],
+      description: [''],
+      isDeleted: [''],
+      code: ['', Validators.required],
+      dateGroup: this.fb.group({
+        importDate: ['',[Validators.required,importDayCheckValidator]],
+        exportDate: ['', Validators.required]
+      }, {validators: exportDayCheckValidator}),
+
+      quantity: [''],
+      type: [''],
+      employee: Employee,
+      herd: Herd,
+    })
   }
 
   search() {
@@ -110,16 +130,23 @@ export class CoteComponent implements OnInit {
   }
 
   AddNewCote(form: FormGroup) {
+    console.log(form.value);
     this.coteService.addNewCote(form.value).subscribe(()=> this.ngOnInit());
     document.getElementById("add").click();
   }
 
-  getInfo(cote: CoteDTO) {
-    // this.coteService.getListPig(cote.herdName).subscribe((data) => this.pigList = data);
+  getInfoPig(cote: CoteDTO) {
     this.coteService.getStatusPig(cote.herdName).subscribe((data) => this.pigListDTO = data);
-    console.log(this.pigListDTO)
+
   }
 
+  getInfo(cote: CoteDTO) {
+    this.coteService.getCoteInform(cote.id).subscribe((data) => {
+      this.coteEdit = data;
+      this.editCoteForm.patchValue(this.coteEdit);
+      console.log(this.editCoteForm.value);
+    });
+  }
   soldPig(pigId: number) {
     this.pigService.soldPig(pigId).subscribe();
   }
@@ -132,6 +159,11 @@ export class CoteComponent implements OnInit {
     this.ngOnInit();
   }
 
+
+  EditCote(form: FormGroup) {
+    this.coteService.addNewCote(form.value).subscribe(()=> this.ngOnInit());
+    document.getElementById("edit").click();
+  }
 }
 
 // Customer Validator ImportDay
