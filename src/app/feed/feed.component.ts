@@ -3,46 +3,99 @@ import {FeedService} from '../service/feed.service';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {Account} from '../model/Account';
-import {AccountModal} from '../account/account.component';
+import {Feed} from '../model/Feed';
+import {FeedType} from '../model/FeedType';
+import {Herd} from '../model/Herd';
 
 @Component({
-  selector: 'app-feed',
-  templateUrl: './feed.component.html',
-  styleUrls: ['./feed.component.css']
+    selector: 'app-feed',
+    templateUrl: './feed.component.html',
+    styleUrls: ['./feed.component.css']
 })
 export class FeedComponent implements OnInit {
-  columnHeader = { 'id': 'ID', 'amount': 'Amount' , 'code': 'Code','unit' : 'Unit','feedTypeName': 'FeedType','herdName':'Herd'};
-  constructor(public feedService: FeedService) { }
+    columnHeader = {
+        'id': 'ID',
+        'amount': 'Amount',
+        'code': 'Code',
+        'unit': 'Unit',
+        'feedTypeName': 'FeedType',
+        'herdName': 'Herd',
+        'Action': 'Action'
+    };
 
-  ngOnInit(): void {
-  }
+    constructor(public feedService: FeedService) {
+    }
 
-  onAddClick(element, modal) {
-    const modalRef = modal.open(FeedModal);
-    modalRef.componentInstance.data = element ?? new Account();
-    modalRef.componentInstance.title = element ? 'Edit Account' : 'Add Account';
-  }
+
+    ngOnInit(): void {
+
+
+    }
+
+    onAddClick(element, modal) {
+      const modalRef = modal.open(FeedModal);
+              modalRef.componentInstance.title = element ? 'Edit Feed' : 'Add Feed';
+              modalRef.componentInstance.data = element ?? new Feed();
+    }
 
 }
 
 @Component({
-  templateUrl: './feed-modal.html'
+    templateUrl: './feed-modal.html',
+    styleUrls: ['./feed.component.css']
 })
 export class FeedModal implements OnInit {
-  @Input() data;
-  @Input() title;
-  feedForm: FormGroup;
+    @Input() data;
+    @Input() title;
+    feedForm: FormGroup;
+    FeedType: FeedType[];
+    Herd: Herd[];
+    feeds: Feed[];
+    herd: Herd;
+    feedType : FeedType;
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router) {}
 
-  ngOnInit(): void {
-    this.feedForm = this.fb.group({
-      id: this.data.id,
-      title: [this.data.title],
-      content: [this.data.content]
-    });
-  }
 
-  onSubmit(){}
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router, public feedService: FeedService) {
+
+    }
+
+    ngOnInit(): void {
+        this.feedForm = this.fb.group({
+            id: [this.data.id],
+            description: [this.data.description],
+            amount: [this.data.amount],
+            code: [this.data.code],
+            unit: [this.data.unit],
+            feedType: [this.data.feedType],
+            herd: [this.data.herd],
+        });
+
+        this.feedService.getFeed().subscribe(next => (this.feeds = next, this.feeds.forEach(e => {
+          if(this.data.id == e.id){
+            this.data = e;
+            this.herd = e.herd;
+            console.log(this.herd);
+            this.feedType = e.feedType;
+          }
+        })) , error => (this.feeds = []));
+
+        this.feedService.getAllFeedType().subscribe(next => (this.FeedType = next), error => (this.FeedType = []));
+
+        this.feedService.getAllHerd().subscribe(next => (this.Herd = next), error => (this.Herd = []));
+
+    }
+
+    onSubmit() {
+        const {value} = this.feedForm;
+        this.feedService.addEdit(value).subscribe(
+            next => {
+                const data = next;
+                console.log(data);
+                this.feedForm.reset();
+                window.location.reload();
+            }
+        ), error => console.log(error);
+
+    }
 }

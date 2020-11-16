@@ -20,10 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e7ba3997-0ec7-4aa7-a706-11880fd6b3bd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/feed/feed-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed-modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/feed/feed.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed.component.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/feed/feed.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/feed/feed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/model/Feed.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Feed.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/model/Herd.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Herd.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/feed.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/feed.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,10 +60,14 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prototype/c04-cattle-ranch-prototype - tuong - editted" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="D:\project\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -69,18 +81,24 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="614651ce-c83e-44dc-a5aa-46a38a72f417" name="Default Changelist" comment="" />
+      <changelist id="e7ba3997-0ec7-4aa7-a706-11880fd6b3bd" name="Default Changelist" comment="" />
       <created>1605081357020</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1605081357020</updated>
       <workItem from="1605081359374" duration="734000" />
       <workItem from="1605082121229" duration="5001000" />
+      <workItem from="1605232508805" duration="4820000" />
+      <workItem from="1605322926068" duration="4132000" />
+      <workItem from="1605362542742" duration="5633000" />
+      <workItem from="1605411229871" duration="13119000" />
+      <workItem from="1605490605848" duration="1192000" />
+      <workItem from="1605492937526" duration="3741000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -96,9 +114,14 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="580" y="185" key="FileChooserDialogImpl" timestamp="1605150998376">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605494483506">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="137" y="19" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1605494483506" />
+    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1605422608145">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605422608145" />
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605150998376" />
   </component>
 </project>
