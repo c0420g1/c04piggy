@@ -72,6 +72,12 @@ export class StockModal implements OnInit {
     this.stockService.getAllVendor().subscribe((data) => {this.vendors = data; console.log("vendor: " + this.vendors)});
     this.stockService.getAllFeedType().subscribe((data) => {this.feedTypes = data; console.log("feedType: " + this.feedTypes) });
   }
-
+  addEditStock(){
+    if (this.stockForm.value.id != null){
+      this.stockService.editStock(this.stockForm.value).subscribe((data)=>window.location.reload())
+    }else if (this.stockForm.value.id == null){
+      this.stockService.addStock(this.stockForm.value).subscribe((data)=>window.location.reload())
+    }
+  }
   onSubmit(){}
 }

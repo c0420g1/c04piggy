@@ -7,82 +7,24 @@
         </div>
 
         <div class="modal-body">
-
                 <div class="form-group">
-                    <label>Code Employee</label>
-                    <input type="text" class="form-control" value="{{data.code}}" formControlName="code">
-                </div>
-
-        </div>
-        <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Username</label>
+                    <label>Username<span style="color: red">(*)</span></label>
                     <input type="text" class="form-control" value="{{data.username}}" formControlName="username">
                 </div>
-
-        </div>
-        <div class="modal-body">
-
                 <div class="form-group">
-                    <label>Password</label>
-                    <input type="text" class="form-control" value="{{data.password}}" formControlName="password">
-                </div>
-
+                <label>Password<span style="color: red">(*)</span></label>
+                <input type="password" class="form-control" value="{{data.password}}" formControlName="password">
+                 </div>
+                 <div class="form-group">
+                <label>Description<span style="color: red">(*)</span></label>
+                <input type="text" class="form-control" value="{{data.password}}" formControlName="description">
+                 </div>
         </div>
-        <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" class="form-control" value="{{data.name}}" formControlName="name">
-                </div>
-
-        </div>
-        <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Birthday</label>
-                    <input type="text" class="form-control" value="{{data.birthday}}" formControlName="birthday">
-                </div>
-
-        </div>
-        <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Email</label>
-                    <input type="text" class="form-control" value="{{data.email}}" formControlName="email">
-                </div>
-
-        </div>
-        <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Gender</label>
-                    <input type="text" class="form-control" value="{{data.gender}}" formControlName="gender">
-                </div>
-
-        </div>
-        <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Id Card</label>
-                    <input type="text" class="form-control" value="{{data.cardId}}" formControlName="cardId">
-                </div>
-
-        </div>
-        <div class="modal-body">
-
-                <div class="form-group">
-                    <label>Role Name</label>
-                    <input type="text" class="form-control" value="{{data.nameRole}}" formControlName="nameRole">
-                </div>
-
-        </div>
-
+    </form>
         <div class="modal-footer">
             <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
-            <button [disabled]="accountForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+            <button [disabled]="accountForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="addEditStock()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
         </div>
-        </form>
+
 </div>
 
