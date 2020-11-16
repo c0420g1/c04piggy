@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -18,11 +17,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import {CoteComponent } from './cote/cote.component';
-import {FeedComponent} from './feed/feed.component';
+import {FeedComponent, FeedModal} from './feed/feed.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {StockComponent, StockModal} from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
+
 
 
 
@@ -41,28 +43,28 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     CoteComponent,
     FeedComponent,
     StockComponent,
-    HistoryExportModal,
-    HistoryExportComponent,
-    StockModal,
-    PigComponent,
-
-
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    NgbModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule,
-    MatAutocompleteModule,
+    FeedModal,
+      HistoryExportModal,
+      HistoryExportComponent,
+      StockModal,
+      PigComponent,
 
   ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        NgbModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        MatInputModule,
+        MatAutocompleteModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
