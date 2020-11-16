@@ -1,12 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TreatmentService} from '../service/treatment.service';
-import {TreatmentDTO} from '../model/TreatmentDTO';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {TreatmentVacxins} from '../model/TreatmentVacxins';
-import {NotificationModal} from '../notification/notification.component';
 import {LoadCssService} from '../load-css.service';
+import {Cote} from '../model/Cote';
+import {Pig} from '../model/Pig';
+
 
 @Component({
   selector: 'app-treatment',
@@ -14,9 +15,8 @@ import {LoadCssService} from '../load-css.service';
   styleUrls: ['./treatment.component.css']
 })
 export class TreatmentComponent implements OnInit {
-  columnHeader = {'select': 'Select', 'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
+  columnHeader = {'select': 'Select', 'No.': 'No.','treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
-  actionName = 'import';
   constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {
@@ -44,10 +44,26 @@ export class TreatmentComponent implements OnInit {
 export class TreatmentModal implements OnInit{
   @Input() data;
   @Input() title;
+  coteList: Cote[] = [];
+  pigList: Pig[] = [];
   treatmentForm: FormGroup;
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router){}
+  checkCoteCode: Cote;
+  coteId = 1;
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
+              private treatmentService: TreatmentService,){}
 
   ngOnInit(): void {
+    this.treatmentService.getAllCote().subscribe(data => {
+      this.coteList = data;
+    })
+    if (this.checkCoteCode != null){
+      this.treatmentService.getPigByCoteId(this.checkCoteCode.id).subscribe(data => {
+        this.pigList = data;
+        console.log(this.pigList);
+      });
+    }
+
+    // this.coteId = this.checkCoteCode.id
     this.treatmentForm = this.fb.group({
       id: [this.data.id],
       description: [this.data.description],
@@ -60,9 +76,15 @@ export class TreatmentModal implements OnInit{
       diseases: [this.data.diseases],
       vacxin: [this.data.vacxin]
     })
+
   }
 
   onSubmit() {
+    console.log(this.checkCoteCode);
+  }
 
+  check(coteId) {
+    this.checkCoteCode.id = coteId;
+    this.ngOnInit();
   }
 }
