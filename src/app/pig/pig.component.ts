@@ -49,11 +49,11 @@ export class PigComponent implements OnInit {
     //get list
     this.pigService.getListHerd().subscribe((herds) =>{
       this.herdList = herds;
-    })
+    });
 
-    this.feedService.getAll().subscribe((feeds) =>{
+    this.feedService.getData().subscribe((feeds) =>{
       this.feedList = feeds;
-    })
+    });
 
     this.pigService.search(this.currentPage, this.search).subscribe((data) => {
       if (data.length === 0) {
