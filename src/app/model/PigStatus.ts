@@ -5,5 +5,4 @@ export class PigStatus {
     description: string;
     isDeleted: boolean;
     name: string;
-    pigAssociateStatus: PigAssociateStatus;
 }
