@@ -85,6 +85,10 @@ export class TreatmentModal implements OnInit{
 
   check(coteId) {
     this.checkCoteCode.id = coteId;
-    this.ngOnInit();
+    if (this.checkCoteCode != null){
+      this.treatmentService.getPigByCoteId(this.checkCoteCode.id).subscribe(data => {
+        this.pigList = data;
+      });
+    }
   }
 }
