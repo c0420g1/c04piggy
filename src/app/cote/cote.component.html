@@ -52,7 +52,7 @@
                                 <th class="column-title">Day Start </th>
                                 <th class="column-title">Day End </th>
                                 <th class="column-title">Quantity </th>
-                                <th class="column-title">To Current Day | Status </th>
+                                <th class="column-title">Day | Status </th>
                                 <th class="column-title no-link last"><span class="nobr">Action</span>
                                 </th>
                                 <th class="bulk-actions" colspan="7">
@@ -71,7 +71,7 @@
                                 <td class=" " *ngIf="cote.exportDate != ''">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
                                 <td class=" " *ngIf="cote.exportDate == ''">  </td>
                                 <td class=" ">{{cote.quantity}} </td>
-                                <td class=" ">50 days | Growing Pig  </td>
+                                <td class=" ">{{cote.day}} days | {{cote.status}}  </td>
                                 <td class=" last">
                                     <a href="#table" data-toggle="modal" style="margin-right: 10px;">
                                         <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
@@ -182,14 +182,31 @@
                             <label>Code</label>
                             <input type="text" class="form-control" formControlName="code" required>
                         </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('code').invalid &&
+                                                                              addNewCoteForm.get('code').touched">
+                            Code is required!
+                        </div>
+                        <fieldset formGroupName="dateGroup">
                         <div class="form-group">
                             <label>Day Start</label>
                             <input type="date" class="form-control" formControlName="importDate" required>
                         </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('dateGroup').get('importDate').invalid &&
+                                                                              addNewCoteForm.get('dateGroup').get('importDate').touched">
+                            Import Day must be greater than today!!!
+                        </div>
                         <div class="form-group">
                             <label>Day End</label>
-                            <input type="date" class="form-control" formControlName="exportDate">
+                            <input type="date" class="form-control" formControlName="exportDate" required>
                         </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('dateGroup').hasError('exportDate',['dateGroup']) &&
+                                                                              addNewCoteForm.get('dateGroup').get('exportDay').touched">
+                                Export Day must be greater than today 4 month or can be blank!!!
+                            </div>
+
+<!--                            how to get errors-->
+                        </fieldset>
+
                         <div class="form-group">
                             <label>Type</label>
                             <input type="text" class="form-control" formControlName="type" required>
@@ -200,16 +217,24 @@
                                 <option *ngFor="let employee of employeeList"  [ngValue]="employee" >{{employee.name}}</option>
                             </select>
                         </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('employee').invalid &&
+                                                                              addNewCoteForm.get('employee').touched">
+                            Employee is required!
+                        </div>
                         <div class="form-group">
                             <label>Herd</label>
                             <select class="form-control" formControlName="herd" required >
                                 <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                             </select>
                         </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('herd').invalid &&
+                                                                              addNewCoteForm.get('herd').touched">
+                            Herd is required!
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Add" [disabled]="addNewCoteForm.invalid">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>

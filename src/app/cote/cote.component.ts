@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Cote} from '../model/Cote';
 import {CoteService} from '../service/cote.service';
 import {CoteDTO} from '../model/CoteDTO';
-import {Form, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {Form, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators, AbstractControl} from '@angular/forms';
 import {Account} from '../model/Account';
 import {Herd} from '../model/Herd';
 import {EmployeeService} from '../service/employee.service';
@@ -41,12 +41,12 @@ export class CoteComponent implements OnInit {
 
     this.coteService.getListCote(this.variableFind).subscribe((data) => {
       this.totalEntities = data.length;
-      this.totalPage = this.totalEntities / 3;
+      this.totalPage = this.totalEntities / 10;
     });
 
     this.coteService.getAllCote(this.currentPage, this.variableFind).subscribe((data) => {
       if (data.length === 0) {
-        this.message = 'Không tìm thấy đặt dữ liệu nào!';
+        this.message = 'Not found any cote, try again!';
       } else {
         this.message = '';
       }
@@ -65,18 +65,21 @@ export class CoteComponent implements OnInit {
       id: [''],
       description: [''],
       isDeleted: [''],
-      code: [''],
-      importDate: [''],
-      exportDate: [''],
+      code: ['', Validators.required],
+      dateGroup: this.fb.group({
+        importDate: ['',[Validators.required,importDayCheckValidator]],
+        exportDate: ['', Validators.required]
+      }, {validators: exportDayCheckValidator}),
+
       quantity: [''],
       type: [''],
       employee: Employee,
       herd: Herd,
     });
-
   }
 
   search() {
+    this.currentPage =1;
     this.ngOnInit();
   }
 
@@ -89,7 +92,7 @@ export class CoteComponent implements OnInit {
   }
 
   nexPage(): void {
-    if (this.currentPage < this.totalEntities / 3) {
+    if (this.currentPage < this.totalEntities / 10) {
       this.currentPage++;
       this.jumpPage = this.currentPage;
     }
@@ -113,6 +116,38 @@ export class CoteComponent implements OnInit {
   }
 
   soldPig(pig: Pig) {
-
+    this.pigService.soldPig(pig).subscribe();
   }
+}
+
+// Customer Validator ImportDay
+
+function importDayCheckValidator(control: AbstractControl) {
+  const currentDay = new Date();
+  const day = new Date(control.value);
+  if (day >= currentDay || (day.getFullYear() == day.getFullYear() && day.getMonth() == currentDay.getMonth() && day.getDay() == currentDay.getDay()) ){
+    return null;
+  }
+  return {
+    importDay: true
+  };
+}
+
+function exportDayCheckValidator(control: AbstractControl) {
+  const day = new Date(control.value.exportDate);
+  const dayCheck = new Date(control.value.importDate);
+  console.log(day +'ex');
+  console.log(dayCheck + 'ex');
+  // @ts-ignore
+  const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
+  console.log(check +'check' + typeof check);
+  // @ts-ignore
+  if ( dayCheck != 0){
+    console.log('null');
+    return null;
+  }
+  console.log('true');
+  return {
+    exportDay: true
+  };
 }

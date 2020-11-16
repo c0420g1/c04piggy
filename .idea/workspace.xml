@@ -22,11 +22,9 @@
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/__ngcc_entry_points__.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/service/cote.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/cote.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/model/CoteDTO.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/CoteDTO.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +90,11 @@
       <workItem from="1605198147008" duration="591000" />
       <workItem from="1605230147504" duration="6167000" />
       <workItem from="1605249079950" duration="4746000" />
+      <workItem from="1605319035249" duration="3603000" />
+      <workItem from="1605454185438" duration="11035000" />
+      <workItem from="1605466989644" duration="717000" />
+      <workItem from="1605489348747" duration="1451000" />
+      <workItem from="1605490831896" duration="528000" />
     </task>
     <servers />
   </component>
