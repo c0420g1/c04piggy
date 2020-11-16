@@ -8,18 +8,13 @@ import { Global } from '../model/Global';
   providedIn: 'root'
 })
 export class NotificationService {
-  private readonly APIgetAllNotification = Global.host + 'getAllNotification';
+  private readonly APIgetNotification = Global.host + 'getNotification/';
   private readonly APIaddEditNotification = Global.host + 'addEditNotification';
   private readonly APIdeleteNotification = Global.host + 'deleteNotification';
-  private readonly APIsearchNotification = Global.host + 'searchNotification/';
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Notification[]>{
-    return this.http.get<Notification[]>(this.APIgetAllNotification);
-  }
-
-  search(pageNum: number, search: string): Observable<Notification[]>{
-    return this.http.get<Notification[]>(this.APIsearchNotification + pageNum + '?search=' + search);
+  getData(pageNum: number, search: string): Observable<Notification[]>{
+    return this.http.get<Notification[]>(this.APIgetNotification + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
   }
 
   addEdit(nf: Notification): Observable<void>{
@@ -27,6 +22,6 @@ export class NotificationService {
   }
 
   delete(ids: number[]): Observable<number>{
-    return this.http.post<number>(this.APIdeleteNotification, ids);
+    return this.http.put<number>(this.APIdeleteNotification, ids);
   }
 }

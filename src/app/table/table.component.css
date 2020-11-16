@@ -8,7 +8,7 @@
   text-align: center;
 }
 
-custom-checkbox {
+.custom-checkbox {
   position: relative;
 }
 .custom-checkbox input[type="checkbox"] {
@@ -72,4 +72,6 @@ custom-checkbox {
 table th:nth-child(1){
   width: 5%;
 }
-
+.action {
+  cursor: pointer;
+}

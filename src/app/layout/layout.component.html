@@ -6,7 +6,7 @@
         <div class="navbar nav_title" style="border: 0;">
           <a href="" class="site_title">
             <img  style="width: 30px;margin-right: 10px;margin-left: 5px" src="assets/production/images/cute-pig-lying-down-looking-back_42750-237.png" alt="">
-            <span> C04 Piggy</span></a>
+            <span> C04Piggy</span></a>
         </div>
 
         <div class="clearfix"></div>
@@ -34,32 +34,32 @@
                   <li><a href="">Dashboard3</a></li>
                 </ul>
               </li>
-              <li><a><i class="fa fa-cog"></i> System Management  <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-cog"></i> System Manager  <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="">Staff </a></li>
                   <li><a routerLink="/notification">Notification </a></li>
                 </ul>
               </li>
-              <li><a><i class="fa fa-paw"></i> Herd Info Management <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-paw"></i> Herd Info Manager <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="">Individual</a></li>
+                  <li><a routerLink="/pig">Individual</a></li>
                   <li><a routerLink="/cote">Cote</a></li>
                 </ul>
               </li>
-              <li><a><i class="fa fa-cutlery"></i> Feed Management <span class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-cutlery"></i> Feed Manager <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="">Feed Weight Information </a></li>
-                  <li><a [routerLink]="['feed']">Adjust Feed Weight </a></li>
+                  <li><a href="">Feed Weight </a></li>
+                  <li><a [routerLink]="['feed']">Adjust </a></li>
                   <li><a routerLink="/stock">Stock </a></li>
                 </ul>
               </li>
-              <li><a><i class="fa fa-heartbeat"></i> Pathological Management <span style="margin-left: -12px" class="fa fa-chevron-down"></span></a>
+              <li><a><i class="fa fa-heartbeat"></i> Disease Manager <span style="margin-left: -12px" class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   <li><a href="">Vaccination</a></li>
-                  <li><a routerLink="/treatment">Examination & Treatment Information</a></li>
+                  <li><a routerLink="/treatment">Examination & Treatment</a></li>
                 </ul>
               </li>
-              <li><a><i class="fa fa-truck"></i>Export Management </a>
+              <li><a routerLink="/export-management"><i class="fa fa-truck"></i>Export Manager </a>
               </li>
             </ul>
           </div>

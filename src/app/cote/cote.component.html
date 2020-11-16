@@ -52,7 +52,7 @@
                                 <th class="column-title">Day Start </th>
                                 <th class="column-title">Day End </th>
                                 <th class="column-title">Quantity </th>
-                                <th class="column-title">To Current Day | Status </th>
+                                <th class="column-title">Day | Status </th>
                                 <th class="column-title no-link last"><span class="nobr">Action</span>
                                 </th>
                                 <th class="bulk-actions" colspan="7">
@@ -64,13 +64,14 @@
                             <tbody>
                             <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
                                 <td class=" ">{{i+1}}</td>
-                                <td class=" ">{{cote.cote}}</td>
+                                <td class=" "><a href="#inforHerd" data-toggle="modal" (click)="getInfo(cote)">{{cote.coteCode}}</a></td>
                                 <td class=" ">{{cote.employeeName}}</td>
                                 <td class=" ">{{cote.herdName}} </td>
                                 <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
-                                <td class=" ">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
+                                <td class=" " *ngIf="cote.exportDate != ''">{{cote.exportDate | date: 'dd-MM-yyyy'}} </td>
+                                <td class=" " *ngIf="cote.exportDate == ''">  </td>
                                 <td class=" ">{{cote.quantity}} </td>
-                                <td class=" ">50 days | Growing Pig  </td>
+                                <td class=" ">{{cote.day}} days | {{cote.status}}  </td>
                                 <td class=" last">
                                     <a href="#table" data-toggle="modal" style="margin-right: 10px;">
                                         <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
@@ -85,21 +86,28 @@
 
                     <div class="x_content">
 
-                        <div class="col-lg-9">
-                            <div style="float: right; margin-right: 50px">
-                                <ul class="list-inline">
-                                    <li>
-                                        <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
-                                    </li>
-                                    <li>
-                                        <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
-                                               [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
-                                    </li>
-                                    <li>
-                                        <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
-                                        <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
-                                    </li>
-                                </ul>
+                        <div class="row" style="margin-top: 10px" *ngIf="!message">
+                            <div class="col-lg-3">
+                                <div style="font-size: 15px">
+                                    Show {{entityNumber}} entities of {{totalEntities}} entities
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <div style="float: right; margin-right: 50px">
+                                    <ul class="list-inline">
+                                        <li>
+                                            <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                        </li>
+                                        <li>
+                                            <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
+                                                   [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                                        </li>
+                                        <li>
+                                            <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
+                                            <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -160,40 +168,73 @@
     <div id="add" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form [formGroup]="addNewCoteForm" (ngSubmit)="AddNewCote(addNewCoteForm)">
                     <div class="modal-header">
                         <h4 class="modal-title">Add New Cote</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Cote Code</label>
-                            <input type="text" class="form-control"  required>
+                            <label>Description: </label>
+                            <input type="text" class="form-control" formControlName="description"  required>
                         </div>
                         <div class="form-group">
-                            <label>Staff Code</label>
-                            <input type="text" class="form-control" required>
+                            <label>Code</label>
+                            <input type="text" class="form-control" formControlName="code" required>
                         </div>
-                        <div class="form-group">
-                            <label>Herd Code</label>
-                            <input type="text" class="form-control" required>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('code').invalid &&
+                                                                              addNewCoteForm.get('code').touched">
+                            Code is required!
                         </div>
+                        <fieldset formGroupName="dateGroup">
                         <div class="form-group">
                             <label>Day Start</label>
-                            <input type="date" class="form-control" required>
+                            <input type="date" class="form-control" formControlName="importDate" required>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('dateGroup').get('importDate').invalid &&
+                                                                              addNewCoteForm.get('dateGroup').get('importDate').touched">
+                            Import Day must be greater than today!!!
                         </div>
                         <div class="form-group">
                             <label>Day End</label>
-                            <input type="date" class="form-control">
+                            <input type="date" class="form-control" formControlName="exportDate" required>
+                        </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('dateGroup').hasError('exportDate',['dateGroup']) &&
+                                                                              addNewCoteForm.get('dateGroup').get('exportDay').touched">
+                                Export Day must be greater than today 4 month or can be blank!!!
+                            </div>
+
+<!--                            how to get errors-->
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label>Type</label>
+                            <input type="text" class="form-control" formControlName="type" required>
                         </div>
                         <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="number" class="form-control" required>
+                            <label>Employee</label>
+                            <select class="form-control" formControlName="employee" required >
+                                <option *ngFor="let employee of employeeList"  [ngValue]="employee" >{{employee.name}}</option>
+                            </select>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('employee').invalid &&
+                                                                              addNewCoteForm.get('employee').touched">
+                            Employee is required!
+                        </div>
+                        <div class="form-group">
+                            <label>Herd</label>
+                            <select class="form-control" formControlName="herd" required >
+                                <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
+                            </select>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('herd').invalid &&
+                                                                              addNewCoteForm.get('herd').touched">
+                            Herd is required!
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Add" [disabled]="addNewCoteForm.invalid">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>
@@ -221,3 +262,67 @@
             </div>
         </div>
     </div>
+
+
+<!--    Xuat chuong-->
+
+<div id="inforHerd" class="modal fade">
+    <div class="modal-dialog" style="max-width: 660px;">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h4 class="modal-title">Herd's Information</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-container">
+                        <table class="table table-filter">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Code</th>
+                                <th>Weight</th>
+                                <th>Color</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let pig of pigList">
+                                <td>
+                                    <div>
+                                       <img src="../../assets/production/images/cute-pig-lying-down-looking-back_42750-237.png" style="width: auto; height: 75px">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px">
+                                        <p>{{pig.code}} </p>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px">
+                                        {{pig.weight}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px">
+                                        {{pig.color}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 20px">
+                                        <input type="button"  class="btn btn-warning" (click)="soldPig(pig)" value="Sold" >
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <button type="submit" class="btn btn-success" value="Add">Sold All</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

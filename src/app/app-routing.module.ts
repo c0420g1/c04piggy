@@ -8,6 +8,9 @@ import {TreatmentComponent} from './treatment/treatment.component';
 import {CoteComponent} from './cote/cote.component';
 import {StockComponent} from './stock/stock.component';
 import {FeedComponent} from './feed/feed.component';
+import {HistoryExportComponent} from './history-export/history-export.component';
+import {PigComponent} from './pig/pig.component';
+
 
 
 const routes: Routes = [{
@@ -40,7 +43,16 @@ const routes: Routes = [{
         {
             path: 'feed',
             component: FeedComponent
-        }
+        },
+        {
+            path: 'pig',
+            component: PigComponent
+        },
+      {
+        path: 'export-management',
+        component: HistoryExportComponent
+      }
+
     ]
 }];
 

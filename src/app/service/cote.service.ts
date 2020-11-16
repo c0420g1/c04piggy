@@ -3,13 +3,15 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Cote} from '../model/Cote';
 import {CoteDTO} from '../model/CoteDTO';
+import {Pig} from '../model/Pig';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoteService {
   private readonly API_URL_COTE = 'http://localhost:8080/cote';
-  
+  private readonly API_URL_PIG = 'http://localhost:8080/listPig';
+
   constructor(private http: HttpClient) { }
 
   getAllCote(pageNum: number,search: string): Observable<CoteDTO[]>{
@@ -24,5 +26,8 @@ export class CoteService {
     return this.http.post<void>(this.API_URL_COTE, cote);
   }
 
+  getListPig(herdCode: string): Observable<Pig[]>{
+    return this.http.get<Pig[]>(this.API_URL_PIG + '?herdCode=' +herdCode);
+  }
 
 }

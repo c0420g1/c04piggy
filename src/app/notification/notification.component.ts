@@ -11,6 +11,7 @@ import { NotificationService } from '../service/notification.service';
   styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
+  actionName: string= "Export";
   columnHeader = {'select': 'Select', 'title': 'Title', 'content': 'Content' , 'action': 'Action'};
   constructor(public notificationService: NotificationService) { }
 
@@ -21,6 +22,14 @@ export class NotificationComponent implements OnInit {
     const modalRef = modal.open(NotificationModal);
     modalRef.componentInstance.data = element ?? new Notification();
     modalRef.componentInstance.title = element ? 'edit' : 'add';
+  }
+
+  onView(element, modal){
+    alert(element);
+  }
+
+  onAction(element, modal){
+    console.log(element);
   }
 }
 

@@ -2,8 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
-import {HistoryExportService} from '../service/history-export.service';
 import {HistoryExport} from '../model/HistoryExport';
+import {HistoryExportService} from '../service/history-export.service';
 
 @Component({
   selector: 'app-history-export',
@@ -12,18 +12,51 @@ import {HistoryExport} from '../model/HistoryExport';
 })
 export class HistoryExportComponent implements OnInit {
    coteExport: HistoryExport[];
+   idDel: number[] = [];
+   pageNum = 1;
+   search =  "";
+
+
   constructor(public historyExportService: HistoryExportService) { }
 
   ngOnInit(): void {
-    this.historyExportService.getAll().subscribe(
+    this.historyExportService.getAll(this.pageNum, this.search).subscribe(
         data => {
-          this.coteExport = data,
-          console.log(this.coteExport);
+          this.coteExport = data;
         },error => console.log(error)
     )
   }
 
 
+  getIdDelete(id: number) {
+    this.idDel.push(id)
+  }
+
+  delete() {
+    this.historyExportService.delete(this.idDel).subscribe(
+        () => {
+          this.ngOnInit();
+        },error => console.log(error)
+    );
+  }
+
+  searching() {
+    this.ngOnInit();
+  }
+  prePage(){
+    this.pageNum--;
+    if (this.pageNum <=1){
+      this.pageNum =1
+    }
+    this.ngOnInit();
+  }
+  nextPage(){
+    this.pageNum++;
+    if (this.pageNum>=5){
+      this.pageNum = 5;
+    }
+    this.ngOnInit();
+  }
 }
 
 
