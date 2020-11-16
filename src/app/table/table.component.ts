@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -41,6 +41,7 @@ export class TableComponent implements OnInit {
   startPage: any;
   endPage:any;
   isDeleteAll:boolean=false;
+  pageSize = Global.pageSize;
   @ViewChild(MatSort) sort: MatSort;
   //#endregion
   
@@ -53,6 +54,7 @@ export class TableComponent implements OnInit {
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');
     this.loadCssService.loadCss('assets/build/css/custom.min.css');
+
   }
   //#endregion
   
@@ -190,5 +192,7 @@ export class DeleteModal{
 
   delete(){
       this.service.delete(this.ids).subscribe();
+      // this.activeModal.close();
+      window.location.reload();
   }
 }
