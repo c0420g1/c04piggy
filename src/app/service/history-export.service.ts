@@ -14,13 +14,12 @@ export class HistoryExportService {
     constructor(private http: HttpClient) {
     }
 
-    getAll(pageNum: number, search): Observable<HistoryExport[]> {
+    getData(pageNum: number, search): Observable<HistoryExport[]> {
         return this.http.get<HistoryExport[]>(this.API_URL + pageNum + '?search=' + search);
     }
 
     delete(id: number[]): Observable<any> {
         return this.http.put<any>(this.API_URL_DEL, id);
     }
-
 
 }
