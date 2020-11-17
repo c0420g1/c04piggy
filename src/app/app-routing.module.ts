@@ -55,7 +55,7 @@ const routes: Routes = [{
         component: HistoryExportComponent
       },
         {
-            path: 'export-history-stock',
+            path: 'history-of-stock-out',
             component: ExportHistoryStockComponent
         }
     ]
