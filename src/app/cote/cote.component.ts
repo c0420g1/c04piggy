@@ -9,6 +9,8 @@ import {EmployeeService} from '../service/employee.service';
 import {Employee} from '../model/Employee';
 import {PigService} from '../service/pig.service';
 import {Pig} from '../model/Pig';
+import {PigDTO} from '../model/PigDTO';
+import { PigDTONew } from '../model/PigDTONew';
 
 @Component({
   selector: 'app-cote',
@@ -22,6 +24,8 @@ export class CoteComponent implements OnInit {
   herdList:  Herd[] = [];
   message: string;
   pigList: Pig[] = [];
+  pigListDTO: PigDTONew[] = [];
+
 
   // Pagination
   currentPage = 1;
@@ -111,13 +115,23 @@ export class CoteComponent implements OnInit {
   }
 
   getInfo(cote: CoteDTO) {
-    this.coteService.getListPig(cote.herdName).subscribe((data) => this.pigList = data);
-    console.log(this.pigList)
+    // this.coteService.getListPig(cote.herdName).subscribe((data) => this.pigList = data);
+    this.coteService.getStatusPig(cote.herdName).subscribe((data) => this.pigListDTO = data);
+    console.log(this.pigListDTO)
   }
 
-  soldPig(pig: Pig) {
-    this.pigService.soldPig(pig).subscribe();
+  soldPig(pigId: number) {
+    this.pigService.soldPig(pigId).subscribe();
   }
+
+  soldAllPig(pigList: PigDTONew[]) {
+    for (let pig of this.pigListDTO){
+      this.pigService.soldPig(pig.pigId).subscribe();
+    }
+    document.getElementById("informHerd").click();
+    this.ngOnInit();
+  }
+
 }
 
 // Customer Validator ImportDay
@@ -140,14 +154,12 @@ function exportDayCheckValidator(control: AbstractControl) {
   console.log(dayCheck + 'ex');
   // @ts-ignore
   const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
-  console.log(check +'check' + typeof check);
-  // @ts-ignore
-  if ( dayCheck != 0){
-    console.log('null');
-    return null;
+  console.log(check +'day');
+  // Điều kiện sai để trả về valid cho form.
+  if ( check <= 112 || day < new Date()){
+    return {
+      exportDay: true
+    }
   }
-  console.log('true');
-  return {
-    exportDay: true
-  };
+  return null;
 }
