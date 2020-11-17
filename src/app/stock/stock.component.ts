@@ -88,7 +88,7 @@ export class StockModal implements OnInit {
   // add & edit Stock
   addEditStock(){
     console.log(this.stockForm.value);
-      this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>window.location.reload());
+      this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>{});
   }
 
   // validate start date < end date
