@@ -51,8 +51,8 @@ export class FeedModal implements OnInit {
     FeedType: FeedType[];
     Herd: Herd[];
     feeds: Feed[];
-    herd: Herd;
-    feedType : FeedType;
+    herd1 = new Herd();
+    feedType1 = new FeedType();
 
 
 
@@ -74,8 +74,8 @@ export class FeedModal implements OnInit {
         this.feedService.getFeed().subscribe(next => (this.feeds = next, this.feeds.forEach(e => {
           if(this.data.id == e.id){
             this.data = e;
-            this.herd = e.herd;
-            this.feedType = e.feedType;
+            this.herd1 = e.herd;
+            this.feedType1 = e.feedType;
           }
         })) , error => (this.feeds = []));
 
@@ -87,6 +87,7 @@ export class FeedModal implements OnInit {
 
     onSubmit() {
         const {value} = this.feedForm;
+        console.log(this.feedForm)
         this.feedService.addEdit(value).subscribe(
             next => {
                 const data = next;

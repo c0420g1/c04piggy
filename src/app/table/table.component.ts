@@ -193,6 +193,6 @@ export class DeleteModal{
   delete(){
       this.service.delete(this.ids).subscribe();
       // this.activeModal.close();
-      window.location.reload();
+      // window.location.reload();
   }
 }
