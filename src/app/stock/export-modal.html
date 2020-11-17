@@ -12,7 +12,7 @@
                 </div>
                 <div class="alert alert-danger" role="alert"
                      *ngIf="exportHistoryStockForm.get('quantity').invalid && exportHistoryStockForm.get('quantity').touched">
-                    <p *ngIf="exportHistoryStockForm.get('quantity').hasError('required')">Manufacturing Date is required</p>
+                    <p *ngIf="exportHistoryStockForm.get('quantity').hasError('required')">Quantity is required</p>
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="error">The quantity stock out must be less than the quantity in stock.</div>
 
