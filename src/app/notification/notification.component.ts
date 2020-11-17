@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Notification } from '../model/Notification';
 import { NotificationService } from '../service/notification.service';
-
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -18,12 +17,19 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onAddEdit(element, modal) {
+  onAddEdit(element, modal, toastr) {
+    toastr.success('aaaaa','eeeeeee');
+    // this.testsv.showSuccess('aaa','aaaa');
+    // this.testsv.showSuccess('Hello world!', 'Toastr fun!');
     // const modalRef = modal.open(NotificationModal);
     // modalRef.componentInstance.data = element ?? new Notification();
     // modalRef.componentInstance.title = element ? 'edit' : 'add';
   }
 
+  showTest(){
+    // this.testsv.showSuccess('aaa', 'eeee');
+    // this.toastr.success('aaaaa','eeeeeee');
+  }
   // onView(element, modal){
   //   alert(element);
   // }

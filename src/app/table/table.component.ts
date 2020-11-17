@@ -13,7 +13,7 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
 import { Global } from "../model/Global";
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: "app-table",
   templateUrl: "./table.component.html",
@@ -53,7 +53,8 @@ export class TableComponent implements OnInit {
   constructor(
     private loadCssService: LoadCssService,
     public dialog: MatDialog,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -202,7 +203,7 @@ export class TableComponent implements OnInit {
   }
 
   onAddEdit(element) {
-    this.addEditButton(element, this.modalService);
+    this.addEditButton(element, this.modalService, this.toastr);
   }
   onView(element: any) {
     this.viewButton(element, this.modalService);

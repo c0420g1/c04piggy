@@ -23,10 +23,8 @@ import {MatInputModule} from '@angular/material/input';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
 import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
-
-
-
-
+import { CommonModule } from '@angular/common';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -49,8 +47,7 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
     ExportModal,
     PigComponent,
     ExportHistoryStockComponent,
-      FeedModal,
-
+    FeedModal
   ],
     imports: [
         BrowserModule,
@@ -64,7 +61,14 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        MatInputModule
+        MatInputModule,
+        CommonModule,
+        ToastrModule.forRoot(
+          {
+            positionClass: 'toast-top-full-width',
+            preventDuplicates: true,
+          }
+        ),
     ],
   providers: [],
   bootstrap: [AppComponent]
