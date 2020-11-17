@@ -15,7 +15,7 @@ import {Pig} from '../model/Pig';
   styleUrls: ['./treatment.component.css']
 })
 export class TreatmentComponent implements OnInit {
-  columnHeader = {'select': 'Select', 'No.': 'No.','treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
+  columnHeader = {'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
   constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
 

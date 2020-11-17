@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
+import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+
 import {Cote} from '../model/Cote';
 import {CoteService} from '../service/cote.service';
 import {CoteDTO} from '../model/CoteDTO';
-import {Form, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators, AbstractControl} from '@angular/forms';
-import {Account} from '../model/Account';
 import {Herd} from '../model/Herd';
 import {EmployeeService} from '../service/employee.service';
 import {Employee} from '../model/Employee';
 import {PigService} from '../service/pig.service';
 import {Pig} from '../model/Pig';
-import {PigDTO} from '../model/PigDTO';
 import { PigDTONew } from '../model/PigDTONew';
 
 @Component({
@@ -25,6 +25,9 @@ export class CoteComponent implements OnInit {
   message: string;
   pigList: Pig[] = [];
   pigListDTO: PigDTONew[] = [];
+  coteEdit = new Cote();
+  coteTemp = new Cote();
+
 
 
   // Pagination
@@ -33,16 +36,20 @@ export class CoteComponent implements OnInit {
   totalEntities: number;
   totalPage: number;
   jumpPage: number;
+  typeList = ['Get Meat', 'Reproduction'];
   // Pagination
   addNewCoteForm: FormGroup;
+  editCoteForm: FormGroup;
 
   constructor(private coteService: CoteService,
               private fb: FormBuilder,
               private employeeService: EmployeeService,
-              private pigService: PigService) { }
+              private pigService: PigService) {
+    this.coteEdit.employee = new Employee();
+    this.coteEdit.herd = new Herd();
+  }
 
   ngOnInit(): void {
-
     this.coteService.getListCote(this.variableFind).subscribe((data) => {
       this.totalEntities = data.length;
       this.totalPage = this.totalEntities / 10;
@@ -63,7 +70,7 @@ export class CoteComponent implements OnInit {
     });
     this.pigService.getListHerd().subscribe((herds) =>{
       this.herdList = herds;
-    })
+    });
 
     this.addNewCoteForm = this.fb.group({
       id: [''],
@@ -72,7 +79,7 @@ export class CoteComponent implements OnInit {
       code: ['', Validators.required],
       dateGroup: this.fb.group({
         importDate: ['',[Validators.required,importDayCheckValidator]],
-        exportDate: ['', Validators.required]
+        exportDate: ['']
       }, {validators: exportDayCheckValidator}),
 
       quantity: [''],
@@ -80,6 +87,21 @@ export class CoteComponent implements OnInit {
       employee: Employee,
       herd: Herd,
     });
+    this.editCoteForm = this.fb.group({
+      id: [''],
+      description: [''],
+      isDeleted: [''],
+      code: ['', Validators.required],
+      dateGroup: this.fb.group({
+        importDate: [''],
+        exportDate: [''],
+      }, {validators: exportDayCheckValidator}),
+
+      quantity: [''],
+      type: [''],
+      employee: Employee,
+      herd: Herd,
+    })
   }
 
   search() {
@@ -100,7 +122,6 @@ export class CoteComponent implements OnInit {
       this.currentPage++;
       this.jumpPage = this.currentPage;
     }
-    console.log(this.currentPage)
     this.ngOnInit();
   }
 
@@ -110,16 +131,41 @@ export class CoteComponent implements OnInit {
   }
 
   AddNewCote(form: FormGroup) {
-    this.coteService.addNewCote(form.value).subscribe(()=> this.ngOnInit());
+
+    this.coteTemp.herd = form.get('herd').value;
+    this.coteTemp.employee = form.get('employee').value;
+    this.coteTemp.type = form.get('type').value;
+    this.coteTemp.code = form.get('code').value;
+    this.coteTemp.quantity = form.get('quantity').value;
+    this.coteTemp.isDeleted = form.get('isDeleted').value;
+    this.coteTemp.description = form.get('description').value;
+    this.coteTemp.importDate = new Date(form.get('dateGroup').get('importDate').value);
+    this.coteTemp.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
+
+    this.coteService.addNewCote(this.coteTemp).subscribe(()=> this.ngOnInit());
     document.getElementById("add").click();
   }
 
-  getInfo(cote: CoteDTO) {
-    // this.coteService.getListPig(cote.herdName).subscribe((data) => this.pigList = data);
+  getInfoPig(cote: CoteDTO) {
     this.coteService.getStatusPig(cote.herdName).subscribe((data) => this.pigListDTO = data);
-    console.log(this.pigListDTO)
+
   }
 
+  getInfo(cote: CoteDTO) {
+    this.coteService.getCoteInform(cote.id).subscribe((data) => {
+      this.coteEdit = data;
+      if (data.exportDate == null){
+        this.coteEdit.exportDate = null;
+      }
+      this.editCoteForm.patchValue(data);
+      this.editCoteForm.get('dateGroup').get('importDate').patchValue(this.formatDate(new Date(data.importDate)));
+      if (data.exportDate != null){
+        this.editCoteForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date(data.exportDate)));
+      } else {
+        this.editCoteForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date('')));
+      }
+    });
+  }
   soldPig(pigId: number) {
     this.pigService.soldPig(pigId).subscribe();
   }
@@ -132,6 +178,30 @@ export class CoteComponent implements OnInit {
     this.ngOnInit();
   }
 
+
+  EditCote(form: FormGroup) {
+    this.coteEdit.herd = form.get('herd').value;
+    this.coteEdit.employee = form.get('employee').value;
+    this.coteEdit.type = form.get('type').value;
+    this.coteEdit.code = form.get('code').value;
+    this.coteEdit.quantity = form.get('quantity').value;
+    this.coteEdit.isDeleted = form.get('isDeleted').value;
+    this.coteEdit.description = form.get('description').value;
+    this.coteEdit.importDate = new Date(form.get('dateGroup').get('importDate').value);
+    this.coteEdit.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
+    this.coteService.addNewCote(this.coteEdit).subscribe(()=> this.ngOnInit());
+    document.getElementById("edit").click();
+  }
+
+  private formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
+  }
 }
 
 // Customer Validator ImportDay
@@ -150,16 +220,17 @@ function importDayCheckValidator(control: AbstractControl) {
 function exportDayCheckValidator(control: AbstractControl) {
   const day = new Date(control.value.exportDate);
   const dayCheck = new Date(control.value.importDate);
-  console.log(day +'ex');
-  console.log(dayCheck + 'ex');
   // @ts-ignore
   const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
-  console.log(check +'day');
   // Điều kiện sai để trả về valid cho form.
-  if ( check <= 112 || day < new Date()){
-    return {
-      exportDay: true
+  if (day != null) {
+    if (check <= 112 || day < new Date()) {
+      return {
+        exportDay: true
+      }
     }
   }
   return null;
 }
+
+
