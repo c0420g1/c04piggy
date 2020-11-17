@@ -23,7 +23,7 @@
                 <div class="alert alert-danger" role="alert"
                      *ngIf="exportHistoryStockForm.get('exportDate').invalid && exportHistoryStockForm.get('exportDate').touched">
                     <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('required')">Stock Out Date is required</p>
-                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('checkDate')">Stock Out Date must be before current date.</p>
+                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('checkDate')">Stock out Date must be before Current Date.</p>
                 </div>
 
                 <div class="form-group">

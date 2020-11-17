@@ -15,7 +15,8 @@
                          *ngIf="stockForm.get('shipmentCode').invalid && stockForm.get('shipmentCode').touched">
                         <p *ngIf="stockForm.get('shipmentCode').hasError('required')">Shipment Code is required</p>
                         <p *ngIf="stockForm.get('shipmentCode').hasError('pattern')">Shipment Code must be a number</p>
-                        <p *ngIf="stockForm.get('shipmentCode').hasError('length')">Shipment Code must be a number that have length = 8.</p>
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('maxlength')">Shipment Code must be a number that have length = 8.</p>
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('minlength')">Shipment Code must be a number that have length = 8.</p>
                     </div>
 
                     <div class="form-group">
@@ -27,17 +28,6 @@
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('feedTypeId').invalid && stockForm.get('feedTypeId').touched">
                         <p *ngIf="stockForm.get('feedTypeId').hasError('required')">Feed Type is required</p>
-                        <p *ngIf="stockForm.get('feedTypeId').hasError('required')">Feed Type must be a number</p>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Expiry Date<span style="color: red">(*)</span></label>
-                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate" [(ngModel)]="end" (change)="compareTwoDates()" >
-                    </div>
-                    <div class="alert alert-danger" role="alert"
-                         *ngIf="stockForm.get('expDate').invalid && stockForm.get('expDate').touched">
-                        <p *ngIf="stockForm.get('expDate').hasError('required')">Expiry Date is required</p>
-                        <p *ngIf="stockForm.get('expDate').hasError('pattern')">Expiry Date must be follow format: (yyyy-mm-dd)</p>
                     </div>
 
                     <div class="form-group">
@@ -49,6 +39,18 @@
                         <p *ngIf="stockForm.get('mfgDate').hasError('required')">Manufacturing Date is required</p>
                         <p *ngIf="stockForm.get('mfgDate').hasError('pattern')">Manufacturing Date must be follow format: (yyyy-mm-dd)</p>
                     </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="error">MfgDate must be before ExpDate 3 months.</div>
+
+                    <div class="form-group">
+                        <label>Expiry Date<span style="color: red">(*)</span></label>
+                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate" [(ngModel)]="end" (change)="compareTwoDates()" >
+                    </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('expDate').invalid && stockForm.get('expDate').touched">
+                        <p *ngIf="stockForm.get('expDate').hasError('required')">Expiry Date is required</p>
+                        <p *ngIf="stockForm.get('expDate').hasError('pattern')">Expiry Date must be follow format: (yyyy-mm-dd)</p>
+                    </div>
+                    <div class="alert alert-danger" role="alert" *ngIf="error">MfgDate must be before ExpDate 3 months.</div>
 
                     <div class="form-group">
                         <label>Stock In Date<span style="color: red">(*)</span></label>
@@ -56,9 +58,9 @@
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('importDate').invalid && stockForm.get('importDate').touched">
-                        <p *ngIf="stockForm.get('importDate').hasError('required')">Stock In Date is required</p>
-                        <p *ngIf="stockForm.get('importDate').hasError('pattern')">Stock In Date must be follow format: (yyyy-mm-dd)</p>
-                        <p *ngIf="stockForm.get('importDate').hasError('checkDate')">Stock In Date must be not after current date.</p>
+                        <p *ngIf="stockForm.get('importDate').hasError('required')">Stock in Date is required</p>
+                        <p *ngIf="stockForm.get('importDate').hasError('pattern')">Stock in Date must be follow format: (yyyy-mm-dd)</p>
+                        <p *ngIf="stockForm.get('importDate').hasError('checkDate')">Stock in Date must be not after Current Date.</p>
                     </div>
 
                     <div class="form-group">
@@ -74,8 +76,8 @@
                     <div class="form-group">
                         <label>Unit<span style="color: red">(*)</span></label>
                         <select formControlName="unit" class="form-control">
-                            <option value="kilogam">Kilogram</option>
-                            <option value="lit">Liter</option>
+                            <option value="kilogram">Kilogram</option>
+                            <option value="liter">Liter</option>
                         </select>
                     </div>
                     <div class="alert alert-danger" role="alert"
@@ -93,7 +95,6 @@
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('vendorId').invalid && stockForm.get('vendorId').touched">
                         <p *ngIf="stockForm.get('vendorId').hasError('required')">Vendor is required</p>
-                        <p *ngIf="stockForm.get('vendorId').hasError('required')">Vendor must be a number</p>
                     </div>
 
                     <div class="form-group">

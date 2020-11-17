@@ -74,11 +74,11 @@ export class StockModal implements OnInit {
       importDate: [this.data.importDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator]],
       mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       quantity: [this.data.quantity, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
-      shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8)]],
-      unit: [this.data.unit, [Validators.required,Validators.pattern(/^(kilogam) | (liter)$/)]],
-      vendorName: [this.data.vendorName, [Validators.required]],
-      feedTypeId: [this.data.feedTypeId, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
-      vendorId: [this.data.vendorId, [Validators.required,Validators.pattern(/^[0-9]+$/)]]
+      shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8),Validators.minLength(8)]],
+      unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogram)|(liter)')]],
+      // vendorName: [this.data.vendorName, [Validators.required]],
+      feedTypeId: [this.data.feedTypeId, [Validators.required]],
+      vendorId: [this.data.vendorId, [Validators.required]]
     });
   }
 
@@ -98,9 +98,9 @@ export class StockModal implements OnInit {
     let startDate: string[];
     endDate = this.end.split('-');
     startDate = this.start.split('-');
-    let dateNumberEnd = (parseInt(endDate[0]) * 12 * 365) + (parseInt(endDate[1]) * 30) + (parseInt(endDate[2]));
-    let dateNumberStart = (parseInt(startDate[0]) * 12 * 365) + (parseInt(startDate[1]) * 30) + (parseInt(startDate[2]));
-    if (dateNumberEnd <= dateNumberStart || dateNumberEnd > dateNumberStart + 30) {
+    let dateNumberEnd = (parseInt(endDate[0]) * 365) + (parseInt(endDate[1]) * 30) + (parseInt(endDate[2]));
+    let dateNumberStart = (parseInt(startDate[0]) *  365) + (parseInt(startDate[1]) * 30) + (parseInt(startDate[2]));
+    if ((dateNumberEnd <= dateNumberStart) || (dateNumberEnd > (dateNumberStart + 90))) {
       this.error = true;
     } else {
       this.error = false;
