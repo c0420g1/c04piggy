@@ -9,6 +9,10 @@ import {PigStatus} from '../model/PigStatus';
 import { Feed } from '../model/Feed';
 import {FeedService} from '../service/feed.service';
 import { StatusService } from '../service/status.service';
+import * as $ from 'jquery';
+import {DeleteModal} from '../table/table.component';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {Global} from '../model/Global';
 
 @Component({
   selector: 'app-pig',
@@ -16,25 +20,33 @@ import { StatusService } from '../service/status.service';
   styleUrls: ['./pig.component.css']
 })
 export class PigComponent implements OnInit {
-  search = '';
+  // List
   message: string;
   pigAssociateStatusList: PigAssociateStatus[] = [];
   pigList: PigDTO[] = [];
   pigStatus: PigStatus[] = [];
   feedList: Feed[] = [];
   herdList: Herd[] = [];
+  pig: Pig;
 
   // Pagination
-  currentPage = 1;
-  entityNumber: number;
-  totalEntities: number;
-  totalPage: number;
-  jumpPage: number;
-  // Pagination
+  currentItems: number=0;
+  totalItems: number=0;
+  search: string ='';
+  listPage: number[];
+  currentPage: number =1;
+  totalPage: any;
+  startPage: any;
+  endPage:any;
+  pageSize = 5;
+
+  // Form
+  isDeleteAll:boolean=false;
   addNewPigForm: FormGroup;
-  checkIfPigNewBorn: string;
+  checkIfPigNewBorn = false;
   addNewPigStatus: FormGroup;
   editNewPigForm: FormGroup;
+
 
 
   constructor(private pigService: PigService,
@@ -42,7 +54,8 @@ export class PigComponent implements OnInit {
               private fbEdit: FormBuilder,
               private fbStatus: FormBuilder,
               private feedService: FeedService,
-              private pigStatusService: StatusService) { }
+              private pigStatusService: StatusService,
+              private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
@@ -55,18 +68,14 @@ export class PigComponent implements OnInit {
       this.feedList = feeds;
     })
 
-    this.pigService.search(this.currentPage, this.search).subscribe((data) => {
-      if (data.length === 0) {
-        this.message = 'Không tìm thấy đặt dữ liệu nào!';
-      } else {
-        this.message = '';
-      }
-      this.entityNumber = data.length;
-      this.pigList = data;
-    });
+    this.pigStatusService.getAllStatus().subscribe((status) =>{
+      this.pigStatus = status;
+    })
 
-    //add
-    if (this.checkIfPigNewBorn.match("born")) {
+    this.getPigList();
+
+    //add (new import/new born)
+    if (this.checkIfPigNewBorn) {
       this.addNewPigForm = this.fb.group({
         description: [''],
         code: ['', Validators.required],
@@ -78,8 +87,10 @@ export class PigComponent implements OnInit {
         spec: [''],
         weight: [''],
         color: [''],
-        fatherId: [''],
-        motherId: [''],
+        parentsGroup: this.fb.group({
+          fatherId: ['',Validators.required],
+          motherId: ['',Validators.required],
+        }),
         feed: Feed,
         herd: Herd,
       });
@@ -124,35 +135,153 @@ export class PigComponent implements OnInit {
   }
 
   searchPig() {
+    this.currentPage =1;
     this.ngOnInit();
   }
 
-  prePage(): void {
-    if (this.currentPage >= 2 ){
-      this.currentPage--;
-      this.jumpPage = this.currentPage;
+  addPig() {
+    if (this.addNewPigForm.valid) {
+      const {value} = this.addNewPigForm;
+      this.pigService.addPig(value).subscribe(() => this.ngOnInit());
     }
-    this.ngOnInit();
   }
 
-  nexPage(): void {
-    if (this.currentPage < this.totalEntities / 3) {
+  editPig(pig: Pig){
+    this.editNewPigForm.setValue(pig);
+  };
+
+  editPigConfirm() {
+    this.pig = this.editNewPigForm.value;
+    if (this.editNewPigForm.valid) {
+      const { value } = this.editNewPigForm;
+      const data = {
+        ...this.pig,
+        ...value
+      };
+      this.pigService.editPig(data).subscribe(() => this.ngOnInit());
+    };
+  };
+
+  onDelete(element){
+    let ids: number[]=[];
+    ids.push(element.id);
+    const modalRef = this.modalService.open(DeleteModal);
+    modalRef.componentInstance.ids = ids;
+    modalRef.componentInstance.service = this.pigService;
+  }
+  isSelectAll(){
+    $('table tbody input[type="checkbox"]').prop('checked', $('#selectAll').is(':checked'));
+  }
+  checkit(){
+    $('#selectAll').prop('checked', false);
+  }
+  fdelete(){
+    let ids: number[]=[];
+    var checkbox = $('table tbody input[type="checkbox"]');
+    checkbox.each(function(index){
+      if((checkbox[index] as HTMLInputElement).checked){
+        let t= Number($(this).val());
+        ids.push(t);
+      }
+    });
+    const modalRef = this.modalService.open(DeleteModal);
+    modalRef.componentInstance.ids = ids;
+    modalRef.componentInstance.service = this.pigService;
+  }
+
+  //pagenation
+  changePage(currentPage){
+    this.currentPage= currentPage;
+    this.getPigList();
+  }
+  setPage(currentPage){
+    let totalPage = Math.ceil(this.totalItems/this.pageSize)
+    let maxPage = 5;
+    if(currentPage < 1){
+      this.currentPage = 1;
+    }else if(currentPage > totalPage){
+      this.currentPage = totalPage;
+    }
+    let startPage: number, endPage: number;
+    if (totalPage <= maxPage){
+      startPage = 1;
+      endPage = totalPage;
+    }else {
+      let maxPagesBeforeCurrentPage = Math.floor(maxPage / 2);
+      let maxPagesAfterCurrentPage = Math.ceil(maxPage / 2) - 1;
+      if (currentPage <= maxPagesBeforeCurrentPage) {
+        // current page near the start
+        startPage = 1;
+        endPage = maxPage;
+      }else if (currentPage + maxPagesAfterCurrentPage >= totalPage) {
+        // current page near the end
+        startPage = totalPage - maxPage + 1;
+        endPage = totalPage;
+      }else {
+        // current page somewhere in the middle
+        startPage = currentPage - maxPagesBeforeCurrentPage;
+        endPage = currentPage + maxPagesAfterCurrentPage;
+      }
+    }
+    this.listPage = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
+    this.currentPage = currentPage;
+    this.startPage = this.listPage[0];
+    this.endPage = this.listPage[this.listPage.length-1];
+    console.log(this.endPage);
+  }
+
+  next(){
+    if(this.currentPage<this.listPage.length){
       this.currentPage++;
-      this.jumpPage = this.currentPage;
+      this.getPigList();
     }
-    console.log(this.currentPage)
-    this.ngOnInit();
+
+  }
+  previous(){
+    if(this.currentPage>1)  {
+      this.currentPage--;
+      this.getPigList();
+    }
   }
 
-  goToPage() {
-    this.currentPage = this.jumpPage;
-    this.ngOnInit();
+  //Change to new born input form
+  onNewBornChange() {
+    this.checkIfPigNewBorn = true;
+    this.addNewPigForm.reset();
   }
 
+  getMotherPig(id: number){
+    const motherPig = this.pigList[id]
+    return motherPig;
+  }
+
+  getFatherPig(id: number){
+    const fatherPig = this.pigList[id]
+    return fatherPig;
+  }
+
+  private getPigList() {
+    this.pigService.search(0,this.search).subscribe(data => {
+      if (data.length === 0) {
+        this.message = 'Không tìm thấy đặt dữ liệu nào!';
+      } else {
+        this.message = '';
+      }
+      this.totalItems= data.length;
+      this.totalPage = Math.ceil(this.totalItems/this.pageSize);
+      console.log('total'+ this.totalPage);
+      this.pigService.search(this.currentPage,this.search).subscribe(data => {
+        this.pigList= data;
+        this.currentItems= data.length;
+        this.setPage(this.currentPage);
+      });
+    });
+  }
 
 }
 
-// Customer Validator ImportDay
+
+//Validator Day
 
 function importDayCheckValidator(control: AbstractControl) {
   const currentDay = new Date();
@@ -183,3 +312,4 @@ function exportDayCheckValidator(control: AbstractControl) {
     exportDay: true
   };
 }
+

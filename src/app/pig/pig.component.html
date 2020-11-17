@@ -1,112 +1,132 @@
 
-<div class="">
-    <div class="page-title">
-        <div class="title_left">
-            <h3 style="color: orange; font-weight: bold">Pig Management</h3>
-        </div>
-
-        <div class="title_right">
-            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                <div class="input-group">
-                    <input type="search"  [(ngModel)]="search"  class="form-control mr-sm-2" placeholder="Search"  >
-                    <button type="button" class="btn btn-success" (click)="searchPig()">Search <i class="fa fa-search"></i></button>
-                </div>
-            </div>
-            <div>
-                    <span *ngIf="message" style="color: red; font-size: 12px; font-weight: bold">
-                    {{message}}
-                    </span>
+<div class="page-title">
+    <div class="title_right" style="float: right">
+        <div class="col-md-5 col-sm-5   form-group pull-right top_search">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for..." [(ngModel)]="search" (ngModelChange)="searchPig()" >
             </div>
         </div>
-
     </div>
-
-    <div class="clearfix"></div>
-
-    <div class="col-md-12 col-sm-12  ">
-        <div class="x_panel">
-            <div class="x_title">
-
-                <ul class="nav navbar-right panel_toolbox">
-
-                    <div style="margin-left: 15px">
-                        <button href="#add" data-toggle="modal" class="btn btn-sm btn-success" type="button">Add New Pig
-                            <a href="#add" data-toggle="modal"><i style="color: white" class="fa fa-plus"></i></a></button>
-                    </div>
-                    <li><a class="collapse-link">Collapse<i class="fa fa-chevron-up"></i></a>
-                    </li>
-
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-
-            <div class="x_content">
-                <div class="table-responsive">
-                    <table class="table table-striped jambo_table bulk_action">
+</div>
+<div class="clearfix"></div>
+<div class="col-md-12 col-sm-12  ">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Pig Management</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <div style="margin-left: 15px">
+                    <button title="add" class="btn btn-sm btn-success" type="button" >Add new pig</button>
+                </div>
+                <div style="margin-left: 15px">
+                    <button class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete Pig</button>
+                </div>
+                <li><a class="collapse-link">Collapse <i class="fa fa-chevron-up"></i></a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="table-responsive">
+                <table class="table table-striped jambo_table bulk_action ">
+                    <ng-container >
                         <thead>
-                        <tr class="headings" style="font-size: 15px">
-                            <th class="column-title"># </th>
-                            <th class="column-title">Cote Code </th>
-                            <th class="column-title">Import Date </th>
-                            <th class="column-title">Pig Status </th>
-                            <th class="column-title">Weight </th>
-                            <th class="column-title no-link last"><span class="nobr">Action</span>
+                            <th>
+                  <span class="customcheckbox">
+                    <input type="checkbox" id="selectAll" (click)='isSelectAll()'>
+                    <label for="selectAll"></label>
+                  </span>
                             </th>
-                            <th class="bulk-actions" colspan="7">
-                                <a class="antoo" style="color:#fff; font-weight:500;">Bulk Actions ( <span class="action-cnt"> </span> ) <i class="fa fa-chevron-down"></i></a>
-                            </th>
-                        </tr>
-                        </thead>
 
+                            <th class="column-title" >#</th>
+
+<!--                            <th class="column-title" >Pig Code</th>-->
+
+                            <th class="column-title" >Cote Name</th>
+
+                            <th class="column-title" >Import date</th>
+
+                            <th class="column-title" >Status</th>
+
+                            <th class="column-title" >Weight</th>
+
+                            <th class="column-title" >Action</th>
+                        </thead>
                         <tbody>
                         <tr class="even pointer" *ngFor="let pig of pigList; let i = index">
-                            <td class=" ">{{i+1}}</td>
-                            <td class=" ">{{pig.coteName}}</td>
-                            <td class=" ">{{pig.importDate}}</td>
-                            <td class=" ">{{pig.pigAssociateStatus}} </td>
-                            <td class=" ">{{pig.weight | date: 'dd-MM-yyyy'}} </td>
-                            <td class=" last">
-                                <a href="#table" data-toggle="modal" style="margin-right: 10px;">
-                                    <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
-                                <a href="#delete" data-toggle="modal" style="font-size: 17px;">
-                                    <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+                            <td>
+                  <span class="customcheckbox">
+                    <input type="checkbox" id="cb" [value]="pig['id']" (click)='checkit()'>
+                    <label></label>
+                  </span>
                             </td>
+
+                            <td> {{(i+1)}}</td>
+
+<!--                            <td> {{pig.codePig}}</td>-->
+
+                                <td> {{pig.cote}}</td>
+
+                                <td> {{pig.importDate}}</td>
+
+                                <td> {{pig.status.length}} status</td>
+
+                                <td> {{pig.weight}} kg</td>
+
+                            <td>
+                                <a  class="action" title="edit" style="margin-left: 10px;  ">
+                                    <i style=" color: #077cf9;font-size: 17px" class="fa fa-edit"></i></a>
+                                <a class="action" title="delete" style="margin-left: 10px;" (click)="onDelete(pig)">
+                                    <i style=" color: #dc3545;font-size: 17px" class="fa fa-trash"></i></a>
+                                <a class="action" title="view" style="margin-left: 10px;">
+                                    <i style=" color: #26b99a;font-size: 17px" class="fa fa-eye"></i></a>
+                            </td>
+
                         </tr>
-
                         </tbody>
-                    </table>
-                </div>
-
-                <div class="x_content">
-
-                    <div class="row" style="margin-top: 10px" *ngIf="!message">
-                        <div class="col-lg-3">
-                            <div style="font-size: 15px">
-                                Show {{entityNumber}} entities of {{totalEntities}} entities
-                            </div>
-                        </div>
-                        <div class="col-lg-9">
-                            <div style="float: right; margin-right: 50px">
-                                <ul class="list-inline">
-                                    <li>
-                                        <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
-                                    </li>
-                                    <li>
-                                        <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
-                                               [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
-                                    </li>
-                                    <li>
-                                        <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
-                                        <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-
+                    </ng-container>
+                </table>
             </div>
+        </div>
+
+        <div *ngIf="listPage" class="clearfix">
+            <div>Showing
+                <b> {{currentItems}}</b> out of <b>{{totalItems}}</b> entries
+                <div style="float: right">
+                    <ul class="pagination" >
+                        <li>
+                            <a class="page-link" (click)='changePage(0)' >First</a>
+                        </li>
+                        <li>
+                            <a class="page-link" (click)='previous()'>Previous</a>
+                        </li>
+                        <li>
+                            <div ngbDropdown class="d-inline-block" *ngIf="startPage != 1">
+                                <button style="margin: 0" class="page-link" ngbDropdownToggle (click)='previous()'>...</button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                                    <input type="email" class="form-control"  placeholder="page:" [(ngModel)]="currentPage" (ngModelChange)="changePage(currentPage)" >
+                                </div>
+                            </div>
+                        </li>
+                        <li *ngFor="let i of listPage" class="page-item" [ngClass]="{active:currentPage == i}">
+                            <a class="page-link" (click)="changePage(i)">{{i}}</a>
+                        </li>
+                        <li>
+                            <div ngbDropdown class="d-inline-block" *ngIf="endPage != totalPage">
+                                <button style="margin: 0" class="page-link" ngbDropdownToggle (click)='previous()'>...</button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                                    <input type="email" class="form-control"  placeholder="page:" [(ngModel)]="currentPage" (ngModelChange)="changePage(currentPage)" >
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="page-link" (click)='next()'>Next</a>
+                        </li>
+                        <li>
+                            <a class="page-link" (click)='changePage(totalPage)'>Last</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
@@ -161,12 +181,14 @@
 <!--<div id="add" class="modal fade">-->
 <!--    <div class="modal-dialog">-->
 <!--        <div class="modal-content">-->
-<!--            <form [formGroup]="addNewCote" (ngSubmit)="AddNewCote(addNewCote.value)">-->
+<!--            <form [formGroup]="addNewPigForm" (ngSubmit)="AddNewCote(addNewCote.value)">-->
 <!--                <div class="modal-header">-->
 <!--                    <h4 class="modal-title">Add New Cote</h4>-->
 <!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
 <!--                </div>-->
 <!--                <div class="modal-body">-->
+<!--                    <input type="checkbox" id="newBorn" [checked]="onNewBornChange()"/>-->
+<!--                    <label for="newBorn" >New Born</label>-->
 <!--                    <div class="form-group">-->
 <!--                        <label>Description: </label>-->
 <!--                        <input type="text" class="form-control" formControlName="description"  required>-->
@@ -210,23 +232,23 @@
 <!--</div>-->
 
 <!--    delete-->
-<div id="delete" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <form>
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Employee</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to delete these Records?</p>
-                    <p class="text-warning"><small>This action cannot be undone.</small></p>
-                </div>
-                <div class="modal-footer">
-                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <input type="submit" class="btn btn-danger" value="Delete">
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+<!--<div id="delete" class="modal fade">-->
+<!--    <div class="modal-dialog">-->
+<!--        <div class="modal-content">-->
+<!--            <form>-->
+<!--                <div class="modal-header">-->
+<!--                    <h4 class="modal-title">Delete Employee</h4>-->
+<!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--                </div>-->
+<!--                <div class="modal-body">-->
+<!--                    <p>Are you sure you want to delete these Records?</p>-->
+<!--                    <p class="text-warning"><small>This action cannot be undone.</small></p>-->
+<!--                </div>-->
+<!--                <div class="modal-footer">-->
+<!--                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">-->
+<!--                    <input type="submit" class="btn btn-danger" value="Delete">-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
