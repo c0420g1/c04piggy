@@ -25,6 +25,7 @@ import { PigComponent } from './pig/pig.component';
 import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
+import { VacxinComponent } from './vacxin/vacxin.component';
 
 
 
@@ -52,7 +53,8 @@ import {ToastrModule} from 'ngx-toastr';
     PigComponent,
     ExportHistoryStockComponent,
       FeedModal,
-      DeleteModal
+      DeleteModal,
+      VacxinComponent
   ],
     imports: [
         BrowserModule,
