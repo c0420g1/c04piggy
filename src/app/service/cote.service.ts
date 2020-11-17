@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+
 import {Cote} from '../model/Cote';
 import {CoteDTO} from '../model/CoteDTO';
 import {Pig} from '../model/Pig';
-import {PigDTO} from '../model/PigDTO';
 import { PigDTONew } from '../model/PigDTONew';
 
 @Injectable({

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
+import { FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
+
 import {Cote} from '../model/Cote';
 import {CoteService} from '../service/cote.service';
 import {CoteDTO} from '../model/CoteDTO';
-import {Form, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators, AbstractControl} from '@angular/forms';
-import {Account} from '../model/Account';
 import {Herd} from '../model/Herd';
 import {EmployeeService} from '../service/employee.service';
 import {Employee} from '../model/Employee';
 import {PigService} from '../service/pig.service';
 import {Pig} from '../model/Pig';
-import {PigDTO} from '../model/PigDTO';
 import { PigDTONew } from '../model/PigDTONew';
 
 @Component({
@@ -26,6 +26,7 @@ export class CoteComponent implements OnInit {
   pigList: Pig[] = [];
   pigListDTO: PigDTONew[] = [];
   coteEdit = new Cote();
+  coteTemp = new Cote();
 
 
 
@@ -120,7 +121,6 @@ export class CoteComponent implements OnInit {
       this.currentPage++;
       this.jumpPage = this.currentPage;
     }
-    console.log(this.currentPage)
     this.ngOnInit();
   }
 
@@ -130,8 +130,18 @@ export class CoteComponent implements OnInit {
   }
 
   AddNewCote(form: FormGroup) {
-    console.log(form.value);
-    this.coteService.addNewCote(form.value).subscribe(()=> this.ngOnInit());
+
+    this.coteTemp.herd = form.get('herd').value;
+    this.coteTemp.employee = form.get('employee').value;
+    this.coteTemp.type = form.get('type').value;
+    this.coteTemp.code = form.get('code').value;
+    this.coteTemp.quantity = form.get('quantity').value;
+    this.coteTemp.isDeleted = form.get('isDeleted').value;
+    this.coteTemp.description = form.get('description').value;
+    this.coteTemp.importDate = new Date(form.get('dateGroup').get('importDate').value);
+    this.coteTemp.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
+
+    this.coteService.addNewCote(this.coteTemp).subscribe(()=> this.ngOnInit());
     document.getElementById("add").click();
   }
 
@@ -144,7 +154,6 @@ export class CoteComponent implements OnInit {
     this.coteService.getCoteInform(cote.id).subscribe((data) => {
       this.coteEdit = data;
       this.editCoteForm.patchValue(this.coteEdit);
-      console.log(this.editCoteForm.value);
     });
   }
   soldPig(pigId: number) {
@@ -161,7 +170,16 @@ export class CoteComponent implements OnInit {
 
 
   EditCote(form: FormGroup) {
-    this.coteService.addNewCote(form.value).subscribe(()=> this.ngOnInit());
+    this.coteEdit.herd = form.get('herd').value;
+    this.coteEdit.employee = form.get('employee').value;
+    this.coteEdit.type = form.get('type').value;
+    this.coteEdit.code = form.get('code').value;
+    this.coteEdit.quantity = form.get('quantity').value;
+    this.coteEdit.isDeleted = form.get('isDeleted').value;
+    this.coteEdit.description = form.get('description').value;
+    this.coteEdit.importDate = new Date(form.get('dateGroup').get('importDate').value);
+    this.coteEdit.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
+    this.coteService.addNewCote(this.coteEdit).subscribe(()=> this.ngOnInit());
     document.getElementById("edit").click();
   }
 }
@@ -182,8 +200,6 @@ function importDayCheckValidator(control: AbstractControl) {
 function exportDayCheckValidator(control: AbstractControl) {
   const day = new Date(control.value.exportDate);
   const dayCheck = new Date(control.value.importDate);
-  console.log(day +'ex');
-  console.log(dayCheck + 'ex');
   // @ts-ignore
   const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
   console.log(check +'day');
