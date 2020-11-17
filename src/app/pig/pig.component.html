@@ -14,8 +14,11 @@
         <div class="x_title">
             <h2>Pig Management</h2>
             <ul class="nav navbar-right panel_toolbox">
+<!--                <div style="margin-left: 15px">-->
+<!--                    <input type="checkbox" [checked]="onNewBornChange()">-->
+<!--                </div>-->
                 <div style="margin-left: 15px">
-                    <button title="add" class="btn btn-sm btn-success" type="button" >Add new pig</button>
+                    <button title="add" class="btn btn-sm btn-success" type="button" href="#add" data-toggle="modal">Add new pig</button>
                 </div>
                 <div style="margin-left: 15px">
                     <button class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete Pig</button>
@@ -38,7 +41,7 @@
 
                             <th class="column-title" >#</th>
 
-<!--                            <th class="column-title" >Pig Code</th>-->
+                            <th class="column-title" >Pig Code</th>
 
                             <th class="column-title" >Cote Name</th>
 
@@ -54,16 +57,16 @@
                         <tr class="even pointer" *ngFor="let pig of pigList; let i = index">
                             <td>
                   <span class="customcheckbox">
-                    <input type="checkbox" id="cb" [value]="pig['id']" (click)='checkit()'>
+                    <input type="checkbox" id="cb" [value]="pig['pigId']" (click)='checkit()'>
                     <label></label>
                   </span>
                             </td>
 
                             <td> {{(i+1)}}</td>
 
-<!--                            <td> {{pig.codePig}}</td>-->
+                                <td> {{pig.codePig}}</td>
 
-                                <td> {{pig.cote}}</td>
+                                <td> {{pig.coteName}}</td>
 
                                 <td> {{pig.importDate}}</td>
 
@@ -72,7 +75,7 @@
                                 <td> {{pig.weight}} kg</td>
 
                             <td>
-                                <a  class="action" title="edit" style="margin-left: 10px;  ">
+                                <a  class="action" title="edit" style="margin-left: 10px;  " href="#edit" data-toggle="modal" (click)="editPig(pig)">
                                     <i style=" color: #077cf9;font-size: 17px" class="fa fa-edit"></i></a>
                                 <a class="action" title="delete" style="margin-left: 10px;" (click)="onDelete(pig)">
                                     <i style=" color: #dc3545;font-size: 17px" class="fa fa-trash"></i></a>
@@ -93,7 +96,7 @@
                 <div style="float: right">
                     <ul class="pagination" >
                         <li>
-                            <a class="page-link" (click)='changePage(0)' >First</a>
+                            <a class="page-link" (click)='changePage(1)' >First</a>
                         </li>
                         <li>
                             <a class="page-link" (click)='previous()'>Previous</a>
@@ -133,103 +136,151 @@
 
 <!--    edit-->
 
-<!--<div id="table" class="modal fade">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            <form>-->
-<!--                <div class="modal-header">-->
-<!--                    <h4 class="modal-title">Edit Cote</h4>-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Cote Code</label>-->
-<!--                        <input type="text" class="form-control" readonly required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Staff Code</label>-->
-<!--                        <input type="text" class="form-control" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Herd Code</label>-->
-<!--                        <input type="text" class="form-control" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Day Start</label>-->
-<!--                        <input type="date" class="form-control" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Day End</label>-->
-<!--                        <input type="date" class="form-control">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Quantity</label>-->
-<!--                        <input type="number" class="form-control" required>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">-->
-<!--                    <button type="submit" class="btn btn-success" value="Add">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div id="edit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="editNewPigForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Pig</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Id: </label>
+                        <input type="text" class="form-control" formControlName="id"  readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Description: </label>
+                        <input type="text" class="form-control" formControlName="description"  >
+                    </div>
+                    <div class="form-group">
+                        <label>isDelete</label>
+                        <input type="text" class="form-control" formControlName="isDeleted" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Code</label>
+                        <input type="text" class="form-control" formControlName="code" >
+                    </div>
+                    <div class="form-group">
+                        <label>Import Date</label>
+                        <input type="date" class="form-control" formControlName="importDate" >
+                    </div>
+                    <div class="form-group">
+                        <label>Export Date</label>
+                        <input type="date" class="form-control" formControlName="exportDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Species</label>
+                        <input type="text" class="form-control" formControlName="spec" >
+                    </div>
+                    <div class="form-group">
+                        <label>Color</label>
+                        <input type="text" class="form-control" formControlName="color" >
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control" formControlName="gender" >
+                            <option value="1">Male</option>
+                            <option value="0">Femele</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cote</label>
+                        <select class="form-control" formControlName="cote" >
+                            <option *ngFor="let cote of coteList" [ngValue]="cote">{{cote.code}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Herd</label>
+                        <select class="form-control" formControlName="herd" >
+                            <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Feed</label>
+                        <select class="form-control" formControlName="feed"  >
+                            <option *ngFor="let feed of feedList" [ngValue]="feed">{{feed.feedTypeName + feed.amount}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <button type="submit" (click)="editPigConfirm()" class="btn btn-success" value="Add">Edit<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!--    add-->
 
-<!--<div id="add" class="modal fade">-->
-<!--    <div class="modal-dialog">-->
-<!--        <div class="modal-content">-->
-<!--            <form [formGroup]="addNewPigForm" (ngSubmit)="AddNewCote(addNewCote.value)">-->
-<!--                <div class="modal-header">-->
-<!--                    <h4 class="modal-title">Add New Cote</h4>-->
-<!--                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--                    <input type="checkbox" id="newBorn" [checked]="onNewBornChange()"/>-->
-<!--                    <label for="newBorn" >New Born</label>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Description: </label>-->
-<!--                        <input type="text" class="form-control" formControlName="description"  required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Code</label>-->
-<!--                        <input type="text" class="form-control" formControlName="code" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Day Start</label>-->
-<!--                        <input type="date" class="form-control" formControlName="importDate" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Day End</label>-->
-<!--                        <input type="date" class="form-control" formControlName="exportDate">-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Type</label>-->
-<!--                        <input type="text" class="form-control" formControlName="type" required>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Employee</label>-->
-<!--                        <select class="form-control" formControlName="employee" required *ngFor="let employee of employeeList">-->
-<!--                            <option value="{{employee}}">{{employee.name}}</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                    <div class="form-group">-->
-<!--                        <label>Herd</label>-->
-<!--                        <select class="form-control" formControlName="herd" required *ngFor="let herd of herdList">-->
-<!--                            <option value="{{herd}}">{{herd}}</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">-->
-<!--                    <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
+<div id="add" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form [formGroup]="addNewPigForm">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add New Pig</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Description: </label>
+                        <input type="text" class="form-control" formControlName="description"  >
+                    </div>
+                    <div class="form-group">
+                        <label>Code</label>
+                        <input type="text" class="form-control" formControlName="code" >
+                    </div>
+                    <div class="form-group">
+                        <label>Import Date</label>
+                        <input type="date" class="form-control" formControlName="importDate" >
+                    </div>
+                    <div class="form-group">
+                        <label>Export Date</label>
+                        <input type="date" class="form-control" formControlName="exportDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Species</label>
+                        <input type="text" class="form-control" formControlName="spec" >
+                    </div>
+                    <div class="form-group">
+                        <label>Color</label>
+                        <input type="text" class="form-control" formControlName="color" >
+                    </div>
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select class="form-control" formControlName="gender" >
+                            <option value="1">Male</option>
+                            <option value="0">Femele</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Cote</label>
+                        <select class="form-control" formControlName="cote" >
+                            <option *ngFor="let cote of coteList" [ngValue]="cote">{{cote.code}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Herd</label>
+                        <select class="form-control" formControlName="herd" >
+                            <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Feed</label>
+                        <select class="form-control" formControlName="feed"  >
+                            <option *ngFor="let feed of feedList" [ngValue]="feed">{{feed.feedTypeName + feed.amount}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                    <button type="submit" (click)="addPig()" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <!--    delete-->
 <!--<div id="delete" class="modal fade">-->

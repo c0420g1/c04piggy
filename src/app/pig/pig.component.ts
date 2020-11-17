@@ -12,7 +12,8 @@ import { StatusService } from '../service/status.service';
 import * as $ from 'jquery';
 import {DeleteModal} from '../table/table.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {Global} from '../model/Global';
+import {Cote} from '../model/Cote';
+import {CoteService} from '../service/cote.service';
 
 @Component({
   selector: 'app-pig',
@@ -27,7 +28,9 @@ export class PigComponent implements OnInit {
   pigStatus: PigStatus[] = [];
   feedList: Feed[] = [];
   herdList: Herd[] = [];
-  pig: Pig;
+  coteList: Cote[] = [];
+  pig: Pig = new Pig();
+  pigEdit: Pig;
 
   // Pagination
   currentItems: number=0;
@@ -54,12 +57,17 @@ export class PigComponent implements OnInit {
               private fbEdit: FormBuilder,
               private fbStatus: FormBuilder,
               private feedService: FeedService,
+              private coteService: CoteService,
               private pigStatusService: StatusService,
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
     //get list
+    this.coteService.getListCote('').subscribe((cotes) =>{
+      this.coteList = cotes;
+    })
+
     this.pigService.getListHerd().subscribe((herds) =>{
       this.herdList = herds;
     });
@@ -79,10 +87,8 @@ export class PigComponent implements OnInit {
       this.addNewPigForm = this.fb.group({
         description: [''],
         code: ['', Validators.required],
-        dateGroup: this.fb.group({
-          importDate: ['', [Validators.required, importDayCheckValidator]],
-          exportDate: ['', Validators.required]
-        }, {validators: exportDayCheckValidator}),
+        importDate: ['', Validators.required],
+        exportDate: ['', Validators.required],
         gender: [''],
         spec: [''],
         weight: [''],
@@ -91,23 +97,24 @@ export class PigComponent implements OnInit {
           fatherId: ['',Validators.required],
           motherId: ['',Validators.required],
         }),
+        cote: Cote,
         feed: Feed,
         herd: Herd,
       });
     }else {
       this.addNewPigForm = this.fb.group({
+        id: [''],
         description: [''],
         code: ['', Validators.required],
-        dateGroup: this.fb.group({
-          importDate: ['', [Validators.required, importDayCheckValidator]],
-          exportDate: ['', Validators.required]
-        }, {validators: exportDayCheckValidator}),
+        importDate: ['', [Validators.required]],
+        exportDate: ['', Validators.required],
         gender: [''],
         spec: [''],
         weight: [''],
         color: [''],
         feed: Feed,
         herd: Herd,
+        cote: Cote,
       });
     }
 
@@ -120,17 +127,19 @@ export class PigComponent implements OnInit {
     this.editNewPigForm = this.fbEdit.group({
       id: [''],
       description: [''],
+      isDeleted: [''],
       code: ['', Validators.required],
-      dateGroup: this.fb.group({
-        importDate: ['', [Validators.required, importDayCheckValidator]],
-        exportDate: ['', Validators.required]
-      }, {validators: exportDayCheckValidator}),
+      importDate: ['', [Validators.required]],
+      exportDate: ['', Validators.required],
       gender: [''],
       spec: [''],
       weight: [''],
       color: [''],
+      fatherId: ['',Validators.required],
+      motherId: ['',Validators.required],
       feed: Feed,
       herd: Herd,
+      cote: Cote,
     })
   }
 
@@ -146,19 +155,30 @@ export class PigComponent implements OnInit {
     }
   }
 
-  editPig(pig: Pig){
-    this.editNewPigForm.setValue(pig);
+  editPig(pig: PigDTO){
+    this.pigService.getPig(pig.pigId).subscribe((data) => {
+      this.pig = data;
+      console.log(this.pig.id);
+      this.editNewPigForm.setValue(this.pig);
+    })
+
   };
 
   editPigConfirm() {
-    this.pig = this.editNewPigForm.value;
+    this.pigEdit = this.editNewPigForm.value;
     if (this.editNewPigForm.valid) {
       const { value } = this.editNewPigForm;
       const data = {
-        ...this.pig,
+        ...this.pigEdit,
         ...value
       };
-      this.pigService.editPig(data).subscribe(() => this.ngOnInit());
+      this.pigService.editPig(data).subscribe(
+          next => {
+            this.pigEdit[this.pigList.findIndex(e => e.pigId === this.pigEdit.id)] = this.pigEdit;
+            this.ngOnInit();
+            },
+          error => console.log(error)
+      );
     };
   };
 
@@ -185,6 +205,7 @@ export class PigComponent implements OnInit {
       }
     });
     const modalRef = this.modalService.open(DeleteModal);
+    console.log("do dai delete" + ids[1].valueOf());
     modalRef.componentInstance.ids = ids;
     modalRef.componentInstance.service = this.pigService;
   }
@@ -227,7 +248,6 @@ export class PigComponent implements OnInit {
     this.currentPage = currentPage;
     this.startPage = this.listPage[0];
     this.endPage = this.listPage[this.listPage.length-1];
-    console.log(this.endPage);
   }
 
   next(){
@@ -283,33 +303,33 @@ export class PigComponent implements OnInit {
 
 //Validator Day
 
-function importDayCheckValidator(control: AbstractControl) {
-  const currentDay = new Date();
-  const day = new Date(control.value);
-  if (day >= currentDay || (day.getFullYear() == day.getFullYear() && day.getMonth() == currentDay.getMonth() && day.getDay() == currentDay.getDay()) ){
-    return null;
-  }
-  return {
-    importDay: true
-  };
-}
-
-function exportDayCheckValidator(control: AbstractControl) {
-  const day = new Date(control.value.exportDate);
-  const dayCheck = new Date(control.value.importDate);
-  console.log(day +'ex');
-  console.log(dayCheck + 'ex');
-  // @ts-ignore
-  const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
-  console.log(check +'check' + typeof check);
-  // @ts-ignore
-  if ( dayCheck != 0){
-    console.log('null');
-    return null;
-  }
-  console.log('true');
-  return {
-    exportDay: true
-  };
-}
+// function importDayCheckValidator(control: AbstractControl) {
+//   const currentDay = new Date();
+//   const day = new Date(control.value);
+//   if (day >= currentDay || (day.getFullYear() == day.getFullYear() && day.getMonth() == currentDay.getMonth() && day.getDay() == currentDay.getDay()) ){
+//     return null;
+//   }
+//   return {
+//     importDay: true
+//   };
+// }
+//
+// function exportDayCheckValidator(control: AbstractControl) {
+//   const day = new Date(control.value.exportDate);
+//   const dayCheck = new Date(control.value.importDate);
+//   console.log(day +'ex');
+//   console.log(dayCheck + 'ex');
+//   // @ts-ignore
+//   const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
+//   console.log(check +'check' + typeof check);
+//   // @ts-ignore
+//   if ( dayCheck != 0){
+//     console.log('null');
+//     return null;
+//   }
+//   console.log('true');
+//   return {
+//     exportDay: true
+//   };
+// }
 

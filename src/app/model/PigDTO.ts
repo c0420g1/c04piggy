@@ -2,7 +2,8 @@ import { PigAssociateStatus } from './PigAssociateStatus';
 
 export class PigDTO {
     pigId: number;
-    cote: string;
+    codePig: string;
+    coteName: string;
     importDate: string;
     weight: number;
     status: PigAssociateStatus[];
