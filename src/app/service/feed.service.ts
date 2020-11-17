@@ -5,6 +5,7 @@ import {Feed} from '../model/Feed';
 import {FeedType} from '../model/FeedType';
 import {Herd} from '../model/Herd';
 import { Global } from '../model/Global';
+import { Error1 } from '../model/error1';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class FeedService {
     return this.http.post<void>(this.API_URL3, feed);
   }
 
-  delete(ids: number[]): Observable<number>{
-    return this.http.post<number>(this.API_URL1, ids);
+  delete(ids: number[]): Observable<Error1>{
+    return this.http.put<Error1>(this.API_URL1, ids);
   }
 
   getAllFeedType(): Observable<FeedType[]>{
