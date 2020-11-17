@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TreatmentService} from '../service/treatment.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {TreatmentVacxins} from '../model/TreatmentVacxins';
@@ -9,7 +9,7 @@ import {Cote} from '../model/Cote';
 import {Pig} from '../model/Pig';
 import {Diseases} from '../model/Diseases';
 import {Vaccine} from '../model/Vaccine';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-treatment',
@@ -19,7 +19,7 @@ import {Vaccine} from '../model/Vaccine';
 export class TreatmentComponent implements OnInit {
   columnHeader = {'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
-  constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService) { }
+  constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -36,6 +36,9 @@ export class TreatmentComponent implements OnInit {
     console.log(element)
     const modalRef = modal.open(TreatmentModal);
     modalRef.componentInstance.data = element ?? new TreatmentVacxins();
+  }
+  showSuccess(){
+    this.toastr.success('Delete successfully', 'C04piggy');
   }
 }
 
@@ -54,7 +57,7 @@ export class TreatmentModal implements OnInit{
   checkCoteCode: Cote = null;
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
-              private treatmentService: TreatmentService,){}
+              private treatmentService: TreatmentService, private toastr: ToastrService){}
 
   ngOnInit(): void {
     console.log(this.data)
@@ -84,22 +87,23 @@ export class TreatmentModal implements OnInit{
       id: [''],
       description: [''],
       isDeleted: [0],
-      treatDate: [''],
+      treatDate: ['', Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')],
       type: ['treatment'],
       veterinary: [''],
-      cote: [this.data.cote],
-      pig: [''],
-      diseases: [''],
-      vacxin: ['']
-    })
+      cote: ['', Validators.required],
+      pig: ['', Validators.required],
+      diseases: ['', Validators.required],
+      vacxin: ['', Validators.required]
+    });
 
   }
 
   onSubmit() {
     console.log(this.treatmentForm.value);
-   this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
-     console.log(data);
-   })
+    this.toastr.success('Delete successfully', 'C04piggy')
+   // this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
+   //   console.log(data);
+   // })
   }
 
   check(coteId) {
@@ -111,4 +115,17 @@ export class TreatmentModal implements OnInit{
       });
     }
   }
+}
+function dateValidator(formControl: FormControl) {
+  let date1: string[];
+  date1 = formControl.value.split('-');
+  const o_date = new Intl.DateTimeFormat;
+  const f_date = (m_ca, m_it) => Object({...m_ca, [m_it.type]: m_it.value});
+  const m_date = o_date.formatToParts().reduce(f_date, {});
+  let dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2])) ;
+  let dateNumberNow = (parseInt(m_date.year) * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day)) ;
+  if (dateNumber < dateNumberNow) {
+    return {checkDate: true};
+  }
+  return null;
 }

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -23,7 +22,7 @@ import {StockComponent, StockModal} from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
-
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -62,6 +61,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     RouterModule,
     MatAutocompleteModule,
     BrowserAnimationsModule ,
+    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -13,6 +13,8 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
 import { Global } from "../model/Global";
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: "app-table",
@@ -223,11 +225,13 @@ export class TableComponent implements OnInit {
 export class DeleteModal {
   @Input() service;
   @Input() ids: number[];
-  constructor(public activeModal: NgbActiveModal, private router: Router) {}
+  constructor(public activeModal: NgbActiveModal, private router: Router, private toastr: ToastrService) {}
 
   delete(){
-      this.service.delete(this.ids).subscribe();
+      this.service.delete(this.ids).subscribe(data => {
+        this.toastr.success('Delete successfull', 'ItSolutionStuff.com')
+      });
       // this.activeModal.close();
-      window.location.reload();
+      // window.location.reload();
   }
 }
