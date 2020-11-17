@@ -20,7 +20,6 @@ import {CoteComponent } from './cote/cote.component';
 import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
 import {FeedComponent, FeedModal} from './feed/feed.component';
 import {MatInputModule} from '@angular/material/input';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
 import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
@@ -49,7 +48,9 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
     StockModal,
     ExportModal,
     PigComponent,
-    ExportHistoryStockComponent
+    ExportHistoryStockComponent,
+      FeedModal,
+
   ],
     imports: [
         BrowserModule,
@@ -63,8 +64,7 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        MatInputModule,
-        MatAutocompleteModule,
+        MatInputModule
     ],
   providers: [],
   bootstrap: [AppComponent]
