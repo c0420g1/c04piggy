@@ -71,7 +71,7 @@ import { VacxinComponent } from './vacxin/vacxin.component';
         MatInputModule,
         CommonModule,
         ToastrModule.forRoot({
-            positionClass: 'toast-top-full-width',
+            positionClass: 'toast-top-center',
             preventDuplicates: true,
         }),
     ],
