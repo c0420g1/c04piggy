@@ -45,8 +45,8 @@ export class StockService {
   }
 
 // them hoac sua 1 record trong stock
-  addEditStock(stock: Stock): Observable<void>{
-    return this.http.post<void>(this.ADD_EDIT_STOCK_API, stock);
+  addEditStock(stock: Stock): Observable<number>{
+    return this.http.post<number>(this.ADD_EDIT_STOCK_API, stock);
   }
 
 // lay ve 1 stock theo id
