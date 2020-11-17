@@ -1,4 +1,5 @@
 <div class="title_left" style="color: orange;position: absolute;margin-top: 56px">
     <h3>Stock Management</h3>
 </div>
-<app-table [columnHeader]="columnHeader" [tableService]="stockService"  [isAdd]="false" [actionButton]="onAction" [actionName]="actionName" [exportButton]="onExport" [addEditButton]="onAddEdit"></app-table>
+<app-table [columnHeader]="columnHeader" [tableService]="stockService"  [isAdd]="false" [actionButton]="onAction"
+           [actionName]="actionName" [historyButton]="true" [exportButton]="onExport" [addEditButton]="onAddEdit"></app-table>

@@ -18,10 +18,16 @@
       <h2>Custom</h2>
       <ul class="nav navbar-right panel_toolbox">
           <div *ngIf="actionButton" style="margin-left: 15px">
-              <button  title="action" class="btn btn-sm btn-success" type="button" (click)='onAction(data)'>{{actionName}}</button>
+          <button  title="" class="btn btn-sm btn-success" type="button" (click)='onAction(data)'>{{actionName}}</button>
+      </div>
+          <div *ngIf="historyButton" style="margin-left: 15px">
+              <a routerLink="/export-history-stock"><button  title="Export out Stock" class="btn btn-sm btn-success" type="button" >History of Stock Out</button></a>
+          </div>
+          <div *ngIf="stockButton" style="margin-left: 15px">
+              <a routerLink="/stock"><button  title="Export out Stock" class="btn btn-sm btn-success" type="button" >Back To Stock</button></a>
           </div>
         <div *ngIf="isAdd" style="margin-left: 15px">
-          <button   title="add" class="btn btn-sm btn-success" type="button" (click)='onAddEdit(null)'>Add new
+          <button   title="add" class="btn btn-sm btn-success" type="button" (click)='onAddEdit(null)'>Add New
             <i style="color: white" class="fa fa-plus"></i></button>
         </div>
         <div *ngIf="isDeleteAll" style="margin-left: 15px">
@@ -77,7 +83,7 @@
                   <i style=" color: #dc3545;font-size: 17px" class="fa fa-trash"></i></a>
                   <a class="action" title="view" *ngIf="viewButton" style="margin-left: 10px;" (click)="onView(element)">
                       <i style=" color: #26b99a;font-size: 17px" class="fa fa-eye"></i></a>
-                  <a class="action" title="view" *ngIf="exportButton" style="margin-left: 10px;" (click)="onExport(element)">
+                  <a class="action" title="Export Out Stock" *ngIf="exportButton" style="margin-left: 10px;" (click)="onExport(element)">
                       <i style=" color: #405467;font-size: 17px" class="fa fa-share"></i></a>
                </td>
             </div>
@@ -132,3 +138,4 @@
       </div>
       </div>
 
+</div>

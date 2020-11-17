@@ -11,53 +11,105 @@
                         <label>Shipment Code<span style="color: red">(*)</span></label>
                         <input type="text" class="form-control" value="{{data.shipmentCode}}" formControlName="shipmentCode">
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('shipmentCode').invalid && stockForm.get('shipmentCode').touched">
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('required')">Shipment Code is required</p>
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('pattern')">Shipment Code must be a number</p>
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('length')">Shipment Code must be a number that have length = 8.</p>
+                    </div>
+
                     <div class="form-group">
                         <label>Feed Type<span style="color: red">(*)</span></label>
-                        <select formControlName="feedType"  class="form-control">
-                            <option  *ngFor="let feedType of feedTypes" [ngValue]="feedType">{{feedType.name}}</option>
+                        <select formControlName="feedTypeId"  class="form-control">
+                            <option  *ngFor="let f of feedTypes" [ngValue]="f.id">{{f.name}}</option>
                         </select>
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('feedTypeId').invalid && stockForm.get('feedTypeId').touched">
+                        <p *ngIf="stockForm.get('feedTypeId').hasError('required')">Feed Type is required</p>
+                        <p *ngIf="stockForm.get('feedTypeId').hasError('required')">Feed Type must be a number</p>
+                    </div>
+
                     <div class="form-group">
                         <label>Expiry Date<span style="color: red">(*)</span></label>
-                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate" >
+                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate" [(ngModel)]="end" (change)="compareTwoDates()" >
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('expDate').invalid && stockForm.get('expDate').touched">
+                        <p *ngIf="stockForm.get('expDate').hasError('required')">Expiry Date is required</p>
+                        <p *ngIf="stockForm.get('expDate').hasError('pattern')">Expiry Date must be follow format: (yyyy-mm-dd)</p>
+                    </div>
+
                     <div class="form-group">
                         <label>Manufacturing Date<span style="color: red">(*)</span></label>
-                        <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate">
+                        <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate" [(ngModel)]="start" (change)="compareTwoDates()">
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('mfgDate').invalid && stockForm.get('mfgDate').touched">
+                        <p *ngIf="stockForm.get('mfgDate').hasError('required')">Manufacturing Date is required</p>
+                        <p *ngIf="stockForm.get('mfgDate').hasError('pattern')">Manufacturing Date must be follow format: (yyyy-mm-dd)</p>
+                    </div>
+
                     <div class="form-group">
-                        <label>Import Date<span style="color: red">(*)</span></label>
+                        <label>Stock In Date<span style="color: red">(*)</span></label>
                         <input type="date" class="form-control" value="{{data.importDate}}" formControlName="importDate">
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('importDate').invalid && stockForm.get('importDate').touched">
+                        <p *ngIf="stockForm.get('importDate').hasError('required')">Stock In Date is required</p>
+                        <p *ngIf="stockForm.get('importDate').hasError('pattern')">Stock In Date must be follow format: (yyyy-mm-dd)</p>
+                        <p *ngIf="stockForm.get('importDate').hasError('checkDate')">Stock In Date must be not after current date.</p>
+                    </div>
+
                     <div class="form-group">
                         <label>Quantity<span style="color: red">(*)</span></label>
                         <input type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity">
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('quantity').invalid && stockForm.get('quantity').touched">
+                        <p *ngIf="stockForm.get('quantity').hasError('required')">Quantity is required</p>
+                        <p *ngIf="stockForm.get('quantity').hasError('pattern')">Quantity must be a number</p>
+                    </div>
+
                     <div class="form-group">
                         <label>Unit<span style="color: red">(*)</span></label>
-
                         <select formControlName="unit" class="form-control">
                             <option value="kilogam">Kilogram</option>
                             <option value="lit">Liter</option>
                         </select>
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('unit').invalid && stockForm.get('unit').touched">
+                        <p *ngIf="stockForm.get('unit').hasError('required')">Unit is required</p>
+                        <p *ngIf="stockForm.get('unit').hasError('pattern')">Unit must be kilogam or liter</p>
+                    </div>
 
                     <div class="form-group" >
                         <label>Vendor<span style="color: red">(*)</span></label>
-                        <select formControlName="vendor"  class="form-control">
-                            <option *ngFor="let vendor of vendors" [ngValue]="vendor">{{vendor.name}}</option>
+                        <select formControlName="vendorId"  class="form-control">
+                            <option *ngFor="let v of vendors" [ngValue]="v.id">{{v.name}}</option>
                         </select>
                     </div>
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('vendorId').invalid && stockForm.get('vendorId').touched">
+                        <p *ngIf="stockForm.get('vendorId').hasError('required')">Vendor is required</p>
+                        <p *ngIf="stockForm.get('vendorId').hasError('required')">Vendor must be a number</p>
+                    </div>
+
                     <div class="form-group">
                         <label>Description</label>
                         <input type="text" class="form-control" value="{{data.description}}" formControlName="description">
                     </div>
-                    
+                    <div class="alert alert-danger" role="alert"
+                         *ngIf="stockForm.get('description').invalid && stockForm.get('description').touched">
+                        <p *ngIf="stockForm.get('description').hasError('maxlength')">Description must be not more than 1000 characters.</p>
+                    </div>
+
                 </form>
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
-                <button [disabled]="stockForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                <button [disabled]="stockForm.invalid" type="submit" class="btn btn-success" data-dismiss="modal" value="Add" (click)="addEditStock()">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
             </div>
         </form>
     </div>

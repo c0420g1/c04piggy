@@ -16,6 +16,7 @@ import { Global } from '../model/Global';
 export class TableComponent implements OnInit {
   //#region Field
   @Input() actionName
+  @Input() exportHistoryStockButton
   @Input() edit;
   @Input() delete;
   @Input() view;
@@ -25,6 +26,8 @@ export class TableComponent implements OnInit {
   @Input() deleteButton;
   @Input() viewButton;
   @Input() exportButton;
+  @Input() historyButton = false;
+  @Input() stockButton = false;
   @Input() actionButton;
   @Input() isAdd: boolean = true;
   @Input() isDelete: boolean = true;

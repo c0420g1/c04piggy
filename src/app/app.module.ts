@@ -19,9 +19,10 @@ import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import {CoteComponent } from './cote/cote.component';
 import {FeedComponent} from './feed/feed.component';
-import {StockComponent, StockModal} from './stock/stock.component';
+import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
+import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
 
 
 
@@ -43,8 +44,9 @@ import { PigComponent } from './pig/pig.component';
     HistoryExportModal,
     HistoryExportComponent,
     StockModal,
-    PigComponent
-
+    ExportModal,
+    PigComponent,
+    ExportHistoryStockComponent
   ],
   imports: [
     BrowserModule,
@@ -57,8 +59,7 @@ import { PigComponent } from './pig/pig.component';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
-
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]
