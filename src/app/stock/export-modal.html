@@ -1,0 +1,67 @@
+
+<div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">{{title}}</h4>
+            <a type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</a>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="exportHistoryStockForm">
+                <div class="form-group">
+                    <label>Quantity<span style="color: red">(*)</span></label>
+                    <input type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="exportHistoryStockForm.get('quantity').invalid && exportHistoryStockForm.get('quantity').touched">
+                    <p *ngIf="exportHistoryStockForm.get('quantity').hasError('required')">Manufacturing Date is required</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Stock Out Date<span style="color: red">(*)</span></label>
+                    <input type="date" class="form-control" value="{{data.exportDate}}" formControlName="exportDate" >
+                </div>
+
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="exportHistoryStockForm.get('exportDate').invalid && exportHistoryStockForm.get('exportDate').touched">
+                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('required')">Stock Out Date is required</p>
+                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('checkDate')">Stock out Date must be before Current Date.</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Stock Employee<span style="color: red">(*)</span></label>
+                    <select formControlName="employee"  class="form-control">
+                        <option  *ngFor="let employee of employees" [ngValue]="employee" >{{employee.name}}</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="exportHistoryStockForm.get('employee').invalid && exportHistoryStockForm.get('employee').touched">
+                    <p *ngIf="exportHistoryStockForm.get('employee').hasError('required')">Stock Employee is required</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Received Employee<span style="color: red">(*)</span></label>
+                    <select formControlName="receivedEmployeeId"  class="form-control">
+                        <option  *ngFor="let employee of employees" [ngValue]="employee.id" >{{employee.name}}</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="exportHistoryStockForm.get('receivedEmployeeId').invalid && exportHistoryStockForm.get('receivedEmployeeId').touched">
+                    <p *ngIf="exportHistoryStockForm.get('receivedEmployeeId').hasError('required')">Received Employee is required</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Description</label>
+                    <input type="text" class="form-control" value="{{data.description}}" formControlName="description" >
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="exportHistoryStockForm.get('description').invalid && exportHistoryStockForm.get('description').touched">
+                    <p *ngIf="exportHistoryStockForm.get('description').hasError('maxlength')">Description must be not more than 1000 characters.</p>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
+            <button [disabled]="exportHistoryStockForm.invalid" type="submit" class="btn btn-success" data-dismiss="modal"  (click)="addExportHistoryStockAndExportOutStock()">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+        </div>
+</div>
