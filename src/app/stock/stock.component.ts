@@ -75,11 +75,14 @@ export class StockModal implements OnInit {
       mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       quantity: [this.data.quantity, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
       shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8),Validators.minLength(8)]],
-      unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogram)|(liter)')]],
-      // vendorName: [this.data.vendorName, [Validators.required]],
+      unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogam)|(liter)')]],
+      vendorName: [this.data.vendorName, [Validators.required]],
       feedTypeId: [this.data.feedTypeId, [Validators.required]],
       vendorId: [this.data.vendorId, [Validators.required]]
     });
+    console.log("mfg date"+this.stockForm.value.mfgDate);
+    console.log("exp date"+this.stockForm.value.expDate);
+    console.log("import date"+this.stockForm.value.importDate);
   }
 
   // add & edit Stock
@@ -106,6 +109,8 @@ export class StockModal implements OnInit {
       this.error = false;
     }
   }
+
+
 }
 
 @Component({
@@ -145,6 +150,16 @@ export class ExportModal implements OnInit {
     this.stockService.exportOutStock(this.data.id, this.exportHistoryStockForm.value.quantity).subscribe(
         data=>{window.location.reload();}
     );
+  }
+
+  error = false;
+  stockOut: number;
+  checkQuantity(){
+   let stockInQuantity = this.data.quantity;
+   let stockOutQuantity = this.stockOut;
+   if (stockOutQuantity > stockInQuantity){
+     this.error = true;
+   }
   }
 
 }
