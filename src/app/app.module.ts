@@ -17,12 +17,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import {CoteComponent } from './cote/cote.component';
+import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
 import {FeedComponent, FeedModal} from './feed/feed.component';
 import {MatInputModule} from '@angular/material/input';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
-import {StockComponent, StockModal} from './stock/stock.component';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
+import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
 
 
 
@@ -43,11 +43,13 @@ import { PigComponent } from './pig/pig.component';
     CoteComponent,
     FeedComponent,
     StockComponent,
-    FeedModal,
-      HistoryExportModal,
-      HistoryExportComponent,
-      StockModal,
-      PigComponent,
+    HistoryExportModal,
+    HistoryExportComponent,
+    StockModal,
+    ExportModal,
+    PigComponent,
+    ExportHistoryStockComponent,
+      FeedModal,
 
   ],
     imports: [
@@ -62,8 +64,7 @@ import { PigComponent } from './pig/pig.component';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        MatInputModule,
-        MatAutocompleteModule,
+        MatInputModule
     ],
   providers: [],
   bootstrap: [AppComponent]
