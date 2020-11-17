@@ -17,18 +17,18 @@ export class HistoryExportService {
     constructor(private http: HttpClient) {
     }
 
-    getAll(pageNum: number, search): Observable<HistoryExport[]> {
+    getData(pageNum: number, search): Observable<HistoryExport[]> {
         return this.http.get<HistoryExport[]>(this.API_URL + pageNum + '?search=' + search);
     }
 
-    delete(id): Observable<any> {
-        return this.http.delete<any>(this.API_URL_DEL, id);
+    delete(id: number[]): Observable<any> {
+        return this.http.put<any>(this.API_URL_DEL, id);
     }
 
     //Tuong
     // lay ve 
-    getData(pageNum: number, search: string): Observable<HistoryExportStockDTO[]>{
-        return this.http.get<HistoryExportStockDTO[]>(this.API_GET_ALL_HISTORY_EXPORT_STOCK + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
-    }
+    // getData(pageNum: number, search: string): Observable<HistoryExportStockDTO[]>{
+    //     return this.http.get<HistoryExportStockDTO[]>(this.API_GET_ALL_HISTORY_EXPORT_STOCK + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
+    // }
 
 }

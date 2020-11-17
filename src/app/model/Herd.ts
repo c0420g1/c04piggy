@@ -8,4 +8,5 @@ export class Herd {
     name: string;
     feed: Feed;
     cote: Cote;
+
 }

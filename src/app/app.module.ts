@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -18,11 +17,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import {CoteComponent } from './cote/cote.component';
-import {FeedComponent} from './feed/feed.component';
 import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
+import {FeedComponent, FeedModal} from './feed/feed.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
 import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
+
+
 
 
 
@@ -48,19 +51,21 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
     PigComponent,
     ExportHistoryStockComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    NgbModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatDialogModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        HttpClientModule,
+        NgbModule,
+        MatTableModule,
+        MatFormFieldModule,
+        MatDialogModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+        MatInputModule,
+        MatAutocompleteModule,
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
