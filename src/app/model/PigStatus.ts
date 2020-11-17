@@ -1,5 +1,3 @@
-import {PigAssociateStatus} from './PigAssociateStatus';
-
 export class PigStatus {
     id: number;
     description: string;
