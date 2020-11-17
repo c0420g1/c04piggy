@@ -7,6 +7,7 @@ import {TreatmentVacxins} from '../model/TreatmentVacxins';
 import {LoadCssService} from '../load-css.service';
 import {Cote} from '../model/Cote';
 import {Pig} from '../model/Pig';
+import {ToastrService} from 'ngx-toastr';
 
 
 @Component({
@@ -26,15 +27,6 @@ export class TreatmentComponent implements OnInit {
     modalRef.componentInstance.data = element ?? new TreatmentVacxins();
     modalRef.componentInstance.title = element ? 'Edit Information' : 'Add Information';
   }
-  onView(element, modal){
-    const modalRef = modal.open(TreatmentModal);
-    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
-  }
-  onAction(element, modal){
-    console.log(element)
-    const modalRef = modal.open(TreatmentModal);
-    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
-  }
 }
 
 
@@ -50,7 +42,7 @@ export class TreatmentModal implements OnInit{
   checkCoteCode: Cote;
   coteId = 1;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
-              private treatmentService: TreatmentService,){}
+              private treatmentService: TreatmentService,private toastr: ToastrService){}
 
   ngOnInit(): void {
     this.treatmentService.getAllCote().subscribe(data => {
@@ -81,10 +73,20 @@ export class TreatmentModal implements OnInit{
 
   onSubmit() {
     console.log(this.checkCoteCode);
+    this.toastr.success('Delete successfully', 'C04piggy');
+    // window.location.reload()
+    this.refeshComponent();
+    this.activeModal.close();
   }
 
   check(coteId) {
     this.checkCoteCode.id = coteId;
     this.ngOnInit();
+  }
+  refeshComponent(){
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+      this.router.navigate([currentRoute]);
+    });
   }
 }

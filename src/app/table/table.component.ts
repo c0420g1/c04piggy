@@ -226,7 +226,13 @@ export class DeleteModal {
 
   delete(){
       this.service.delete(this.ids).subscribe();
-      // this.activeModal.close();
-      window.location.reload();
+      this.activeModal.close();
+      this.refeshComponent();
+  }
+  refeshComponent(){
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+      this.router.navigate([currentRoute]);
+    });
   }
 }
