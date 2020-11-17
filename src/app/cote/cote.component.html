@@ -130,25 +130,17 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Description: </label>
-                            <input type="text" class="form-control" formControlName="description"  required>
-                        </div>
-                        <div class="form-group">
                             <label>Code</label>
-                            <input type="text" class="form-control" formControlName="code" value="{{coteEdit.code}}" readonly>
+                            <input type="text" class="form-control" formControlName="code" readonly>
                         </div>
                         <fieldset formGroupName="dateGroup">
                             <div class="form-group">
                                 <label>Day Start</label>
-                                <input type="date" class="form-control" formControlName="importDate" value="{{coteEdit.importDate}}" required>
-                            </div>
-                            <div class="alert alert-danger" role="alert" *ngIf="editCoteForm.get('dateGroup').get('importDate').invalid &&
-                                                                              editCoteForm.get('dateGroup').get('importDate').touched">
-                                Import Day must be greater than today!!!
+                                <input type="date" class="form-control" formControlName="importDate">
                             </div>
                             <div class="form-group">
                                 <label>Day End</label>
-                                <input type="date" class="form-control" formControlName="exportDate" value="{{coteEdit.exportDate}}" required>
+                                <input type="date" class="form-control" formControlName="exportDate" >
                             </div>
                             <div class="alert alert-danger" role="alert" *ngIf="editCoteForm.hasError('exportDay',['dateGroup'])">
                                 Export Day must be greater than today 4 month or can be blank!!!
@@ -157,7 +149,11 @@
 
                         <div class="form-group">
                             <label>Type</label>
-                            <input type="text" class="form-control" formControlName="type" required>
+<!--                            <input type="text" class="form-control" formControlName="type" required>-->
+                            <select class="form-control" formControlName="type" required >
+                                <option [ngValue]="coteEdit.type">{{coteEdit.type}}</option>
+                                <option *ngFor="let type of typeList"  [ngValue]="type"  >{{type}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Employee</label>
@@ -225,7 +221,7 @@
                         </div>
                         <div class="form-group">
                             <label>Day End</label>
-                            <input type="date" class="form-control" formControlName="exportDate" required>
+                            <input type="date" class="form-control" formControlName="exportDate">
                         </div>
                             <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.hasError('exportDay',['dateGroup'])">
                                 Export Day must be greater than today 4 month or can be blank!!!

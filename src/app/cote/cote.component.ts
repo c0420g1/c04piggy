@@ -36,6 +36,7 @@ export class CoteComponent implements OnInit {
   totalEntities: number;
   totalPage: number;
   jumpPage: number;
+  typeList = ['Get Meat', 'Reproduction'];
   // Pagination
   addNewCoteForm: FormGroup;
   editCoteForm: FormGroup;
@@ -78,7 +79,7 @@ export class CoteComponent implements OnInit {
       code: ['', Validators.required],
       dateGroup: this.fb.group({
         importDate: ['',[Validators.required,importDayCheckValidator]],
-        exportDate: ['', Validators.required]
+        exportDate: ['']
       }, {validators: exportDayCheckValidator}),
 
       quantity: [''],
@@ -92,8 +93,8 @@ export class CoteComponent implements OnInit {
       isDeleted: [''],
       code: ['', Validators.required],
       dateGroup: this.fb.group({
-        importDate: ['',[Validators.required,importDayCheckValidator]],
-        exportDate: ['', Validators.required]
+        importDate: [''],
+        exportDate: [''],
       }, {validators: exportDayCheckValidator}),
 
       quantity: [''],
@@ -153,7 +154,16 @@ export class CoteComponent implements OnInit {
   getInfo(cote: CoteDTO) {
     this.coteService.getCoteInform(cote.id).subscribe((data) => {
       this.coteEdit = data;
-      this.editCoteForm.patchValue(this.coteEdit);
+      if (data.exportDate == null){
+        this.coteEdit.exportDate = null;
+      }
+      this.editCoteForm.patchValue(data);
+      this.editCoteForm.get('dateGroup').get('importDate').patchValue(this.formatDate(new Date(data.importDate)));
+      if (data.exportDate != null){
+        this.editCoteForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date(data.exportDate)));
+      } else {
+        this.editCoteForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date('')));
+      }
     });
   }
   soldPig(pigId: number) {
@@ -182,6 +192,16 @@ export class CoteComponent implements OnInit {
     this.coteService.addNewCote(this.coteEdit).subscribe(()=> this.ngOnInit());
     document.getElementById("edit").click();
   }
+
+  private formatDate(date) {
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    return [year, month, day].join('-');
+  }
 }
 
 // Customer Validator ImportDay
@@ -202,12 +222,15 @@ function exportDayCheckValidator(control: AbstractControl) {
   const dayCheck = new Date(control.value.importDate);
   // @ts-ignore
   const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
-  console.log(check +'day');
   // Điều kiện sai để trả về valid cho form.
-  if ( check <= 112 || day < new Date()){
-    return {
-      exportDay: true
+  if (day != null) {
+    if (check <= 112 || day < new Date()) {
+      return {
+        exportDay: true
+      }
     }
   }
   return null;
 }
+
+
