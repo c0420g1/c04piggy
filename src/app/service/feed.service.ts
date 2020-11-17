@@ -27,12 +27,12 @@ export class FeedService {
     return this.http.get<Feed[]>(this.API_URL4 + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
   }
 
-  addEdit(feed: Feed): Observable<void>{
-    return this.http.post<void>(this.API_URL3, feed);
+  addEdit(feed: Feed): Observable<Error1[]>{
+    return this.http.post<Error1[]>(this.API_URL3, feed);
   }
 
   delete(ids: number[]): Observable<Error1>{
-    return this.http.put<Error1>(this.API_URL1, ids);
+    return this.http.patch<Error1>(this.API_URL1, ids);
   }
 
   getAllFeedType(): Observable<FeedType[]>{
