@@ -11,6 +11,7 @@ import {Diseases} from '../model/Diseases';
 import {Vaccine} from '../model/Vaccine';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-treatment',
   templateUrl: './treatment.component.html',
@@ -28,18 +29,7 @@ export class TreatmentComponent implements OnInit {
     modalRef.componentInstance.data = element ?? new TreatmentVacxins();
     modalRef.componentInstance.title = element ? 'Edit Information' : 'Add Information';
   }
-  onView(element, modal){
-    const modalRef = modal.open(TreatmentModal);
-    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
-  }
-  onAction(element, modal){
-    console.log(element)
-    const modalRef = modal.open(TreatmentModal);
-    modalRef.componentInstance.data = element ?? new TreatmentVacxins();
-  }
-  showSuccess(){
-    this.toastr.success('Delete successfully', 'C04piggy');
-  }
+
 }
 
 
@@ -58,6 +48,7 @@ export class TreatmentModal implements OnInit{
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
               private treatmentService: TreatmentService, private toastr: ToastrService){}
+
 
   ngOnInit(): void {
     console.log(this.data)
@@ -104,6 +95,14 @@ export class TreatmentModal implements OnInit{
    // this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
    //   console.log(data);
    // })
+    this.refeshComponent();
+    this.activeModal.close();
+  }
+  refeshComponent(){
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+      this.router.navigate([currentRoute]);
+    });
   }
 
   check(coteId) {
@@ -127,5 +126,7 @@ function dateValidator(formControl: FormControl) {
   if (dateNumber < dateNumberNow) {
     return {checkDate: true};
   }
+
   return null;
+
 }

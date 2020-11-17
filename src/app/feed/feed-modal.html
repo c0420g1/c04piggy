@@ -1,20 +1,92 @@
-<!--<div class="modal-content">-->
-<!--    <form>-->
-<!--        <div class="modal-header">-->
-<!--            <h4 class="modal-title">{{title}}</h4>-->
-<!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>-->
-<!--        </div>-->
-<!--        <div class="modal-body">-->
-<!--            <form [formGroup]="feedForm">-->
-<!--                <div class="form-group">-->
-<!--                    <label>Title</label>-->
-<!--                    <input type="text" class="form-control" value="{{data.title}}" formControlName="title">-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--        <div class="modal-footer">-->
-<!--            <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">-->
-<!--            <button [disabled]="feedForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>-->
-<!--        </div>-->
-<!--    </form>-->
-<!--</div>-->
+<div class="modal-content">
+    <form [formGroup]="feedForm">
+        <div class="modal-header">
+            <h4 class="modal-title">{{title}}</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Amount</label>
+                <input type="text" #inputAmount class="form-control" value="{{data.amount}}" formControlName="amount">
+                <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('amount').touched && feedForm.get('amount').invalid">
+                    <p *ngIf="feedForm.get('amount').hasError('required')"> Not required</p>
+                    <p *ngIf="feedForm.get('amount').hasError('pattern')"> format is number </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Code</label>
+                <input type="text" #inputCode class="form-control" value="{{data.code}}" formControlName="code">
+                <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('code').touched && feedForm.get('code').invalid">
+                    <p *ngIf="feedForm.get('code').hasError('required')"> Not required</p>
+                    <p *ngIf="feedForm.get('code').hasError('pattern')"> format is FEXXXX with XXXX is number </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Unit</label>
+                <input type="text" #inputUnit class="form-control" value="{{data.unit}}" formControlName="unit">
+                <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('unit').touched && feedForm.get('unit').invalid">
+                    <p *ngIf="feedForm.get('unit').hasError('required')"> Not required</p>
+                    <p *ngIf="feedForm.get('unit').hasError('pattern')"> format is kg/ngay | kg/tuan | kg/thang </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Feed Type</label>
+                <select class="form-control" formControlName="feedType" [ngModel]="feedType1">
+                    <option [ngValue]="feedType1" disabled>{{feedType1.name}}</option>
+                    <option *ngFor="let feedType of FeedType" [ngValue]="feedType" >{{feedType.name}}</option>
+                </select>
+                <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('feedType').touched && feedForm.get('feedType').invalid">
+                    <p *ngIf="feedForm.get('feedType').hasError('required')"> Not required</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body">
+
+            <div class="form-group">
+                <label>Herd</label>
+                <select class="form-control" formControlName="herd"  [ngModel]="herd1">
+                    <option [ngValue]="herd1" disabled>{{herd1.name}}</option>
+                    <option *ngFor="let herd of Herd" [ngValue]="herd" >{{herd.name}}</option>
+                </select>
+                <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('herd').touched && feedForm.get('herd').invalid">
+                    <p *ngIf="feedForm.get('herd').hasError('required')"> Not required</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Description</label>
+                <textarea type="text" class="form-control" #inputDescription  value="{{data.description}}" formControlName="description"></textarea>
+                <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('description').touched && feedForm.get('description').invalid">
+                    <p *ngIf="feedForm.get('description').hasError('required')"> Not required</p>
+                </div>
+            </div>
+        </div>
+
+        <ul>
+            <li class="alert alert-danger" *ngFor="let error of error1s">
+                {{error.message}}
+            </li>
+        </ul>
+
+        <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
+            <button [disabled]="feedForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+        </div>
+    </form>
+</div>

@@ -64,7 +64,7 @@
                             <tbody>
                             <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
                                 <td class=" ">{{i+1}}</td>
-                                <td class=" "><a href="#inforHerd" data-toggle="modal" (click)="getInfo(cote)">{{cote.coteCode}}</a></td>
+                                <td class=" "><a href="#informHerd" data-toggle="modal" (click)="getInfoPig(cote)">{{cote.coteCode}}</a></td>
                                 <td class=" ">{{cote.employeeName}}</td>
                                 <td class=" ">{{cote.herdName}} </td>
                                 <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
@@ -73,7 +73,7 @@
                                 <td class=" ">{{cote.quantity}} </td>
                                 <td class=" ">{{cote.day}} days | {{cote.status}}  </td>
                                 <td class=" last">
-                                    <a href="#table" data-toggle="modal" style="margin-right: 10px;">
+                                    <a href="#edit" data-toggle="modal" (click)="getInfo(cote)" style="margin-right: 10px;">
                                         <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
                                     <a href="#delete" data-toggle="modal" style="font-size: 17px;">
                                         <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
@@ -120,43 +120,67 @@
 
 <!--    edit-->
 
-    <div id="table" class="modal fade">
+    <div id="edit" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form>
+                <form [formGroup]="editCoteForm" (ngSubmit)="EditCote(editCoteForm)">
                     <div class="modal-header">
                         <h4 class="modal-title">Edit Cote</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <label>Cote Code</label>
-                            <input type="text" class="form-control" readonly required>
+                            <label>Code</label>
+                            <input type="text" class="form-control" formControlName="code" readonly>
+                        </div>
+                        <fieldset formGroupName="dateGroup">
+                            <div class="form-group">
+                                <label>Day Start</label>
+                                <input type="date" class="form-control" formControlName="importDate">
+                            </div>
+                            <div class="form-group">
+                                <label>Day End</label>
+                                <input type="date" class="form-control" formControlName="exportDate" >
+                            </div>
+                            <div class="alert alert-danger" role="alert" *ngIf="editCoteForm.hasError('exportDay',['dateGroup'])">
+                                Export Day must be greater than today 4 month or can be blank!!!
+                            </div>
+                        </fieldset>
+
+                        <div class="form-group">
+                            <label>Type</label>
+<!--                            <input type="text" class="form-control" formControlName="type" required>-->
+                            <select class="form-control" formControlName="type" required >
+                                <option [ngValue]="coteEdit.type">{{coteEdit.type}}</option>
+                                <option *ngFor="let type of typeList"  [ngValue]="type"  >{{type}}</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label>Staff Code</label>
-                            <input type="text" class="form-control" required>
+                            <label>Employee</label>
+                            <select class="form-control" formControlName="employee" required >
+                                <option [ngValue]="coteEdit.employee">{{coteEdit.employee.name}}</option>
+                                <option *ngFor="let employee of employeeList"  [ngValue]="employee"  >{{employee.name}}</option>
+                            </select>
+                        </div>
+                        <div class="alert alert-danger" role="alert" *ngIf="editCoteForm.get('employee').invalid &&
+                                                                              editCoteForm.get('employee').touched">
+                            Employee is required!
                         </div>
                         <div class="form-group">
-                            <label>Herd Code</label>
-                            <input type="text" class="form-control" required>
+                            <label>Herd</label>
+                            <select class="form-control" formControlName="herd"  required >
+                                <option [ngValue]="coteEdit.herd">{{coteEdit.herd.name}}</option>
+                                <option *ngFor="let herd of herdList"  [ngValue]="herd" >{{herd.name}}</option>
+                            </select>
                         </div>
-                        <div class="form-group">
-                            <label>Day Start</label>
-                            <input type="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Day End</label>
-                            <input type="date" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label>Quantity</label>
-                            <input type="number" class="form-control" required>
+                        <div class="alert alert-danger" role="alert" *ngIf="editCoteForm.get('herd').invalid &&
+                                                                              editCoteForm.get('herd').touched">
+                            Herd is required!
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Save" [disabled]="editCoteForm.invalid">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>
@@ -197,14 +221,11 @@
                         </div>
                         <div class="form-group">
                             <label>Day End</label>
-                            <input type="date" class="form-control" formControlName="exportDate" required>
+                            <input type="date" class="form-control" formControlName="exportDate">
                         </div>
-                            <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('dateGroup').hasError('exportDate',['dateGroup']) &&
-                                                                              addNewCoteForm.get('dateGroup').get('exportDay').touched">
+                            <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.hasError('exportDay',['dateGroup'])">
                                 Export Day must be greater than today 4 month or can be blank!!!
                             </div>
-
-<!--                            how to get errors-->
                         </fieldset>
 
                         <div class="form-group">
@@ -266,7 +287,7 @@
 
 <!--    Xuat chuong-->
 
-<div id="inforHerd" class="modal fade">
+<div id="informHerd" class="modal fade">
     <div class="modal-dialog" style="max-width: 660px;">
         <div class="modal-content">
             <form>
@@ -283,11 +304,12 @@
                                 <th>Code</th>
                                 <th>Weight</th>
                                 <th>Color</th>
+                                <th>Status</th>
                                 <th></th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr *ngFor="let pig of pigList">
+                            <tr *ngFor="let pig of pigListDTO">
                                 <td>
                                     <div>
                                        <img src="../../assets/production/images/cute-pig-lying-down-looking-back_42750-237.png" style="width: auto; height: 75px">
@@ -295,7 +317,7 @@
                                 </td>
                                 <td>
                                     <div style="padding-top: 30px">
-                                        <p>{{pig.code}} </p>
+                                        <p>{{pig.cote}} </p>
                                     </div>
                                 </td>
                                 <td>
@@ -305,12 +327,17 @@
                                 </td>
                                 <td>
                                     <div style="padding-top: 30px">
-                                        {{pig.color}}
+                                        {{pig.importDate}}
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="padding-top: 30px" *ngFor="let status of pig.status">
+                                        {{status}}
                                     </div>
                                 </td>
                                 <td>
                                     <div style="padding-top: 20px">
-                                        <input type="button"  class="btn btn-warning" (click)="soldPig(pig)" value="Sold" >
+                                        <input type="button"  class="btn btn-warning" (click)="soldPig(pig.pigId)" *ngIf="pig.weight > 113" value="Sold" >
                                     </div>
                                 </td>
                             </tr>
@@ -320,7 +347,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" class="btn btn-success" value="Add">Sold All</button>
+                    <button type="submit" class="btn btn-success" (click)="soldAllPig(pigListDTO)" value="Add">Sold All</button>
                 </div>
             </form>
         </div>

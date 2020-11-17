@@ -7,8 +7,11 @@ import {AccountComponent} from './account/account.component';
 import {TreatmentComponent} from './treatment/treatment.component';
 import {CoteComponent} from './cote/cote.component';
 import {StockComponent} from './stock/stock.component';
+import {FeedComponent} from './feed/feed.component';
 import {HistoryExportComponent} from './history-export/history-export.component';
 import {PigComponent} from './pig/pig.component';
+import {ExportHistoryStockComponent} from './export-history-stock/export-history-stock.component';
+
 
 
 const routes: Routes = [{
@@ -25,6 +28,7 @@ const routes: Routes = [{
         {
             path: 'stock',
             component: StockComponent
+            ,
         },
         {
             path: 'account',
@@ -35,8 +39,12 @@ const routes: Routes = [{
             component: TreatmentComponent
         },
         {
-            path: 'cote',
-            component: CoteComponent
+          path: 'cote',
+          component: CoteComponent
+        },
+        {
+            path: 'feed',
+            component: FeedComponent
         },
         {
             path: 'pig',
@@ -45,7 +53,11 @@ const routes: Routes = [{
       {
         path: 'export-management',
         component: HistoryExportComponent
-      }
+      },
+        {
+            path: 'history-of-stock-out',
+            component: ExportHistoryStockComponent
+        }
     ]
 }];
 
