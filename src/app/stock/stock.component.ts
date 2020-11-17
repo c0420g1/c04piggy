@@ -75,7 +75,7 @@ export class StockModal implements OnInit {
       mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       quantity: [this.data.quantity, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
       shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8),Validators.minLength(8)]],
-      unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogram)|(liter)')]],
+      unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogam)|(liter)')]],
       vendorName: [this.data.vendorName, [Validators.required]],
       feedTypeId: [this.data.feedTypeId, [Validators.required]],
       vendorId: [this.data.vendorId, [Validators.required]]
