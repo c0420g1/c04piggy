@@ -18,18 +18,12 @@ export class NotificationComponent implements OnInit {
   }
 
   onAddEdit(element, modal, toastr) {
-    toastr.success('aaaaa','eeeeeee');
-    // this.testsv.showSuccess('aaa','aaaa');
-    // this.testsv.showSuccess('Hello world!', 'Toastr fun!');
+    toastr.success('Success','Notification Created');
     // const modalRef = modal.open(NotificationModal);
     // modalRef.componentInstance.data = element ?? new Notification();
     // modalRef.componentInstance.title = element ? 'edit' : 'add';
   }
 
-  showTest(){
-    // this.testsv.showSuccess('aaa', 'eeee');
-    // this.toastr.success('aaaaa','eeeeeee');
-  }
   // onView(element, modal){
   //   alert(element);
   // }
