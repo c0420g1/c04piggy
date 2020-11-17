@@ -69,7 +69,7 @@ import {ToastrModule} from 'ngx-toastr';
         MatInputModule,
         CommonModule,
         ToastrModule.forRoot({
-            positionClass: 'toast-top-full-width',
+            positionClass: 'toast-top-center',
             preventDuplicates: true,
         }),
     ],

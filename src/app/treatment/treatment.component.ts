@@ -20,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
 export class TreatmentComponent implements OnInit {
   columnHeader = {'treatDate': 'Date', 'coteCode': 'Cote Code', 'pigCode': 'Pig Code',
                   'veterinarian': 'Veterinarians' ,'diseases': 'Diseases','vacxin': 'Medicine', 'action': 'Action'};
+  tableName = 'Examination & Treatment Information';
   constructor(public treatmentService: TreatmentService, private loadCssService: LoadCssService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -84,17 +85,18 @@ export class TreatmentModal implements OnInit{
       cote: ['', Validators.required],
       pig: ['', Validators.required],
       diseases: ['', Validators.required],
-      vacxin: ['', Validators.required]
+      vacxinId: ['', Validators.required]
     });
 
   }
 
   onSubmit() {
     console.log(this.treatmentForm.value);
-    this.toastr.success('Delete successfully', 'C04piggy')
-   // this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
-   //   console.log(data);
-   // })
+
+   this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
+     console.log(data);
+     this.toastr.success('Add new Information successfully', 'Treatment')
+   })
     this.refeshComponent();
     this.activeModal.close();
   }
