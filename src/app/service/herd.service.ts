@@ -12,11 +12,16 @@ export class HerdService {
   private readonly ADD_HERD_URL = Global.host + 'addHerd';
   private readonly GET_EDIT_HERD_URL = Global.host + 'herdDetail';
   private readonly DELETE_HERD_URL = Global.host + 'deleteHerd';
+  private readonly ALL_HERD_LIST_URL = Global.host + 'herdListAll';
 
   constructor(private http: HttpClient) { }
 
   getData(pageNum: number): Observable<Herd[]>{
     return  this.http.get<Herd[]>(this.HERD_LIST_URL + '/' + pageNum);
+  }
+
+  getAll(): Observable<Herd[]> {
+    return this.http.get<Herd[]>(this.ALL_HERD_LIST_URL);
   }
 
   addHerd(herd: Partial<Herd>): Observable<Herd> {
