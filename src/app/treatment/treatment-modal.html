@@ -19,7 +19,9 @@
                 </div>
                 <div class="form-group">
                     <label>Cote Code <span style="color:red;">*</span></label>
-                    <select formControlName="cote"  class="form-control"  [(ngModel)]="checkCoteCode" (ngModelChange)="check(checkCoteCode.id)">
+                    <select formControlName="cote"  class="form-control"  [(ngModel)]="checkCoteCode" (ngModelChange)="check(checkCoteCode.id)"
+                            onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                        <option  [ngValue]="checkCoteCode"  disabled >{{checkCoteCode.code}}</option>
                         <option *ngFor="let cote of coteList" [ngValue]="cote"  >{{cote.code}}</option>
                     </select>
                 </div>
@@ -29,7 +31,8 @@
                 </div>
                 <div class="form-group">
                     <label>Pig Code <span style="color:red;">*</span></label>
-                    <select formControlName="pig"  class="form-control">
+                    <select formControlName="pig"  class="form-control" [(ngModel)]="checkPigCode">
+                        <option  [ngValue]="checkPigCode"  disabled >{{checkPigCode.code}}</option>
                         <option *ngFor="let pig of pigList" [ngValue]="pig">{{pig.code}}</option>
                     </select>
                 </div>
@@ -43,7 +46,8 @@
                 </div>
                 <div class="form-group">
                     <label>Diseases <span style="color:red;">*</span></label>
-                    <select formControlName="diseases"  class="form-control">
+                    <select formControlName="diseases"  class="form-control" [(ngModel)]="checkDiseases">
+                        <option  [ngValue]="checkDiseases"  disabled >{{checkDiseases.name}}</option>
                         <option *ngFor="let diseases of diseasesList" [ngValue]="diseases">{{diseases.name}}</option>
                     </select>
                 </div>
@@ -53,7 +57,8 @@
                 </div>
                 <div class="form-group">
                     <label>Medicine  <span style="color:red;">*</span></label>
-                    <select formControlName="vacxin"  class="form-control">
+                    <select formControlName="vacxin"  class="form-control" [(ngModel)]="checkVaccine">
+                        <option  [ngValue]="checkVaccine"  disabled >{{checkVaccine.name}}</option>
                         <option *ngFor="let medicine  of medicineList" [ngValue]="medicine">{{medicine.name}}</option>
                     </select>
                 </div>
