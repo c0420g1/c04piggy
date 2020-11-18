@@ -4,12 +4,10 @@
             <div class="title_left">
                 <h3 style="color: orange; font-weight: bold">Cote Management</h3>
             </div>
-
-            <div class="title_right">
+            <div class="title_right" style="float: right">
                 <div class="col-md-5 col-sm-5   form-group pull-right top_search">
                     <div class="input-group">
-                        <input type="search"  [(ngModel)]="variableFind"  class="form-control mr-sm-2" placeholder="Search"  >
-                        <button type="button" class="btn btn-success" (click)="search()">Search <i class="fa fa-search"></i></button>
+                        <input type="text" class="form-control" placeholder="Search for..." [(ngModel)]="variableFind" (ngModelChange)="search()" >
                     </div>
                 </div>
                 <div>
@@ -75,8 +73,8 @@
                                 <td class=" last">
                                     <a href="#edit" data-toggle="modal" (click)="getInfo(cote)" style="margin-right: 10px;">
                                         <i style=" color: #1abb9c;font-size: 17px" class="fa fa-edit"></i></a>
-                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">
-                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>
+<!--                                    <a href="#delete" data-toggle="modal" style="font-size: 17px;">-->
+<!--                                        <i style=" color: #007bff;font-size: 17px" class="fa fa-trash-o"></i></a>-->
                                 </td>
                             </tr>
 
@@ -84,33 +82,85 @@
                         </table>
                     </div>
 
-                    <div class="x_content">
 
-                        <div class="row" style="margin-top: 10px" *ngIf="!message">
-                            <div class="col-lg-3">
-                                <div style="font-size: 15px">
-                                    Show {{entityNumber}} entities of {{totalEntities}} entities
-                                </div>
-                            </div>
-                            <div class="col-lg-9">
-                                <div style="float: right; margin-right: 50px">
-                                    <ul class="list-inline">
+<!--                    Pagination-->
+
+                    <div class="x_content">
+                        <div *ngIf="totalPage" class="clearfix">
+                            <div>
+                                Showing <b> {{ entityNumber }}</b> out of
+                                <b>{{ totalEntities }}</b> entries
+                                <div style="float: right">
+                                    <ul class="pagination">
                                         <li>
-                                            <button (click)="prePage()" class="btn btn-light" *ngIf="currentPage>1">Previous</button>
+                                            <a class="page-link" (click)="changePage(1)">First</a>
                                         </li>
                                         <li>
-                                            <input type="number" min="1" max="{{totalPage}}" class="input-group" placeholder="number of page" style="width: 100px;"
-                                                   [(ngModel)]="jumpPage" (ngModelChange)="goToPage()"  >
+                                            <a class="page-link" (click)="prePage()">Previous</a>
                                         </li>
                                         <li>
-                                            <span style="margin-left: 10px ; margin-right: 10px;color: black">{{this.currentPage}}</span>
-                                            <button (click)="nexPage()" class="btn btn-light" *ngIf="currentPage<totalPage">Next</button>
+                                            <div ngbDropdown class="d-inline-block" *ngIf="startPage != 1">
+                                                <button
+                                                        style="margin: 0"
+                                                        class="page-link"
+                                                        ngbDropdownToggle
+                                                        (click)="prePage()"
+                                                >
+                                                    ...
+                                                </button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                                                    <input
+                                                            type="email"
+                                                            class="form-control"
+                                                            placeholder="page:"
+                                                            [(ngModel)]="currentPage"
+                                                            (ngModelChange)="changePage(currentPage)"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li
+                                                *ngFor="let i of listPage"
+                                                class="page-item"
+                                                [ngClass]="{ active: currentPage == i }"
+                                        >
+                                            <a class="page-link" (click)="changePage(i)">{{ i }}</a>
+                                        </li>
+                                        <li>
+                                            <div
+                                                    ngbDropdown
+                                                    class="d-inline-block"
+                                                    *ngIf="endPage != totalPage"
+                                            >
+                                                <button
+                                                        style="margin: 0"
+                                                        class="page-link"
+                                                        ngbDropdownToggle
+                                                        (click)="prePage()"
+                                                >
+                                                    ...
+                                                </button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                                                    <input
+                                                            type="email"
+                                                            class="form-control"
+                                                            placeholder="page:"
+                                                            [(ngModel)]="currentPage"
+                                                            (ngModelChange)="changePage(currentPage)"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a class="page-link" (click)="nexPage()">Next</a>
+                                        </li>
+                                        <li>
+                                            <a class="page-link" (click)="changePage(totalPage)">Last</a>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="clearfix"></div>
                     </div>
 
                 </div>
@@ -168,14 +218,10 @@
                         </div>
                         <div class="form-group">
                             <label>Herd</label>
-                            <select class="form-control" formControlName="herd"  required >
-                                <option [ngValue]="coteEdit.herd">{{coteEdit.herd.name}}</option>
-                                <option *ngFor="let herd of herdList"  [ngValue]="herd" >{{herd.name}}</option>
+                            <input *ngIf="!check" class="form-control" formControlName="herd" readonly>
+                            <select *ngIf="check" class="form-control" formControlName="herd" required >
+                                <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                             </select>
-                        </div>
-                        <div class="alert alert-danger" role="alert" *ngIf="editCoteForm.get('herd').invalid &&
-                                                                              editCoteForm.get('herd').touched">
-                            Herd is required!
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -204,7 +250,9 @@
                         </div>
                         <div class="form-group">
                             <label>Code</label>
-                            <input type="text" class="form-control" formControlName="code" required>
+                            <select class="form-control" formControlName="code" required >
+                                <option *ngFor="let coteCode of coteCodeList"  [ngValue]="coteCode" >{{coteCode}}</option>
+                            </select>
                         </div>
                         <div class="alert alert-danger" role="alert" *ngIf="addNewCoteForm.get('code').invalid &&
                                                                               addNewCoteForm.get('code').touched">

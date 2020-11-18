@@ -44,7 +44,7 @@
 
             <div class="form-group">
                 <label>Feed Type</label>
-                <select class="form-control" formControlName="feedType" [ngModel]="feedType1">
+                <select class="form-control" formControlName="feedType" [ngModel]="feedType1" onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option [ngValue]="feedType1" disabled>{{feedType1.name}}</option>
                     <option *ngFor="let feedType of FeedType" [ngValue]="feedType" >{{feedType.name}}</option>
                 </select>
@@ -58,7 +58,7 @@
 
             <div class="form-group">
                 <label>Herd</label>
-                <select class="form-control" formControlName="herd"  [ngModel]="herd1">
+                <select class="form-control" formControlName="herd"  [ngModel]="herd1" onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option [ngValue]="herd1" disabled>{{herd1.name}}</option>
                     <option *ngFor="let herd of Herd" [ngValue]="herd" >{{herd.name}}</option>
                 </select>

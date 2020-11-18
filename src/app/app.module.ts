@@ -22,6 +22,9 @@ import {FeedComponent, FeedModal} from './feed/feed.component';
 import {MatInputModule} from '@angular/material/input';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { LoginComponent } from './login/login.component';
 import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
@@ -51,10 +54,12 @@ import { VacxinComponent } from './vacxin/vacxin.component';
     StockModal,
     ExportModal,
     PigComponent,
+    AccountDetailComponent,
+    LoginComponent,
     ExportHistoryStockComponent,
-      FeedModal,
-      DeleteModal,
-      VacxinComponent
+     FeedModal,
+    DeleteModal,
+    VacxinComponent
   ],
     imports: [
         BrowserModule,
