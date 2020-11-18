@@ -1,11 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {FeedService} from '../service/feed.service';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
 import {Feed} from '../model/Feed';
 import {FeedType} from '../model/FeedType';
 import {Herd} from '../model/Herd';
+import {Error1 } from '../model/error1';
+
 
 @Component({
     selector: 'app-feed',
@@ -51,8 +53,13 @@ export class FeedModal implements OnInit {
     FeedType: FeedType[];
     Herd: Herd[];
     feeds: Feed[];
-    herd: Herd;
-    feedType : FeedType;
+    herd1 = new Herd();
+    feedType1 = new FeedType();
+    error1s: Error1[];
+    @ViewChild('inputAmount') inputAmount: ElementRef;
+    @ViewChild('inputUnit') inputUnit: ElementRef;
+    @ViewChild('inputDescription') inputDescription: ElementRef;
+    @ViewChild('inputCode') inputCode: ElementRef;
 
 
 
@@ -63,19 +70,19 @@ export class FeedModal implements OnInit {
     ngOnInit(): void {
         this.feedForm = this.fb.group({
             id: [this.data.id],
-            description: [this.data.description],
-            amount: [this.data.amount],
-            code: [this.data.code],
-            unit: [this.data.unit],
-            feedType: [this.data.feedType],
-            herd: [this.data.herd],
+            description: [this.data.description, [Validators.required]],
+            amount: [this.data.amount, [Validators.required, Validators.pattern('^[\\d\\s]+$')]],
+            code: [this.data.code,  [Validators.required, Validators.pattern('^(FE)[\\d]{4}$')]],
+            unit: [this.data.unit,  [Validators.required, Validators.pattern('kg/ngay|kg/tuan|kg/thang')]],
+            feedType: [this.data.feedType,  [Validators.required]],
+            herd: [this.data.herd,  [Validators.required]],
         });
 
         this.feedService.getFeed().subscribe(next => (this.feeds = next, this.feeds.forEach(e => {
           if(this.data.id == e.id){
             this.data = e;
-            this.herd = e.herd;
-            this.feedType = e.feedType;
+            this.herd1 = e.herd;
+            this.feedType1 = e.feedType;
           }
         })) , error => (this.feeds = []));
 
@@ -86,15 +93,34 @@ export class FeedModal implements OnInit {
     }
 
     onSubmit() {
+        if(this.feedForm.valid)
+        {
         const {value} = this.feedForm;
+        console.log(this.feedForm);
         this.feedService.addEdit(value).subscribe(
             next => {
-                const data = next;
-                console.log(data);
-                this.feedForm.reset();
-                window.location.reload();
-            }
-        ), error => console.log(error);
-
+                this.error1s = next;
+                this.error1s.forEach(e => {
+                    if(e.fileName == 'amount'){
+                        this.inputAmount.nativeElement.focus()
+                    }
+                    if(e.fileName == 'unit'){
+                        this.inputUnit.nativeElement.focus()
+                    }
+                    if(e.fileName == 'description'){
+                        this.inputDescription.nativeElement.focus()
+                    }
+                    if(e.fileName == 'code'){
+                        this.inputCode.nativeElement.focus()
+                    }
+                    if(e.fileName == 'success'){
+                        this.feedForm.reset();
+                        window.location.reload();
+                    }
+                })
+            }, error => console.log(error)
+        );
+        }
     }
+
 }
