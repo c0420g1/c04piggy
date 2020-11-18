@@ -21,14 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/history-export/HistoryExport-Modal.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/history-export/history-export.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/history-export/history-export.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/history-export/history-export.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/history-export/history-export.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/HistoryExport.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/HistoryExport.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/service/history-export.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/history-export.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/cote/cote.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/cote/cote.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +59,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="D:\Team C0420G1\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">

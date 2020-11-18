@@ -153,6 +153,20 @@ export class CoteComponent implements OnInit {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+       //====================================//
     // creator Hieu
     soldPig() {
         this.historyService.soldPigs(this.pigsListSoldIds, this.historyExport.value).subscribe(
@@ -186,6 +200,8 @@ export class CoteComponent implements OnInit {
         );
         this.ngOnInit();
     }
+
+    //==========================// Hiếu
 }
 
 // Customer Validator ImportDay
