@@ -167,7 +167,6 @@ export class CoteComponent implements OnInit {
         }
         this.ngOnInit();
     }
-
     // creator Hieu
     soldPig() {
         this.historyService.soldPigs(this.pigsListSoldIds, this.historyExport.value).subscribe(
