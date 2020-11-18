@@ -172,14 +172,6 @@
 
 <!--    test-->
 
-    <div *ngFor="let row of listCoteNew">
-            <span class="seat" *ngFor="let col of cols" (click)="seatClicked(row + col)"
-                  [ngSwitch]="getStatus(row + listCoteNew)">
-                <span *ngSwitchCase="'selected'" class="glyphicon glyphicon-ok-sign selectedSeat">a</span>
-                <span *ngSwitchCase="'reserved'" class="glyphicon glyphicon-ban-circle reservedSeat">b</span>
-                <span *ngSwitchDefault class="glyphicon glyphicon-stop freeSeat">c</span>
-            </span>
-    </div>
 
 <!--    edit-->
 
@@ -389,7 +381,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button *ngIf="checkQuality(pigListDTO)" type="submit" class="btn btn-success" value="Add" data-toggle="modal"  data-dismiss="modal" href="#soldAll" (click)="getAllIdPigs(pigListDTO)">Sold All</button>
+
                 </div>
             </form>
         </div>
