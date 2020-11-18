@@ -23,6 +23,8 @@
     "@angular/platform-browser-dynamic": "~9.1.12",
     "@angular/router": "~9.1.12",
     "@ng-bootstrap/ng-bootstrap": "^6.2.0",
+    "@ng-select/ng-option-highlight": "0.0.5",
+    "@ng-select/ng-select": "^5.0.8",
     "bootstrap": "^4.4.0",
     "jquery": "^3.5.1",
     "ngx-toastr": "^12.1.0",

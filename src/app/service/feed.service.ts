@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import { Observable, of } from 'rxjs';
 import {Feed} from '../model/Feed';
 import {FeedType} from '../model/FeedType';
 import {Herd} from '../model/Herd';
 import { Global } from '../model/Global';
 import { Error1 } from '../model/error1';
+import {delay} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +43,18 @@ export class FeedService {
     return this.http.get<Herd[]>(this.API_URL2);
   }
 
-  getFeed():Observable<Feed[]>{
+  getFeed(): Observable<Feed[]>{
     return this.http.get<Feed[]>(this.API_URL6);
+  }
+
+  getPeople(term: string = null): Observable<FeedType[]> {
+    let items = [];
+    this.getAllFeedType().subscribe(data => {
+      items = data;
+    });
+    if (term) {
+      items = items.filter(x => x.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
+    }
+    return of(items).pipe(delay(500));
   }
 }

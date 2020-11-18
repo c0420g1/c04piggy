@@ -26,6 +26,8 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
 import { VacxinComponent } from './vacxin/vacxin.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 
 
@@ -69,11 +71,14 @@ import { VacxinComponent } from './vacxin/vacxin.component';
         ReactiveFormsModule,
         RouterModule,
         MatInputModule,
+        NgSelectModule,
+        NgOptionHighlightModule,
         CommonModule,
         ToastrModule.forRoot({
             positionClass: 'toast-top-center',
             preventDuplicates: true,
         }),
+
     ],
   providers: [],
   bootstrap: [AppComponent]

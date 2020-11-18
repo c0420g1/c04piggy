@@ -7,6 +7,8 @@ import {Feed} from '../model/Feed';
 import {FeedType} from '../model/FeedType';
 import {Herd} from '../model/Herd';
 import {Error1 } from '../model/error1';
+import {Observable, of} from 'rxjs';
+import {delay} from 'rxjs/operators';
 
 
 @Component({
@@ -16,7 +18,6 @@ import {Error1 } from '../model/error1';
 })
 export class FeedComponent implements OnInit {
     columnHeader = {
-        'id': 'ID',
         'amount': 'Amount',
         'code': 'Code',
         'unit': 'Unit',
@@ -50,11 +51,11 @@ export class FeedModal implements OnInit {
     @Input() data;
     @Input() title;
     feedForm: FormGroup;
-    FeedType: FeedType[];
     Herd: Herd[];
     feeds: Feed[];
     herd1 = new Herd();
     feedType1 = new FeedType();
+    feedType1$: Observable<FeedType[]>;
     error1s: Error1[];
     @ViewChild('inputAmount') inputAmount: ElementRef;
     @ViewChild('inputUnit') inputUnit: ElementRef;
@@ -79,19 +80,22 @@ export class FeedModal implements OnInit {
         });
 
         this.feedService.getFeed().subscribe(next => (this.feeds = next, this.feeds.forEach(e => {
-          if(this.data.id == e.id){
+          if (this.data.id == e.id){
             this.data = e;
             this.herd1 = e.herd;
             this.feedType1 = e.feedType;
           }
         })) , error => (this.feeds = []));
 
-        this.feedService.getAllFeedType().subscribe(next => (this.FeedType = next), error => (this.FeedType = []));
+        // this.feedService.getAllFeedType().subscribe(next => (this.feedType1$ = next), error => (this.feedType1$ = []));
+        this.feedType1$ = this.feedService.getPeople();
 
         this.feedService.getAllHerd().subscribe(next => (this.Herd = next), error => (this.Herd = []));
 
+        setTimeout(() => {
+            this.inputAmount.nativeElement.focus();
+        });
     }
-
     onSubmit() {
         if(this.feedForm.valid)
         {
@@ -101,23 +105,23 @@ export class FeedModal implements OnInit {
             next => {
                 this.error1s = next;
                 this.error1s.forEach(e => {
-                    if(e.fileName == 'amount'){
-                        this.inputAmount.nativeElement.focus()
+                    if (e.fileName == 'amount'){
+                        this.inputAmount.nativeElement.focus();
                     }
-                    if(e.fileName == 'unit'){
-                        this.inputUnit.nativeElement.focus()
+                    if (e.fileName == 'unit'){
+                        this.inputUnit.nativeElement.focus();
                     }
-                    if(e.fileName == 'description'){
-                        this.inputDescription.nativeElement.focus()
+                    if (e.fileName == 'description'){
+                        this.inputDescription.nativeElement.focus();
                     }
-                    if(e.fileName == 'code'){
-                        this.inputCode.nativeElement.focus()
+                    if (e.fileName == 'code'){
+                        this.inputCode.nativeElement.focus();
                     }
-                    if(e.fileName == 'success'){
+                    if (e.fileName == 'success'){
                         this.feedForm.reset();
                         window.location.reload();
                     }
-                })
+                });
             }, error => console.log(error)
         );
         }

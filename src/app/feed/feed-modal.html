@@ -44,10 +44,17 @@
 
             <div class="form-group">
                 <label>Feed Type</label>
-                <select class="form-control" formControlName="feedType" [ngModel]="feedType1" onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
-                    <option [ngValue]="feedType1" disabled>{{feedType1.name}}</option>
-                    <option *ngFor="let feedType of FeedType" [ngValue]="feedType" >{{feedType.name}}</option>
-                </select>
+<!--                <select class="form-control" formControlName="feedType" [ngModel]="feedType1" onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>-->
+<!--                    <option [ngValue]="feedType1" disabled>{{feedType1.name}}</option>-->
+<!--                    <option *ngFor="let feedType of FeedType" [ngValue]="feedType" >{{feedType.name}}</option>-->
+<!--                </select>-->
+                <ng-select [items]="feedType1$ | async"
+                           bindLabel="name"
+                           autofocus
+                           bindValue="id"
+                           [(ngModel)]="feedType1">
+                </ng-select>
+                <br> {{feedType1}}
                 <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('feedType').touched && feedForm.get('feedType').invalid">
                     <p *ngIf="feedForm.get('feedType').hasError('required')"> Not required</p>
                 </div>
