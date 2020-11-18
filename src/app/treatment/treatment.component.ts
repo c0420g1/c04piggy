@@ -104,7 +104,7 @@ export class TreatmentModal implements OnInit{
 
    this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
      console.log(data);
-     this.toastr.success('Add new Information successfully', 'Treatment')
+     this.toastr.success('Save Information successfully', 'Treatment')
    })
     this.refeshComponent();
     this.activeModal.close();
