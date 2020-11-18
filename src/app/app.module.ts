@@ -29,6 +29,7 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
 import { VacxinComponent } from './vacxin/vacxin.component';
+import {HerdComponent} from './herd/herd.component';
 
 
 
@@ -59,7 +60,8 @@ import { VacxinComponent } from './vacxin/vacxin.component';
     ExportHistoryStockComponent,
      FeedModal,
     DeleteModal,
-    VacxinComponent
+    VacxinComponent,
+      HerdComponent
   ],
     imports: [
         BrowserModule,
