@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/service/pig.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/pig.service.ts" afterDir="false" />
@@ -60,8 +61,9 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\Team C0420G1\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\ProjectCodeGym\C0420G1_TranQuangTrung_Module6\project2new\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -130,11 +132,12 @@
       <workItem from="1605661208824" duration="3305000" />
       <workItem from="1605665042108" duration="1424000" />
       <workItem from="1605682165814" duration="1784000" />
+      <workItem from="1605693096637" duration="2102000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -158,6 +161,22 @@
     </state>
     <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605661579622" />
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
+    <state width="1345" height="192" key="GridCell.Tab.0.bottom" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
+    <state width="1345" height="192" key="GridCell.Tab.0.center" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
+    <state width="1345" height="192" key="GridCell.Tab.0.left" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
+    <state width="1345" height="192" key="GridCell.Tab.0.right" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
     <state x="389" y="165" key="run.anything.popup" timestamp="1605597315307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
