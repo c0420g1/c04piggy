@@ -23,6 +23,7 @@ import {MatInputModule} from '@angular/material/input';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
 import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
+import {HerdComponent, HerdModal} from './herd/herd.component';
 
 
 
@@ -50,6 +51,8 @@ import { ExportHistoryStockComponent } from './export-history-stock/export-histo
     PigComponent,
     ExportHistoryStockComponent,
       FeedModal,
+      HerdComponent,
+      HerdModal
 
   ],
     imports: [
