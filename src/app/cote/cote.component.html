@@ -371,7 +371,9 @@
                                 <td>
                                     <div style="padding-top: 20px">
 
-                                        <input *ngIf="pig.weight >=113" type="button"  class="btn btn-warning" data-dismiss="modal" (click)="addIdPigSold(pig.pigId)" href="#sold1" data-toggle="modal" value="Sold" >
+
+                                        <input type="button"  class="btn btn-warning" data-dismiss="modal" (click)="addIdPigSold(pig.pigId)" href="#sold1" data-toggle="modal" value="Sold" >
+
                                     </div>
                                 </td>
                             </tr>
@@ -381,6 +383,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+
+                    <button type="submit" class="btn btn-success" value="Add" data-toggle="modal"  data-dismiss="modal" href="#soldAll" (click)="getAllIdPigs(pigListDTO)">Sold All</button>
 
                 </div>
             </form>

@@ -16,7 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
-import {CoteComponent} from './cote/cote.component';
+import {CoteComponent} from './cote/cote.component'
 import {DatePipe} from '@angular/common';
 import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
 import {FeedComponent, FeedModal} from './feed/feed.component';
@@ -30,6 +30,7 @@ import {ExportHistoryStockComponent} from './export-history-stock/export-history
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
 import {VacxinComponent} from './vacxin/vacxin.component';
+import {HerdComponent} from './herd/herd.component';
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import {VacxinComponent} from './vacxin/vacxin.component';
         ExportHistoryStockComponent,
         FeedModal,
         DeleteModal,
-        VacxinComponent
+        VacxinComponent,
+        HerdComponent,
     ],
     imports: [
         BrowserModule,
