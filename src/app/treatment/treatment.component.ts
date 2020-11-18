@@ -45,7 +45,10 @@ export class TreatmentModal implements OnInit{
   diseasesList: Diseases[] = [];
   medicineList: Vaccine[] = [];
   treatmentForm: FormGroup;
-  checkCoteCode: Cote = null;
+  checkCoteCode = new Cote();
+  checkPigCode = new Pig();
+  checkDiseases = new Diseases();
+  checkVaccine = new Vaccine();
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
               private treatmentService: TreatmentService, private toastr: ToastrService){}
@@ -55,6 +58,12 @@ export class TreatmentModal implements OnInit{
     console.log(this.data)
     this.treatmentService.getTreatmentById(this.data.id).subscribe(data => {
       this.data = data;
+      this.checkCoteCode = data.cote;
+      this.checkPigCode = data.pig;
+      this.checkDiseases = data.diseases;
+      this.checkVaccine = data.vacxin;
+      console.log(this.checkVaccine);
+      console.log(this.checkDiseases);
       console.log(this.data.veterinary);
       this.treatmentForm.patchValue(data);
     })
@@ -85,7 +94,7 @@ export class TreatmentModal implements OnInit{
       cote: ['', Validators.required],
       pig: ['', Validators.required],
       diseases: ['', Validators.required],
-      vacxinId: ['', Validators.required]
+      vacxin: ['', Validators.required]
     });
 
   }

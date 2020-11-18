@@ -21,106 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/bundles/mat-select-autocomplete.umd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/bundles/mat-select-autocomplete.umd.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/bundles/mat-select-autocomplete.umd.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/bundles/mat-select-autocomplete.umd.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm2015/lib/select-autocomplete.component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm2015/lib/select-autocomplete.module.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm2015/lib/select-autocomplete.service.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm2015/mat-select-autocomplete.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm2015/public_api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm5/lib/select-autocomplete.component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm5/lib/select-autocomplete.module.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm5/lib/select-autocomplete.service.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm5/mat-select-autocomplete.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/esm5/public_api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/fesm2015/mat-select-autocomplete.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/fesm2015/mat-select-autocomplete.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/fesm5/mat-select-autocomplete.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/fesm5/mat-select-autocomplete.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/lib/select-autocomplete.component.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/lib/select-autocomplete.module.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/lib/select-autocomplete.service.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/mat-select-autocomplete.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/mat-select-autocomplete.metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/mat-select-autocomplete/public_api.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/__ivy_ngcc__/fesm2015/ngx-toastr.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/bundles/ngx-toastr.umd.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/bundles/ngx-toastr.umd.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/bundles/ngx-toastr.umd.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/bundles/ngx-toastr.umd.min.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/ngx-toastr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/overlay/overlay-container.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/overlay/overlay-ref.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/overlay/overlay.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/portal/dom-portal-host.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/portal/portal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/public_api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/toastr/toast-injector.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/toastr/toast-noanimation.component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/toastr/toast.component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/toastr/toast.directive.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/toastr/toastr-config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/toastr/toastr.module.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm2015/toastr/toastr.service.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/ngx-toastr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/overlay/overlay-container.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/overlay/overlay-ref.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/overlay/overlay.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/portal/dom-portal-host.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/portal/portal.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/public_api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/toastr/toast-injector.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/toastr/toast-noanimation.component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/toastr/toast.component.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/toastr/toast.directive.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/toastr/toastr-config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/toastr/toastr.module.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/esm5/toastr/toastr.service.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/fesm2015/ngx-toastr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/fesm2015/ngx-toastr.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/fesm5/ngx-toastr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/fesm5/ngx-toastr.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/ngx-toastr.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/ngx-toastr.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/ngx-toastr.metadata.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/overlay/overlay-container.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/overlay/overlay-container.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/overlay/overlay-ref.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/overlay/overlay.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/overlay/overlay.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/portal/dom-portal-host.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/portal/portal.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/public_api.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr-bs4-alert.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr-old.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toast-injector.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toast-noanimation.component.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toast-noanimation.component.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toast.component.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toast.component.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toast.directive.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toast.directive.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toastr-config.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toastr.module.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toastr.module.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toastr.service.d.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/ngx-toastr/toastr/toastr.service.d.ts.__ivy_ngcc_bak" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/toastr/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/feed/feed-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed-modal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/feed/feed.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/feed/feed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/service/feed.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/feed.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/account/account.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/account.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/account/account.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/account.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/layout.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,19 +54,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../c04cinema-frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\project\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\project2\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\project\c04piggy\src\app\model" />
       <recent name="D:\project2\c04piggy\src\app\model" />
     </key>
   </component>
@@ -197,7 +99,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -217,39 +119,42 @@
       <workItem from="1605198147008" duration="591000" />
       <workItem from="1605230147504" duration="6167000" />
       <workItem from="1605249079950" duration="4746000" />
-      <workItem from="1605319035249" duration="3603000" />
-      <workItem from="1605454185438" duration="11035000" />
-      <workItem from="1605466989644" duration="717000" />
-      <workItem from="1605489348747" duration="1451000" />
-      <workItem from="1605490831896" duration="528000" />
-      <workItem from="1605515309804" duration="4528000" />
-      <workItem from="1605537879215" duration="404000" />
-      <workItem from="1605575987839" duration="22037000" />
-      <workItem from="1605662542794" duration="4512000" />
-      <workItem from="1605681200109" duration="1949000" />
+      <workItem from="1605490512064" duration="4880000" />
+      <workItem from="1605508200679" duration="12117000" />
+      <workItem from="1605528716819" duration="8089000" />
+      <workItem from="1605575452731" duration="20503000" />
+      <workItem from="1605603257325" duration="2711000" />
+      <workItem from="1605617091475" duration="4148000" />
+      <workItem from="1605661208824" duration="3305000" />
+      <workItem from="1605665042108" duration="1424000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="119" key="FileChooserDialogImpl" timestamp="1605666602950">
+    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1605661579622">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605666602950" />
+    <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605661579622" />
+    <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
+    <state x="389" y="165" key="run.anything.popup" timestamp="1605597315307">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="389" y="165" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1605597315307" />
+    <state x="456" y="195" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1605338642405" />
   </component>
 </project>

@@ -143,8 +143,6 @@ export class StockModal implements OnInit {
       this.error = false;
     }
   }
-
-
 }
 
 @Component({
