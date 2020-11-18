@@ -9,6 +9,7 @@ import {EmployeeService} from '../service/employee.service';
 import {Employee} from '../model/Employee';
 import { Role } from '../model/Role';
 import { AccountRole } from '../model/AccountRole';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-account',
@@ -18,6 +19,7 @@ import { AccountRole } from '../model/AccountRole';
 export class AccountComponent implements OnInit {
   columnHeader = { code: 'Code' , username: 'Username', name: 'Name', birthday: 'Birthday', email: 'Email', cardId: 'Card ID',
     nameRole: 'Role Name', action: 'Action'};
+  tableName = 'Staff Manager';
   constructor(public accountService: AccountService) { }
 
   ngOnInit(): void {
@@ -44,7 +46,7 @@ export class AccountModal implements OnInit {
   roleSelect: Role;
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
-              private accountService: AccountService, private employeeService: EmployeeService) {}
+              private accountService: AccountService, private employeeService: EmployeeService, private  toast: ToastrService) {}
 
   ngOnInit(): void {
 
@@ -89,7 +91,12 @@ export class AccountModal implements OnInit {
       }
     }
   }
-
+    refeshComponent(){
+        const currentRoute = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+            this.router.navigate([currentRoute]);
+        });
+    }
   addEditStock(){
     // @ts-ignore
 
@@ -140,6 +147,9 @@ export class AccountModal implements OnInit {
               );
           });
     }
+    this.activeModal.close();
+    this.refeshComponent();
+    this.toast.success('Add Successful', 'ABC Accounht');
   }
 
 }
