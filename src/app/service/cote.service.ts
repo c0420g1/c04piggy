@@ -28,6 +28,7 @@ export class CoteService {
   }
 
   addNewCote(cote: Cote): Observable<void>{
+    console.log(cote);
     return this.http.post<void>(this.API_URL_COTE, cote);
   }
 

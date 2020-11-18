@@ -278,7 +278,7 @@ export class CoteComponent implements OnInit {
         this.coteEdit.exportDate = null;
       }
       this.editCoteForm.patchValue(data);
-      this.editCoteForm.patchValue({herd: data.herd.name});
+      this.editCoteForm.patchValue({herd: data.herd});
       this.editCoteForm.get('dateGroup').get('importDate').patchValue(this.formatDate(new Date(data.importDate)));
       if (data.exportDate != null){
         this.editCoteForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date(data.exportDate)));
@@ -327,6 +327,15 @@ export class CoteComponent implements OnInit {
     if (month.length < 2) { month = '0' + month; }
     if (day.length < 2) { day = '0' + day; }
     return [year, month, day].join('-');
+  }
+
+  checkQuantity(pigListDTO: PigDTONew[]) {
+    for (let i = 0;i < pigListDTO.length; i++){
+      if (pigListDTO[i].weight < 113){
+        return false;
+      }
+    }
+    return true;
   }
 }
 
