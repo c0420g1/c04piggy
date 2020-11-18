@@ -6,16 +6,25 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <form [formGroup]="notificationForm">
+                    <form [formGroup]="addNewNotificationForm">
                         <div class="form-group">
                             <label>Title</label>
                             <input type="text" class="form-control" value="{{data.title}}" formControlName="title">
+                            <label>Date Post</label>
+                            <input type="date" class="form-control" value="{{data.createDate}}" formControlName="createDate">
+                            <label>Content</label>
+                            <input type="text" class="form-control" value="{{data.content}}" formControlName="content">
+                            <label>Type</label>
+                            <input type="text" class="form-control" value="{{data.type}}" formControlName="content">
+                            <label>Employee Id</label>
+                            <input type="text" class="form-control" value="{{data.employeeId}}" formControlName="content">
+
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
-                    <button [disabled]="notificationForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                    <button [disabled]="addNewNotificationForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit(addNewNotificationForm)">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>
