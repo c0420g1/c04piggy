@@ -281,7 +281,7 @@ export class PigComponent implements OnInit {
   }
 
   private getPigList() {
-    this.pigService.search(this.currentPage - 1, this.search).subscribe(data => {
+    this.pigService.search(- 1, this.search).subscribe(data => {
       if (data.length === 0) {
         this.message = 'Không tìm thấy đặt dữ liệu nào!';
       } else {
@@ -289,10 +289,14 @@ export class PigComponent implements OnInit {
       }
       this.totalItems = data.length;
       this.totalPage = Math.ceil(this.totalItems / this.pageSize);
-      console.log('total' + this.totalPage);
-      this.pigList = data;
-      this.currentItems = data.length;
-      this.setPage(this.currentPage);
+      // tslint:disable-next-line:no-shadowed-variable
+      this.pigService
+          .search(this.currentPage, this.search).subscribe(data => {
+          console.log('total' + this.totalPage);
+          this.pigList = data;
+          this.currentItems = data.length;
+          this.setPage(this.currentPage);
+      });
     });
   }
 

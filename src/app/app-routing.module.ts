@@ -12,6 +12,7 @@ import {HistoryExportComponent} from './history-export/history-export.component'
 import {PigComponent} from './pig/pig.component';
 import {ExportHistoryStockComponent} from './export-history-stock/export-history-stock.component';
 import { VacxinComponent } from './vacxin/vacxin.component';
+import {HerdComponent} from './herd/herd.component';
 
 
 
@@ -62,7 +63,11 @@ const routes: Routes = [{
         {
             path: 'history-of-stock-out',
             component: ExportHistoryStockComponent
-        }
+        },
+        {
+            path: 'herd',
+            component: HerdComponent
+        },
     ]
 }];
 

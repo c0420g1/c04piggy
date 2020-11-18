@@ -82,6 +82,7 @@ export class TableComponent implements OnInit {
       console.log("total" + this.totalPage);
       this.tableService
         .getData(this.currentPage, this.searchValue)
+          // tslint:disable-next-line:no-shadowed-variable
         .subscribe((data) => {
           this.data = data;
           this.dataSource = new MatTableDataSource(data);
