@@ -62,10 +62,7 @@ export class StockModal implements OnInit {
   stockForm: FormGroup;
   stockDTOs: StockDTO[] = [];
 
-  // cac bien cua ham compareTwoDates
-  start: string;
-  end: string;
-  error = false;
+
 
   // cac bien cua ham validateShipmentCode
   inputShipmentCode: string;
@@ -85,20 +82,19 @@ export class StockModal implements OnInit {
       isDeleted: [0],
       description: [this.data.description, [Validators.maxLength(1000)]],
       importDate: [this.data.importDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator]],
-      mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
-      expDate: [this.data.expDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
+      mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),compareTwoDates.bind(this)]],
+      expDate: [this.data.expDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),compareTwoDates.bind(this)]],
       quantity: [this.data.quantity, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
       shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8),Validators.minLength(8)]],
       unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogam)|(liter)')]],
-      // vendorName: [this.data.vendorName, [Validators.required]],
       feedTypeId: [this.data.feedTypeId, [Validators.required]],
       vendorId: [this.data.vendorId, [Validators.required]]
     });
-    // lay ve bien start và end cua ngay san xuat (mfgDate) và ngay het han (expDate) tren stockForm
-    this.start = this.stockForm.value.mfgDate;
-    this.end = this.stockForm.value.expDate;
-    // lay ve bien
-    this.inputShipmentCode = this.stockForm.value.shipmentCode;
+
+    // this.stockForm = new FormGroup({
+    //   mfgDate: new FormControl(),
+    //   expDate: new FormControl()
+    // });
 
     setTimeout(() => {
       this.input.nativeElement.focus();
@@ -124,22 +120,6 @@ export class StockModal implements OnInit {
     });
   }
 
-  // validate start date < end date
-
-  compareTwoDates() {
-    let endDate: string[];
-    let startDate: string[];
-    endDate = this.end.split('-');
-    startDate = this.start.split('-');
-    let dateNumberEnd = (parseInt(endDate[0]) * 365) + (parseInt(endDate[1]) * 30) + (parseInt(endDate[2]));
-    let dateNumberStart = (parseInt(startDate[0]) *  365) + (parseInt(startDate[1]) * 30) + (parseInt(startDate[2]));
-    if ((dateNumberEnd <= dateNumberStart) || (dateNumberEnd > (dateNumberStart + 100))) {
-      this.error = true;
-    } else {
-      this.error = false;
-    }
-  }
-
   // validate Shipment Code
   validateShipmentCode(){
     for (let stockDTO of this.stockDTOs){
@@ -162,7 +142,8 @@ export class ExportModal implements OnInit {
   exportHistoryStockForm: FormGroup;
   employees: Employee[] = [];
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
-              private stockService: StockService, private employeeService: EmployeeService) {}
+              private stockService: StockService, private employeeService: EmployeeService,
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.employeeService.getAllEmployee().subscribe((data) => {this.employees = data; });
@@ -184,14 +165,26 @@ export class ExportModal implements OnInit {
   // them vao bang lich su va xuat khoi kho
   addExportHistoryStockAndExportOutStock(){
     this.stockService.addHistoryExportStock(this.exportHistoryStockForm.value).subscribe(
-       data=> {}
+       data=> { }
     );
     this.stockService.exportOutStock(this.data.id, this.exportHistoryStockForm.value.quantity).subscribe(
-        data=>{window.location.reload();}
+        data=>{
+          this.toastr.success('Stock out and save history successfully', 'Stock Out');
+          window.location.reload();
+        }
     );
+    this.refeshComponent();
+    this.activeModal.close();
   }
 
-  // kiem
+  refeshComponent(){
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+      this.router.navigate([currentRoute]);
+    });
+  }
+
+  // kiểm tra số lượng xuất kho phải nhỏ hơn số lượng tồn kho
   error = false;
   stockOut: number;
   checkQuantity(){
@@ -199,6 +192,8 @@ export class ExportModal implements OnInit {
    let stockOutQuantity = this.stockOut;
    if (stockOutQuantity > stockInQuantity){
      this.error = true;
+   }else {
+     this.error = false;
    }
   }
 
@@ -220,6 +215,25 @@ function dateValidator(formControl: FormControl) {
   }
   return null;
 }
+
+
+function compareTwoDates(){
+  if(!this.stockForm?.controls?.expDate?.value || !this.stockForm?.controls?.mfgDate?.value) {
+    return null;
+  }
+
+  let endDate: string[];
+  let startDate: string[];
+  endDate = this.stockForm.controls.expDate.value.split('-');
+  startDate = this.stockForm.controls.mfgDate.value.split('-');
+  let dateNumberEnd = (parseInt(endDate[0]) * 365) + (parseInt(endDate[1]) * 30) + (parseInt(endDate[2]));
+  let dateNumberStart = (parseInt(startDate[0]) *  365) + (parseInt(startDate[1]) * 30) + (parseInt(startDate[2]));
+    if ((dateNumberEnd <= dateNumberStart) || (dateNumberEnd > (dateNumberStart + 100))) {
+      return {invalidDate: true};
+  }
+    return false;
+}
+
 
 
 
