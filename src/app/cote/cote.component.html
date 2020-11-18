@@ -409,14 +409,14 @@
                                 <option *ngFor="let employee of employeeList" [ngValue]="employee">{{employee.name}}</option>
                             </select>
                             <div class="alert alert-danger" role="alert" *ngIf="historyExport.get('employee').invalid &&
-                                                                              historyExport.get('employee').touched">
+                                                                              historyExport.get('employee').untouched">
                                 Employee is required!
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add" data-dismiss="modal" (click)="soldPig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Add" data-dismiss="modal" [disabled]="historyExport.invalid" (click)="soldPig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>

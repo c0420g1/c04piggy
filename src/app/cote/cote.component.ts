@@ -171,7 +171,7 @@ export class CoteComponent implements OnInit {
     soldPig() {
         this.historyService.soldPigs(this.pigsListSoldIds, this.historyExport.value).subscribe(
             () => {
-              console.log("export cote done")
+              alert("Xuất thành công cả chuồng !")
             }, error => console.log('error export!')
         );
         this.ngOnInit();
@@ -196,6 +196,7 @@ export class CoteComponent implements OnInit {
         this.historyService.soldPigs(""+this.idPig+"", this.historyExport.value).subscribe(
             () => {
                 console.log(this.historyExport.value);
+                alert("Một con heo đã được xuất !")
             }, error => console.log('error export!')
         );
         this.ngOnInit();
