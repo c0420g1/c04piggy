@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Router} from '@angular/router';
@@ -20,8 +20,6 @@ import {StockDTO} from '../model/StockDTO';
   styleUrls: ['./stock.component.css']
 })
 export class StockComponent implements OnInit {
-  actionName = "Stock In";
-
   columnHeader = { 'shipmentCode': 'Shipment Code' , 'feedTypeName':'Feed Type','vendorName':'Vendor',
     'expDate': 'Expiry Date', 'quantity': 'Quantity', 'unit': 'Unit','action': 'Action'};
 
@@ -63,10 +61,22 @@ export class StockModal implements OnInit {
   vendorDefaultName: string='';
   stockForm: FormGroup;
   stockDTOs: StockDTO[] = [];
+
+  // cac bien cua ham compareTwoDates
+  start: string;
+  end: string;
+  error = false;
+
+  // cac bien cua ham validateShipmentCode
+  inputShipmentCode: string;
+  shipmentCodeError = false;
+
+  @ViewChild('input') input: ElementRef;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router
               , private stockService: StockService,private toastr: ToastrService) {}
 
   ngOnInit(): void {
+    this.stockService.getData(-1,"").subscribe(data => {this.stockDTOs=data; console.log(data)});
     this.stockService.getAllVendor().subscribe((data) => {this.vendors = data; this.vendorDefaultName= data[0].name});
     this.stockService.getAllFeedType().subscribe((data) => {this.feedTypes = data; });
 
@@ -74,9 +84,9 @@ export class StockModal implements OnInit {
       id: [this.data.id],
       isDeleted: [0],
       description: [this.data.description, [Validators.maxLength(1000)]],
-      expDate: [this.data.expDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       importDate: [this.data.importDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator]],
       mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
+      expDate: [this.data.expDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       quantity: [this.data.quantity, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
       shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8),Validators.minLength(8)]],
       unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogam)|(liter)')]],
@@ -84,35 +94,24 @@ export class StockModal implements OnInit {
       feedTypeId: [this.data.feedTypeId, [Validators.required]],
       vendorId: [this.data.vendorId, [Validators.required]]
     });
-    console.log("mfg date"+this.stockForm.value.mfgDate);
-    console.log("exp date"+this.stockForm.value.expDate);
-    console.log("import date"+this.stockForm.value.importDate);
+    // lay ve bien start và end cua ngay san xuat (mfgDate) và ngay het han (expDate) tren stockForm
+    this.start = this.stockForm.value.mfgDate;
+    this.end = this.stockForm.value.expDate;
+    // lay ve bien
+    this.inputShipmentCode = this.stockForm.value.shipmentCode;
+
+    setTimeout(() => {
+      this.input.nativeElement.focus();
+    });
   }
 
   // add & edit Stock
   addEditStock(){
-    console.log(this.stockForm.value);
-
-    let check = true;
-    for (let stockDTO of this.stockDTOs){
-      console.log()
-      if ((stockDTO.shipmentCode === this.stockForm.value.shipmentCode) && (this.stockForm.value.id === null)){
-        check = false;
-      }
-    }
-    if (check === true){
-      this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>{
-        console.log(data);
-        this.toastr.success('Save to stock successfully', 'Stock Management');
-      });
-    }else {
-      this.toastr.error('Shipment Code already exists in the system, Please input again!', 'Stock Management');
-    }
-
-    // this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>{
-    //   console.log(data);
-    //   this.toastr.success('Save to stock successfully', 'Stock');
-    // });
+    // console.log(this.stockForm.value);
+    this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>{
+      console.log(data);
+      this.toastr.success('Save to stock successfully', 'Stock');
+    });
 
     this.refeshComponent();
     this.activeModal.close();
@@ -126,9 +125,6 @@ export class StockModal implements OnInit {
   }
 
   // validate start date < end date
-  end: string;
-  start: string;
-  error = false;
 
   compareTwoDates() {
     let endDate: string[];
@@ -143,6 +139,18 @@ export class StockModal implements OnInit {
       this.error = false;
     }
   }
+
+  // validate Shipment Code
+  validateShipmentCode(){
+    for (let stockDTO of this.stockDTOs){
+      if ((this.stockForm.value.id === null) && (stockDTO.shipmentCode === this.inputShipmentCode)){
+        this.shipmentCodeError = true;
+      }else {
+        this.shipmentCodeError = false;
+      }
+    }
+  }
+
 
 
 }
@@ -186,6 +194,7 @@ export class ExportModal implements OnInit {
     );
   }
 
+  // kiem
   error = false;
   stockOut: number;
   checkQuantity(){
@@ -214,6 +223,11 @@ function dateValidator(formControl: FormControl) {
   }
   return null;
 }
+
+
+
+
+
 
 
 

@@ -233,7 +233,7 @@ export class DeleteModal {
 
   delete(){
       this.service.delete(this.ids).subscribe(data => {
-        this.toastr.success('Delete successfully', 'Treatment')
+        this.toastr.success('Delete successfully', 'C04piggy')
       });
       this.activeModal.close();
       this.refeshComponent();
