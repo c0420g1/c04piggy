@@ -21,12 +21,12 @@ export class AccountService {
   private readonly ADD_EDIT_ROLE_ACCOUNT = Global.host + 'roleaccount';
   private readonly GET_ROLE_BY_ID = Global.host + 'getRole/';
   private readonly DELETE_ALL_BY_IDS = Global.host + 'deleteEmployee';
-  roleaccount
+  // roleaccount
   constructor(private http: HttpClient) { }
   getData(pageNum: number, search: string): Observable<Account[]>{
     return this.http.get<Account[]>(this.APIgetAllAccount + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
   }
-  public getRolebyId(id: number):Observable<AccountRole>{
+  public getRolebyId(id: number): Observable<AccountRole>{
     return this.http.get<AccountRole>(this.GET_ROLE_BY_ID+id);
   }
   public getAllRole(): Observable<Role[]>{
