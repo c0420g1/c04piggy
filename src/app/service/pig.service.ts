@@ -11,6 +11,7 @@ import {Herd} from '../model/Herd';
 export class PigService {
   private readonly API_URL_PIG_LIST_SHOW = 'http://localhost:8080/pigList';
   private readonly API_URL_PIG_LIST = 'http://localhost:8080/pigListFull';
+  private readonly API_URL_GET_PIG = 'http://localhost:8080/pigDetail';
   private readonly API_URL_ADD_PIG = 'http://localhost:8080/addPig';
   private readonly API_URL_EDIT_PIG = 'http://localhost:8080/editPig';
   private readonly API_URL_DELETE_PIG = 'http://localhost:8080/deletePig';
@@ -25,6 +26,10 @@ export class PigService {
     return this.http.get<PigDTO[]>(this.API_URL_PIG_LIST_SHOW + '/' + pageNum + '?search=' + search);
   };
 
+  getPig(id: number):Observable<Pig> {
+    return this.http.get<Pig>(this.API_URL_GET_PIG + '/?id=' + id);
+  }
+
   getAll(): Observable<Pig[]> {
     return this.http.get<Pig[]>(this.API_URL_PIG_LIST); 
   };
@@ -34,11 +39,12 @@ export class PigService {
   };
 
   editPig(pig: Pig) {
+    console.log(pig.id)
     return this.http.patch<Pig>(this.API_URL_EDIT_PIG, pig);
   };
 
-  deletePig(id: number[]) : Observable<any> {
-    return this.http.delete(`${this.API_URL_DELETE_PIG}/${id}`);
+  delete(ids: number[]) : Observable<number> {
+    return this.http.post<number>(this.API_URL_DELETE_PIG, ids);
   }
 
   //herd
@@ -47,8 +53,8 @@ export class PigService {
   };
 
   //sold pig
-  soldPig(pig: Pig) {
-    return this.http.patch<Pig>(this.API_URL_SOLD_PIG, pig);
+  soldPig(pigId: number) {
+    return this.http.patch<Pig>(this.API_URL_SOLD_PIG, pigId);
   };
 }
 

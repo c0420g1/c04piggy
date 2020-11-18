@@ -2,6 +2,7 @@ import {Feed} from './Feed';
 import {Herd} from './Herd';
 import {PigAssociateStatus} from './PigAssociateStatus';
 import {TreatmentVacxins} from './TreatmentVacxins';
+import {Cote} from './Cote';
 
 export class Pig {
     id: number;
@@ -16,8 +17,9 @@ export class Pig {
     motherId: number;
     importDate: string;
     exportDate: string;
-    pigFeed: Feed;
-    pigHerd: Herd;
+    feed: Feed;
+    herd: Herd;
+    cote: Cote;
     PigAssociateStatus: PigAssociateStatus;
     TreatmentVacxins: TreatmentVacxins;
 }

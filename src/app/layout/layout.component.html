@@ -36,7 +36,7 @@
               </li>
               <li><a><i class="fa fa-cog"></i> System Manager  <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="">Staff </a></li>
+                  <li><a routerLink="/account">Staff </a></li>
                   <li><a routerLink="/notification">Notification </a></li>
                 </ul>
               </li>
@@ -51,11 +51,12 @@
                   <li><a href="">Feed Weight </a></li>
                   <li><a [routerLink]="['feed']">Adjust </a></li>
                   <li><a routerLink="/stock">Stock </a></li>
+                  <li><a routerLink="/history-of-stock-out">History of Stock Out </a></li>
                 </ul>
               </li>
               <li><a><i class="fa fa-heartbeat"></i> Disease Manager <span style="margin-left: -12px" class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="">Vaccination</a></li>
+                  <li><a routerLink="/vacxin">Vaccination</a></li>
                   <li><a routerLink="/treatment">Examination & Treatment</a></li>
                 </ul>
               </li>
