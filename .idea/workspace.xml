@@ -19,9 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.html" afterDir="false" />
-    </list>
+    <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
