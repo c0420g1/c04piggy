@@ -1,26 +1,95 @@
 
 <div class="modal-content">
-    <form [formGroup]="accountForm">
+
         <div class="modal-header">
             <h4 class="modal-title">{{title}}</h4>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
         </div>
 
         <div class="modal-body">
+            <form [formGroup]="accountForm">
                 <div class="form-group">
                     <label>Username<span style="color: red">(*)</span></label>
-                    <input type="text" class="form-control" value="{{data.username}}" formControlName="username">
+                    <input type="text" class="form-control" formControlName="username">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="accountForm.get('username').invalid && accountForm.get('username').touched">
+                    <p *ngIf="accountForm.get('username').hasError('required')">Username is required</p>
                 </div>
                 <div class="form-group">
                 <label>Password<span style="color: red">(*)</span></label>
-                <input type="password" class="form-control" value="{{data.password}}" formControlName="password">
+                <input type="password" class="form-control" formControlName="password">
                  </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="accountForm.get('password').invalid && accountForm.get('password').touched">
+                    <p *ngIf="accountForm.get('password').hasError('required')">Password is required</p>
+                </div>
                  <div class="form-group">
-                <label>Description<span style="color: red">(*)</span></label>
-                <input type="text" class="form-control" value="{{data.password}}" formControlName="description">
+                <label>Description</label>
+                <input type="text" class="form-control" formControlName="description">
                  </div>
+
+            <div class="form-group">
+                <label>Priviledge<span style="color: red">(*)</span></label>
+                <select class="form-control"  (change)="call($event.target.value)">
+                    <option *ngFor="let role of roleList" [value]="role.id">{{role.name}}</option>
+                </select>
+            </div>
+            </form>
+            <form [formGroup]="employeeForm">
+                <div class="form-group">
+                    <label>Code Employee<span style="color: red">(*)</span></label>
+                    <input type="text" class="form-control" formControlName="code">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="employeeForm.get('code').invalid && employeeForm.get('code').touched">
+                    <p *ngIf="employeeForm.get('code').hasError('required')">Code Employee is required</p>
+                    <p *ngIf="employeeForm.get('code').hasError('pattern')">Example: NV212.</p>
+
+                </div>
+                <div class="form-group">
+                    <label>Name Employee<span style="color: red">(*)</span></label>
+                    <input type="text" class="form-control" formControlName="name">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="employeeForm.get('name').invalid && employeeForm.get('name').touched">
+                    <p *ngIf="employeeForm.get('name').hasError('required')">Name Employee is required</p>
+                </div>
+                <div class="form-group">
+                    <label>Birthday<span style="color: red">(*)</span></label>
+                    <input type="date" class="form-control"  formControlName="birthday">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="employeeForm.get('birthday').invalid && employeeForm.get('birthday').touched">
+                    <p *ngIf="employeeForm.get('birthday').hasError('required')">Birthday Employee is required</p>
+                </div>
+                <div class="form-group">
+                    <label>Email<span style="color: red">(*)</span></label>
+                    <input type="text" class="form-control"  formControlName="email">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="employeeForm.get('email').invalid && employeeForm.get('email').touched">
+                    <p *ngIf="employeeForm.get('email').hasError('required')">Email is required</p>
+                    <p *ngIf="employeeForm.get('email').hasError('pattern')">abc@abc.com</p>
+
+                </div>
+                <div class="form-group">
+                    <label>Card Id<span style="color: red">(*)</span></label>
+                    <input type="text" class="form-control" placeholder="XXX-XXX-XXX" formControlName="cardId">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="employeeForm.get('cardId').invalid && employeeForm.get('cardId').touched">
+                    <p *ngIf="employeeForm.get('cardId').hasError('required')">Card Id is required</p>
+                    <p *ngIf="employeeForm.get('cardId').hasError('pattern')">Format: XXX-XXX-XXX</p>
+                </div>
+<!--                <div class="form-group">-->
+<!--                    <label>Gender<span style="color: red">(*)</span></label>-->
+<!--                    <input type="text" class="form-control" formControlName="gender">-->
+<!--                </div>-->
+            </form>
         </div>
-    </form>
+
+
         <div class="modal-footer">
             <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
             <button [disabled]="accountForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="addEditStock()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>

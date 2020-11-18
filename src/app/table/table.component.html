@@ -1,134 +1,261 @@
-
 <div class="page-title">
+
 <div class="title_right" style="float: right">
   <div class="col-md-5 col-sm-5   form-group pull-right top_search">
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for..." (keyup)='searchInput($event.target.value)' >
-      <span class="input-group-btn">
-                      <button class="btn btn-secondary" style="color: white" type="button" (click)='search()'>Go!</button>
-                    </span>
+      <input type="text" class="form-control" placeholder="Search for..." [(ngModel)]="searchValue" (ngModelChange)="search()" >
     </div>
   </div>
 </div>
-</div>
 <div class="clearfix"></div>
-<div class="col-md-12 col-sm-12  ">
+<div class="col-md-12 col-sm-12">
   <div class="x_panel">
     <div class="x_title">
       <h2>Custom</h2>
       <ul class="nav navbar-right panel_toolbox">
-          <div *ngIf="actionButton" style="margin-left: 15px">
-              <button  title="action" class="btn btn-sm btn-success" type="button" (click)='onAction(data)'>{{actionName}}</button>
-          </div>
+        <div *ngIf="actionButton" style="margin-left: 15px">
+          <button
+            title="action"
+            class="btn btn-sm btn-success"
+            type="button"
+            (click)="onAction(data)"
+          >
+            {{ actionName }}
+          </button>
+        </div>
         <div *ngIf="isAdd" style="margin-left: 15px">
-          <button   title="add" class="btn btn-sm btn-success" type="button" (click)='onAddEdit(null)'>Add new
-            <i style="color: white" class="fa fa-plus"></i></button>
+          <button
+            title="add"
+            class="btn btn-sm btn-success"
+            type="button"
+            (click)="onAddEdit(null)"
+          >
+            Add new <i style="color: white" class="fa fa-plus"></i>
+          </button>
         </div>
         <div *ngIf="isDeleteAll" style="margin-left: 15px">
-          <button    class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete
-            <i style="color: white" class="fa fa-trash-o"></i></button>
+          <button
+            class="btn btn-sm btn-danger"
+            type="button"
+            (click)="fdelete()"
+          >
+            Delete <i style="color: white" class="fa fa-trash-o"></i>
+          </button>
         </div>
-        <li><a class="collapse-link">Collapse <i class="fa fa-chevron-up"></i></a></li>
+        <li>
+          <a class="collapse-link">Collapse <i class="fa fa-chevron-up"></i></a>
+        </li>
       </ul>
       <div class="clearfix"></div>
     </div>
 
-
-
-<!--<input type="text" (keyup)='searchInput($event.target.value)'>-->
-<!--<button (click)='search()'> Search</button>-->
-      <div class="x_content">
-        <div class="table-responsive">
-          <table class="table table-striped jambo_table bulk_action " *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
-            <ng-container [matColumnDef]="tableData" *ngFor="let tableData of objectKeys(columnHeader)">
+    <div class="x_content">
+      <div class="table-responsive">
+        <table
+          class="table table-striped jambo_table bulk_action"
+          *ngIf="dataSource"
+          mat-table
+          [dataSource]="dataSource"
+          matSort
+        >
+          <ng-container
+            [matColumnDef]="tableData"
+            *ngFor="let tableData of objectKeys(columnHeader)"
+          >
             <thead>
               <div *ngIf="columnHeader[tableData] == 'Select'">
                 <th mat-header-cell *matHeaderCellDef>
                   <span class="customcheckbox">
-                    <input type="checkbox" id="selectAll" (click)='isSelectAll()'>
+                    <input
+                      type="checkbox"
+                      id="selectAll"
+                      (click)="isSelectAll()"
+                    />
                     <label for="selectAll"></label>
                   </span>
                 </th>
               </div>
 
               <div *ngIf="columnHeader[tableData] != 'Select'">
-              <th class="column-title"  mat-header-cell *matHeaderCellDef mat-sort-header> {{columnHeader[tableData]}}</th>
-            </div>
+                <th
+                  class="column-title"
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                >
+                  {{ columnHeader[tableData] }}
+                </th>
+              </div>
             </thead>
             <tbody>
               <div *ngIf="columnHeader[tableData] == 'Select'">
                 <td mat-cell *matCellDef="let element">
                   <span class="customcheckbox">
-                    <input type="checkbox" id="cb" [value]="element['id']" (click)='checkit()'>
+                    <input
+                      type="checkbox"
+                      id="cb"
+                      [value]="element['id']"
+                      (click)="checkit()"
+                    />
                     <label></label>
                   </span>
                 </td>
               </div>
 
-            <div *ngIf="columnHeader[tableData] != 'Action'">
-              <td mat-cell  *matCellDef="let element"> {{element[tableData] }}</td>
-            </div>
-            
-            <div *ngIf="columnHeader[tableData] == 'Action'">
-              <td mat-cell  *matCellDef="let element">
-                  <a  class="action" title="edit" *ngIf="addEditButton" style="margin-left: 10px;  " (click)="onAddEdit(element)">
-                  <i style=" color: #077cf9;font-size: 17px" class="fa fa-edit"></i></a>
-                  <a class="action" title="delete" style="margin-left: 10px;" (click)="onDelete(element)">
-                  <i style=" color: #dc3545;font-size: 17px" class="fa fa-trash"></i></a>
-                  <a class="action" title="view" *ngIf="viewButton" style="margin-left: 10px;" (click)="onView(element)">
-                      <i style=" color: #26b99a;font-size: 17px" class="fa fa-eye"></i></a>
-                  <a class="action" title="view" *ngIf="exportButton" style="margin-left: 10px;" (click)="onExport(element)">
-                      <i style=" color: #405467;font-size: 17px" class="fa fa-share"></i></a>
-               </td>
-            </div>
+
+              <div *ngIf="columnHeader[tableData] == 'No.'">
+                <td mat-cell *matCellDef="let i = index">{{ i + 1 }}</td>
+              </div>
+              <div *ngIf="columnHeader[tableData] != 'Action'">
+                <td mat-cell *matCellDef="let element">
+                  {{ element[tableData] }}
+                </td>
+              </div>
+
+              <div *ngIf="columnHeader[tableData] == 'Action'">
+                <td mat-cell *matCellDef="let element">
+                  <a
+                    class="action"
+                    title="edit"
+                    *ngIf="addEditButton"
+                    style="margin-left: 10px"
+                    (click)="onAddEdit(element)"
+                  >
+                    <i
+                      style="color: #077cf9; font-size: 17px"
+                      class="fa fa-edit"
+                    ></i
+                  ></a>
+                  <a
+                    class="action"
+                    title="delete"
+                    *ngIf="deleteButton"
+                    style="margin-left: 10px"
+                    (click)="onDelete(element)"
+                  >
+                    <i
+                      style="color: #dc3545; font-size: 17px"
+                      class="fa fa-trash"
+                    ></i
+                  ></a>
+                  <a
+                    class="action"
+                    title="view"
+                    *ngIf="viewButton"
+                    style="margin-left: 10px"
+                    (click)="onView(element)"
+                  >
+                    <i
+                      style="color: #26b99a; font-size: 17px"
+                      class="fa fa-eye"
+                    ></i
+                  ></a>
+                  <a
+                    class="action"
+                    title="view"
+                    *ngIf="exportButton"
+                    style="margin-left: 10px"
+                    (click)="onExport(element)"
+                  >
+                    <i
+                      style="color: #405467; font-size: 17px"
+                      class="fa fa-share"
+                    ></i
+                  ></a>
+                </td>
+              </div>
+
             </tbody>
-            </ng-container>
-            <tr class="headings" style="height: 45px" mat-header-row *matHeaderRowDef="objectKeys(columnHeader)"></tr>
-            <tr class="even pointer" mat-row *matRowDef="let row; columns: objectKeys(columnHeader);"></tr>
-          </table>
+          </ng-container>
+          <tr
+            class="headings"
+            style="height: 45px"
+            mat-header-row
+            *matHeaderRowDef="objectKeys(columnHeader)"
+          ></tr>
+          <tr
+            class="even pointer"
+            mat-row
+            *matRowDef="let row; columns: objectKeys(columnHeader)"
+          ></tr>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="listPage" class="clearfix">
+      <div>
+        Showing <b> {{ currentItems }}</b> out of
+        <b>{{ totalItems }}</b> entries
+        <div style="float: right">
+          <ul class="pagination">
+            <li>
+              <a class="page-link" (click)="changePage(1)">First</a>
+            </li>
+            <li>
+              <a class="page-link" (click)="previous()">Previous</a>
+            </li>
+            <li>
+              <div ngbDropdown class="d-inline-block" *ngIf="startPage != 1">
+                <button
+                  style="margin: 0"
+                  class="page-link"
+                  ngbDropdownToggle
+                  (click)="previous()"
+                >
+                  ...
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="page:"
+                    [(ngModel)]="currentPage"
+                    (ngModelChange)="changePage(currentPage)"
+                  />
+                </div>
+              </div>
+            </li>
+            <li
+              *ngFor="let i of listPage"
+              class="page-item"
+              [ngClass]="{ active: currentPage == i }"
+            >
+              <a class="page-link" (click)="changePage(i)">{{ i }}</a>
+            </li>
+            <li>
+              <div
+                ngbDropdown
+                class="d-inline-block"
+                *ngIf="endPage != totalPage"
+              >
+                <button
+                  style="margin: 0"
+                  class="page-link"
+                  ngbDropdownToggle
+                  (click)="previous()"
+                >
+                  ...
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="page:"
+                    [(ngModel)]="currentPage"
+                    (ngModelChange)="changePage(currentPage)"
+                  />
+                </div>
+              </div>
+            </li>
+            <li>
+              <a class="page-link" (click)="next()">Next</a>
+            </li>
+            <li>
+              <a class="page-link" (click)="changePage(totalPage)">Last</a>
+            </li>
+          </ul>
         </div>
       </div>
-      
-      <div *ngIf="listPage" class="clearfix">
-        <div>Showing
-            <b> {{currentItems}}</b> out of <b>{{totalItems}}</b> entries
-            <div style="float: right">
-                <ul class="pagination" >
-                    <li>
-                        <a class="page-link" (click)='changePage(1)' >First</a>
-                    </li>
-                    <li>
-                        <a class="page-link" (click)='previous()'>Previous</a>
-                    </li>
-                    <li>
-                        <div ngbDropdown class="d-inline-block" *ngIf="startPage != 1">
-                        <button style="margin: 0" class="page-link" ngbDropdownToggle (click)='previous()'>...</button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-                                <input type="email" class="form-control"  placeholder="page:" [(ngModel)]="currentPage" (ngModelChange)="changePage(currentPage)" >
-                            </div>
-                        </div>
-                    </li>
-                    <li *ngFor="let i of listPage" class="page-item" [ngClass]="{active:currentPage == i}">
-                        <a class="page-link" (click)="changePage(i)">{{i}}</a>
-                    </li>
-                    <li>
-                        <div ngbDropdown class="d-inline-block" *ngIf="endPage != totalPage">
-                            <button style="margin: 0" class="page-link" ngbDropdownToggle (click)='previous()'>...</button>
-                            <div ngbDropdownMenu aria-labelledby="dropdownForm1">
-                                <input type="email" class="form-control"  placeholder="page:" [(ngModel)]="currentPage" (ngModelChange)="changePage(currentPage)" >
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="page-link" (click)='next()'>Next</a>
-                    </li>
-                    <li>
-                        <a class="page-link" (click)='changePage(totalPage)'>Last</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-      </div>
-      </div>
-
+    </div>
+  </div>
+</div>

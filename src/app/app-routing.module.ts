@@ -9,10 +9,18 @@ import {CoteComponent} from './cote/cote.component';
 import {StockComponent} from './stock/stock.component';
 import {HistoryExportComponent} from './history-export/history-export.component';
 import {PigComponent} from './pig/pig.component';
+import { AccountDetailComponent } from './account-detail/account-detail.component';
+import { LoginComponent } from './login/login.component';
 
 
-const routes: Routes = [{
-    path: '',
+const routes: Routes = [
+    {
+        path: '',
+        component: LoginComponent
+    }
+    ,
+    {
+    path: 'layout',
     component: LayoutComponent,
     children: [{
         path: 'dashboard',
@@ -45,7 +53,11 @@ const routes: Routes = [{
       {
         path: 'export-management',
         component: HistoryExportComponent
-      }
+      },
+        {
+            path: 'account-detail',
+            component: AccountDetailComponent
+        },
     ]
 }];
 

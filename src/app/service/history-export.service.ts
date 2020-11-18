@@ -9,17 +9,17 @@ import {HistoryExport} from '../model/HistoryExport';
 })
 export class HistoryExportService {
     private readonly API_URL = 'http://localhost:8080/export-management/';
-    private readonly API_URL_DEL = 'http://localhost:8080/delCoteExport/';
+    private readonly API_URL_DEL = 'http://localhost:8080/delCoteExport';
 
     constructor(private http: HttpClient) {
     }
 
-    getAll(pageNum: number, search): Observable<HistoryExport[]> {
+    getData(pageNum: number, search): Observable<HistoryExport[]> {
         return this.http.get<HistoryExport[]>(this.API_URL + pageNum + '?search=' + search);
     }
 
-    delete(id): Observable<any> {
-        return this.http.delete<any>(this.API_URL_DEL, id);
+    delete(id: number[]): Observable<any> {
+        return this.http.put<any>(this.API_URL_DEL, id);
     }
 
 }
