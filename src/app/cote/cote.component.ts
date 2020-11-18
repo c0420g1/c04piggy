@@ -54,7 +54,7 @@ export class CoteComponent implements OnInit {
     historyExport: FormGroup;
     ids: string = '';
     currentDate: string;
-    pigsListSoldIds = '';
+    pigsListSoldIds: string = '';
     idSoldPig: number[] = [];
     idPig: number;
 
@@ -71,6 +71,8 @@ export class CoteComponent implements OnInit {
   ngOnInit(): void {
       const dateCur = new Date();
       this.currentDate = this.datePipe.transform(dateCur, 'yyyy-MM-dd');
+
+
     this.coteService.getListCote(this.variableFind).subscribe((data) => {
       this.totalEntities = data.length;
       this.totalPage = this.totalEntities / 10;
@@ -127,6 +129,8 @@ export class CoteComponent implements OnInit {
       employee: Employee,
       herd: Herd,
     });
+
+
       this.historyExport = this.fb.group({
           id: [''],
           isDeleted: [''],
@@ -161,14 +165,13 @@ export class CoteComponent implements OnInit {
             this.currentPage++;
             this.jumpPage = this.currentPage;
         }
-        console.log(this.currentPage);
         this.ngOnInit();
     }
-    
     // creator Hieu
     soldPig() {
         this.historyService.soldPigs(this.pigsListSoldIds, this.historyExport.value).subscribe(
             () => {
+              console.log("export cote done")
             }, error => console.log('error export!')
         );
         this.ngOnInit();
@@ -178,12 +181,11 @@ export class CoteComponent implements OnInit {
         this.idPig = id;
     }
 
-    getAllIdPigs(pigs: Pig[]) {
+    getAllIdPigs(pigs: PigDTONew[]) {
         this.idSoldPig = [];
         this.pigsListSoldIds = '';
-
         for (let i = 0; i < pigs.length; i++) {
-            this.idSoldPig.push(pigs[i].id);
+            this.idSoldPig.push(pigs[i].pigId);
         }
         for (let i = 0; i < this.idSoldPig.length; i++) {
             this.pigsListSoldIds += this.idSoldPig[i] + ',';

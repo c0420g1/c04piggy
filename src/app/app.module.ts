@@ -16,7 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
-import {CoteComponent} from './cote/cote.component';
+import {CoteComponent} from './cote/cote.component'
 import {DatePipe} from '@angular/common';
 import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
 import {FeedComponent, FeedModal} from './feed/feed.component';
