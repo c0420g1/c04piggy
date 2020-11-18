@@ -60,9 +60,14 @@ export class TableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+<<<<<<< HEAD
+    let arr: string[] = Object.keys(this.columnHeader);
+    this.isDeleteAll= arr[0] == 'select';
+=======
     if (this.ordinalColumn) this.addColumn('No.');
     if (this.isDeleteAll) this.addColumn('Select');
     console.log(this.columnHeader);
+>>>>>>> develop
     this.getDataSource();
 
     this.loadCssService.loadCss(

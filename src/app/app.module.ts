@@ -17,6 +17,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
 import {CoteComponent } from './cote/cote.component';
+import {FeedComponent} from './feed/feed.component';
+import {StockComponent, StockModal} from './stock/stock.component';
+import { HistoryExportComponent } from './history-export/history-export.component';
+import { PigComponent } from './pig/pig.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {DatePipe} from '@angular/common';
 import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
 import {FeedComponent, FeedModal} from './feed/feed.component';
 import {MatInputModule} from '@angular/material/input';
@@ -49,7 +55,6 @@ import { VacxinComponent } from './vacxin/vacxin.component';
     CoteComponent,
     FeedComponent,
     StockComponent,
-    HistoryExportModal,
     HistoryExportComponent,
     StockModal,
     ExportModal,
@@ -80,7 +85,7 @@ import { VacxinComponent } from './vacxin/vacxin.component';
             preventDuplicates: true,
         }),
     ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
