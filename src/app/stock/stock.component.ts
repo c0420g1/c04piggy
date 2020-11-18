@@ -150,9 +150,6 @@ export class StockModal implements OnInit {
       }
     }
   }
-
-
-
 }
 
 @Component({

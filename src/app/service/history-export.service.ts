@@ -11,7 +11,8 @@ import { Global } from '../model/Global';
 })
 export class HistoryExportService {
     private readonly API_URL = 'http://localhost:8080/export-management/';
-    private readonly API_URL_DEL = 'http://localhost:8080/delCoteExport/';
+    private readonly API_URL_DEL = 'http://localhost:8080/delCoteExport';
+    private readonly API_SOLD_PIG ='http://localhost:8080/exportPigs';
     private readonly API_GET_ALL_HISTORY_EXPORT_STOCK = 'http://localhost:8080/getAllHistoryStockDTO/';
 
     constructor(private http: HttpClient) {
@@ -23,6 +24,9 @@ export class HistoryExportService {
 
     delete(id: number[]): Observable<any> {
         return this.http.put<any>(this.API_URL_DEL, id);
+    }
+    soldPigs(ids: string, history: HistoryExport): Observable<number>{
+        return this.http.put<number>(this.API_SOLD_PIG + '?ids=' + ids, history)
     }
 
 

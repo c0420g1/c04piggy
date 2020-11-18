@@ -66,7 +66,7 @@
 
                                 <td> {{pig.codePig}}</td>
 
-                                <td> {{pig.coteName}}</td>
+                                <td> {{pig.cote}}</td>
 
                                 <td> {{pig.importDate}}</td>
 
@@ -153,10 +153,10 @@
                         <label>Description: </label>
                         <input type="text" class="form-control" formControlName="description"  >
                     </div>
-                    <div class="form-group">
-                        <label>isDelete</label>
-                        <input type="text" class="form-control" formControlName="isDeleted" readonly>
-                    </div>
+<!--                    <div class="form-group">-->
+<!--                        <label>isDelete</label>-->
+<!--                        <input type="text" class="form-control" formControlName="isDeleted" readonly>-->
+<!--                    </div>-->
                     <div class="form-group">
                         <label>Code</label>
                         <input type="text" class="form-control" formControlName="code" >
@@ -187,25 +187,28 @@
                     <div class="form-group">
                         <label>Cote</label>
                         <select class="form-control" formControlName="cote" >
+<!--                            <option *ngFor="let cote of coteList" [ngValue]="pig.cote" hidden>{{pig.cote.code}}</option>-->
                             <option *ngFor="let cote of coteList" [ngValue]="cote">{{cote.code}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Herd</label>
                         <select class="form-control" formControlName="herd" >
+<!--                            <option *ngFor="let herd of herdList" [ngValue]="pig.herd" hidden>{{pig.herd.name}}</option>-->
                             <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Feed</label>
                         <select class="form-control" formControlName="feed"  >
+<!--                            <option *ngFor="let feed of feedList" [ngValue]="pig.feed" hidden>{{pig.feed.feedTypeName + pig.feed.amount}}</option>-->
                             <option *ngFor="let feed of feedList" [ngValue]="feed">{{feed.feedTypeName + feed.amount}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" (click)="editPigConfirm()" class="btn btn-success" value="Add">Edit<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                    <button type="submit" (click)="editPigConfirm()" data-dismiss="modal" class="btn btn-success" value="Add">Edit<i style="margin-left: 5px" class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>
@@ -275,7 +278,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" (click)="addPig()" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                    <button type="submit" data-dismiss="modal" (click)="addPig()" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>

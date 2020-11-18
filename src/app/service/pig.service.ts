@@ -16,46 +16,46 @@ export class PigService {
   private readonly API_URL_EDIT_PIG = 'http://localhost:8080/editPig';
   private readonly API_URL_DELETE_PIG = 'http://localhost:8080/deletePig';
   private readonly API_URL_SOLD_PIG = 'http://localhost:8080/soldPig';
-  private readonly API_URL_HERD_LIST = 'http://localhost:8080/herdList';
+  private readonly API_URL_HERD_LIST = 'http://localhost:8080/herdListAll';
 
   constructor(private http: HttpClient) {
   }
 
-  //pig
+  // pig
   search(pageNum: number, search: string): Observable<PigDTO[]> {
     return this.http.get<PigDTO[]>(this.API_URL_PIG_LIST_SHOW + '/' + pageNum + '?search=' + search);
-  };
+  }
 
-  getPig(id: number):Observable<Pig> {
+  getPig(id: number): Observable<Pig> {
     return this.http.get<Pig>(this.API_URL_GET_PIG + '/?id=' + id);
   }
 
   getAll(): Observable<Pig[]> {
-    return this.http.get<Pig[]>(this.API_URL_PIG_LIST); 
-  };
+    return this.http.get<Pig[]>(this.API_URL_PIG_LIST);
+  }
 
   addPig(pig: Partial<Pig>): Observable<Pig> {
     return this.http.post<Pig>(this.API_URL_ADD_PIG, pig);
-  };
-
-  editPig(pig: Pig) {
-    console.log(pig.id)
-    return this.http.patch<Pig>(this.API_URL_EDIT_PIG, pig);
-  };
-
-  delete(ids: number[]) : Observable<number> {
-    return this.http.post<number>(this.API_URL_DELETE_PIG, ids);
   }
 
-  //herd
+  editPig(pig: Partial<Pig>) {
+    console.log(pig.id);
+    return this.http.patch<Pig>(this.API_URL_EDIT_PIG, pig);
+  }
+
+  delete(ids: number[]): Observable<number> {
+    return this.http.patch<number>(this.API_URL_DELETE_PIG, ids);
+  }
+
+  // herd
   getListHerd(): Observable<Herd[]> {
     return this.http.get<Herd[]>(this.API_URL_HERD_LIST);
-  };
+  }
 
-  //sold pig
+  // sold pig
   soldPig(pigId: number) {
     return this.http.patch<Pig>(this.API_URL_SOLD_PIG, pigId);
-  };
+  }
 }
 
 
