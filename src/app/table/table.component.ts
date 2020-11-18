@@ -233,9 +233,8 @@ export class DeleteModal {
   constructor(public activeModal: NgbActiveModal, private router: Router, private toastr: ToastrService) {}
 
   delete(){
-    console.log(this.ids.toString());
-    this.service.delete(this.ids).subscribe(data => {
-        this.toastr.success('Delete successfully', 'Treatment');
+      this.service.delete(this.ids).subscribe(data => {
+        this.toastr.success('Delete successfully', 'C04piggy')
       });
       this.activeModal.close();
       this.refeshComponent();

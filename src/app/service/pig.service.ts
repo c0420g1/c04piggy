@@ -16,7 +16,7 @@ export class PigService {
   private readonly API_URL_EDIT_PIG = 'http://localhost:8080/editPig';
   private readonly API_URL_DELETE_PIG = 'http://localhost:8080/deletePig';
   private readonly API_URL_SOLD_PIG = 'http://localhost:8080/soldPig';
-  private readonly API_URL_HERD_LIST = 'http://localhost:8080/herdList';
+  private readonly API_URL_HERD_LIST = 'http://localhost:8080/herdListAll';
 
   constructor(private http: HttpClient) {
   }
@@ -38,7 +38,7 @@ export class PigService {
     return this.http.post<Pig>(this.API_URL_ADD_PIG, pig);
   }
 
-  editPig(pig: Pig) {
+  editPig(pig: Partial<Pig>) {
     console.log(pig.id);
     return this.http.patch<Pig>(this.API_URL_EDIT_PIG, pig);
   }
