@@ -8,6 +8,7 @@ import {FeedType} from '../model/FeedType';
 import {Herd} from '../model/Herd';
 import {Error1 } from '../model/error1';
 
+
 @Component({
     selector: 'app-feed',
     templateUrl: './feed.component.html',
@@ -121,4 +122,5 @@ export class FeedModal implements OnInit {
         );
         }
     }
+
 }
