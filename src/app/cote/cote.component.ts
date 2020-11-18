@@ -164,28 +164,7 @@ export class CoteComponent implements OnInit {
         console.log(this.currentPage);
         this.ngOnInit();
     }
-
-    goToPage() {
-        this.currentPage = this.jumpPage;
-        this.ngOnInit();
-    }
-
-    AddNewCote(form: FormGroup) {
-        this.coteService.addNewCote(form.value).subscribe(() => this.ngOnInit());
-        document.getElementById('add').click();
-    }
-
-    getInfo(cote: CoteDTO) {
-        this.coteService.getListPig(cote.herdName).subscribe((data) => this.pigList = data);
-        console.log(this.pigList);
-    }
-
-
-
-
-
-
-       //====================================//
+    
     // creator Hieu
     soldPig() {
         this.historyService.soldPigs(this.pigsListSoldIds, this.historyExport.value).subscribe(
