@@ -168,15 +168,16 @@ export class PigComponent implements OnInit {
 
   editPigConfirm() {
     this.pigEdit = this.editNewPigForm.value;
+    console.log(this.editNewPigForm.value);
     if (this.editNewPigForm.valid) {
       const { value } = this.editNewPigForm;
       const data = {
         ...this.pigEdit,
         ...value
       };
-      this.pigService.editPig(data).subscribe(
+      this.pigService.editPig(this.pigEdit).subscribe(
           next => {
-            this.pigEdit[this.pigList.findIndex(e => e.pigId === this.pigEdit.id)] = this.pigEdit;
+            // this.pigEdit[this.pigList.findIndex(e => e.pigId === this.pigEdit.id)] = this.pigEdit;
             this.ngOnInit();
             },
           error => console.log(error)
@@ -232,6 +233,7 @@ export class PigComponent implements OnInit {
     }else if (currentPage > totalPage){
       this.currentPage = totalPage;
     }
+    // tslint:disable-next-line:one-variable-per-declaration
     let startPage: number, endPage: number;
     if (totalPage <= maxPage){
       startPage = 1;
@@ -300,6 +302,7 @@ export class PigComponent implements OnInit {
       this.totalPage = Math.ceil(this.totalItems / this.pageSize);
       // tslint:disable-next-line:no-shadowed-variable
       this.pigService
+          // tslint:disable-next-line:no-shadowed-variable
           .search(this.currentPage, this.search).subscribe(data => {
           this.pigList = data;
           this.currentItems = data.length;
