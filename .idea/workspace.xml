@@ -21,13 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/herd/herd.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/herd/herd.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/herd/herd.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/herd/herd.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/account/account.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/account.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/account/account.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/account/account.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/layout/layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/layout.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,19 +54,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/herd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../c04cinema-frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\ProjectCodeGym\C0420G1_TranQuangTrung_Module6\project2new\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\project2\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ProjectCodeGym\C0420G1_TranQuangTrung_Module6\project2new\c04piggy\src\app\herd" />
       <recent name="D:\project2\c04piggy\src\app\model" />
     </key>
   </component>
@@ -104,7 +99,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -124,19 +119,19 @@
       <workItem from="1605198147008" duration="591000" />
       <workItem from="1605230147504" duration="6167000" />
       <workItem from="1605249079950" duration="4746000" />
-      <workItem from="1605319035249" duration="3603000" />
-      <workItem from="1605454185438" duration="11035000" />
-      <workItem from="1605466989644" duration="717000" />
-      <workItem from="1605489348747" duration="1451000" />
-      <workItem from="1605490831896" duration="528000" />
-      <workItem from="1605515309804" duration="4053000" />
-      <workItem from="1605604353909" duration="2317000" />
-      <workItem from="1605663047491" duration="5769000" />
+      <workItem from="1605490512064" duration="4880000" />
+      <workItem from="1605508200679" duration="12117000" />
+      <workItem from="1605528716819" duration="8089000" />
+      <workItem from="1605575452731" duration="20503000" />
+      <workItem from="1605603257325" duration="2711000" />
+      <workItem from="1605617091475" duration="4148000" />
+      <workItem from="1605661208824" duration="3305000" />
+      <workItem from="1605665042108" duration="1424000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -151,36 +146,15 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="139" key="FileChooserDialogImpl" timestamp="1605604349963">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1605661579622">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="139" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1605604349963" />
-    <state width="1345" height="192" key="GridCell.Tab.0.bottom" timestamp="1605604208289">
-      <screen x="0" y="0" width="1366" height="768" />
+    <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605661579622" />
+    <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
+    <state x="389" y="165" key="run.anything.popup" timestamp="1605597315307">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1345" height="192" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1605604208289" />
-    <state width="1345" height="192" key="GridCell.Tab.0.center" timestamp="1605604208289">
-      <screen x="0" y="0" width="1366" height="768" />
-    </state>
-    <state width="1345" height="192" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1605604208289" />
-    <state width="1345" height="192" key="GridCell.Tab.0.left" timestamp="1605604208289">
-      <screen x="0" y="0" width="1366" height="768" />
-    </state>
-    <state width="1345" height="192" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1605604208289" />
-    <state width="1345" height="192" key="GridCell.Tab.0.right" timestamp="1605604208289">
-      <screen x="0" y="0" width="1366" height="768" />
-    </state>
-    <state width="1345" height="192" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1605604208289" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/app/service/pig.service.ts</url>
-          <line>42</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="389" y="165" key="run.anything.popup/0.0.1366.728@0.0.1366.728" timestamp="1605597315307" />
+    <state x="456" y="195" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1605338642405" />
   </component>
 </project>
