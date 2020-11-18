@@ -1,0 +1,55 @@
+<!--<div class="modal-content">-->
+<!--    <form [formGroup]="herdForm">-->
+<!--        <div class="modal-header">-->
+<!--            <h4 class="modal-title">{{title}}</h4>-->
+<!--            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>-->
+<!--        </div>-->
+
+<!--        <div class="modal-body">-->
+<!--            <div class="form-group">-->
+<!--                <label>Description</label>-->
+<!--                <textarea type="text" class="form-control" #inputDescription  value="{{data.description}}" formControlName="description"></textarea>-->
+<!--                <div class="alert alert-danger" role="alert" *ngIf="herdForm.get('description').touched && herdForm.get('description').invalid">-->
+<!--                    <p *ngIf="herdForm.get('description').hasError('required')"> Not required</p>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Name</label>-->
+<!--            <input type="text" #inputName class="form-control" value="{{data.amount}}" formControlName="name">-->
+<!--            <div class="alert alert-danger" role="alert" *ngIf="herdForm.get('name').touched && herdForm.get('name').invalid">-->
+<!--                <p *ngIf="herdForm.get('name').hasError('required')"> Not required</p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Amount</label>-->
+<!--            <input type="text" #inputAmount class="form-control" value="{{data.amount}}" formControlName="amount">-->
+<!--            <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('amount').touched && feedForm.get('amount').invalid">-->
+<!--                <p *ngIf="feedForm.get('amount').hasError('required')"> Not required</p>-->
+<!--                <p *ngIf="feedForm.get('amount').hasError('pattern')"> format is number </p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <div class="form-group">-->
+<!--            <label>Amount</label>-->
+<!--            <input type="text" #inputAmount class="form-control" value="{{data.amount}}" formControlName="amount">-->
+<!--            <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('amount').touched && feedForm.get('amount').invalid">-->
+<!--                <p *ngIf="feedForm.get('amount').hasError('required')"> Not required</p>-->
+<!--                <p *ngIf="feedForm.get('amount').hasError('pattern')"> format is number </p>-->
+<!--            </div>-->
+<!--        </div>-->
+
+<!--        <ul>-->
+<!--            <li class="alert alert-danger" *ngFor="let error of error1s">-->
+<!--                {{error.message}}-->
+<!--            </li>-->
+<!--        </ul>-->
+
+<!--        <div class="modal-footer">-->
+<!--            <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">-->
+<!--            <button [disabled]="feedForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>-->
+<!--        </div>-->
+<!--    </form>-->
+<!--</div>-->

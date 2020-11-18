@@ -82,6 +82,7 @@ export class TableComponent implements OnInit {
       console.log("total" + this.totalPage);
       this.tableService
         .getData(this.currentPage, this.searchValue)
+          // tslint:disable-next-line:no-shadowed-variable
         .subscribe((data) => {
           this.data = data;
           this.dataSource = new MatTableDataSource(data);
@@ -232,8 +233,9 @@ export class DeleteModal {
   constructor(public activeModal: NgbActiveModal, private router: Router, private toastr: ToastrService) {}
 
   delete(){
-      this.service.delete(this.ids).subscribe(data => {
-        this.toastr.success('Delete successfully', 'Treatment')
+    console.log(this.ids.toString());
+    this.service.delete(this.ids).subscribe(data => {
+        this.toastr.success('Delete successfully', 'Treatment');
       });
       this.activeModal.close();
       this.refeshComponent();

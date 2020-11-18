@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/notification/notification-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/notification/notification-modal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/notification/notification.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/notification/notification.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/herd.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/herd.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,14 +52,14 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../c04cinema-frontend" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="C:\Users\LENOVO\Documents\GitHub\Project-Farm-C04\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\Team C0420G1\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -127,8 +126,6 @@
       <workItem from="1605661208824" duration="3305000" />
       <workItem from="1605665042108" duration="1424000" />
       <workItem from="1605682165814" duration="1784000" />
-      <workItem from="1605684904340" duration="346000" />
-      <workItem from="1605685273742" duration="1737000" />
     </task>
     <servers />
   </component>
@@ -140,24 +137,22 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="28" key="#TSLint" timestamp="1605682534623">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="28" key="#TSLint/0.0.1366.738@0.0.1366.738" timestamp="1605682534623" />
-    <state x="557" y="186" key="FileChooserDialogImpl" timestamp="1605684943032">
-      <screen x="0" y="0" width="1536" height="864" />
+    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1605661579622">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605661579622" />
-    <state x="557" y="186" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1605684943032" />
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
     <state x="389" y="165" key="run.anything.popup" timestamp="1605597315307">
       <screen x="0" y="0" width="1366" height="728" />
