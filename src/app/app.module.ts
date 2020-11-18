@@ -11,7 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { NotificationComponent, NotificationModal } from './notification/notification.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { TableComponent } from './table/table.component';
+import {DeleteModal, TableComponent} from './table/table.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
@@ -23,7 +23,9 @@ import {MatInputModule} from '@angular/material/input';
 import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
 import { ExportHistoryStockComponent } from './export-history-stock/export-history-stock.component';
-import {HerdComponent, HerdModal} from './herd/herd.component';
+import {CommonModule} from '@angular/common';
+import {ToastrModule} from 'ngx-toastr';
+import { VacxinComponent } from './vacxin/vacxin.component';
 
 
 
@@ -51,9 +53,8 @@ import {HerdComponent, HerdModal} from './herd/herd.component';
     PigComponent,
     ExportHistoryStockComponent,
       FeedModal,
-      HerdComponent,
-      HerdModal
-
+      DeleteModal,
+      VacxinComponent
   ],
     imports: [
         BrowserModule,
@@ -67,7 +68,12 @@ import {HerdComponent, HerdModal} from './herd/herd.component';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
-        MatInputModule
+        MatInputModule,
+        CommonModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-top-center',
+            preventDuplicates: true,
+        }),
     ],
   providers: [],
   bootstrap: [AppComponent]

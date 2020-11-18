@@ -9,6 +9,8 @@ import {Vendor} from '../model/Vendor';
 import {Employee} from '../model/Employee';
 import {EmployeeService} from '../service/employee.service';
 import {StockService} from '../service/stock.service';
+import {ToastrService} from 'ngx-toastr';
+import {StockDTO} from '../model/StockDTO';
 
 
 // creator: Tuong
@@ -23,7 +25,7 @@ export class StockComponent implements OnInit {
   columnHeader = { 'shipmentCode': 'Shipment Code' , 'feedTypeName':'Feed Type','vendorName':'Vendor',
     'expDate': 'Expiry Date', 'quantity': 'Quantity', 'unit': 'Unit','action': 'Action'};
 
-  constructor(public stockService: StockService, private router: Router) { }
+  constructor(public stockService: StockService) { }
 
   ngOnInit(): void {
   }
@@ -60,14 +62,16 @@ export class StockModal implements OnInit {
   feedTypes: FeedType[] = [];
   vendorDefaultName: string='';
   stockForm: FormGroup;
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router, private stockService: StockService) {}
+  stockDTOs: StockDTO[] = [];
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router
+              , private stockService: StockService,private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.stockService.getAllVendor().subscribe((data) => {this.vendors = data; this.vendorDefaultName= data[0].name});
     this.stockService.getAllFeedType().subscribe((data) => {this.feedTypes = data; });
 
     this.stockForm = this.fb.group({
-      id: [this.data.id, [Validators.required,]],
+      id: [this.data.id],
       isDeleted: [0],
       description: [this.data.description, [Validators.maxLength(1000)]],
       expDate: [this.data.expDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
@@ -75,17 +79,50 @@ export class StockModal implements OnInit {
       mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')]],
       quantity: [this.data.quantity, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
       shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8),Validators.minLength(8)]],
-      unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogram)|(liter)')]],
+      unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogam)|(liter)')]],
       // vendorName: [this.data.vendorName, [Validators.required]],
       feedTypeId: [this.data.feedTypeId, [Validators.required]],
       vendorId: [this.data.vendorId, [Validators.required]]
     });
+    console.log("mfg date"+this.stockForm.value.mfgDate);
+    console.log("exp date"+this.stockForm.value.expDate);
+    console.log("import date"+this.stockForm.value.importDate);
   }
 
   // add & edit Stock
   addEditStock(){
     console.log(this.stockForm.value);
-      this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>window.location.reload());
+
+    let check = true;
+    for (let stockDTO of this.stockDTOs){
+      console.log()
+      if ((stockDTO.shipmentCode === this.stockForm.value.shipmentCode) && (this.stockForm.value.id === null)){
+        check = false;
+      }
+    }
+    if (check === true){
+      this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>{
+        console.log(data);
+        this.toastr.success('Save to stock successfully', 'Stock Management');
+      });
+    }else {
+      this.toastr.error('Shipment Code already exists in the system, Please input again!', 'Stock Management');
+    }
+
+    // this.stockService.addEditStock(this.stockForm.value).subscribe((data)=>{
+    //   console.log(data);
+    //   this.toastr.success('Save to stock successfully', 'Stock');
+    // });
+
+    this.refeshComponent();
+    this.activeModal.close();
+  }
+
+  refeshComponent(){
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+      this.router.navigate([currentRoute]);
+    });
   }
 
   // validate start date < end date
@@ -100,12 +137,14 @@ export class StockModal implements OnInit {
     startDate = this.start.split('-');
     let dateNumberEnd = (parseInt(endDate[0]) * 365) + (parseInt(endDate[1]) * 30) + (parseInt(endDate[2]));
     let dateNumberStart = (parseInt(startDate[0]) *  365) + (parseInt(startDate[1]) * 30) + (parseInt(startDate[2]));
-    if ((dateNumberEnd <= dateNumberStart) || (dateNumberEnd > (dateNumberStart + 90))) {
+    if ((dateNumberEnd <= dateNumberStart) || (dateNumberEnd > (dateNumberStart + 100))) {
       this.error = true;
     } else {
       this.error = false;
     }
   }
+
+
 }
 
 @Component({
@@ -145,6 +184,16 @@ export class ExportModal implements OnInit {
     this.stockService.exportOutStock(this.data.id, this.exportHistoryStockForm.value.quantity).subscribe(
         data=>{window.location.reload();}
     );
+  }
+
+  error = false;
+  stockOut: number;
+  checkQuantity(){
+   let stockInQuantity = this.data.quantity;
+   let stockOutQuantity = this.stockOut;
+   if (stockOutQuantity > stockInQuantity){
+     this.error = true;
+   }
   }
 
 }

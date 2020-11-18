@@ -11,7 +11,7 @@ import {FeedComponent} from './feed/feed.component';
 import {HistoryExportComponent} from './history-export/history-export.component';
 import {PigComponent} from './pig/pig.component';
 import {ExportHistoryStockComponent} from './export-history-stock/export-history-stock.component';
-import {HerdComponent} from './herd/herd.component';
+import { VacxinComponent } from './vacxin/vacxin.component';
 
 
 
@@ -21,6 +21,10 @@ const routes: Routes = [{
     children: [{
         path: 'dashboard',
         component: DashboardComponent
+    },
+    {
+        path: 'vacxin',
+        component: VacxinComponent
     },
         {
             path: 'notification',
@@ -58,10 +62,6 @@ const routes: Routes = [{
         {
             path: 'history-of-stock-out',
             component: ExportHistoryStockComponent
-        },
-        {
-            path: 'herd',
-            component: HerdComponent
         }
     ]
 }];
