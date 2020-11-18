@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Notification} from '../model/Notification';
 import {NotificationService} from '../service/notification.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
     selector: 'app-notification',
@@ -12,7 +13,7 @@ import {NotificationService} from '../service/notification.service';
 })
 export class NotificationComponent implements OnInit {
     // actionName: string= "Export";
-    columnHeader = {'title': 'Title', 'createDate': 'Date of Post', 'content': 'Content', 'action': 'Action','type':'Type','employeeId': 'Employee Id'};
+    columnHeader = {'title': 'Title', 'createDate': 'Date of Post', 'content': 'Content','type':'Type', 'action': 'Action'};
 
     constructor(public notificationService: NotificationService) {
     }
@@ -23,7 +24,8 @@ export class NotificationComponent implements OnInit {
     onAddEdit(element, modal) {
         const modalRef = modal.open(NotificationModal);
         modalRef.componentInstance.data = element ?? new Notification();
-        modalRef.componentInstance.title = element ? 'EDIT NOTE' : 'ADD NOTE';
+        modalRef.componentInstance.title = element ? 'Edit Nofification' : 'Add Notification';
+        modalRef.componentInstance.employeeName = element ? element.employee.name : '';
     }
 }
 
@@ -34,10 +36,11 @@ export class NotificationComponent implements OnInit {
 export class NotificationModal implements OnInit {
     @Input() data;
     @Input() title;
+    @Input() employeeName;
     addNewNotificationForm: FormGroup;
     notification: Notification;
     constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService, private toastr: ToastrService) {
     }
 
     ngOnInit(): void {
@@ -47,16 +50,24 @@ export class NotificationModal implements OnInit {
             createDate: [this.data.createDate],
             content: [this.data.content],
             type: [this.data.type],
-            employeeId: [this.data.employeeId]
+            employeeName: [this.employeeName]
         });
     }
 
+
+    refeshComponent(){
+        const currentRoute = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+            this.router.navigate([currentRoute]);
+        });
+    }
     onSubmit(form: FormGroup) {
 
 
-            this.notificationService.addEdit(form.value).subscribe(()=> this.ngOnInit());
-
-        window.location.reload();
+        this.notificationService.addEdit(form.value).subscribe(()=> this.ngOnInit());
+        this.toastr.success('Add new Information successfully', 'Treatment')
+        this.refeshComponent();
+        this.activeModal.close();
         }
 
 

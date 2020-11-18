@@ -8,6 +8,8 @@
                 <div class="modal-body">
                     <form [formGroup]="addNewNotificationForm">
                         <div class="form-group">
+                            <label>Created Employee</label>
+                            <input type="text" class="form-control" value="{{employeeName}}" formControlName="employeeName">
                             <label>Title</label>
                             <input type="text" class="form-control" value="{{data.title}}" formControlName="title">
                             <label>Date Post</label>
@@ -15,9 +17,8 @@
                             <label>Content</label>
                             <input type="text" class="form-control" value="{{data.content}}" formControlName="content">
                             <label>Type</label>
-                            <input type="text" class="form-control" value="{{data.type}}" formControlName="content">
-                            <label>Employee Id</label>
-                            <input type="text" class="form-control" value="{{data.employeeId}}" formControlName="content">
+                            <input type="text" class="form-control" value="{{data.type}}" formControlName="type">
+
 
                         </div>
                     </form>
