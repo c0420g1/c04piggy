@@ -169,20 +169,12 @@ export class PigComponent implements OnInit {
   editPigConfirm() {
     this.pigEdit = this.editNewPigForm.value;
     console.log(this.editNewPigForm.value);
-    if (this.editNewPigForm.valid) {
-      const { value } = this.editNewPigForm;
-      const data = {
-        ...this.pigEdit,
-        ...value
-      };
-      this.pigService.editPig(this.pigEdit).subscribe(
+    this.pigService.addPig(this.pigEdit).subscribe(
           next => {
-            // this.pigEdit[this.pigList.findIndex(e => e.pigId === this.pigEdit.id)] = this.pigEdit;
             this.ngOnInit();
             },
           error => console.log(error)
       );
-    }
   }
 
   onDelete(element) {
