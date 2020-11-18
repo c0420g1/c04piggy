@@ -32,25 +32,25 @@
 
                     <div class="form-group">
                         <label>Manufacturing Date<span style="color: red">(*)</span></label>
-                        <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate" [(ngModel)]="start" (change)="compareTwoDates()">
+                        <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate" >
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('mfgDate').invalid && stockForm.get('mfgDate').touched">
                         <p *ngIf="stockForm.get('mfgDate').hasError('required')">Manufacturing Date is required</p>
                         <p *ngIf="stockForm.get('mfgDate').hasError('pattern')">Manufacturing Date must be follow format: (yyyy-mm-dd)</p>
                     </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="error">MfgDate must be before ExpDate 3 months.</div>
+                    <div class="alert alert-danger" role="alert" *ngIf="error">MfgDate must be before ExpDate, term not exceeding 100 days use.</div>
 
                     <div class="form-group">
                         <label>Expiry Date<span style="color: red">(*)</span></label>
-                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate" [(ngModel)]="end" (change)="compareTwoDates()" >
+                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate" >
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('expDate').invalid && stockForm.get('expDate').touched">
                         <p *ngIf="stockForm.get('expDate').hasError('required')">Expiry Date is required</p>
                         <p *ngIf="stockForm.get('expDate').hasError('pattern')">Expiry Date must be follow format: (yyyy-mm-dd)</p>
                     </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="error">MfgDate must be before ExpDate 3 months.</div>
+                    <div class="alert alert-danger" role="alert" *ngIf="error">MfgDate must be before ExpDate, term not exceeding 100 days use. </div>
 
                     <div class="form-group">
                         <label>Stock In Date<span style="color: red">(*)</span></label>
@@ -76,7 +76,7 @@
                     <div class="form-group">
                         <label>Unit<span style="color: red">(*)</span></label>
                         <select formControlName="unit" class="form-control">
-                            <option value="kilogram">Kilogram</option>
+                            <option value="kilogam">Kilogram</option>
                             <option value="liter">Liter</option>
                         </select>
                     </div>
@@ -110,7 +110,7 @@
             </div>
             <div class="modal-footer">
                 <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
-                <button [disabled]="stockForm.invalid" type="submit" class="btn btn-success" data-dismiss="modal" value="Add" (click)="addEditStock()">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                <button [disabled]="stockForm.invalid" type="submit" class="btn btn-success"  value="Add" (click)="addEditStock()">Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
             </div>
         </form>
     </div>

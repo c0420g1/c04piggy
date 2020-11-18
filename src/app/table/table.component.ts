@@ -13,6 +13,7 @@ import { NgbActiveModal, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { Router } from "@angular/router";
 import * as $ from "jquery";
 import { Global } from "../model/Global";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: "app-table",
@@ -22,6 +23,7 @@ import { Global } from "../model/Global";
 export class TableComponent implements OnInit {
   //#region Field
   @Input() columnHeader;
+  @Input() tableName;
   @Input() tableService;
   @Input() addEditButton;
   @Input() deleteButton;
@@ -53,7 +55,8 @@ export class TableComponent implements OnInit {
   constructor(
     private loadCssService: LoadCssService,
     public dialog: MatDialog,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -154,9 +157,13 @@ export class TableComponent implements OnInit {
         ids.push(t);
       }
     });
-    const modalRef = this.modalService.open(DeleteModal);
-    modalRef.componentInstance.ids = ids;
-    modalRef.componentInstance.service = this.tableService;
+    if (ids.length == 0){
+      this.toastr.error('Must be check on check box', 'C04piggy')
+    }else if (ids.length != 0) {
+      const modalRef = this.modalService.open(DeleteModal);
+      modalRef.componentInstance.ids = ids;
+      modalRef.componentInstance.service = this.tableService;
+    }
   }
 
   changePage(currentPage) {
@@ -222,11 +229,19 @@ export class TableComponent implements OnInit {
 export class DeleteModal {
   @Input() service;
   @Input() ids: number[];
-  constructor(public activeModal: NgbActiveModal, private router: Router) {}
+  constructor(public activeModal: NgbActiveModal, private router: Router, private toastr: ToastrService) {}
 
   delete(){
-      this.service.delete(this.ids).subscribe();
-      // this.activeModal.close();
-      // window.location.reload();
+      this.service.delete(this.ids).subscribe(data => {
+        this.toastr.success('Delete successfully', 'Treatment')
+      });
+      this.activeModal.close();
+      this.refeshComponent();
+  }
+  refeshComponent(){
+    const currentRoute = this.router.url;
+    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+      this.router.navigate([currentRoute]);
+    });
   }
 }
