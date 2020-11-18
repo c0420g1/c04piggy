@@ -63,11 +63,6 @@ export class StockModal implements OnInit {
   stockDTOs: StockDTO[] = [];
 
 
-
-  // cac bien cua ham validateShipmentCode
-  inputShipmentCode: string;
-  shipmentCodeError = false;
-
   @ViewChild('input') input: ElementRef;
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router
               , private stockService: StockService,private toastr: ToastrService) {}
@@ -85,16 +80,13 @@ export class StockModal implements OnInit {
       mfgDate: [this.data.mfgDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),compareTwoDates.bind(this)]],
       expDate: [this.data.expDate, [Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),compareTwoDates.bind(this)]],
       quantity: [this.data.quantity, [Validators.required,Validators.pattern(/^[0-9]+$/)]],
-      shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8),Validators.minLength(8)]],
+      shipmentCode: [this.data.shipmentCode, [Validators.required,Validators.pattern(/^[0-9]+$/),Validators.maxLength(8)
+        ,Validators.minLength(8),validateShipmentCode.bind(this)]],
       unit: [this.data.unit, [Validators.required,Validators.pattern('(kilogam)|(liter)')]],
       feedTypeId: [this.data.feedTypeId, [Validators.required]],
       vendorId: [this.data.vendorId, [Validators.required]]
     });
 
-    // this.stockForm = new FormGroup({
-    //   mfgDate: new FormControl(),
-    //   expDate: new FormControl()
-    // });
 
     setTimeout(() => {
       this.input.nativeElement.focus();
@@ -120,16 +112,6 @@ export class StockModal implements OnInit {
     });
   }
 
-  // validate Shipment Code
-  validateShipmentCode(){
-    for (let stockDTO of this.stockDTOs){
-      if ((this.stockForm.value.id === null) && (stockDTO.shipmentCode === this.inputShipmentCode)){
-        this.shipmentCodeError = true;
-      }else {
-        this.shipmentCodeError = false;
-      }
-    }
-  }
 }
 
 @Component({
@@ -234,7 +216,20 @@ function compareTwoDates(){
     return false;
 }
 
+// validate Shipment Code
+function validateShipmentCode(){
 
+  if(!this.stockForm?.controls?.shipmentCode?.value) {
+    return null;
+  }
+  for (let stockDTO of this.stockDTOs){
+    if ((!this.stockForm?.controls?.id?.value) && (stockDTO.shipmentCode === this.stockForm.controls.shipmentCode.value)){
+      return {invalidShipmentCode: true};
+    }else {
+      return false;
+    }
+  }
+}
 
 
 

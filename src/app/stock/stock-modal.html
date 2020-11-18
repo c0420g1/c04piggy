@@ -17,6 +17,7 @@
                         <p *ngIf="stockForm.get('shipmentCode').hasError('pattern')">Shipment Code must be a number</p>
                         <p *ngIf="stockForm.get('shipmentCode').hasError('maxlength')">Shipment Code must be a number that have length = 8.</p>
                         <p *ngIf="stockForm.get('shipmentCode').hasError('minlength')">Shipment Code must be a number that have length = 8.</p>
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('invalidShipmentCode')">Shipment Code already exists in the database.</p>
                     </div>
 
                     <div class="form-group">
