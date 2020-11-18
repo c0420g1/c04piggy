@@ -49,7 +49,7 @@ export class TableComponent implements OnInit {
   constructor(private loadCssService: LoadCssService, public dialog: MatDialog, private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    let arr: string[] = Object.keys(this.columnHeader)
+    let arr: string[] = Object.keys(this.columnHeader);
     this.isDeleteAll= arr[0] == 'select';
     this.getDataSource();
     this.loadCssService.loadCss('assets/vendors/bootstrap/dist/css/bootstrap.min.css');

@@ -13,72 +13,12 @@ import {HistoryExportService} from '../service/history-export.service';
 export class HistoryExportComponent implements OnInit {
   columnHeader = {'No.':'No.','coteCode': 'Cote Code', 'employeeCode': 'Staff Name', 'company': 'Company', 'exportDate': 'Export Date',
   'quantity': 'Quantity', 'weightTotal': 'Weight Total', 'total': 'Total', 'action': 'Action'};
-   // coteExport: HistoryExport[];
-   // idDel: number[] = [];
-   // pageNum = 1;
-   // search =  "";
-
 
   constructor(public historyExportService: HistoryExportService) { }
 
   ngOnInit(): void {
-    // this.historyExportService.getData(this.pageNum, this.search).subscribe(
-    //     data => {
-    //       this.coteExport = data;
-    //     },error => console.log(error)
-    // )
+
   }
-
-
-  // getIdDelete(id: number) {
-  //   this.idDel.push(id)
-  // }
-  //
-  // delete() {
-  //   this.historyExportService.delete(this.idDel).subscribe(
-  //       () => {
-  //         this.ngOnInit();
-  //       },error => console.log(error)
-  //   );
-  // }
-  //
-  // searching() {
-  //   this.ngOnInit();
-  // }
-  // prePage(){
-  //   this.pageNum--;
-  //   if (this.pageNum <=1){
-  //     this.pageNum =1
-  //   }
-  //   this.ngOnInit();
-  // }
-  // nextPage(){
-  //   this.pageNum++;
-  //   if (this.pageNum>=5){
-  //     this.pageNum = 5;
-  //   }
-  //   this.ngOnInit();
-  // }
 }
 
 
-@Component({
-  templateUrl: './HistoryExport-Modal.html'
-})
-export class HistoryExportModal implements OnInit {
-  @Input() data;
-  @Input() title;
-  historyExportForm: FormGroup;
-
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router) {}
-
-  ngOnInit(): void {
-    this.historyExportForm= this.fb.group({
-      id: this.data.id,
-      title: [this.data.title],
-      content: [this.data.content]
-    });
-  }
-
-  onSubmit(){}
-}

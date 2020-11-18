@@ -20,9 +20,10 @@ import {TreatmentComponent, TreatmentModal} from './treatment/treatment.componen
 import {CoteComponent } from './cote/cote.component';
 import {FeedComponent} from './feed/feed.component';
 import {StockComponent, StockModal} from './stock/stock.component';
-import { HistoryExportComponent, HistoryExportModal } from './history-export/history-export.component';
+import { HistoryExportComponent } from './history-export/history-export.component';
 import { PigComponent } from './pig/pig.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {DatePipe} from '@angular/common';
 
 
 
@@ -41,7 +42,6 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     CoteComponent,
     FeedComponent,
     StockComponent,
-    HistoryExportModal,
     HistoryExportComponent,
     StockModal,
     PigComponent,
@@ -63,7 +63,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatAutocompleteModule,
 
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
