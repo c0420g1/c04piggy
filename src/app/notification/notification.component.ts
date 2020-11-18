@@ -5,75 +5,29 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {Notification} from '../model/Notification';
 import {NotificationService} from '../service/notification.service';
 import {ToastrService} from 'ngx-toastr';
-
+import { EmployeeService } from '../service/employee.service';
+import { Employee } from '../model/Employee';
+import { Global } from '../model/Global';
+import { DatePipe } from '@angular/common';
 @Component({
     selector: 'app-notification',
     templateUrl: './notification.component.html',
     styleUrls: ['./notification.component.css']
 })
 export class NotificationComponent implements OnInit {
-    dropdownList = [];
-    selectedItems = [];
-    dropdownSettings = {};
-    ngOnInit(){
-        this.dropdownList = [
-                              {"id":1,"itemName":"India"},
-                              {"id":2,"itemName":"Singapore"},
-                              {"id":3,"itemName":"Australia"},
-                              {"id":4,"itemName":"Canada"},
-                              {"id":5,"itemName":"South Korea"},
-                              {"id":6,"itemName":"Germany"},
-                              {"id":7,"itemName":"France"},
-                              {"id":8,"itemName":"Russia"},
-                              {"id":9,"itemName":"Italy"},
-                              {"id":10,"itemName":"Sweden"}
-                            ];
-        this.selectedItems = [
-                                {"id":2,"itemName":"Singapore"},
-                                {"id":3,"itemName":"Australia"},
-                                {"id":4,"itemName":"Canada"},
-                                {"id":5,"itemName":"South Korea"}
-                            ];
-        this.dropdownSettings = { 
-                                  singleSelection: false, 
-                                  text:"Select Countries",
-                                  selectAllText:'Select All',
-                                  unSelectAllText:'UnSelect All',
-                                  enableSearchFilter: true,
-                                  classes:"myclass custom-class"
-                                };            
-    }
-    onItemSelect(item:any){
-        console.log(item);
-        console.log(this.selectedItems);
-    }
-    OnItemDeSelect(item:any){
-        console.log(item);
-        console.log(this.selectedItems);
-    }
-    onSelectAll(items: any){
-        console.log(items);
-    }
-    onDeSelectAll(items: any){
-        console.log(items);
+    columnHeader = {'title': 'Title','createdBy' : 'Created By',  'createDate': 'Date of Post', 'type':'Type', 'content': 'Content', 'action': 'Action'};
+
+    constructor(public notificationService: NotificationService) {
     }
 
+    ngOnInit(): void {
+    }
 
-    // actionName: string= "Export";
-    // columnHeader = {'title': 'Title', 'createDate': 'Date of Post', 'content': 'Content','type':'Type', 'action': 'Action'};
-
-    // constructor(public notificationService: NotificationService) {
-    // }
-
-    // ngOnInit(): void {
-    // }
-
-    // onAddEdit(element, modal) {
-    //     const modalRef = modal.open(NotificationModal);
-    //     modalRef.componentInstance.data = element ?? new Notification();
-    //     modalRef.componentInstance.title = element ? 'Edit Nofification' : 'Add Notification';
-    //     modalRef.componentInstance.employeeName = element ? element.employee.name : '';
-    // }
+    onAddEdit(element, modal) {
+        const modalRef = modal.open(NotificationModal);
+        modalRef.componentInstance.data = element ?? new Notification();
+        modalRef.componentInstance.title = element ? 'Edit Nofification' : 'Add Notification';
+    }
 }
 
 
@@ -83,24 +37,43 @@ export class NotificationComponent implements OnInit {
 export class NotificationModal implements OnInit {
     @Input() data;
     @Input() title;
-    @Input() employeeName;
     addNewNotificationForm: FormGroup;
-    notification: Notification;
+    dropdownList= [];
+    selectedItems = [];
+    dropdownSettings = {};
     constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
-                private notificationService: NotificationService, private toastr: ToastrService) {
+                private notificationService: NotificationService, private toastr: ToastrService,
+                private employeeService: EmployeeService, private datepipe: DatePipe) {
     }
 
+    
     ngOnInit(): void {
-        this.addNewNotificationForm = this.fb.group({
-            id: this.data.id,
-            title: [this.data.title],
-            createDate: [this.data.createDate],
-            content: [this.data.content],
-            type: [this.data.type],
-            employeeName: [this.employeeName]
-        });
-    }
+        this.employeeService.getAllEmployee().subscribe(r => {r.forEach(e=>{
+    this.dropdownList.push(  {"id": e.id,"itemName":e.name});
+});
+    });
 
+    this.selectedItems = this.data.employees;
+        this.dropdownSettings = { 
+                                  singleSelection: false, 
+                                  text:"Select Employees",
+                                  selectAllText:'Select All',
+                                  unSelectAllText:'UnSelect All',
+                                  enableSearchFilter: false,
+                                  classes:"myclass custom-class"
+                                };          
+                                
+                                const currentDate = this.datepipe.transform(new Date(), 'yyyy-MM-dd');
+                                this.addNewNotificationForm = this.fb.group({
+                                    id: [this.data.id],
+                                    title: [this.data.title],
+                                    createById: [Global.employeeId],
+                                    createDate: [currentDate],    
+                                    content: [this.data.content, Validators.required],
+                                    type: [this.data.type, Validators.required],
+                                    employees: [[], Validators.required]
+                                });
+    }
 
     refeshComponent(){
         const currentRoute = this.router.url;
@@ -108,14 +81,10 @@ export class NotificationModal implements OnInit {
             this.router.navigate([currentRoute]);
         });
     }
-    onSubmit(form: FormGroup) {
-
-
-        this.notificationService.addEdit(form.value).subscribe(()=> this.ngOnInit());
-        this.toastr.success('Add new Information successfully', 'Treatment')
+    onSubmit() {
+        this.notificationService.addEdit(this.addNewNotificationForm.value).subscribe();
+        this.toastr.success(this.title== 'Add Notification' ? 'Added successfully' : "Edited succsessful", 'Notification')
         this.refeshComponent();
         this.activeModal.close();
         }
-
-
 }
