@@ -43,47 +43,47 @@ export class VacxinModal implements OnInit{
               private vacxinService: VacxinService, private toastr: ToastrService){}
 
   ngOnInit(): void {
-    this.vacxinService.getAllCote().subscribe(data => {
-      this.coteList = data;
-    })
-    if (this.checkCoteCode != null){
-      this.vacxinService.getPigByCoteId(this.checkCoteCode.id).subscribe(data => {
-        this.pigList = data;
-        console.log(this.pigList);
-      });
-    }
-
-    this.treatmentForm = this.fb.group({
-      id: [this.data.id],
-      description: [this.data.description],
-      isDeleted: [0],
-      treatDate: [this.data.treatDate],
-      type: ['vacxin'],
-      veterinary: [this.data.veterinary],
-      cote: [this.data.cote],
-      pig: [this.data.pig],
-      diseases: [this.data.diseases],
-      vacxin: [this.data.vacxin]
-    })
-
-  }
-
-  onSubmit() {
-    console.log(this.checkCoteCode);
-    this.toastr.success('Delete successfully', 'C04piggy');
-    this.refeshComponent();
-    this.activeModal.close();
-  }
-
-  check(coteId) {
-    this.checkCoteCode.id = coteId;
-    this.ngOnInit();
-  }
-  refeshComponent(){
-    const currentRoute = this.router.url;
-    this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
-      this.router.navigate([currentRoute]);
-    });
+  //   this.vacxinService.getAllCote().subscribe(data => {
+  //     this.coteList = data;
+  //   })
+  //   if (this.checkCoteCode != null){
+  //     this.vacxinService.getPigByCoteId(this.checkCoteCode.id).subscribe(data => {
+  //       this.pigList = data;
+  //       console.log(this.pigList);
+  //     });
+  //   }
+  //
+  //   this.treatmentForm = this.fb.group({
+  //     id: [this.data.id],
+  //     description: [this.data.description],
+  //     isDeleted: [0],
+  //     treatDate: [this.data.treatDate],
+  //     type: ['vacxin'],
+  //     veterinary: [this.data.veterinary],
+  //     cote: [this.data.cote],
+  //     pig: [this.data.pig],
+  //     diseases: [this.data.diseases],
+  //     vacxin: [this.data.vacxin]
+  //   })
+  //
+  // }
+  //
+  // onSubmit() {
+  //   console.log(this.checkCoteCode);
+  //   this.toastr.success('Delete successfully', 'C04piggy');
+  //   this.refeshComponent();
+  //   this.activeModal.close();
+  // }
+  //
+  // check(coteId) {
+  //   this.checkCoteCode.id = coteId;
+  //   this.ngOnInit();
+  // }
+  // refeshComponent(){
+  //   const currentRoute = this.router.url;
+  //   this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+  //     this.router.navigate([currentRoute]);
+  //   });
   }
 }
 

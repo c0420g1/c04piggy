@@ -16,6 +16,7 @@ import {ExportHistoryStockComponent} from './export-history-stock/export-history
 import { VacxinComponent } from './vacxin/vacxin.component';
 import {AuthGuard} from './service/auth.guard.service';
 import {AdminAuthService} from './service/admin-auth.service';
+import {HerdComponent} from './herd/herd.component';
 
 
 
@@ -81,7 +82,11 @@ const routes: Routes = [
         {
             path: 'history-of-stock-out',
             component: ExportHistoryStockComponent
-        }
+        },
+        {
+            path: 'herd',
+            component: HerdComponent
+        },
     ]
 }];
 
