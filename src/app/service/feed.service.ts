@@ -42,7 +42,7 @@ export class FeedService {
     return this.http.get<Herd[]>(this.API_URL2);
   }
 
-  getFeed():Observable<Feed[]>{
+  getFeed(): Observable<Feed[]>{
     return this.http.get<Feed[]>(this.API_URL6);
   }
 }
