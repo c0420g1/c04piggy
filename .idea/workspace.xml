@@ -21,8 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/herd/herd.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/herd/herd.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/service/feed.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/feed.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/service/pig.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/pig.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/table/table.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +128,7 @@
       <workItem from="1605617091475" duration="4148000" />
       <workItem from="1605661208824" duration="3305000" />
       <workItem from="1605665042108" duration="1424000" />
-      <workItem from="1605670527512" duration="1384000" />
+      <workItem from="1605670527512" duration="3569000" />
     </task>
     <servers />
   </component>

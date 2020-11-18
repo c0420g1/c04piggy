@@ -14,6 +14,7 @@ import {DeleteModal} from '../table/table.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Cote} from '../model/Cote';
 import {CoteService} from '../service/cote.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-pig',
@@ -59,6 +60,7 @@ export class PigComponent implements OnInit {
               private feedService: FeedService,
               private coteService: CoteService,
               private pigStatusService: StatusService,
+              private toastr: ToastrService,
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
@@ -182,34 +184,41 @@ export class PigComponent implements OnInit {
     }
   }
 
-  onDelete(element){
+  onDelete(element) {
     const ids: number[] = [];
     ids.push(element.id);
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.ids = ids;
     modalRef.componentInstance.service = this.pigService;
   }
-  isSelectAll(){
-    $('table tbody input[type="checkbox"]').prop('checked', $('#selectAll').is(':checked'));
+  isSelectAll() {
+    $('table tbody input[type="checkbox"]').prop(
+        'checked',
+        $('#selectAll').is(':checked')
+    );
   }
-  checkit(){
+  checkit() {
     $('#selectAll').prop('checked', false);
   }
-  fdelete(){
+  fdelete() {
     const ids: number[] = [];
     const checkbox = $('table tbody input[type="checkbox"]');
-    checkbox.each(function(index){
-      if ((checkbox[index] as HTMLInputElement).checked){
+    checkbox.each(function(index) {
+      if ((checkbox[index] as HTMLInputElement).checked) {
         const t = Number($(this).val());
         ids.push(t);
       }
     });
-    const modalRef = this.modalService.open(DeleteModal);
-    console.log('do dai delete' + ids[1].valueOf());
-    modalRef.componentInstance.ids = ids;
-    modalRef.componentInstance.service = this.pigService;
+    // tslint:disable-next-line:triple-equals
+    if (ids.length == 0){
+      this.toastr.error('Must be check on check box', 'C04piggy');
+      // tslint:disable-next-line:triple-equals
+    }else if (ids.length != 0) {
+      const modalRef = this.modalService.open(DeleteModal);
+      modalRef.componentInstance.ids = ids;
+      modalRef.componentInstance.service = this.pigService;
+    }
   }
-
   // pagenation
   changePage(currentPage){
     this.currentPage = currentPage;
@@ -292,7 +301,6 @@ export class PigComponent implements OnInit {
       // tslint:disable-next-line:no-shadowed-variable
       this.pigService
           .search(this.currentPage, this.search).subscribe(data => {
-          console.log('total' + this.totalPage);
           this.pigList = data;
           this.currentItems = data.length;
           this.setPage(this.currentPage);

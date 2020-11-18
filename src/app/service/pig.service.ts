@@ -44,7 +44,7 @@ export class PigService {
   }
 
   delete(ids: number[]): Observable<number> {
-    return this.http.post<number>(this.API_URL_DELETE_PIG, ids);
+    return this.http.patch<number>(this.API_URL_DELETE_PIG, ids);
   }
 
   // herd
