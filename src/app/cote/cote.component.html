@@ -425,7 +425,8 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add" data-dismiss="modal" [disabled]="historyExport.invalid" (click)="soldPig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Add"
+                                data-dismiss="modal" [hidden]="historyExport.invalid"  (click)="soldPig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>
@@ -457,9 +458,13 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add" data-dismiss="modal" (click)="sold1Pig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Add" [hidden]="historyExport.invalid"
+                                data-dismiss="modal" (click)="sold1Pig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+
+
