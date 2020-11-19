@@ -31,7 +31,11 @@ import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
 import {VacxinComponent} from './vacxin/vacxin.component';
 import {HerdComponent} from './herd/herd.component';
-
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { NotifireComponent } from './notifire/notifire.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -58,6 +62,7 @@ import {HerdComponent} from './herd/herd.component';
         DeleteModal,
         VacxinComponent,
         HerdComponent,
+        NotifireComponent,
     ],
     imports: [
         BrowserModule,
@@ -69,6 +74,9 @@ import {HerdComponent} from './herd/herd.component';
         MatFormFieldModule,
         MatDialogModule,
         FormsModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
         ReactiveFormsModule,
         RouterModule,
         MatInputModule,

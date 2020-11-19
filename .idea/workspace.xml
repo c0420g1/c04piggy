@@ -21,10 +21,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/debug.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/service/pig.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/service/pig.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/layout.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout/layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout/layout.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/model/Global.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/Global.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +58,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../c04cinema-frontend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/app/model" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -63,7 +66,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\ProjectCodeGym\C0420G1_TranQuangTrung_Module6\project2new\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\project2\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -103,7 +106,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -133,11 +136,14 @@
       <workItem from="1605665042108" duration="1424000" />
       <workItem from="1605682165814" duration="1784000" />
       <workItem from="1605693096637" duration="2102000" />
+      <workItem from="1605701997786" duration="4456000" />
+      <workItem from="1605748507445" duration="11100000" />
+      <workItem from="1605767221405" duration="339000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -156,9 +162,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="28" key="#TSLint/0.0.1366.738@0.0.1366.738" timestamp="1605682534623" />
-    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1605661579622">
+    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1605702327846">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728/1366.0.1600.860@0.0.1366.728" timestamp="1605702327846" />
     <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605661579622" />
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
     <state width="1345" height="192" key="GridCell.Tab.0.bottom" timestamp="1605693806853">
