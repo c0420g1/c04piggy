@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoadCssService} from '../load-css.service';
 import {TokenStorageService} from '../service/token-storage.service';
-declare var $: any;
+// declare var $: any;
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
