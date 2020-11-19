@@ -100,7 +100,7 @@
 
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <input id="description" type="text" class="form-control" value="{{data.description}}" formControlName="description">
+                        <textarea id="description" type="text" class="form-control" value="{{data.description}}" formControlName="description"></textarea>
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('description').invalid && stockForm.get('description').touched">
