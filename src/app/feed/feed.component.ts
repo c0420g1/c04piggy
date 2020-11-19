@@ -19,7 +19,7 @@ import {delay} from 'rxjs/operators';
 })
 export class FeedComponent implements OnInit {
     columnHeader = {
-        'amount': 'Amount',
+        'amount': 'Amount (kg)',
         'code': 'Code',
         'unit': 'Unit',
         'feedTypeName': 'FeedType',

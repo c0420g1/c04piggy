@@ -7,69 +7,69 @@
         <div class="modal-body">
 
             <div class="form-group">
-                <label>Amount</label>
-                <input type="text" #inputAmount class="form-control" value="{{data.amount}}" formControlName="amount">
+                <label>Amount <span style="color: red">(*)</span></label>
+                <input type="text" #inputAmount class="form-control" value="{{data.amount}}" formControlName="amount" placeholder="Input number ...">
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('amount').touched && feedForm.get('amount').invalid">
-                <p *ngIf="feedForm.get('amount').hasError('required')"> Not required</p>
+                <p *ngIf="feedForm.get('amount').hasError('required')"> required</p>
                 <p *ngIf="feedForm.get('amount').hasError('pattern')"> format is number </p>
             </div>
         </div>
         <div class="modal-body">
 
             <div class="form-group">
-                <label>Code</label>
-                <input type="text" #inputCode class="form-control" value="{{data.code}}" formControlName="code">
+                <label>Code <span style="color: red">(*)</span></label>
+                <input type="text" #inputCode class="form-control" value="{{data.code}}" formControlName="code" placeholder="FEXXXX">
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('code').touched && feedForm.get('code').invalid">
-                <p *ngIf="feedForm.get('code').hasError('required')"> Not required</p>
+                <p *ngIf="feedForm.get('code').hasError('required')"> required</p>
                 <p *ngIf="feedForm.get('code').hasError('pattern')"> format is FEXXXX with XXXX is number </p>
             </div>
         </div>
         <div class="modal-body">
 
             <div class="form-group">
-                <label>Unit</label>
-                <input type="text" #inputUnit class="form-control" value="{{data.unit}}" formControlName="unit">
+                <label>Unit <span style="color: red">(*)</span></label>
+                <input type="text" #inputUnit class="form-control" value="{{data.unit}}" formControlName="unit" placeholder="kg/ngay || kg/tuan || kg/thang">
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('unit').touched && feedForm.get('unit').invalid">
-                <p *ngIf="feedForm.get('unit').hasError('required')"> Not required</p>
+                <p *ngIf="feedForm.get('unit').hasError('required')"> required</p>
                 <p *ngIf="feedForm.get('unit').hasError('pattern')"> format is kg/ngay | kg/tuan | kg/thang </p>
             </div>
         </div>
         <div class="modal-body">
 
             <div class="form-group">
-                <label>Feed Type</label>
+                <label>Feed Type <span style="color: red">(*)</span></label>
                 <select class="form-control" formControlName="feedType" [ngModel]="feedType1" onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option [ngValue]="feedType1" disabled>{{feedType1.name}}</option>
                     <option *ngFor="let feedType of feedType1$" [ngValue]="feedType" >{{feedType.name}}</option>
                 </select>
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('feedType').touched && feedForm.get('feedType').invalid">
-                <p *ngIf="feedForm.get('feedType').hasError('required')"> Not required</p>
+                <p *ngIf="feedForm.get('feedType').hasError('required')"> required</p>
             </div>
         </div>
         <div class="modal-body">
 
             <div class="form-group">
-                <label>Herd</label>
+                <label>Herd <span style="color: red">(*)</span></label>
                 <select class="form-control" formControlName="herd"  [ngModel]="herd1" onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
                     <option [ngValue]="herd1" disabled>{{herd1.name}}</option>
                     <option *ngFor="let herd of Herd" [ngValue]="herd" >{{herd.name}}</option>
                 </select>
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('herd').touched && feedForm.get('herd').invalid">
-                <p *ngIf="feedForm.get('herd').hasError('required')"> Not required</p>
+                <p *ngIf="feedForm.get('herd').hasError('required')"> required</p>
             </div>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label>Description</label>
+                <label>Description <span style="color: red">(*)</span></label>
                 <textarea type="text" class="form-control" #inputDescription  value="{{data.description}}" formControlName="description"></textarea>
             </div>
             <div class="alert alert-danger" role="alert" *ngIf="feedForm.get('description').touched && feedForm.get('description').invalid">
-                <p *ngIf="feedForm.get('description').hasError('required')"> Not required</p>
+                <p *ngIf="feedForm.get('description').hasError('required')"> required</p>
             </div>
         </div>
 
