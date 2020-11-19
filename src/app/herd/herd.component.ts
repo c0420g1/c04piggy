@@ -16,8 +16,7 @@ import {FeedService} from '../service/feed.service';
   styleUrls: ['./herd.component.css']
 })
 export class HerdComponent implements OnInit {
-  columnHeader = { 'description': 'Description', 'name': 'Herd Name',
-    'feed': 'Feed Type' ,'cote': 'Cote Code', 'action': 'Action'};
+  columnHeader = { 'description': 'Description', 'name': 'Herd Name', 'action': 'Action'};
 
   constructor(public herdService: HerdService, private loadCssService: LoadCssService) { }
 
