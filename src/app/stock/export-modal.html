@@ -7,8 +7,8 @@
         <div class="modal-body">
             <form [formGroup]="exportHistoryStockForm">
                 <div class="form-group">
-                    <label>Quantity<span style="color: red">(*)</span></label>
-                    <input type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity" [(ngModel)]="stockOut" (change)="checkQuantity()">
+                    <label for="quantity">Quantity<span style="color: red">(*)</span></label>
+                    <input  id="quantity" type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity" [(ngModel)]="stockOut" (change)="checkQuantity()">
                 </div>
                 <div class="alert alert-danger" role="alert"
                      *ngIf="exportHistoryStockForm.get('quantity').invalid && exportHistoryStockForm.get('quantity').touched">
@@ -16,42 +16,46 @@
                 </div>
                 <div class="alert alert-danger" role="alert" *ngIf="error">The quantity stock out must be less than the quantity in stock.</div>
 
+                <input  type="hidden" class="form-control" value="{{data.importDate}}" formControlName="importDate" >
+
                 <div class="form-group">
-                    <label>Stock Out Date<span style="color: red">(*)</span></label>
-                    <input type="date" class="form-control" value="{{data.exportDate}}" formControlName="exportDate" >
+                    <label for="stockOutDate">Stock Out Date<span style="color: red">(*)</span></label>
+                    <input id="stockOutDate" type="date" class="form-control" value="{{data.exportDate}}" formControlName="exportDate" >
                 </div>
 
                 <div class="alert alert-danger" role="alert"
                      *ngIf="exportHistoryStockForm.get('exportDate').invalid && exportHistoryStockForm.get('exportDate').touched">
-                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('required')">Stock Out Date is required</p>
-                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('checkDate')">Stock out Date must be before Current Date.</p>
+                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('required')">Stock Out Date is required.</p>
+                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('pattern')">Stock Out Date must be follow format: (dd//mm/yyyy).</p>
+                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('checkDate')">Stock out Date must be not before Current Date.</p>
+                    <p *ngIf="exportHistoryStockForm.get('exportDate').hasError('invalidDate2')">Stock Out must be not before Stock In date</p>
                 </div>
 
                 <div class="form-group">
-                    <label>Stock Employee<span style="color: red">(*)</span></label>
-                    <select formControlName="employee"  class="form-control">
+                    <label for="employee">Stock Employee<span style="color: red">(*)</span></label>
+                    <select id="employee" formControlName="employee"  class="form-control">
                         <option  *ngFor="let employee of employees" [ngValue]="employee" >{{employee.name}}</option>
                     </select>
                 </div>
                 <div class="alert alert-danger" role="alert"
                      *ngIf="exportHistoryStockForm.get('employee').invalid && exportHistoryStockForm.get('employee').touched">
-                    <p *ngIf="exportHistoryStockForm.get('employee').hasError('required')">Stock Employee is required</p>
+                    <p *ngIf="exportHistoryStockForm.get('employee').hasError('required')">Stock Employee is required.</p>
                 </div>
 
                 <div class="form-group">
-                    <label>Received Employee<span style="color: red">(*)</span></label>
-                    <select formControlName="receivedEmployeeId"  class="form-control">
+                    <label for="receivedEmployeedId">Received Employee<span style="color: red">(*)</span></label>
+                    <select id="receivedEmployeedId" formControlName="receivedEmployeeId"  class="form-control">
                         <option  *ngFor="let employee of employees" [ngValue]="employee.id" >{{employee.name}}</option>
                     </select>
                 </div>
                 <div class="alert alert-danger" role="alert"
                      *ngIf="exportHistoryStockForm.get('receivedEmployeeId').invalid && exportHistoryStockForm.get('receivedEmployeeId').touched">
-                    <p *ngIf="exportHistoryStockForm.get('receivedEmployeeId').hasError('required')">Received Employee is required</p>
+                    <p *ngIf="exportHistoryStockForm.get('receivedEmployeeId').hasError('required')">Received Employee is required.</p>
                 </div>
 
                 <div class="form-group">
-                    <label>Description</label>
-                    <input type="text" class="form-control" value="{{data.description}}" formControlName="description" >
+                    <label for="description">Description</label>
+                    <input id="description" type="text" class="form-control" value="{{data.description}}" formControlName="description" >
                 </div>
                 <div class="alert alert-danger" role="alert"
                      *ngIf="exportHistoryStockForm.get('description').invalid && exportHistoryStockForm.get('description').touched">
