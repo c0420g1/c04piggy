@@ -21,13 +21,12 @@ export class FeedComponent implements OnInit {
     columnHeader = {
         'amount': 'Amount (kg)',
         'code': 'Code',
-        'unit': 'Unit',
+        'unit': 'Unit (kg)',
         'feedTypeName': 'FeedType',
         'herdName': 'Herd',
         'Action': 'Action'
     };
-    feedType1$: Observable<FeedType[]>;
-
+     items =  [];
 
     constructor(public feedService: FeedService) {
     }
@@ -35,29 +34,24 @@ export class FeedComponent implements OnInit {
 
     ngOnInit(): void {
 
-        // this.feedType1$ = this.getAllFeedTypeSearch();
+        this.feedService.getAllFeedType().subscribe(
+            data => {
+               this.items = data;
+               console.log(this.items);
+            } , error => {
+                    this.items = [];
+                });
 
 
     }
 
-    // getAllFeedTypeSearch(term: string = null): Observable<FeedType[]> {
-    //     let items =  [];
-    //     this.feedService.getAllFeedType().subscribe(
-    //         data => {
-    //             items = data;
-    //             if (term) {
-    //                 items = items.filter(x => x.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
-    //             }
-    //         }, error => {
-    //             items = [];
-    //         });
-    //     return of(items).pipe(delay(2500));
-    // }
 
     onAddClick(element, modal) {
       const modalRef = modal.open(FeedModal);
               modalRef.componentInstance.title = element ? 'Edit Feed' : 'Add Feed';
               modalRef.componentInstance.data = element ?? new Feed();
+              modalRef.componentInstance.feedType = this.items;
+              console.log(this.items);
     }
 
 }
@@ -69,6 +63,7 @@ export class FeedComponent implements OnInit {
 export class FeedModal implements OnInit {
     @Input() data;
     @Input() title;
+    @Input() feedType;
     feedForm: FormGroup;
     Herd: Herd[];
     feeds: Feed[];
@@ -80,7 +75,9 @@ export class FeedModal implements OnInit {
     @ViewChild('inputDescription') inputDescription: ElementRef;
     @ViewChild('inputCode') inputCode: ElementRef;
     feedType1$: FeedType[];
-
+    feedType$ : Observable<FeedType[]>;
+    selectedPersonId : string;
+    unit : string;
 
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router, public feedService: FeedService, private toast: ToastrService) {
@@ -88,14 +85,17 @@ export class FeedModal implements OnInit {
     }
 
     ngOnInit(): void {
+        this.feedType$ = this.getAllFeedTypeSearch();
+        this.unit = this.data.unit;
+
         this.feedForm = this.fb.group({
             id: [this.data.id],
             description: [this.data.description, [Validators.required]],
             amount: [this.data.amount, [Validators.required, Validators.pattern('^[\\d\\s]+$')]],
             code: [this.data.code,  [Validators.required, Validators.pattern('^(FE)[\\d]{4}$')]],
-            unit: [this.data.unit,  [Validators.required, Validators.pattern('kg/ngay|kg/tuan|kg/thang')]],
+            unit: [this.data.unit,  [Validators.required, Validators.pattern('ngay|tuan|thang')]],
             feedType: [this.data.feedType,  [Validators.required]],
-            herd: [this.data.herd,  [Validators.required]],
+            herd: [this.data.herd],
         });
 
         this.feedService.getFeed().subscribe(next => (this.feeds = next, this.feeds.forEach(e => {
@@ -123,7 +123,6 @@ export class FeedModal implements OnInit {
         if(this.feedForm.valid)
         {
             const {value} = this.feedForm;
-            console.log(this.feedForm);
             this.feedService.addEdit(value).subscribe(
                 next => {
                     this.error1s = next;
@@ -157,5 +156,14 @@ export class FeedModal implements OnInit {
         this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
             this.router.navigate([currentRoute]);
         });
+    }
+
+
+    getAllFeedTypeSearch(term: string = null): Observable<FeedType[]> {
+                if (term) {
+                    this.feedType = this.feedType.filter(x => x.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
+                    console.log(this.feedType);
+                }
+        return of(this.feedType).pipe(delay(2500));
     }
 }
