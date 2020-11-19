@@ -10,7 +10,7 @@ import { TreatmentDTO } from '../model/TreatmentDTO';
   providedIn: 'root'
 })
 export class VacxinService {
-  private readonly TREATMENTDTO_URL = Global.host + 'treatmentVacxinDTO';
+  private readonly TREATMENTDTO_URL = Global.host + 'vaccineInfoDTO';
   private readonly COTE_URL = Global.host + 'cote';
   private readonly DELETE_URL = Global.host + 'treatmentVacxin';
   private readonly GETPIG_URL = Global.host + 'pig';
