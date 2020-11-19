@@ -223,8 +223,14 @@
                         </div>
                         <div class="form-group">
                             <label>Herd</label>
-                            <input *ngIf="!check" class="form-control" formControlName="herd" value="{{coteEdit.herd.name}}" readonly>
+                            <!-- <input *ngIf="!check" class="form-control" formControlName="herd" value="{{coteEdit.herd.name}}" readonly>
                             <select *ngIf="check" class="form-control" formControlName="herd" required >
+                                <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
+                            </select> -->
+
+
+                            <select formControlName="herd"  class="form-control" [(ngModel)]="checkHerd">
+                                <option  [ngValue]="checkHerd"  disabled >{{checkHerd.name}}</option>
                                 <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                             </select>
                         </div>
