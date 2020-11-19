@@ -143,7 +143,7 @@ export class FeedModal implements OnInit {
                         if (e.fileName == 'success'){
                             this.feedForm.reset();
                             this.activeModal.close();
-                            this.toast.success('Feed Add', 'aaaaaaaaaa');
+                            this.toast.success('Feed Add', 'update success');
                             this.refeshComponent();
                         }
                     });
