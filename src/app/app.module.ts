@@ -31,7 +31,7 @@ import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
 import {VacxinComponent, VacxinModal} from './vacxin/vacxin.component';
 import {HerdComponent} from './herd/herd.component';
-
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 @NgModule({
     declarations: [
         AppComponent,
@@ -78,6 +78,7 @@ import {HerdComponent} from './herd/herd.component';
             positionClass: 'toast-top-center',
             preventDuplicates: true,
         }),
+        AngularMultiSelectModule,
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent]
