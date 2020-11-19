@@ -132,7 +132,8 @@ export class ExportModal implements OnInit {
     this.exportHistoryStockForm = this.fb.group({
       description: ['', Validators.maxLength(1000)],
       isDeleted: [0],
-      exportDate: ['',[Validators.required,dateValidator]],
+      importDate: [this.data.importDate,compareStockInStockOutDate.bind(this)],
+      exportDate: ['',[Validators.required,Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator,compareStockInStockOutDate.bind(this)]],
       quantity: ['',[Validators.required,]],
       receivedEmployeeId: ['',[Validators.required]],
       type: ['stock'],
@@ -216,19 +217,39 @@ function compareTwoDates(){
     return false;
 }
 
+function compareStockInStockOutDate(){
+  if(!this.exportHistoryStockForm?.controls?.importDate?.value || !this.exportHistoryStockForm?.controls?.exportDate?.value) {
+    return null;
+  }
+
+  let endDate: string[];
+  let startDate: string[];
+  endDate = this.exportHistoryStockForm.controls.exportDate.value.split('-');
+  startDate = this.exportHistoryStockForm.controls.importDate.value.split('-');
+  let dateNumberEnd = (parseInt(endDate[0]) * 365) + (parseInt(endDate[1]) * 30) + (parseInt(endDate[2]));
+  let dateNumberStart = (parseInt(startDate[0]) *  365) + (parseInt(startDate[1]) * 30) + (parseInt(startDate[2]));
+  if ((dateNumberEnd <= dateNumberStart)) {
+    return {invalidDate2: true};
+  }
+  return false;
+}
+
 // validate Shipment Code
 function validateShipmentCode(){
-  console.log("abc")
+
+
   if(!this.stockForm?.controls?.shipmentCode?.value) {
     return null;
   }
   for (let stockDTO of this.stockDTOs){
-    if ((!this.stockForm?.controls?.id?.value) && (stockDTO.shipmentCode === this.stockForm.controls.shipmentCode.value)){
+    if (!(this.stockForm?.controls?.id?.value) && (stockDTO.shipmentCode === this.stockForm.controls.shipmentCode.value)){
       return {invalidShipmentCode: true};
     }else {
       return null;
     }
   }
+
+  console.log("abc");
 }
 
 
