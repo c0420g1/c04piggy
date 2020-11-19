@@ -15,7 +15,7 @@
                      *ngIf="treatmentForm.get('treatDate').invalid && treatmentForm.get('treatDate').touched">
                     <p *ngIf="treatmentForm.get('treatDate').hasError('required')">Treat Date is Required</p>
                     <p *ngIf="treatmentForm.get('treatDate').hasError('pattern')">Treat Date is not format</p>
-                    <!--                        <p *ngIf="treatmentForm.get('treatDate').hasError('checkDate')">Treat Date cannot be smaller than the current date</p>-->
+                    <p *ngIf="treatmentForm.get('treatDate').hasError('checkDate')">Treat Date must be after the current date</p>
                 </div>
                 <div class="form-group">
                     <label>Cote Code <span style="color:red;">*</span></label>

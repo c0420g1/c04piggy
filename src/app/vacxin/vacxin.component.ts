@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
@@ -61,14 +61,14 @@ export class VacxinModal implements OnInit{
     })
     this.vaccineForm = this.fb.group({
       id: [''],
-      description: [''],
+      description: ['',Validators.required],
       isDeleted: [0],
-      treatDate: [''],
+      treatDate: ['',[Validators.required,dateValidator.bind(this)]],
       type: ['vacxin'],
-      veterinary: [''],
-      cote: [''],
+      veterinary: ['',Validators.required],
+      cote: ['',Validators.required],
       pig: [this.data.pig],
-      diseases: [''],
+      diseases: ['',Validators.required],
       vacxin: [this.data.vacxin]
     })
 
@@ -92,3 +92,21 @@ export class VacxinModal implements OnInit{
   }
 }
 
+function dateValidator(formControl: FormControl) {
+  // if(formControl.value == undefined) {
+  //   return null;
+  // }
+  let date1: string[];
+  date1 = formControl.value.split('-');
+  const o_date = new Intl.DateTimeFormat;
+  const f_date = (m_ca, m_it) => Object({...m_ca, [m_it.type]: m_it.value});
+  const m_date = o_date.formatToParts().reduce(f_date, {});
+  let dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2])) ;
+  let dateNumberNow = (parseInt(m_date.year) * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day)) ;
+  if (dateNumber < dateNumberNow) {
+    return {checkDate: true};
+  }
+
+  return null;
+
+}
