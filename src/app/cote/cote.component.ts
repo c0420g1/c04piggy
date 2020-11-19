@@ -177,7 +177,7 @@ export class CoteComponent implements OnInit {
         this.historyService.soldPigs(this.pigsListSoldIds, this.historyExport.value).subscribe(
             () => {
                 this.toast.success('', 'Manipulation Success !');
-            }, error => console.log('error export!')
+            }, error => this.toast.error('Manipulation not valid !',"Error Export !")
         );
         this.ngOnInit();
     }
@@ -202,7 +202,7 @@ export class CoteComponent implements OnInit {
             () => {
                 this.notificate = true;
                 this.toast.success('', 'Manipulation Success !');
-            }, error => console.log('error export!')
+            }, error => this.toast.error('Manipulation not valid !',"Error Export !")
         );
         this.ngOnInit();
     }
@@ -270,7 +270,7 @@ export class CoteComponent implements OnInit {
         this.coteTemp.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
 
         this.coteService.addNewCote(this.coteTemp).subscribe(() => {
-          this.ngOnInit()
+          this.ngOnInit();
           this.toast.success("","Add New Successful !");
         });
         document.getElementById('add').click();
