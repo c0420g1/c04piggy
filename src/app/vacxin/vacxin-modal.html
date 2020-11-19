@@ -1,0 +1,59 @@
+
+<div class="modal-content">
+    <form>
+        <div class="modal-header">
+            <h4 class="modal-title">{{title}}</h4>
+            <a type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</a>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="vaccineForm">
+                <div class="form-group">
+                    <label>Date <span style="color:red;">*</span></label>
+                    <input type="date" class="form-control" formControlName="treatDate">
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="vaccineForm.get('treatDate').invalid && vaccineForm.get('treatDate').touched">
+                    <p *ngIf="vaccineForm.get('treatDate').hasError('required')"> Date is Required</p>
+                    <p *ngIf="vaccineForm.get('treatDate').hasError('pattern')"> Date is not format</p>
+                    <p *ngIf="vaccineForm.get('treatDate').hasError('checkDate')"> Date must be not before the current date</p>
+                </div>
+                <div class="form-group">
+                    <label>Cote Code <span style="color:red;">*</span></label>
+                    <select formControlName="cote"  class="form-control"  [(ngModel)]="checkCoteCode"
+                            onfocus='if(this.options.length > 5){ this.size = 5; }' onblur='this.size=1;' onchange='this.size=1; this.blur();'>
+                        <option  [ngValue]="checkCoteCode"  disabled >{{checkCoteCode.code}}</option>
+                        <option *ngFor="let cote of coteList" [ngValue]="cote"  >{{cote.code}}</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="vaccineForm.get('cote').invalid && vaccineForm.get('cote').touched">
+                    <p *ngIf="vaccineForm.get('cote').hasError('required')">Cote is Required</p>
+                </div>
+                <div class="form-group">
+                    <label>Veterinarians</label>
+                    <input type="text" class="form-control" formControlName="veterinary">
+                </div>
+                <div class="form-group">
+                    <label>Vaccine Type <span style="color:red;">*</span></label>
+                    <select formControlName="diseases"  class="form-control" [(ngModel)]="checkDiseases">
+                        <option  [ngValue]="checkDiseases"  disabled >{{checkDiseases.name}}</option>
+                        <option *ngFor="let diseases of diseasesList" [ngValue]="diseases">{{diseases.name}}</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" role="alert"
+                     *ngIf="vaccineForm.get('diseases').invalid && vaccineForm.get('diseases').touched">
+                    <p *ngIf="vaccineForm.get('diseases').hasError('required')">Diseases is Required</p>
+                </div>
+                <div class="form-group">
+                    <label>Note</label>
+                    <textarea type="text" class="form-control" formControlName="description"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
+            <button [disabled]="vaccineForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()">save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+        </div>
+    </form>
+</div>
+

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {LoadCssService} from '../load-css.service';
 declare var $: any;
 @Component({
   selector: 'app-dashboard',
@@ -7,7 +8,7 @@ declare var $: any;
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loadCssService: LoadCssService) { }
 
   ngOnInit(): void {
   }

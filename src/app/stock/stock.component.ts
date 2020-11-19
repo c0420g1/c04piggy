@@ -200,6 +200,8 @@ export class ExportModal implements OnInit {
    if (stockOutQuantity > stockInQuantity){
      this.error = true;
    }
+   else
+    this.error= null;
   }
 
 }
