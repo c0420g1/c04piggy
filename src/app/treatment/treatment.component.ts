@@ -88,7 +88,7 @@ export class TreatmentModal implements OnInit{
       id: [''],
       description: [''],
       isDeleted: [0],
-      treatDate: ['', Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$')],
+      treatDate: ['', [Validators.required, Validators.pattern('^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$'),dateValidator.bind(this)]],
       type: ['treatment'],
       veterinary: [''],
       cote: ['', Validators.required],
@@ -104,7 +104,7 @@ export class TreatmentModal implements OnInit{
 
    this.treatmentService.addEditTreatment(this.treatmentForm.value).subscribe(data => {
      console.log(data);
-     this.toastr.success('Add new Information successfully', 'Treatment')
+     this.toastr.success('Save Information successfully', 'Treatment')
    })
     this.refeshComponent();
     this.activeModal.close();
@@ -134,7 +134,7 @@ function dateValidator(formControl: FormControl) {
   const m_date = o_date.formatToParts().reduce(f_date, {});
   let dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2])) ;
   let dateNumberNow = (parseInt(m_date.year) * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day)) ;
-  if (dateNumber < dateNumberNow) {
+  if (dateNumber > dateNumberNow) {
     return {checkDate: true};
   }
 

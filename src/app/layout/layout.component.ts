@@ -6,6 +6,7 @@ import {NotifireService} from '../service/notifire.service';
 import {Router} from '@angular/router';
 import {Global} from '../model/Global';
 declare var $: any;
+// declare var $: any;
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
