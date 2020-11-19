@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a163ba73-ffdf-4e3d-9570-253d353d92f7" name="Default Changelist" comment="">
+    <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock/stock.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/feed/feed-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed-modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/feed/feed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,14 +53,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../c04cinema-frontend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="ts.external.directory.path" value="D:\Team C0420G1\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -128,6 +130,8 @@
       <workItem from="1605661208824" duration="3305000" />
       <workItem from="1605665042108" duration="1424000" />
       <workItem from="1605682165814" duration="1784000" />
+      <workItem from="1605693096637" duration="2102000" />
+      <workItem from="1605749482324" duration="1815000" />
     </task>
     <servers />
   </component>
@@ -157,6 +161,22 @@
     </state>
     <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1605661579622" />
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
+    <state width="1345" height="192" key="GridCell.Tab.0.bottom" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
+    <state width="1345" height="192" key="GridCell.Tab.0.center" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
+    <state width="1345" height="192" key="GridCell.Tab.0.left" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
+    <state width="1345" height="192" key="GridCell.Tab.0.right" timestamp="1605693806853">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state width="1345" height="192" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
     <state x="389" y="165" key="run.anything.popup" timestamp="1605597315307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

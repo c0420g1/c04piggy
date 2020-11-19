@@ -23,14 +23,16 @@ import {FeedComponent, FeedModal} from './feed/feed.component';
 import {MatInputModule} from '@angular/material/input';
 import {HistoryExportComponent} from './history-export/history-export.component';
 import {PigComponent} from './pig/pig.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {AccountDetailComponent} from './account-detail/account-detail.component';
 import {LoginComponent} from './login/login.component';
 import {ExportHistoryStockComponent} from './export-history-stock/export-history-stock.component';
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
-import {VacxinComponent} from './vacxin/vacxin.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import {VacxinComponent, VacxinModal} from './vacxin/vacxin.component';
 import {HerdComponent} from './herd/herd.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 @NgModule({
     declarations: [
@@ -57,6 +59,7 @@ import {HerdComponent} from './herd/herd.component';
         FeedModal,
         DeleteModal,
         VacxinComponent,
+        VacxinModal,
         HerdComponent,
     ],
     imports: [
@@ -72,11 +75,15 @@ import {HerdComponent} from './herd/herd.component';
         ReactiveFormsModule,
         RouterModule,
         MatInputModule,
+        NgSelectModule,
+        NgOptionHighlightModule,
         CommonModule,
         ToastrModule.forRoot({
             positionClass: 'toast-top-center',
             preventDuplicates: true,
         }),
+        AngularMultiSelectModule,
+
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent]

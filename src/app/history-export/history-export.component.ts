@@ -1,8 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HistoryExport} from '../model/HistoryExport';
 import {HistoryExportService} from '../service/history-export.service';
 
 @Component({

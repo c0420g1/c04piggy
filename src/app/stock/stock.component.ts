@@ -177,6 +177,8 @@ export class ExportModal implements OnInit {
    }else {
      this.error = false;
    }
+   else
+    this.error= null;
   }
 
 }

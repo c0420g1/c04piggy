@@ -288,7 +288,7 @@ export class CoteComponent implements OnInit {
                 this.coteEdit.exportDate = null;
             }
             this.editCoteForm.patchValue(data);
-            this.editCoteForm.patchValue({herd: data.herd.name});
+            this.editCoteForm.patchValue({herd: data.herd});
             this.editCoteForm.get('dateGroup').get('importDate').patchValue(this.formatDate(new Date(data.importDate)));
             if (data.exportDate != null) {
                 this.editCoteForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date(data.exportDate)));
@@ -327,7 +327,7 @@ export class CoteComponent implements OnInit {
         this.coteEdit.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
         this.coteService.addNewCote(this.coteEdit).subscribe(() => {
           this.ngOnInit();
-          this.toast.success("","Add New Successful !");
+          this.toast.success("","Edit Successful !");
         });
         document.getElementById('edit').click();
     }
@@ -344,6 +344,36 @@ export class CoteComponent implements OnInit {
             day = '0' + day;
         }
         return [year, month, day].join('-');
+    }
+
+    checkQuality(pigListDTO: PigDTONew[]) {
+        for (let i =0; i< pigListDTO.length; i++){
+            if (pigListDTO[i].weight < 113){
+                return false;
+            } else if(pigListDTO[i].weight >= 113) {
+                let count = 0;
+                for (let i = 0; i < pigListDTO[i].status.length; i++) {
+                    if (pigListDTO[i].status[i] == 'Healthy') {
+                        count ++;
+                    }
+                }
+                if (count == 0){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    checkQualityPig(pig: PigDTONew) {
+        if (pig.weight >= 113) {
+            for (let i = 0; i < pig.status.length; i++) {
+                if (pig.status[i] == 'Healthy') {
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

@@ -10,7 +10,7 @@ import {Employee} from '../model/Employee';
 import { Role } from '../model/Role';
 import { AccountRole } from '../model/AccountRole';
 import {ToastrService} from 'ngx-toastr';
-
+import * as bcrypt from 'bcryptjs';
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -44,12 +44,17 @@ export class AccountModal implements OnInit {
   roleList: Role[];
   accountLast: Acc;
   roleSelect: Role;
+  accountList = [];
+  pass: string;
 
   constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router,
               private accountService: AccountService, private employeeService: EmployeeService, private  toast: ToastrService) {}
 
   ngOnInit(): void {
-
+    this.accountService.getData(-1, ' ').subscribe(account => {
+        this.accountList = account;
+        console.log(this.accountList);
+    });
     this.accountService.getAllRole().subscribe((roles) => {
       this.roleList = roles;
       this.roleSelect = roles[0];
@@ -76,8 +81,7 @@ export class AccountModal implements OnInit {
       description: [''],
       code:  [this.data.code, [Validators.required, Validators.pattern('NV[0-9]+')]],
       name:  [this.data.name, [Validators.required]],
-        // , Validators.pattern('([0-3])\\d/([0|1])\\d/(19|20)\\d{2}')
-      birthday:  [this.data.birthday, [Validators.required]],
+      birthday:  [this.data.birthday, [Validators.required, dateValidator]],
       email:  [this.data.email, [Validators.required, Validators.pattern('[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}')]],
       cardId:  [this.data.cardId, [Validators.required, Validators.pattern('[\\d]{3,}(-)[\\d]{3,}(-)[\\d]{3,}')]],
       gender:  ['1'],
@@ -106,7 +110,9 @@ export class AccountModal implements OnInit {
       console.log(this.employeeForm.value);
       this.accountService.editEmployee(this.employeeForm.value).subscribe(
           data => {
-            this.accountService.editAccount(this.accountForm.value).subscribe(
+              this.pass = bcrypt.hashSync(this.accountForm.value.password, 10);
+              this.accountForm.value.password = this.pass;
+              this.accountService.editAccount(this.accountForm.value).subscribe(
                 (data) => {
                   this.accountService.getRolebyId(this.accountForm.value.id).subscribe((role) => {
                     this.roleForm.value.id = role.id;
@@ -121,8 +127,9 @@ export class AccountModal implements OnInit {
       );
 
     }else if (this.accountForm.value.id == null){
-
-      this.accountService.addAccount(this.accountForm.value).subscribe(
+        this.pass = bcrypt.hashSync(this.accountForm.value.password, 10);
+        this.accountForm.value.password = this.pass;
+        this.accountService.addAccount(this.accountForm.value).subscribe(
           (data) => {
               this.accountService.getAccountLast().subscribe(
                   data => {
@@ -151,6 +158,34 @@ export class AccountModal implements OnInit {
     this.refeshComponent();
     this.toast.success('Add Successful', 'ABC Accounht');
   }
+    // usernameValidator(){
+    //
+    //   for (const account of this.accountList){
+    //     if (account.username === this.accountForm.value.username){
+    //         console.log('true');
+    //         this.testAccount = true;
+    //     }else if (account.username !== this.accountForm.value.username){
+    //         console.log('false');
+    //         this.testAccount = false;
+    //     }
+    // }
+    // }
+}
 
+function dateValidator(formControl: FormControl) {
+    if (formControl.value == undefined) {
+        return null;
+    }
+    let date1: string[];
+    date1 = formControl.value.split('-');
+    const o_date = new Intl.DateTimeFormat;
+    const f_date = (m_ca, m_it) => Object({...m_ca, [m_it.type]: m_it.value});
+    const m_date = o_date.formatToParts().reduce(f_date, {});
+    const dateNumber = (parseInt(date1[0]) * 365) + (parseInt(date1[1]) * 30) + (parseInt(date1[2]));
+    const dateNumberNow = (parseInt(m_date.year) * 365) + (parseInt(m_date.month) * 30) + (parseInt(m_date.day));
+    if (dateNumber > dateNumberNow) {
+        return {checkDate: true};
+    }
+    return null;
 }
 
