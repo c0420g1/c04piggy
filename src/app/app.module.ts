@@ -32,6 +32,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 import {VacxinComponent, VacxinModal} from './vacxin/vacxin.component';
 import {HerdComponent} from './herd/herd.component';
+import {environment} from '../environments/environment';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
+import { NotifireComponent } from './notifire/notifire.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 @NgModule({
@@ -61,6 +66,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
         VacxinComponent,
         VacxinModal,
         HerdComponent,
+        NotifireComponent,
     ],
     imports: [
         BrowserModule,
@@ -72,6 +78,9 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
         MatFormFieldModule,
         MatDialogModule,
         FormsModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireStorageModule,
+        AngularFireDatabaseModule,
         ReactiveFormsModule,
         RouterModule,
         MatInputModule,

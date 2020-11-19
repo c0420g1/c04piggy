@@ -26,6 +26,8 @@ export class PigComponent implements OnInit {
   message: string;
   pigAssociateStatusList: PigAssociateStatus[] = [];
   pigList: PigDTO[] = [];
+  maleList: Pig[] = [];
+  femaleList: Pig[] = [];
   pigStatus: PigStatus[] = [];
   feedList: Feed[] = [];
   herdList: Herd[] = [];
@@ -50,6 +52,8 @@ export class PigComponent implements OnInit {
   checkIfPigNewBorn = false;
   addNewPigStatus: FormGroup;
   editNewPigForm: FormGroup;
+  private errors: any;
+  private filter: string;
 
 
 
@@ -82,11 +86,18 @@ export class PigComponent implements OnInit {
       this.pigStatus = status;
     });
 
+    this.pigService.maleList(this.filter).subscribe((male) => {
+      this.maleList = male;
+    });
+
+    this.pigService.femaleList(this.filter).subscribe((female) => {
+      this.femaleList = female;
+    });
+
     this.getPigList();
 
     // add (new import/new born)
-    if (this.checkIfPigNewBorn) {
-      this.addNewPigForm = this.fb.group({
+    this.addNewPigForm = this.fb.group({
         description: [''],
         code: ['', Validators.required],
         importDate: ['', Validators.required],
@@ -95,30 +106,12 @@ export class PigComponent implements OnInit {
         spec: [''],
         weight: [''],
         color: [''],
-        parentsGroup: this.fb.group({
-          fatherId: ['', Validators.required],
-          motherId: ['', Validators.required],
-        }),
+        fatherId: ['', Validators.required],
+        motherId: ['', Validators.required],
         cote: Cote,
         feed: Feed,
         herd: Herd,
       });
-    }else {
-      this.addNewPigForm = this.fb.group({
-        id: [''],
-        description: [''],
-        code: ['', Validators.required],
-        importDate: ['', [Validators.required]],
-        exportDate: ['', Validators.required],
-        gender: [''],
-        spec: [''],
-        weight: [''],
-        color: [''],
-        feed: Feed,
-        herd: Herd,
-        cote: Cote,
-      });
-    }
 
     this.addNewPigStatus = this.fbStatus.group({
       description: [''],
@@ -154,6 +147,19 @@ export class PigComponent implements OnInit {
     if (this.addNewPigForm.valid) {
       const {value} = this.addNewPigForm;
       this.pigService.addPig(value).subscribe(() => this.ngOnInit());
+    }
+  }
+
+  addPigNewBorn() {
+    if (this.addNewPigForm.valid) {
+      const {value} = this.addNewPigForm;
+      this.pigService.addPig(value).subscribe(
+          res => console.log(res),
+          err => {
+            this.errors = err.error.message;
+            console.log(this.errors);
+          }
+      );
     }
   }
 

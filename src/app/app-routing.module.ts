@@ -17,6 +17,7 @@ import { VacxinComponent } from './vacxin/vacxin.component';
 import {AuthGuard} from './service/auth.guard.service';
 import {AdminAuthService} from './service/admin-auth.service';
 import {HerdComponent} from './herd/herd.component';
+import {NotifireComponent} from './notifire/notifire.component';
 
 
 
@@ -41,6 +42,10 @@ const routes: Routes = [
         {
             path: 'notification',
             component: NotificationComponent
+        },
+        {
+            path: 'notifire',
+            component: NotifireComponent
         },
         {
             path: 'stock',
