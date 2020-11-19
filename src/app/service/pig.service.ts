@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {PigDTO} from '../model/PigDTO';
 import {Pig} from '../model/Pig';
 import {Herd} from '../model/Herd';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,11 @@ import {Herd} from '../model/Herd';
 export class PigService {
   private readonly API_URL_PIG_LIST_SHOW = 'http://localhost:8080/pigList';
   private readonly API_URL_PIG_LIST = 'http://localhost:8080/pigListFull';
+  private readonly API_URL_MALE_LIST = 'http://localhost:8080/pigMale';
+  private readonly API_URL_FEMALE_LIST = 'http://localhost:8080/pigFemale';
   private readonly API_URL_GET_PIG = 'http://localhost:8080/pigDetail';
   private readonly API_URL_ADD_PIG = 'http://localhost:8080/addPig';
+  private readonly API_URL_ADD_NEW_BORN_PIG = 'http://localhost:8080/pigAdd';
   private readonly API_URL_EDIT_PIG = 'http://localhost:8080/editPig';
   private readonly API_URL_DELETE_PIG = 'http://localhost:8080/deletePig';
   private readonly API_URL_SOLD_PIG = 'http://localhost:8080/soldPig';
@@ -34,9 +38,22 @@ export class PigService {
     return this.http.get<Pig[]>(this.API_URL_PIG_LIST);
   }
 
+  maleList(filter: string): Observable<Pig[]> {
+    return this.http.get<Pig[]>(this.API_URL_MALE_LIST + '/' + '?filter=' + filter);
+  }
+
+  femaleList(filter: string): Observable<Pig[]> {
+    return this.http.get<Pig[]>(this.API_URL_FEMALE_LIST + '/' + '?filter=' + filter);
+  }
+
   addPig(pig: Partial<Pig>): Observable<Pig> {
     return this.http.post<Pig>(this.API_URL_ADD_PIG, pig);
   }
+
+  addPigNewBorn(pig: Partial<Pig>): Observable<Pig> {
+      return this.http.post<Pig>(this.API_URL_ADD_PIG, pig);
+  }
+
 
   editPig(pig: Partial<Pig>) {
     return this.http.patch<Pig>(this.API_URL_EDIT_PIG, pig);

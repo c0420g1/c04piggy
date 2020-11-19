@@ -19,7 +19,7 @@ import {delay} from 'rxjs/operators';
 })
 export class FeedComponent implements OnInit {
     columnHeader = {
-        'amount': 'Amount',
+        'amount': 'Amount (kg)',
         'code': 'Code',
         'unit': 'Unit',
         'feedTypeName': 'FeedType',
@@ -143,7 +143,7 @@ export class FeedModal implements OnInit {
                         if (e.fileName == 'success'){
                             this.feedForm.reset();
                             this.activeModal.close();
-                            this.toast.success('Feed Add', 'aaaaaaaaaa');
+                            this.toast.success('Feed Add', 'update success');
                             this.refeshComponent();
                         }
                     });
