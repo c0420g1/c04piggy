@@ -34,7 +34,7 @@ export class CoteComponent implements OnInit {
     coteEdit = new Cote();
     coteTemp = new Cote();
     check: boolean;
-
+    checkHerd: Herd= new Herd();
 
     // Pagination
     currentPage = 1;
@@ -91,14 +91,16 @@ export class CoteComponent implements OnInit {
             this.entityNumber = data.length;
             this.coteList = data;
             this.setPage(this.currentPage);
+
+            this.pigService.getListHerd().subscribe((herds) => {
+                this.herdList = herds;
+            });
         });
 
         this.employeeService.getAllEmployee().subscribe((employees) => {
             this.employeeList = employees;
         });
-        this.pigService.getListHerd().subscribe((herds) => {
-            this.herdList = herds;
-        });
+        
         this.coteService.getCoteCode().subscribe((data) => {
             this.coteCodeList = data;
         });
@@ -288,7 +290,6 @@ export class CoteComponent implements OnInit {
                 this.coteEdit.exportDate = null;
             }
             this.editCoteForm.patchValue(data);
-            this.editCoteForm.patchValue({herd: data.herd});
             this.editCoteForm.get('dateGroup').get('importDate').patchValue(this.formatDate(new Date(data.importDate)));
             if (data.exportDate != null) {
                 this.editCoteForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date(data.exportDate)));
