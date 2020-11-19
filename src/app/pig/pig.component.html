@@ -18,7 +18,10 @@
 <!--                    <input type="checkbox" [checked]="onNewBornChange()">-->
 <!--                </div>-->
                 <div style="margin-left: 15px">
-                    <button title="add" class="btn btn-sm btn-success" type="button" href="#add" data-toggle="modal">Add new pig</button>
+                    <button title="add" (click)="onNewBornChange()" class="btn btn-sm btn-success" type="button" href="#add" data-toggle="modal">Add new born</button>
+                </div>
+                <div style="margin-left: 15px">
+                    <button title="add" (click)="checkIfPigNewBorn = false" class="btn btn-sm btn-success" type="button" href="#add" data-toggle="modal">Add new pig</button>
                 </div>
                 <div style="margin-left: 15px">
                     <button class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete Pig</button>
@@ -255,6 +258,20 @@
                         <select class="form-control" formControlName="gender" >
                             <option value="1">Male</option>
                             <option value="0">Femele</option>
+                        </select>
+                    </div>
+                    <div class="form-group" *ngIf="checkIfPigNewBorn">
+                        <label>Father</label>
+<!--                        <input type="checkbox" [checked]="filter == 'filter'">-->
+                        <select class="form-control" formControlName="fatherId" >
+                            <option *ngFor="let male of maleList" [ngValue]="male.id">{{male.code}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group" *ngIf="checkIfPigNewBorn">
+                        <label>Mother</label>
+<!--                        <input type="checkbox" [checked]="filter == 'filter'">-->
+                        <select class="form-control" formControlName="fatherId" >
+                            <option *ngFor="let female of femaleList" [ngValue]="female.id">{{female.code}}</option>
                         </select>
                     </div>
                     <div class="form-group">
