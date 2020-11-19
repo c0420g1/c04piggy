@@ -152,7 +152,7 @@ export class ExportModal implements OnInit {
     this.stockService.exportOutStock(this.data.id, this.exportHistoryStockForm.value.quantity).subscribe(
         data=>{
           this.toastr.success('Stock out and save history successfully', 'Stock Out');
-          window.location.reload();
+          // window.location.reload();
         }
     );
     this.refeshComponent();
@@ -218,7 +218,7 @@ function compareTwoDates(){
 
 // validate Shipment Code
 function validateShipmentCode(){
-
+  console.log("abc")
   if(!this.stockForm?.controls?.shipmentCode?.value) {
     return null;
   }
@@ -226,7 +226,7 @@ function validateShipmentCode(){
     if ((!this.stockForm?.controls?.id?.value) && (stockDTO.shipmentCode === this.stockForm.controls.shipmentCode.value)){
       return {invalidShipmentCode: true};
     }else {
-      return false;
+      return null;
     }
   }
 }
