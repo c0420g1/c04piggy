@@ -8,6 +8,7 @@ import {FeedType} from '../model/FeedType';
 import {Herd} from '../model/Herd';
 import {Error1 } from '../model/error1';
 import {Observable, of} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
 import {delay} from 'rxjs/operators';
 
 
@@ -25,6 +26,8 @@ export class FeedComponent implements OnInit {
         'herdName': 'Herd',
         'Action': 'Action'
     };
+    feedType1$: Observable<FeedType[]>;
+
 
     constructor(public feedService: FeedService) {
     }
@@ -32,8 +35,24 @@ export class FeedComponent implements OnInit {
 
     ngOnInit(): void {
 
+        // this.feedType1$ = this.getAllFeedTypeSearch();
+
 
     }
+
+    // getAllFeedTypeSearch(term: string = null): Observable<FeedType[]> {
+    //     let items =  [];
+    //     this.feedService.getAllFeedType().subscribe(
+    //         data => {
+    //             items = data;
+    //             if (term) {
+    //                 items = items.filter(x => x.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
+    //             }
+    //         }, error => {
+    //             items = [];
+    //         });
+    //     return of(items).pipe(delay(2500));
+    // }
 
     onAddClick(element, modal) {
       const modalRef = modal.open(FeedModal);
@@ -55,16 +74,16 @@ export class FeedModal implements OnInit {
     feeds: Feed[];
     herd1 = new Herd();
     feedType1 = new FeedType();
-    feedType1$: Observable<FeedType[]>;
     error1s: Error1[];
     @ViewChild('inputAmount') inputAmount: ElementRef;
     @ViewChild('inputUnit') inputUnit: ElementRef;
     @ViewChild('inputDescription') inputDescription: ElementRef;
     @ViewChild('inputCode') inputCode: ElementRef;
+    feedType1$: FeedType[];
 
 
 
-  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router, public feedService: FeedService) {
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder, private router: Router, public feedService: FeedService, private toast: ToastrService) {
 
     }
 
@@ -87,8 +106,9 @@ export class FeedModal implements OnInit {
           }
         })) , error => (this.feeds = []));
 
-        // this.feedService.getAllFeedType().subscribe(next => (this.feedType1$ = next), error => (this.feedType1$ = []));
-        this.feedType1$ = this.feedService.getPeople();
+        this.feedService.getAllFeedType().subscribe(next => (this.feedType1$ = next), error => (this.feedType1$ = []));
+
+
 
         this.feedService.getAllHerd().subscribe(next => (this.Herd = next), error => (this.Herd = []));
 
@@ -96,35 +116,46 @@ export class FeedModal implements OnInit {
             this.inputAmount.nativeElement.focus();
         });
     }
+
+
+
     onSubmit() {
         if(this.feedForm.valid)
         {
-        const {value} = this.feedForm;
-        console.log(this.feedForm);
-        this.feedService.addEdit(value).subscribe(
-            next => {
-                this.error1s = next;
-                this.error1s.forEach(e => {
-                    if (e.fileName == 'amount'){
-                        this.inputAmount.nativeElement.focus();
-                    }
-                    if (e.fileName == 'unit'){
-                        this.inputUnit.nativeElement.focus();
-                    }
-                    if (e.fileName == 'description'){
-                        this.inputDescription.nativeElement.focus();
-                    }
-                    if (e.fileName == 'code'){
-                        this.inputCode.nativeElement.focus();
-                    }
-                    if (e.fileName == 'success'){
-                        this.feedForm.reset();
-                        window.location.reload();
-                    }
-                });
-            }, error => console.log(error)
-        );
+            const {value} = this.feedForm;
+            console.log(this.feedForm);
+            this.feedService.addEdit(value).subscribe(
+                next => {
+                    this.error1s = next;
+                    this.error1s.forEach(e => {
+                        if (e.fileName == 'amount'){
+                            this.inputAmount.nativeElement.focus();
+                        }
+                        if (e.fileName == 'unit'){
+                            this.inputUnit.nativeElement.focus();
+                        }
+                        if (e.fileName == 'description'){
+                            this.inputDescription.nativeElement.focus();
+                        }
+                        if (e.fileName == 'code'){
+                            this.inputCode.nativeElement.focus();
+                        }
+                        if (e.fileName == 'success'){
+                            this.feedForm.reset();
+                            this.activeModal.close();
+                            this.toast.success('Feed Add', 'aaaaaaaaaa');
+                            this.refeshComponent();
+                        }
+                    });
+                }, error => console.log(error)
+            );
         }
-    }
 
+    }
+    refeshComponent(){
+        const currentRoute = this.router.url;
+        this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
+            this.router.navigate([currentRoute]);
+        });
+    }
 }
