@@ -29,7 +29,7 @@ import {LoginComponent} from './login/login.component';
 import {ExportHistoryStockComponent} from './export-history-stock/export-history-stock.component';
 import {CommonModule} from '@angular/common';
 import {ToastrModule} from 'ngx-toastr';
-import {VacxinComponent} from './vacxin/vacxin.component';
+import {VacxinComponent, VacxinModal} from './vacxin/vacxin.component';
 import {HerdComponent} from './herd/herd.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 @NgModule({
@@ -57,6 +57,7 @@ import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
         FeedModal,
         DeleteModal,
         VacxinComponent,
+        VacxinModal,
         HerdComponent,
     ],
     imports: [
