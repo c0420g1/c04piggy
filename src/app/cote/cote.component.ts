@@ -350,9 +350,30 @@ export class CoteComponent implements OnInit {
         for (let i =0; i< pigListDTO.length; i++){
             if (pigListDTO[i].weight < 113){
                 return false;
+            } else if(pigListDTO[i].weight >= 113) {
+                let count = 0;
+                for (let i = 0; i < pigListDTO[i].status.length; i++) {
+                    if (pigListDTO[i].status[i] == 'Healthy') {
+                        count ++;
+                    }
+                }
+                if (count == 0){
+                    return false;
+                }
             }
         }
         return true;
+    }
+
+    checkQualityPig(pig: PigDTONew) {
+        if (pig.weight >= 113) {
+            for (let i = 0; i < pig.status.length; i++) {
+                if (pig.status[i] == 'Healthy') {
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 }
 

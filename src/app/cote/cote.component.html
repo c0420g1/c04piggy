@@ -370,7 +370,7 @@
                                 </td>
                                 <td>
                                     <div style="padding-top: 20px">
-                                        <input *ngIf="pig.weight >= 113" type="button"  class="btn btn-warning" data-dismiss="modal" (click)="addIdPigSold(pig.pigId)" href="#sold1" data-toggle="modal" value="Sold" >
+                                        <input *ngIf="checkQualityPig(pig)" type="button"  class="btn btn-warning" data-dismiss="modal" (click)="addIdPigSold(pig.pigId)" href="#sold1" data-toggle="modal" value="Sold" >
 
                                     </div>
                                 </td>
