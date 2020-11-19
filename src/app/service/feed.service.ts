@@ -51,6 +51,4 @@ export class FeedService {
         return this.http.get<Feed[]>(this.API_URL6);
     }
 
-
-
 }

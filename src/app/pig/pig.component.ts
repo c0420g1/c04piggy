@@ -14,6 +14,7 @@ import {DeleteModal} from '../table/table.component';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Cote} from '../model/Cote';
 import {CoteService} from '../service/cote.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-pig',
@@ -33,18 +34,18 @@ export class PigComponent implements OnInit {
   pigEdit: Pig;
 
   // Pagination
-  currentItems: number=0;
-  totalItems: number=0;
-  search: string ='';
+  currentItems = 0;
+  totalItems = 0;
+  search = '';
   listPage: number[];
-  currentPage: number =1;
+  currentPage = 1;
   totalPage: any;
   startPage: any;
-  endPage:any;
+  endPage: any;
   pageSize = 5;
 
   // Form
-  isDeleteAll:boolean=false;
+  isDeleteAll = false;
   addNewPigForm: FormGroup;
   checkIfPigNewBorn = false;
   addNewPigStatus: FormGroup;
@@ -59,30 +60,31 @@ export class PigComponent implements OnInit {
               private feedService: FeedService,
               private coteService: CoteService,
               private pigStatusService: StatusService,
+              private toastr: ToastrService,
               private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
-    //get list
-    this.coteService.getListCote('').subscribe((cotes) =>{
+    // get list
+    this.coteService.getListCote('').subscribe((cotes) => {
       this.coteList = cotes;
-    })
+    });
 
-    this.pigService.getListHerd().subscribe((herds) =>{
+    this.pigService.getListHerd().subscribe((herds) => {
       this.herdList = herds;
     });
 
-    this.feedService.getAll().subscribe((feeds) =>{
+    this.feedService.getAll().subscribe((feeds) => {
       this.feedList = feeds;
     });
 
-    this.pigStatusService.getAllStatus().subscribe((status) =>{
+    this.pigStatusService.getAllStatus().subscribe((status) => {
       this.pigStatus = status;
-    })
+    });
 
     this.getPigList();
 
-    //add (new import/new born)
+    // add (new import/new born)
     if (this.checkIfPigNewBorn) {
       this.addNewPigForm = this.fb.group({
         description: [''],
@@ -94,8 +96,8 @@ export class PigComponent implements OnInit {
         weight: [''],
         color: [''],
         parentsGroup: this.fb.group({
-          fatherId: ['',Validators.required],
-          motherId: ['',Validators.required],
+          fatherId: ['', Validators.required],
+          motherId: ['', Validators.required],
         }),
         cote: Cote,
         feed: Feed,
@@ -122,7 +124,7 @@ export class PigComponent implements OnInit {
       description: [''],
       pig: Pig,
       pigStatus: PigStatus,
-    })
+    });
 
     this.editNewPigForm = this.fbEdit.group({
       id: [''],
@@ -135,16 +137,16 @@ export class PigComponent implements OnInit {
       spec: [''],
       weight: [''],
       color: [''],
-      fatherId: ['',Validators.required],
-      motherId: ['',Validators.required],
+      fatherId: ['', Validators.required],
+      motherId: ['', Validators.required],
       feed: Feed,
       herd: Herd,
       cote: Cote,
-    })
+    });
   }
 
   searchPig() {
-    this.currentPage =1;
+    this.currentPage = 1;
     this.ngOnInit();
   }
 
@@ -160,76 +162,77 @@ export class PigComponent implements OnInit {
       this.pig = data;
       console.log(this.pig.id);
       this.editNewPigForm.setValue(this.pig);
-    })
+    });
 
-  };
+  }
 
   editPigConfirm() {
     this.pigEdit = this.editNewPigForm.value;
-    if (this.editNewPigForm.valid) {
-      const { value } = this.editNewPigForm;
-      const data = {
-        ...this.pigEdit,
-        ...value
-      };
-      this.pigService.editPig(data).subscribe(
+    console.log(this.editNewPigForm.value);
+    this.pigService.addPig(this.pigEdit).subscribe(
           next => {
-            this.pigEdit[this.pigList.findIndex(e => e.pigId === this.pigEdit.id)] = this.pigEdit;
             this.ngOnInit();
             },
           error => console.log(error)
       );
-    };
-  };
+  }
 
-  onDelete(element){
-    let ids: number[]=[];
+  onDelete(element) {
+    const ids: number[] = [];
     ids.push(element.id);
     const modalRef = this.modalService.open(DeleteModal);
     modalRef.componentInstance.ids = ids;
     modalRef.componentInstance.service = this.pigService;
   }
-  isSelectAll(){
-    $('table tbody input[type="checkbox"]').prop('checked', $('#selectAll').is(':checked'));
+  isSelectAll() {
+    $('table tbody input[type="checkbox"]').prop(
+        'checked',
+        $('#selectAll').is(':checked')
+    );
   }
-  checkit(){
+  checkit() {
     $('#selectAll').prop('checked', false);
   }
-  fdelete(){
-    let ids: number[]=[];
-    var checkbox = $('table tbody input[type="checkbox"]');
-    checkbox.each(function(index){
-      if((checkbox[index] as HTMLInputElement).checked){
-        let t= Number($(this).val());
+  fdelete() {
+    const ids: number[] = [];
+    const checkbox = $('table tbody input[type="checkbox"]');
+    checkbox.each(function(index) {
+      if ((checkbox[index] as HTMLInputElement).checked) {
+        const t = Number($(this).val());
         ids.push(t);
       }
     });
-    const modalRef = this.modalService.open(DeleteModal);
-    console.log("do dai delete" + ids[1].valueOf());
-    modalRef.componentInstance.ids = ids;
-    modalRef.componentInstance.service = this.pigService;
+    // tslint:disable-next-line:triple-equals
+    if (ids.length == 0){
+      this.toastr.error('Must be check on check box', 'C04piggy');
+      // tslint:disable-next-line:triple-equals
+    }else if (ids.length != 0) {
+      const modalRef = this.modalService.open(DeleteModal);
+      modalRef.componentInstance.ids = ids;
+      modalRef.componentInstance.service = this.pigService;
+    }
   }
-
-  //pagenation
+  // pagenation
   changePage(currentPage){
-    this.currentPage= currentPage;
+    this.currentPage = currentPage;
     this.getPigList();
   }
   setPage(currentPage){
-    let totalPage = Math.ceil(this.totalItems/this.pageSize)
-    let maxPage = 5;
-    if(currentPage < 1){
+    const totalPage = Math.ceil(this.totalItems / this.pageSize);
+    const maxPage = 5;
+    if (currentPage < 1){
       this.currentPage = 1;
-    }else if(currentPage > totalPage){
+    }else if (currentPage > totalPage){
       this.currentPage = totalPage;
     }
+    // tslint:disable-next-line:one-variable-per-declaration
     let startPage: number, endPage: number;
     if (totalPage <= maxPage){
       startPage = 1;
       endPage = totalPage;
     }else {
-      let maxPagesBeforeCurrentPage = Math.floor(maxPage / 2);
-      let maxPagesAfterCurrentPage = Math.ceil(maxPage / 2) - 1;
+      const maxPagesBeforeCurrentPage = Math.floor(maxPage / 2);
+      const maxPagesAfterCurrentPage = Math.ceil(maxPage / 2) - 1;
       if (currentPage <= maxPagesBeforeCurrentPage) {
         // current page near the start
         startPage = 1;
@@ -247,53 +250,55 @@ export class PigComponent implements OnInit {
     this.listPage = Array.from(Array((endPage + 1) - startPage).keys()).map(i => startPage + i);
     this.currentPage = currentPage;
     this.startPage = this.listPage[0];
-    this.endPage = this.listPage[this.listPage.length-1];
+    this.endPage = this.listPage[this.listPage.length - 1];
   }
 
   next(){
-    if(this.currentPage<this.listPage.length){
+    if (this.currentPage < this.listPage.length){
       this.currentPage++;
       this.getPigList();
     }
 
   }
   previous(){
-    if(this.currentPage>1)  {
+    if (this.currentPage > 1)  {
       this.currentPage--;
       this.getPigList();
     }
   }
 
-  //Change to new born input form
+  // Change to new born input form
   onNewBornChange() {
     this.checkIfPigNewBorn = true;
     this.addNewPigForm.reset();
   }
 
   getMotherPig(id: number){
-    const motherPig = this.pigList[id]
+    const motherPig = this.pigList[id];
     return motherPig;
   }
 
   getFatherPig(id: number){
-    const fatherPig = this.pigList[id]
+    const fatherPig = this.pigList[id];
     return fatherPig;
   }
 
   private getPigList() {
-    this.pigService.search(0,this.search).subscribe(data => {
+    this.pigService.search(- 1, this.search).subscribe(data => {
       if (data.length === 0) {
         this.message = 'Không tìm thấy đặt dữ liệu nào!';
       } else {
         this.message = '';
       }
-      this.totalItems= data.length;
-      this.totalPage = Math.ceil(this.totalItems/this.pageSize);
-      console.log('total'+ this.totalPage);
-      this.pigService.search(this.currentPage,this.search).subscribe(data => {
-        this.pigList= data;
-        this.currentItems= data.length;
-        this.setPage(this.currentPage);
+      this.totalItems = data.length;
+      this.totalPage = Math.ceil(this.totalItems / this.pageSize);
+      // tslint:disable-next-line:no-shadowed-variable
+      this.pigService
+          // tslint:disable-next-line:no-shadowed-variable
+          .search(this.currentPage, this.search).subscribe(data => {
+          this.pigList = data;
+          this.currentItems = data.length;
+          this.setPage(this.currentPage);
       });
     });
   }
@@ -301,11 +306,12 @@ export class PigComponent implements OnInit {
 }
 
 
-//Validator Day
+// Validator Day
 
 // function importDayCheckValidator(control: AbstractControl) {
 //   const currentDay = new Date();
 //   const day = new Date(control.value);
+// tslint:disable-next-line:max-line-length
 //   if (day >= currentDay || (day.getFullYear() == day.getFullYear() && day.getMonth() == currentDay.getMonth() && day.getDay() == currentDay.getDay()) ){
 //     return null;
 //   }

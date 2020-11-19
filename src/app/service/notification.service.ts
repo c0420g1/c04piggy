@@ -9,7 +9,7 @@ import { Global } from '../model/Global';
 })
 export class NotificationService {
   private readonly APIgetNotification = Global.host + 'getNotification/';
-  private readonly APIaddEditNotification = Global.host + 'addEditNotification';
+  private readonly APIaddEditNotification = Global.host + 'addEditNotificationDTO';
   private readonly APIdeleteNotification = Global.host + 'deleteNotification';
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class NotificationService {
     return this.http.get<Notification[]>(this.APIgetNotification + pageNum + '?pageSize=' + Global.pageSize + '&search=' + search);
   }
 
-  addEdit(nf: Notification): Observable<void>{
+  addEdit(nf: any): Observable<void>{
     return this.http.post<void>(this.APIaddEditNotification, nf);
   }
 

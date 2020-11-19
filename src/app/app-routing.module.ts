@@ -14,18 +14,22 @@ import { AccountDetailComponent } from './account-detail/account-detail.componen
 import { LoginComponent } from './login/login.component';
 import {ExportHistoryStockComponent} from './export-history-stock/export-history-stock.component';
 import { VacxinComponent } from './vacxin/vacxin.component';
+import {AuthGuard} from './service/auth.guard.service';
+import {AdminAuthService} from './service/admin-auth.service';
+import {HerdComponent} from './herd/herd.component';
 
 
 
 const routes: Routes = [
-    // {
-    //     path: '',
-    //     component: LoginComponent
-    // }
-    // ,
+    {
+        path: 'login',
+        component: LoginComponent
+    }
+    ,
     {
     path: '',
     component: LayoutComponent,
+    canActivate: [AuthGuard],
     children: [{
         path: 'dashboard',
         component: DashboardComponent
@@ -45,7 +49,11 @@ const routes: Routes = [
         },
         {
             path: 'account',
-            component: AccountComponent
+            component: AccountComponent,
+            canActivate: [AdminAuthService],
+            data: {
+                expectedRole : 'admin'
+            }
         },
         {
             path: 'treatment',
@@ -74,7 +82,11 @@ const routes: Routes = [
         {
             path: 'history-of-stock-out',
             component: ExportHistoryStockComponent
-        }
+        },
+        {
+            path: 'herd',
+            component: HerdComponent
+        },
     ]
 }];
 

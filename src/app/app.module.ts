@@ -16,7 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {AccountComponent, AccountModal} from './account/account.component';
 import {TreatmentComponent, TreatmentModal} from './treatment/treatment.component';
-import {CoteComponent} from './cote/cote.component';
+import {CoteComponent} from './cote/cote.component'
 import {DatePipe} from '@angular/common';
 import {ExportModal, StockComponent, StockModal} from './stock/stock.component';
 import {FeedComponent, FeedModal} from './feed/feed.component';
@@ -32,6 +32,8 @@ import {ToastrModule} from 'ngx-toastr';
 import { VacxinComponent } from './vacxin/vacxin.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
+import {HerdComponent} from './herd/herd.component';
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 
 @NgModule({
     declarations: [
@@ -57,7 +59,8 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
         ExportHistoryStockComponent,
         FeedModal,
         DeleteModal,
-        VacxinComponent
+        VacxinComponent,
+        HerdComponent,
     ],
     imports: [
         BrowserModule,
@@ -79,6 +82,7 @@ import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
             positionClass: 'toast-top-center',
             preventDuplicates: true,
         }),
+        AngularMultiSelectModule,
 
     ],
     providers: [DatePipe],

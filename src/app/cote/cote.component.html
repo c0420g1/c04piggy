@@ -62,7 +62,8 @@
                             <tbody>
                             <tr class="even pointer" *ngFor="let cote of coteList; let i = index">
                                 <td class=" ">{{i+1}}</td>
-                                <td class=" "><a href="#informHerd" data-toggle="modal" (click)="getInfoPig(cote)">{{cote.coteCode}}</a></td>
+                                <td class=" " *ngIf="cote.quantity !=0"><a href="#informHerd" data-toggle="modal" (click)="getInfoPig(cote)">{{cote.coteCode}}</a></td>
+                                <td class=" " *ngIf="cote.quantity == 0">{{cote.coteCode}}</td>
                                 <td class=" ">{{cote.employeeName}}</td>
                                 <td class=" ">{{cote.herdName}} </td>
                                 <td class=" ">{{cote.importDate | date: 'dd-MM-yyyy'}} </td>
@@ -168,6 +169,10 @@
         </div>
     </div>
 
+
+<!--    test-->
+
+
 <!--    edit-->
 
     <div id="edit" class="modal fade">
@@ -218,7 +223,7 @@
                         </div>
                         <div class="form-group">
                             <label>Herd</label>
-                            <input *ngIf="!check" class="form-control" formControlName="herd" readonly>
+                            <input *ngIf="!check" class="form-control" formControlName="herd" value="{{coteEdit.herd.name}}" readonly>
                             <select *ngIf="check" class="form-control" formControlName="herd" required >
                                 <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                             </select>
@@ -292,7 +297,7 @@
                         </div>
                         <div class="form-group">
                             <label>Herd</label>
-                            <select class="form-control" formControlName="herd" required >
+                            <select class="form-control" formControlName="herd"  required >
                                 <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                             </select>
                         </div>
@@ -365,8 +370,8 @@
                                 </td>
                                 <td>
                                     <div style="padding-top: 20px">
+                                        <input *ngIf="pig.weight >= 113" type="button"  class="btn btn-warning" data-dismiss="modal" (click)="addIdPigSold(pig.pigId)" href="#sold1" data-toggle="modal" value="Sold" >
 
-                                        <input type="button"  class="btn btn-warning" data-dismiss="modal" (click)="addIdPigSold(pig.id)" href="#sold1" data-toggle="modal" value="Sold" >
                                     </div>
                                 </td>
                             </tr>
@@ -376,7 +381,8 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="submit" class="btn btn-success" value="Add" data-toggle="modal"  data-dismiss="modal" href="#soldAll" (click)="getAllIdPigs(pigList)">Sold All</button>
+                    <button *ngIf="checkQuality(pigListDTO)" type="submit" class="btn btn-success" value="Add" data-toggle="modal"  data-dismiss="modal" href="#soldAll" (click)="getAllIdPigs(pigListDTO)">Sold All</button>
+
                 </div>
             </form>
         </div>
@@ -409,14 +415,15 @@
                                 <option *ngFor="let employee of employeeList" [ngValue]="employee">{{employee.name}}</option>
                             </select>
                             <div class="alert alert-danger" role="alert" *ngIf="historyExport.get('employee').invalid &&
-                                                                              historyExport.get('employee').touched">
+                                                                              historyExport.get('employee').untouched">
                                 Employee is required!
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add" data-dismiss="modal" (click)="soldPig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Add"
+                                data-dismiss="modal" [hidden]="historyExport.invalid"  (click)="soldPig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>
@@ -448,9 +455,13 @@
                     </div>
                     <div class="modal-footer">
                         <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                        <button type="submit" class="btn btn-success" value="Add" data-dismiss="modal" (click)="sold1Pig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                        <button type="submit" class="btn btn-success" value="Add" [hidden]="historyExport.invalid"
+                                data-dismiss="modal" (click)="sold1Pig()">Export<i style="margin-left: 5px" class="fa fa-save"></i></button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+
+
