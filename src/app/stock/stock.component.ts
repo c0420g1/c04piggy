@@ -51,7 +51,9 @@ export class StockComponent implements OnInit {
 }
 
 @Component({
-  templateUrl: './stock-modal.html'
+  templateUrl: './stock-modal.html',
+  styleUrls: ['./stock.component.css']
+
 })
 export class StockModal implements OnInit {
   @Input() data;
@@ -115,7 +117,8 @@ export class StockModal implements OnInit {
 }
 
 @Component({
-  templateUrl: './export-modal.html'
+  templateUrl: './export-modal.html',
+  styleUrls: ['./stock.component.css']
 })
 export class ExportModal implements OnInit {
   @Input() data;
