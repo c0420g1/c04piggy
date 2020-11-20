@@ -21,7 +21,7 @@ export class FeedComponent implements OnInit {
     columnHeader = {
         'amount': 'Amount (kg)',
         'code': 'Code',
-        'unit': 'Unit (kg)',
+        'unit': 'Unit (kg/)',
         'feedTypeName': 'FeedType',
         'herdName': 'Herd',
         'Action': 'Action'
