@@ -21,11 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock/export-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock/export-modal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock/stock-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock/stock-modal.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock/stock.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock/stock.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/stock/stock.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/stock/stock.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assets/build/css/custom.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/build/css/custom.min.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
