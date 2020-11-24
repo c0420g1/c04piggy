@@ -52,7 +52,6 @@ export class PigComponent implements OnInit {
   checkIfPigNewBorn = false;
   addNewPigStatus: FormGroup;
   pigAdd: Pig = new Pig();
-  newPig: Pig;
   editPigForm: FormGroup;
   private errors: any;
   private filter: string;
@@ -212,20 +211,20 @@ export class PigComponent implements OnInit {
   }
 
   editPigConfirm(form: FormGroup) {
-    this.newPig.id = form.get('id').value;
-    this.newPig.description = form.get('description').value;
-    this.newPig.isDeleted = form.get('isDeleted').value;
-    this.newPig.code = form.get('code').value;
-    this.newPig.spec = form.get('spec').value;
-    this.newPig.weight = form.get('weight').value;
-    this.newPig.gender = form.get('gender').value;
-    this.newPig.color = form.get('color').value;
-    this.newPig.feed = form.get('feed').value;
-    this.newPig.herd = form.get('herd').value;
-    this.newPig.cote = form.get('cote').value;
-    this.newPig.importDate = new Date(form.get('dateGroup').get('importDate').value);
-    this.newPig.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
-    this.pigService.editPig(this.newPig).subscribe(() => {
+    this.pigEdit.id = form.get('id').value;
+    this.pigEdit.description = form.get('description').value;
+    this.pigEdit.isDeleted = form.get('isDeleted').value;
+    this.pigEdit.code = form.get('code').value;
+    this.pigEdit.spec = form.get('spec').value;
+    this.pigEdit.weight = form.get('weight').value;
+    this.pigEdit.gender = form.get('gender').value;
+    this.pigEdit.color = form.get('color').value;
+    this.pigEdit.feed = form.get('feed').value;
+    this.pigEdit.herd = form.get('herd').value;
+    this.pigEdit.cote = form.get('cote').value;
+    this.pigEdit.importDate = new Date(form.get('dateGroup').get('importDate').value);
+    this.pigEdit.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
+    this.pigService.editPig(this.pigEdit).subscribe(() => {
       console.log(this.pig.id);
       this.getPigList();
       this.toastr.success('', 'Edit Successful !');
