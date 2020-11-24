@@ -211,17 +211,8 @@ export class PigComponent implements OnInit {
   }
 
   editPigConfirm(form: FormGroup) {
-    this.pigEdit.id = form.get('id').value;
-    this.pigEdit.description = form.get('description').value;
-    this.pigEdit.isDeleted = form.get('isDeleted').value;
-    this.pigEdit.code = form.get('code').value;
-    this.pigEdit.spec = form.get('spec').value;
-    this.pigEdit.weight = form.get('weight').value;
-    this.pigEdit.gender = form.get('gender').value;
-    this.pigEdit.color = form.get('color').value;
-    this.pigEdit.feed = form.get('feed').value;
-    this.pigEdit.herd = form.get('herd').value;
-    this.pigEdit.cote = form.get('cote').value;
+    this.pigEdit = this.editPigForm.value;
+    console.log(this.editPigForm.value);
     this.pigEdit.importDate = new Date(form.get('dateGroup').get('importDate').value);
     this.pigEdit.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
     this.pigService.editPig(this.pigEdit).subscribe(() => {
