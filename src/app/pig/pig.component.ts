@@ -144,11 +144,9 @@ export class PigComponent implements OnInit {
   }
 
   addPig() {
-    if (this.addNewPigForm.valid) {
       const {value} = this.addNewPigForm;
       this.pigService.addPig(value).subscribe(() => this.ngOnInit());
     }
-  }
 
   addPigNewBorn() {
     if (this.addNewPigForm.valid) {
