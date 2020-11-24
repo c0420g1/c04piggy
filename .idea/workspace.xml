@@ -21,8 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d4678550-b504-4bb8-8b4c-54e0e02f53f4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pig/pig.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pig/pig.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/feed/feed-modal.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed-modal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/feed/feed.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/feed/feed.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +53,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../project1/c04cinema-frontend" />
+    <property name="last_opened_file_path" value="E:/modul 1/caseStudy/yeu cau 6.html" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -61,8 +61,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
-    <property name="ts.external.directory.path" value="D:\ProjectCodeGym\C0420G1_TranQuangTrung_Module6\project2new\c04piggy\node_modules\typescript\lib" />
+    <property name="ts.external.directory.path" value="D:\project\c04piggy\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -73,6 +72,7 @@
   <component name="RunManager" selected="npm.Angular CLI Server">
     <configuration name="Tests (c04-pigFarm)" type="JavaScriptTestRunnerKarma">
       <config-file value="$PROJECT_DIR$/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/node_modules/@angular/cli" />
       <working-directory value="$PROJECT_DIR$" />
       <node-interpreter value="project" />
       <envs />
@@ -132,36 +132,36 @@
       <workItem from="1605682165814" duration="1784000" />
       <workItem from="1605693096637" duration="2102000" />
       <workItem from="1605749482324" duration="1815000" />
-      <workItem from="1606119091243" duration="533000" />
-      <workItem from="1606119786209" duration="1643000" />
-      <workItem from="1606148383667" duration="103000" />
+      <workItem from="1606101396179" duration="1752000" />
+      <workItem from="1606181409181" duration="3397000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="28" key="#TSLint" timestamp="1605682534623">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="275" y="28" key="#TSLint/0.0.1366.738@0.0.1366.738" timestamp="1605682534623" />
-    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1606148489097">
+    <state x="495" y="157" key="FileChooserDialogImpl" timestamp="1606105119994">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1606148489097" />
+    <state x="495" y="157" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1606105119994" />
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1605339223911" />
     <state width="1345" height="192" key="GridCell.Tab.0.bottom" timestamp="1605693806853">
       <screen x="0" y="0" width="1366" height="768" />
@@ -179,10 +179,6 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1345" height="192" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1605693806853" />
-    <state x="184" y="9" key="SettingsEditor" timestamp="1606119259156">
-      <screen x="0" y="0" width="1366" height="728" />
-    </state>
-    <state x="184" y="9" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1606119259156" />
     <state x="389" y="165" key="run.anything.popup" timestamp="1605597315307">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
