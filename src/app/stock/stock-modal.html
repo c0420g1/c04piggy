@@ -6,9 +6,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="stockForm">
+                <form [formGroup]="stockForm" >
                     <div class="form-group">
-                        <label for="shipmentCode">Shipment Code<span style="color: red">(*)</span></label>
+                        <label class="label" for="shipmentCode">Shipment Code<span style="color: red">(*)</span></label>
                         <input  #input type="text" class="form-control" value="{{data.shipmentCode}}" formControlName="shipmentCode" id="shipmentCode">
                     </div>
                     <div class="alert alert-danger" role="alert"
@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="feedType">Feed Type<span style="color: red">(*)</span></label>
+                        <label class="label" for="feedType">Feed Type<span style="color: red">(*)</span></label>
                         <select formControlName="feedTypeId"  class="form-control" id="feedType" >
                             <option *ngFor="let f of feedTypes" [ngValue]="f.id">{{f.name}}</option>
                         </select>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="mfgDate">Manufacturing Date<span style="color: red">(*)</span></label>
+                        <label class="label" for="mfgDate">Manufacturing Date<span style="color: red">(*)</span></label>
                         <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate" id="mfgDate">
                     </div>
                     <div class="alert alert-danger" role="alert"
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="expDate">Expiry Date<span style="color: red">(*)</span></label>
+                        <label class="label" for="expDate">Expiry Date<span style="color: red">(*)</span></label>
                         <input id="expDate" type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate">
                     </div>
                     <div class="alert alert-danger" role="alert"
@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="stockInDate">Stock In Date<span style="color: red">(*)</span></label>
+                        <label class="label" for="stockInDate">Stock In Date<span style="color: red">(*)</span></label>
                         <input id="stockInDate" type="date" class="form-control" value="{{data.importDate}}" formControlName="importDate">
                     </div>
                     <div class="alert alert-danger" role="alert"
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="quantity">Quantity<span style="color: red">(*)</span></label>
+                        <label class="label" for="quantity">Quantity<span style="color: red">(*)</span></label>
                         <input id="quantity" type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity">
                     </div>
                     <div class="alert alert-danger" role="alert"
@@ -75,7 +75,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="unit">Unit<span style="color: red">(*)</span></label>
+                        <label class="label" for="unit">Unit<span style="color: red">(*)</span></label>
                         <select id="unit" formControlName="unit" class="form-control">
                             <option value="kilogam">Kilogram</option>
                             <option value="liter">Liter</option>
@@ -88,7 +88,7 @@
                     </div>
 
                     <div class="form-group" >
-                        <label for="vendorId">Vendor<span style="color: red">(*)</span></label>
+                        <label class="label" for="vendorId">Vendor<span style="color: red">(*)</span></label>
                         <select id="vendorId" formControlName="vendorId"  class="form-control">
                             <option *ngFor="let v of vendors" [ngValue]="v.id">{{v.name}}</option>
                         </select>
@@ -99,7 +99,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="description">Description</label>
+                        <label class="label" for="description">Description</label>
                         <textarea id="description" type="text" class="form-control" value="{{data.description}}" formControlName="description"></textarea>
                     </div>
                     <div class="alert alert-danger" role="alert"
