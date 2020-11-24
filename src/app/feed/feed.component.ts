@@ -162,7 +162,6 @@ export class FeedModal implements OnInit {
     getAllFeedTypeSearch(term: string = null): Observable<FeedType[]> {
                 if (term) {
                     this.feedType = this.feedType.filter(x => x.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
-                    console.log(this.feedType);
                 }
         return of(this.feedType).pipe(delay(2500));
     }
