@@ -51,7 +51,6 @@ export class FeedComponent implements OnInit {
               modalRef.componentInstance.title = element ? 'Edit Feed' : 'Add Feed';
               modalRef.componentInstance.data = element ?? new Feed();
               modalRef.componentInstance.feedType = this.items;
-              console.log(this.items);
     }
 
 }
@@ -90,12 +89,12 @@ export class FeedModal implements OnInit {
 
         this.feedForm = this.fb.group({
             id: [this.data.id],
-            description: [this.data.description, [Validators.required]],
+            description: [this.data.description],
             amount: [this.data.amount, [Validators.required, Validators.pattern('^[\\d\\s]+$')]],
             code: [this.data.code,  [Validators.required, Validators.pattern('^(FE)[\\d]{4}$')]],
             unit: [this.data.unit,  [Validators.required, Validators.pattern('ngay|tuan|thang')]],
             feedType: [this.data.feedType,  [Validators.required]],
-            herd: [this.data.herd],
+            herd: [this.data.herd, [Validators.required]],
         });
 
         this.feedService.getFeed().subscribe(next => (this.feeds = next, this.feeds.forEach(e => {
