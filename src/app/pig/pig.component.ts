@@ -148,18 +148,9 @@ export class PigComponent implements OnInit {
   }
 
   addPig(form: FormGroup) {
-    this.pigAdd.description = form.get('description').value;
-    this.pigAdd.isDeleted = form.get('isDeleted').value;
-    this.pigAdd.code = form.get('code').value;
-    this.pigAdd.spec = form.get('spec').value;
-    this.pigAdd.weight = form.get('weight').value;
-    this.pigAdd.gender = form.get('gender').value;
-    this.pigAdd.color = form.get('color').value;
-    this.pigAdd.fatherId = form.get('fatherId').value;
-    this.pigAdd.motherId = form.get('motherId').value;
-    this.pigAdd.feed = form.get('feed').value;
-    this.pigAdd.herd = form.get('herd').value;
-    this.pigAdd.cote = form.get('cote').value;
+    if (this.addNewPigForm.valid) {
+      this.pigAdd = this.addNewPigForm.value;
+    }
     this.pigAdd.importDate = new Date(form.get('dateGroup').get('importDate').value);
     this.pigAdd.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
     this.pigService.addPig(this.pigAdd).subscribe(() => {
