@@ -6,101 +6,101 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"(click)="activeModal.dismiss('Cross click')">&times;</button>
             </div>
             <div class="modal-body">
-                <form [formGroup]="stockForm" >
+                <form [formGroup]="stockForm">
                     <div class="form-group">
-                        <label class="label" for="shipmentCode">Shipment Code<span style="color: red">(*)</span></label>
-                        <input  #input type="text" class="form-control" value="{{data.shipmentCode}}" formControlName="shipmentCode" id="shipmentCode">
+                        <label>Shipment Code<span style="color: red">(*)</span></label>
+                        <input  #input type="text" class="form-control" value="{{data.shipmentCode}}" formControlName="shipmentCode" >
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('shipmentCode').invalid && stockForm.get('shipmentCode').touched">
-                        <p *ngIf="stockForm.get('shipmentCode').hasError('required')">Shipment Code is required.</p>
-                        <p *ngIf="stockForm.get('shipmentCode').hasError('pattern')">Shipment Code must be a number.</p>
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('required')">Shipment Code is required</p>
+                        <p *ngIf="stockForm.get('shipmentCode').hasError('pattern')">Shipment Code must be a number</p>
                         <p *ngIf="stockForm.get('shipmentCode').hasError('maxlength')">Shipment Code must be a number that have length = 8.</p>
                         <p *ngIf="stockForm.get('shipmentCode').hasError('minlength')">Shipment Code must be a number that have length = 8.</p>
                         <p *ngIf="stockForm.get('shipmentCode').hasError('invalidShipmentCode')">Shipment Code already exists in the database.</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label" for="feedType">Feed Type<span style="color: red">(*)</span></label>
-                        <select formControlName="feedTypeId"  class="form-control" id="feedType" >
-                            <option *ngFor="let f of feedTypes" [ngValue]="f.id">{{f.name}}</option>
+                        <label>Feed Type<span style="color: red">(*)</span></label>
+                        <select formControlName="feedTypeId"  class="form-control">
+                            <option  *ngFor="let f of feedTypes" [ngValue]="f.id">{{f.name}}</option>
                         </select>
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('feedTypeId').invalid && stockForm.get('feedTypeId').touched">
-                        <p *ngIf="stockForm.get('feedTypeId').hasError('required')">Feed Type is required.</p>
+                        <p *ngIf="stockForm.get('feedTypeId').hasError('required')">Feed Type is required</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label" for="mfgDate">Manufacturing Date<span style="color: red">(*)</span></label>
-                        <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate" id="mfgDate">
+                        <label>Manufacturing Date<span style="color: red">(*)</span></label>
+                        <input type="date" class="form-control" value="{{data.mfgDate}}" formControlName="mfgDate">
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('mfgDate').invalid && stockForm.get('mfgDate').touched">
-                        <p *ngIf="stockForm.get('mfgDate').hasError('required')">Manufacturing Date is required.</p>
-                        <p *ngIf="stockForm.get('mfgDate').hasError('pattern')">Manufacturing Date must be follow format: (dd//mm/yyyy)</p>
+                        <p *ngIf="stockForm.get('mfgDate').hasError('required')">Manufacturing Date is required</p>
+                        <p *ngIf="stockForm.get('mfgDate').hasError('pattern')">Manufacturing Date must be follow format: (yyyy-mm-dd)</p>
                         <p *ngIf="stockForm.get('mfgDate').hasError('invalidDate')">Manufacturing date must be before Expiry date, and exp not after mfg 100 days.</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label" for="expDate">Expiry Date<span style="color: red">(*)</span></label>
-                        <input id="expDate" type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate">
+                        <label>Expiry Date<span style="color: red">(*)</span></label>
+                        <input type="date" class="form-control" value="{{data.expDate}}" formControlName="expDate">
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('expDate').invalid && stockForm.get('expDate').touched">
-                        <p *ngIf="stockForm.get('expDate').hasError('required')">Expiry Date is required.</p>
-                        <p *ngIf="stockForm.get('expDate').hasError('pattern')">Expiry Date must be follow format: (dd//mm/yyyy).
+                        <p *ngIf="stockForm.get('expDate').hasError('required')">Expiry Date is required</p>
+                        <p *ngIf="stockForm.get('expDate').hasError('pattern')">Expiry Date must be follow format: (yyyy-mm-dd)
                         <p *ngIf="stockForm.get('expDate').hasError('invalidDate')">Manufacturing date must be before Expiry date, and exp not after mfg 100 days.</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label" for="stockInDate">Stock In Date<span style="color: red">(*)</span></label>
-                        <input id="stockInDate" type="date" class="form-control" value="{{data.importDate}}" formControlName="importDate">
+                        <label>Stock In Date<span style="color: red">(*)</span></label>
+                        <input type="date" class="form-control" value="{{data.importDate}}" formControlName="importDate">
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('importDate').invalid && stockForm.get('importDate').touched">
-                        <p *ngIf="stockForm.get('importDate').hasError('required')">Stock in Date is required.</p>
-                        <p *ngIf="stockForm.get('importDate').hasError('pattern')">Stock in Date must be follow format: (dd//mm/yyyy).</p>
+                        <p *ngIf="stockForm.get('importDate').hasError('required')">Stock in Date is required</p>
+                        <p *ngIf="stockForm.get('importDate').hasError('pattern')">Stock in Date must be follow format: (yyyy-mm-dd)</p>
                         <p *ngIf="stockForm.get('importDate').hasError('checkDate')">Stock in Date must be not after Current Date.</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label" for="quantity">Quantity<span style="color: red">(*)</span></label>
-                        <input id="quantity" type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity">
+                        <label>Quantity<span style="color: red">(*)</span></label>
+                        <input type="text" class="form-control" value="{{data.quantity}}" formControlName="quantity">
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('quantity').invalid && stockForm.get('quantity').touched">
-                        <p *ngIf="stockForm.get('quantity').hasError('required')">Quantity is required.</p>
-                        <p *ngIf="stockForm.get('quantity').hasError('pattern')">Quantity must be a number.</p>
+                        <p *ngIf="stockForm.get('quantity').hasError('required')">Quantity is required</p>
+                        <p *ngIf="stockForm.get('quantity').hasError('pattern')">Quantity must be a number</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label" for="unit">Unit<span style="color: red">(*)</span></label>
-                        <select id="unit" formControlName="unit" class="form-control">
+                        <label>Unit<span style="color: red">(*)</span></label>
+                        <select formControlName="unit" class="form-control">
                             <option value="kilogam">Kilogram</option>
                             <option value="liter">Liter</option>
                         </select>
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('unit').invalid && stockForm.get('unit').touched">
-                        <p *ngIf="stockForm.get('unit').hasError('required')">Unit is required.</p>
-                        <p *ngIf="stockForm.get('unit').hasError('pattern')">Unit must be kilogam or liter.</p>
+                        <p *ngIf="stockForm.get('unit').hasError('required')">Unit is required</p>
+                        <p *ngIf="stockForm.get('unit').hasError('pattern')">Unit must be kilogam or liter</p>
                     </div>
 
                     <div class="form-group" >
-                        <label class="label" for="vendorId">Vendor<span style="color: red">(*)</span></label>
-                        <select id="vendorId" formControlName="vendorId"  class="form-control">
+                        <label>Vendor<span style="color: red">(*)</span></label>
+                        <select formControlName="vendorId"  class="form-control">
                             <option *ngFor="let v of vendors" [ngValue]="v.id">{{v.name}}</option>
                         </select>
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('vendorId').invalid && stockForm.get('vendorId').touched">
-                        <p *ngIf="stockForm.get('vendorId').hasError('required')">Vendor is required.</p>
+                        <p *ngIf="stockForm.get('vendorId').hasError('required')">Vendor is required</p>
                     </div>
 
                     <div class="form-group">
-                        <label class="label" for="description">Description</label>
-                        <textarea id="description" type="text" class="form-control" value="{{data.description}}" formControlName="description"></textarea>
+                        <label>Description</label>
+                        <input type="text" class="form-control" value="{{data.description}}" formControlName="description">
                     </div>
                     <div class="alert alert-danger" role="alert"
                          *ngIf="stockForm.get('description').invalid && stockForm.get('description').touched">

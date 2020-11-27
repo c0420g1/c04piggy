@@ -51,8 +51,7 @@ export class PigComponent implements OnInit {
   addNewPigForm: FormGroup;
   checkIfPigNewBorn = false;
   addNewPigStatus: FormGroup;
-  pigAdd: Pig = new Pig();
-  editPigForm: FormGroup;
+  editNewPigForm: FormGroup;
   private errors: any;
   private filter: string;
 
@@ -101,44 +100,41 @@ export class PigComponent implements OnInit {
     this.addNewPigForm = this.fb.group({
         description: [''],
         code: ['', Validators.required],
-      dateGroup: this.fb.group({
-          importDate: [''],
-          exportDate: [''],
-        }, {validators: exportDayCheckValidator}),
-        gender: ['', Validators.required],
-        spec: ['', Validators.required],
-        weight: ['', Validators.required],
+        importDate: ['', Validators.required],
+        exportDate: ['', Validators.required],
+        gender: [''],
+        spec: [''],
+        weight: [''],
         color: [''],
-        fatherId: [''],
-        motherId: [''],
+        fatherId: ['', Validators.required],
+        motherId: ['', Validators.required],
         cote: Cote,
         feed: Feed,
         herd: Herd,
       });
 
-    this.editPigForm = this.fb.group({
-      id: [''],
-      description: [''],
-      code: ['', Validators.required],
-      dateGroup: this.fb.group({
-        importDate: [''],
-        exportDate: [''],
-      }, {validators: exportDayCheckValidator}),
-      gender: ['', Validators.required],
-      spec: ['', Validators.required],
-      weight: ['', Validators.required],
-      color: [''],
-      fatherId: [''],
-      motherId: [''],
-      cote: Cote,
-      feed: Feed,
-      herd: Herd,
-    });
-
     this.addNewPigStatus = this.fbStatus.group({
       description: [''],
       pig: Pig,
       pigStatus: PigStatus,
+    });
+
+    this.editNewPigForm = this.fbEdit.group({
+      id: [''],
+      description: [''],
+      isDeleted: [''],
+      code: ['', Validators.required],
+      importDate: ['', [Validators.required]],
+      exportDate: ['', Validators.required],
+      gender: [''],
+      spec: [''],
+      weight: [''],
+      color: [''],
+      fatherId: ['', Validators.required],
+      motherId: ['', Validators.required],
+      feed: Feed,
+      herd: Herd,
+      cote: Cote,
     });
   }
 
@@ -147,18 +143,12 @@ export class PigComponent implements OnInit {
     this.ngOnInit();
   }
 
-  addPig(form: FormGroup) {
+  addPig() {
     if (this.addNewPigForm.valid) {
-      this.pigAdd = this.addNewPigForm.value;
+      const {value} = this.addNewPigForm;
+      this.pigService.addPig(value).subscribe(() => this.ngOnInit());
     }
-    this.pigAdd.importDate = new Date(form.get('dateGroup').get('importDate').value);
-    this.pigAdd.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
-    this.pigService.addPig(this.pigAdd).subscribe(() => {
-      this.getPigList();
-      this.toastr.success('', 'Add new successful !');
-    });
-    document.getElementById('add').click();
-    }
+  }
 
   addPigNewBorn() {
     if (this.addNewPigForm.valid) {
@@ -173,44 +163,24 @@ export class PigComponent implements OnInit {
     }
   }
 
-  private formatDate(date) {
-    const d = new Date(date);
-    let month = '' + (d.getMonth() + 1);
-    let day = '' + d.getDate();
-    const year = d.getFullYear();
-    if (month.length < 2) {
-      month = '0' + month;
-    }
-    if (day.length < 2) {
-      day = '0' + day;
-    }
-    return [year, month, day].join('-');
-  }
-
   editPig(pig: PigDTO){
     this.pigService.getPig(pig.pigId).subscribe((data) => {
       this.pig = data;
       console.log(this.pig.id);
-      this.editPigForm.patchValue(this.pig);
-      this.editPigForm.get('dateGroup').get('importDate').patchValue(this.formatDate(new Date(data.importDate)));
-      if (data.exportDate != null) {
-        this.editPigForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date(data.exportDate)));
-      } else {
-        this.editPigForm.get('dateGroup').get('exportDate').patchValue(this.formatDate(new Date('')));
-      }
+      this.editNewPigForm.setValue(this.pig);
     });
+
   }
 
-  editPigConfirm(form: FormGroup) {
-    this.pigEdit = this.editPigForm.value;
-    console.log(this.editPigForm.value);
-    this.pigEdit.importDate = new Date(form.get('dateGroup').get('importDate').value);
-    this.pigEdit.exportDate = new Date(form.get('dateGroup').get('exportDate').value);
-    this.pigService.editPig(this.pigEdit).subscribe(() => {
-      console.log(this.pig.id);
-      this.getPigList();
-      this.toastr.success('', 'Edit Successful !');
-    });
+  editPigConfirm() {
+    this.pigEdit = this.editNewPigForm.value;
+    console.log(this.editNewPigForm.value);
+    this.pigService.addPig(this.pigEdit).subscribe(
+          next => {
+            this.ngOnInit();
+            },
+          error => console.log(error)
+      );
   }
 
   onDelete(element) {
@@ -344,19 +314,34 @@ export class PigComponent implements OnInit {
 
 // Validator Day
 
-function exportDayCheckValidator(control: AbstractControl) {
-  const day = new Date(control.value.exportDate);
-  const dayCheck = new Date(control.value.importDate);
-  // @ts-ignore
-  const check = Math.round(Math.abs((day - dayCheck) / (24 * 60 * 60 * 1000)));
-  // Điều kiện sai để trả về valid cho form.
-  if (day != null) {
-    if (check <= 112 || day < new Date()) {
-      return {
-        exportDay: true
-      };
-    }
-  }
-  return null;
-}
+// function importDayCheckValidator(control: AbstractControl) {
+//   const currentDay = new Date();
+//   const day = new Date(control.value);
+// tslint:disable-next-line:max-line-length
+//   if (day >= currentDay || (day.getFullYear() == day.getFullYear() && day.getMonth() == currentDay.getMonth() && day.getDay() == currentDay.getDay()) ){
+//     return null;
+//   }
+//   return {
+//     importDay: true
+//   };
+// }
+//
+// function exportDayCheckValidator(control: AbstractControl) {
+//   const day = new Date(control.value.exportDate);
+//   const dayCheck = new Date(control.value.importDate);
+//   console.log(day +'ex');
+//   console.log(dayCheck + 'ex');
+//   // @ts-ignore
+//   const check = Math.round(Math.abs((day- dayCheck)/(24*60*60*1000)));
+//   console.log(check +'check' + typeof check);
+//   // @ts-ignore
+//   if ( dayCheck != 0){
+//     console.log('null');
+//     return null;
+//   }
+//   console.log('true');
+//   return {
+//     exportDay: true
+//   };
+// }
 

@@ -21,7 +21,7 @@
                     <button title="add" (click)="onNewBornChange()" class="btn btn-sm btn-success" type="button" href="#add" data-toggle="modal">Add new born</button>
                 </div>
                 <div style="margin-left: 15px">
-                    <button title="add" class="btn btn-sm btn-success" type="button" href="#add" data-toggle="modal">Add new pig</button>
+                    <button title="add" (click)="checkIfPigNewBorn = false" class="btn btn-sm btn-success" type="button" href="#add" data-toggle="modal">Add new pig</button>
                 </div>
                 <div style="margin-left: 15px">
                     <button class="btn btn-sm btn-danger" type="button" (click)='fdelete()'>Delete Pig</button>
@@ -142,7 +142,7 @@
 <div id="edit" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form [formGroup]="editPigForm">
+            <form [formGroup]="editNewPigForm">
                 <div class="modal-header">
                     <h4 class="modal-title">Edit Pig</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -164,35 +164,17 @@
                         <label>Code</label>
                         <input type="text" class="form-control" formControlName="code" >
                     </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="editPigForm.get('code').invalid && editPigForm.get('code').touched">
-                        Pig code is required!
+                    <div class="form-group">
+                        <label>Import Date</label>
+                        <input type="date" class="form-control" formControlName="importDate" >
                     </div>
-                    <fieldset formGroupName="dateGroup">
-                        <div class="form-group">
-                            <label>Import Date</label>
-                            <input type="date" class="form-control" formControlName="importDate">
-                        </div>
-                        <div class="form-group">
-                            <label>Export Date</label>
-                            <input type="date" class="form-control" formControlName="exportDate" >
-                        </div>
-                        <div class="alert alert-danger" role="alert" *ngIf="editPigForm.hasError('exportDay',['dateGroup'])">
-                            Export Day must be greater than today 4 month or can be blank!!!
-                        </div>
-                    </fieldset>
+                    <div class="form-group">
+                        <label>Export Date</label>
+                        <input type="date" class="form-control" formControlName="exportDate">
+                    </div>
                     <div class="form-group">
                         <label>Species</label>
                         <input type="text" class="form-control" formControlName="spec" >
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="editPigForm.get('spec').invalid && editPigForm.get('spec').touched">
-                        Species is required!
-                    </div>
-                    <div class="form-group">
-                        <label>Weight</label>
-                        <input type="number" class="form-control" formControlName="weight" >
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="editPigForm.get('weight').invalid && editPigForm.get('weight').touched">
-                        Weight is required!
                     </div>
                     <div class="form-group">
                         <label>Color</label>
@@ -205,34 +187,31 @@
                             <option value="0">Femele</option>
                         </select>
                     </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="editPigForm.get('gender').invalid && editPigForm.get('gender').touched">
-                        Gender is required!
-                    </div>
                     <div class="form-group">
                         <label>Cote</label>
                         <select class="form-control" formControlName="cote" >
-                           <option *ngIf="pig.cote" [ngValue]="pig.cote" hidden>{{pig.cote.code}}</option>
+                           <option *ngFor="let cote of coteList" [ngValue]="pig.cote" hidden>{{pig.cote.code}}</option>
                             <option *ngFor="let cote of coteList" [ngValue]="cote">{{cote.code}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Herd</label>
                         <select class="form-control" formControlName="herd" >
-                           <option *ngIf="pig.herd" [ngValue]="pig.herd" hidden>{{pig.herd.name}}</option>
+                           <option *ngFor="let herd of herdList" [ngValue]="pig.herd" hidden>{{pig.herd.name}}</option>
                             <option *ngFor="let herd of herdList" [ngValue]="herd">{{herd.name}}</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Feed</label>
                         <select class="form-control" formControlName="feed"  >
-                           <option *ngIf="pig.feed" [ngValue]="pig.feed" hidden>{{pig.feed.feedTypeName + pig.feed.amount}}</option>
+                           <option *ngFor="let feed of feedList" [ngValue]="pig.feed" hidden>{{pig.feed.feedTypeName + pig.feed.amount}}</option>
                             <option *ngFor="let feed of feedList" [ngValue]="feed">{{feed.feedTypeName + feed.amount}}</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="button" data-dismiss="modal" (click)="editPigConfirm(editPigForm)" class="btn btn-success" value="Add"  [disabled]="editPigForm.invalid">Edit<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                    <button type="submit" class="btn btn-success" (click)="editPigConfirm()" value="Add">Edit<i style="margin-left: 5px" class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>
@@ -244,7 +223,7 @@
 <div id="add" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form [formGroup]="addNewPigForm">
+            <form [formGroup]="addNewPigForm" (ngSubmit)="addPig()">
                 <div class="modal-header">
                     <h4 class="modal-title">Add New Pig</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -256,37 +235,19 @@
                     </div>
                     <div class="form-group">
                         <label>Code</label>
-                        <input type="text" class="form-control" formControlName="code">
+                        <input type="text" class="form-control" formControlName="code" >
                     </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="addNewPigForm.get('code').invalid && addNewPigForm.get('code').touched">
-                        Pig code is required!
+                    <div class="form-group">
+                        <label>Import Date</label>
+                        <input type="date" class="form-control" formControlName="importDate" >
                     </div>
-                    <fieldset formGroupName="dateGroup">
-                        <div class="form-group">
-                            <label>Import Date</label>
-                            <input type="date" class="form-control" formControlName="importDate">
-                        </div>
-                        <div class="form-group">
-                            <label>Export Date</label>
-                            <input type="date" class="form-control" formControlName="exportDate" >
-                        </div>
-                        <div class="alert alert-danger" role="alert" *ngIf="addNewPigForm.hasError('exportDay',['dateGroup'])">
-                            Export Day must be greater than today 4 month or can be blank!!!
-                        </div>
-                    </fieldset>
+                    <div class="form-group">
+                        <label>Export Date</label>
+                        <input type="date" class="form-control" formControlName="exportDate">
+                    </div>
                     <div class="form-group">
                         <label>Species</label>
                         <input type="text" class="form-control" formControlName="spec" >
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="addNewPigForm.get('spec').invalid && addNewPigForm.get('spec').touched">
-                        Species is required!
-                    </div>
-                    <div class="form-group">
-                        <label>Weight</label>
-                        <input type="number" class="form-control" formControlName="weight" >
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="addNewPigForm.get('weight').invalid && addNewPigForm.get('weight').touched">
-                        Weight is required!
                     </div>
                     <div class="form-group">
                         <label>Color</label>
@@ -298,9 +259,6 @@
                             <option value="1">Male</option>
                             <option value="0">Femele</option>
                         </select>
-                    </div>
-                    <div class="alert alert-danger" role="alert" *ngIf="addNewPigForm.get('gender').invalid && addNewPigForm.get('gender').touched">
-                        Gender is required!
                     </div>
                     <div class="form-group" *ngIf="checkIfPigNewBorn">
                         <label>Father</label>
@@ -337,7 +295,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                    <button type="button" class="btn btn-success" value="Add" data-dismiss="modal" (click)="addPig(addNewPigForm)" [disabled]="addNewPigForm.invalid">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
+                    <button type="submit" class="btn btn-success" value="Add">Create<i style="margin-left: 5px" class="fa fa-save"></i></button>
                 </div>
             </form>
         </div>

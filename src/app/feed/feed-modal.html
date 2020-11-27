@@ -89,7 +89,7 @@
 
         <div class="modal-footer">
             <input type="button" class="btn btn-default" data-dismiss="modal" (click)="activeModal.close('Close click')"value="Cancel">
-            <button [disabled]="feedForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()" >Save<i style="margin-left: 5px" class="fa fa-save"></i></button>
+            <button [disabled]="feedForm.invalid" type="submit" class="btn btn-success" value="Add" (click)="onSubmit()" >save<i style="margin-left: 5px" class="fa fa-save"></i></button>
         </div>
     </form>
     <ng-select [items]="feedType$ | async"

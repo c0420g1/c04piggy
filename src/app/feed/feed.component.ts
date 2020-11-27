@@ -21,7 +21,7 @@ export class FeedComponent implements OnInit {
     columnHeader = {
         'amount': 'Amount (kg)',
         'code': 'Code',
-        'unit': 'Unit (kg/)',
+        'unit': 'Unit (kg)',
         'feedTypeName': 'FeedType',
         'herdName': 'Herd',
         'Action': 'Action'
@@ -51,6 +51,7 @@ export class FeedComponent implements OnInit {
               modalRef.componentInstance.title = element ? 'Edit Feed' : 'Add Feed';
               modalRef.componentInstance.data = element ?? new Feed();
               modalRef.componentInstance.feedType = this.items;
+              console.log(this.items);
     }
 
 }
@@ -89,12 +90,12 @@ export class FeedModal implements OnInit {
 
         this.feedForm = this.fb.group({
             id: [this.data.id],
-            description: [this.data.description],
+            description: [this.data.description, [Validators.required]],
             amount: [this.data.amount, [Validators.required, Validators.pattern('^[\\d\\s]+$')]],
             code: [this.data.code,  [Validators.required, Validators.pattern('^(FE)[\\d]{4}$')]],
             unit: [this.data.unit,  [Validators.required, Validators.pattern('ngay|tuan|thang')]],
             feedType: [this.data.feedType,  [Validators.required]],
-            herd: [this.data.herd, [Validators.required]],
+            herd: [this.data.herd],
         });
 
         this.feedService.getFeed().subscribe(next => (this.feeds = next, this.feeds.forEach(e => {
@@ -161,6 +162,7 @@ export class FeedModal implements OnInit {
     getAllFeedTypeSearch(term: string = null): Observable<FeedType[]> {
                 if (term) {
                     this.feedType = this.feedType.filter(x => x.name.toLocaleLowerCase().indexOf(term.toLocaleLowerCase()) > -1);
+                    console.log(this.feedType);
                 }
         return of(this.feedType).pipe(delay(2500));
     }

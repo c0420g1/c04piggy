@@ -15,8 +15,8 @@ export class Pig {
     color: string;
     fatherId: number;
     motherId: number;
-    importDate: Date;
-    exportDate: Date;
+    importDate: string;
+    exportDate: string;
     feed: Feed;
     herd: Herd;
     cote: Cote;
