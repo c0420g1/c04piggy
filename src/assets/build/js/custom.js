@@ -182,9 +182,9 @@ $(document).ready(function () {
 
 // Progressbar
 $(document).ready(function () {
-    if ($(".progress .progress-bar")[0]) {
-        $('.progress .progress-bar').progressbar();
-    }
+    // if ($(".progress .progress-bar")[0]) {
+    //     $('.progress .progress-bar').progressbar();
+    // }
 });
 // /Progressbar
 
@@ -282,15 +282,15 @@ $(document).ready(function () {
 });
 
 // NProgress
-if (typeof NProgress != 'undefined') {
-    $(document).ready(function () {
-        NProgress.start();
-    });
+// if (typeof NProgress != 'undefined') {
+//     $(document).ready(function () {
+//         NProgress.start();
+//     });
 
-    $(window).on('load', function () {
-        NProgress.done();
-    });
-}
+//     $(window).on('load', function () {
+//         NProgress.done();
+//     });
+// }
 
 
 //hover and retain popover when on popover content
